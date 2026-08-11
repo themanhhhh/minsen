@@ -16,7 +16,7 @@ export function Hero({ locale }: { locale: Locale }) {
         </form>
         <a className="hero-secondary-link" href="#protection">{heroContent.secondaryAction} <span aria-hidden="true">↓</span></a>
       </div>
-      <div className="hero-photo"><Image src="/images/hero/hero-vietnam-plywood-factory.jpg" alt="Vietnam plywood factory and export network" fill priority sizes="(max-width: 820px) 100vw, 900px" /></div>
+      <Image className="hero-background" src="/images/hero/hero-vietnam-plywood-factory.png" alt="" fill priority sizes="100vw" />
       <div className="hero-stats">{heroStats.map((stat) => <div key={stat.label}><strong>{stat.value}</strong><span>{stat.label}</span></div>)}</div>
     </section>
   );
