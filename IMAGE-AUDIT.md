@@ -4,13 +4,13 @@ Tài liệu này được rà soát theo code hiện tại và thư mục `publi
 
 ## Tổng Quan
 
-- Website hiện có 19 ảnh thực tế và 1 file `.gitkeep`.
+- Website hiện có bộ ảnh Hero, sản phẩm, factory, process, protection, videos, insights, team và logistics trong `public/images`.
 - Ảnh Hero đã được tích hợp.
-- Ảnh sản phẩm hiện mới dùng đúng cho Commercial Plywood, Film Faced Plywood và Natural Veneer.
-- Factory `VN-PW-018` có bộ ảnh tương đối đầy đủ.
-- Các factory mock còn lại chưa có ảnh riêng.
-- Một số ảnh đã có trong thư mục nhưng chưa được sử dụng trong giao diện.
-- Một số page đang dùng visual CSS hoặc ảnh lặp vì chưa có ảnh đúng nội dung.
+- Toàn bộ 8 product catalog đã có mapping ảnh riêng.
+- Factory `VN-PW-018`, `VN-PW-038` và `VN-PW-052` đã có ảnh exterior; ba factory này cũng có production, product stack, quality control và video poster.
+- Ảnh process và Buyer Protection đã được tích hợp vào các section tương ứng.
+- Ảnh About, Insights và Factory Videos đã được nối vào giao diện.
+- Các factory mock còn lại vẫn cần ảnh riêng nếu muốn hiển thị gallery đầy đủ.
 
 ## Ảnh Đang Được Sử Dụng
 
@@ -27,14 +27,24 @@ public/images/hero/hero-vietnam-plywood-factory.jpg
 ```text
 public/images/products/product-commercial-plywood.jpg
 public/images/products/product-film-faced-plywood.jpg
+public/images/products/product-packing-plywood.jpg
 public/images/products/product-natural-veneer.jpg
+public/images/products/product-engineered-veneer.jpg
+public/images/products/product-lvl.jpg
+public/images/products/product-mdf-hdf.jpg
+public/images/products/product-finger-joint-board.jpg
 ```
 
 Đang dùng cho:
 
 - Commercial Plywood
 - Film Faced Plywood
+- Packing Plywood
 - Natural Veneer
+- Engineered Veneer
+- LVL
+- MDF/HDF
+- Finger Joint Board
 
 ### Factory Preview và Factory Profile
 
@@ -42,7 +52,7 @@ public/images/products/product-natural-veneer.jpg
 public/images/factories/vn-pw-018/exterior.jpg
 ```
 
-Đang dùng cho factory `VN-PW-018`.
+Đang dùng đúng theo Factory ID cho `VN-PW-018`, `VN-PW-038` và `VN-PW-052`.
 
 ### Factory Videos
 

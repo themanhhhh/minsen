@@ -2,6 +2,7 @@ import { aboutPageContent, type Locale } from "@/data/landing-page";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import Link from "next/link";
+import Image from "next/image";
 
 export function CompanyAbout({ locale }: { locale: Locale }) {
   const content = aboutPageContent[locale];
@@ -11,7 +12,7 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
       <main className="about-page">
         <section className="about-hero">
           <div className="about-hero-content"><p className="eyebrow eyebrow-light">{content.eyebrow}</p><h1>{content.title}</h1><p>{content.intro}</p><a className="button button-light" href="#mission">{locale === "vi" ? "Tìm hiểu thêm" : "Learn more"}<span aria-hidden="true">↓</span></a></div>
-          <div className="about-hero-mark" aria-hidden="true"><span>V</span><strong>230+</strong><small>VERIFIED<br />FACTORIES</small></div>
+          <div className="about-hero-mark" aria-hidden="true"><Image src="/images/team/minsen-sourcing-team.jpg" alt="" fill sizes="300px" /><span>MINSEN</span><strong>230+</strong><small>VERIFIED<br />FACTORIES</small></div>
         </section>
         <section className="about-story" id="mission"><div className="about-story-label"><span>01</span><p>{locale === "vi" ? "Sứ mệnh của chúng tôi" : "Our mission"}</p></div><div><h2>{content.missionTitle}</h2><p>{content.missionText}</p><Link className="text-link" href="/#contact">{locale === "vi" ? "Trao đổi với đội ngũ" : "Talk to our team"} <span aria-hidden="true">↗</span></Link></div></section>
         <section className="about-network"><div className="network-copy"><p className="eyebrow">{locale === "vi" ? "Năng lực kết nối" : "The network behind us"}</p><h2>{content.networkTitle}</h2><p>{content.networkText}</p></div><div className="network-numbers"><div><strong>230+</strong><span>{locale === "vi" ? "nhà máy đã xác minh" : "verified factories"}</span></div><div><strong>03</strong><span>{locale === "vi" ? "nhóm sản phẩm chính" : "core product groups"}</span></div><div><strong>01</strong><span>{locale === "vi" ? "đầu mối chịu trách nhiệm" : "accountable partner"}</span></div></div></section>
