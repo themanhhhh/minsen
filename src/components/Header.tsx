@@ -6,6 +6,10 @@ export function Header({ locale }: { locale: Locale }) {
   const { navigation } = getLandingContent(locale);
   return (
     <header className="site-header">
+      <a className="header-cta" href={locale === "vi" ? "/vi/rfq" : "/rfq"}>
+          {locale === "vi" ? "Gửi RFQ" : "Submit RFQ"}{" "}
+          <span aria-hidden="true">↗</span>
+        </a>
       <Link
         className="brand"
         href={locale === "vi" ? "/vi" : "/"}
@@ -31,10 +35,6 @@ export function Header({ locale }: { locale: Locale }) {
         >
           {locale === "vi" ? "Liên hệ" : "Contact"}
         </Link>
-        <a className="header-cta" href={locale === "vi" ? "/vi/rfq" : "/rfq"}>
-          {locale === "vi" ? "Gửi RFQ" : "Submit RFQ"}{" "}
-          <span aria-hidden="true">↗</span>
-        </a>
       </div>
     </header>
   );
