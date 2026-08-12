@@ -25,16 +25,17 @@ export function Header({ locale }: { locale: Locale }) {
       </nav>
       <div className="header-actions">
         <LanguageSwitcher locale={locale} />
+        <a className="header-cta" href={locale === "vi" ? "/vi/rfq" : "/rfq"}>
+          {locale === "vi" ? "Gửi RFQ" : "Submit RFQ"}{" "}
+          <span aria-hidden="true">↗</span>
+        </a>
         <Link
           className="header-contact"
           href={locale === "vi" ? "/vi/contact" : "/contact"}
         >
           {locale === "vi" ? "Liên hệ" : "Contact"}
         </Link>
-        <a className="header-cta" href={locale === "vi" ? "/vi/rfq" : "/rfq"}>
-          {locale === "vi" ? "Gửi RFQ" : "Submit RFQ"}{" "}
-          <span aria-hidden="true">↗</span>
-        </a>
+        
       </div>
     </header>
   );
