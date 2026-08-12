@@ -10,7 +10,7 @@ export function LanguageSwitcher({ locale }: { locale: Locale }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const englishPath = pathname.startsWith("/vi") ? pathname.slice(3) || "/" : pathname;
   const vietnamesePath = pathname.startsWith("/vi") ? pathname : `/vi${pathname === "/" ? "" : pathname}`;
-  const currentLabel = locale === "vi" ? "Tiếng Việt" : "English";
+  const currentLabel = locale === "vi" ? "VIE" : "ENG";
 
   useEffect(() => {
     const closeMenu = (event: MouseEvent) => {
@@ -20,5 +20,5 @@ export function LanguageSwitcher({ locale }: { locale: Locale }) {
     return () => document.removeEventListener("mousedown", closeMenu);
   }, []);
 
-  return <div className="language-menu" ref={containerRef}><button className="language-trigger" type="button" aria-expanded={open} aria-haspopup="listbox" onClick={() => setOpen((value) => !value)}>{currentLabel}<span aria-hidden="true">⌄</span></button>{open && <div className="language-options" role="listbox" aria-label="Language selection"><a className={locale === "en" ? "selected" : ""} href={englishPath} role="option" aria-selected={locale === "en"} onClick={() => setOpen(false)}>English {locale === "en" && <span aria-hidden="true">✓</span>}</a><a className={locale === "vi" ? "selected" : ""} href={vietnamesePath} role="option" aria-selected={locale === "vi"} onClick={() => setOpen(false)}>Tiếng Việt {locale === "vi" && <span aria-hidden="true">✓</span>}</a></div>}</div>;
+  return <div className="language-menu" ref={containerRef}><button className="language-trigger" type="button" aria-expanded={open} aria-haspopup="listbox" onClick={() => setOpen((value) => !value)}>{currentLabel}<span className={`language-chevron${open ? " is-open" : ""}`} aria-hidden="true" /></button>{open && <div className="language-options" role="listbox" aria-label="Language selection"><a className={locale === "en" ? "selected" : ""} href={englishPath} role="option" aria-selected={locale === "en"} onClick={() => setOpen(false)}><span className="language-check" aria-hidden="true">{locale === "en" ? "✓" : ""}</span>ENG</a><a className={locale === "vi" ? "selected" : ""} href={vietnamesePath} role="option" aria-selected={locale === "vi"} onClick={() => setOpen(false)}><span className="language-check" aria-hidden="true">{locale === "vi" ? "✓" : ""}</span>VIE</a></div>}</div>;
 }
