@@ -72,8 +72,7 @@ h1, h2, h3, p { margin-top: 0; }
 /* Full-width landing sections follow the centered reference layout. */
 .header-actions { align-items: center; display: flex; gap: 20px; }
 .header-contact { color: var(--muted); font-size: 12px; font-weight: 700; }.header-contact:hover { color: var(--blue); }
-.language-switcher { align-items: center; color: #9aa3af; display: flex; font-size: 11px; font-weight: 800; gap: 6px; }
-.language-switcher a:hover, .language-switcher .active { color: var(--blue); }
+.language-select select { appearance: none; background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='m1 1 4 4 4-4' fill='none' stroke='%23606775' stroke-width='1.4'/%3E%3C/svg%3E") no-repeat right 1px center; border: 0; color: var(--muted); cursor: pointer; font: inherit; font-size: 11px; font-weight: 700; outline: 0; padding: 5px 17px 5px 0; }.language-select select:focus { color: var(--blue); }
 .sr-only { height: 1px; margin: -1px; overflow: hidden; position: absolute; width: 1px; clip: rect(0, 0, 0, 0); }
 .hero { background: var(--primary-dark); color: #fff; display: block; isolation: isolate; max-width: none; overflow: hidden; padding: 96px max(48px, calc((100vw - 1304px) / 2)) 0; position: relative; text-align: center; }
 .hero::before { background: rgba(10,27,81,.78); content: ""; inset: 0; pointer-events: none; position: absolute; z-index: 0; }.hero-background { object-fit: cover; object-position: center; z-index: -1; }
