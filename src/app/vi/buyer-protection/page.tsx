@@ -1,4 +1,4 @@
 import { DetailPage } from "@/components/DetailPage";
 
-export const metadata = { title: "Bảo vệ Buyer | Minsen Export", description: "7 lớp bảo vệ buyer khi sourcing sản phẩm gỗ từ Việt Nam." };
+export const metadata = { title: "Kiểm soát rủi ro Buyer | MISO JAPAN", description: "Hệ thống kiểm soát rủi ro và đơn hàng của MISO JAPAN." };
 export default function VietnameseProtectionPage() { return <DetailPage kind="protection" locale="vi" />; }

@@ -7,8 +7,8 @@ const manrope = Manrope({ variable: "--font-heading", subsets: ["latin"] });
 const inter = Inter({ variable: "--font-body", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Minsen Export | Vietnam Plywood Sourcing Hub",
-  description: "A trusted sourcing partner connecting international buyers with verified Vietnamese plywood and veneer factories.",
+  title: "MISO JAPAN | Vietnam Plywood Sourcing & Buyer Risk Elimination",
+  description: "MISO JAPAN helps international buyers source Vietnam plywood with controlled quality, documented evidence and one accountable partner.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

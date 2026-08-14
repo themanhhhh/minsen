@@ -1,9 +1,10 @@
 export const company = {
-  name: "Minsen Export",
-  descriptor: "Vietnam Plywood Sourcing Hub",
-  email: "sourcing@minsenexport.example",
-  whatsapp: "+84 900 000 000",
-  location: "Ho Chi Minh City, Vietnam",
+  name: "MISO JAPAN",
+  legalName: "Công ty TNHH Liên doanh MISO JAPAN",
+  descriptor: "Vietnam Plywood Sourcing & Buyer Risk Elimination Partner",
+  email: "[official email to be confirmed]",
+  whatsapp: "[official WhatsApp to be confirmed]",
+  location: "[registered address to be confirmed]",
 };
 
 export const navigation = [
@@ -13,24 +14,24 @@ export const navigation = [
   { label: "How It Works", href: "/process" },
   { label: "Factory Videos", href: "/factory-videos" },
   { label: "Insights", href: "/insights" },
-  { label: "About Minsen", href: "/about" },
+  { label: "About MISO JAPAN", href: "/about" },
 ];
 
 export const heroContent = {
-  eyebrow: "Vietnam's trusted wood sourcing hub",
-  title: "Direct access to Vietnam's best plywood factories",
+  eyebrow: "Vietnam Plywood Sourcing & Buyer Risk Elimination",
+  title: "Source Vietnam plywood with controlled quality and one accountable partner.",
   description:
-    "We connect international buyers with 230+ verified Vietnamese factories. Get the right product, at the right price, with controlled quality.",
-  primaryAction: "Find manufacturers",
-  secondaryAction: "Explore buyer protection",
+    "MISO JAPAN clarifies your RFQ, selects suitable Vietnamese manufacturers and controls factory verification, sample approval, production, inspection, documentation and shipment through defined control gates.",
+  primaryAction: "Submit your RFQ",
+  secondaryAction: "See our control system",
   searchPlaceholder: "What product are you looking for? (e.g. Commercial plywood)",
 };
 
 export const heroStats = [
-  { value: "230+", label: "Verified factories" },
-  { value: "20+", label: "Product categories" },
-  { value: "20", label: "Provinces covered" },
-  { value: "12+", label: "Export markets" },
+  { value: "01", label: "Accountable partner" },
+  { value: "05", label: "Buyer-facing phases" },
+  { value: "12", label: "Control gates planned" },
+  { value: "02", label: "Priority regions" },
 ];
 
 export const buyerConcerns = [
@@ -76,9 +77,9 @@ export const protectionLayers = [
 ];
 
 export const networkStats = [
-  { value: "230+", label: "manufacturing partners" },
-  { value: "24/7", label: "buyer communication" },
-  { value: "1", label: "accountable partner" },
+  { value: "01", label: "accountable partner" },
+  { value: "05", label: "buyer-facing phases" },
+  { value: "12", label: "control gates planned" },
 ];
 
 export const sourcingSteps = [
@@ -136,9 +137,9 @@ const vietnameseContent = {
     { number: "07", title: "Đồng hành lâu dài", description: "Tiếp tục chịu trách nhiệm sau giao hàng để mỗi đơn tiếp theo dễ dàng hơn." },
   ],
   networkStats: [
-    { value: "230+", label: "đối tác sản xuất" },
-    { value: "24/7", label: "hỗ trợ buyer" },
-    { value: "1", label: "đầu mối chịu trách nhiệm" },
+    { value: "01", label: "đầu mối chịu trách nhiệm" },
+    { value: "05", label: "giai đoạn dành cho buyer" },
+    { value: "12", label: "control gate dự kiến" },
   ],
   sourcingSteps: [
     { number: "01", title: "Gửi nhu cầu", description: "Chia sẻ sản phẩm, quy cách, số lượng và điểm đến của bạn." },
@@ -161,13 +162,13 @@ export function getLandingContent(locale: Locale) {
 
 export const aboutPageContent = {
   en: {
-    eyebrow: "About Minsen Export",
+    eyebrow: "About MISO JAPAN",
     title: "We make Vietnam's wood supply easier to trust.",
-    intro: "Minsen Export is an international trade promotion and sourcing partner connecting buyers with the right Vietnamese manufacturers for plywood, veneer and wood-based products.",
+    intro: "MISO JAPAN is an international trade promotion and sourcing partner helping buyers reduce risk when purchasing plywood, veneer and wood-based products from Vietnam.",
     missionTitle: "A better way to buy from Vietnam.",
     missionText: "International sourcing should not feel like a leap of faith. We bring structure, local knowledge and accountability to every stage, so buyers can make decisions with clearer information and fewer surprises.",
     networkTitle: "One partner behind your supply chain.",
-    networkText: "Our network of 230+ manufacturing partners gives buyers access to a broad range of capabilities without the complexity of managing multiple factory relationships alone.",
+    networkText: "We work across a qualified manufacturing network while keeping one accountable MISO JAPAN team between the buyer and the supply chain.",
     valuesEyebrow: "What we stand for",
     values: [
       { title: "Buyer-first thinking", text: "We start with your requirements, not with a factory's available stock." },
@@ -179,13 +180,13 @@ export const aboutPageContent = {
     cta: "Start a conversation",
   },
   vi: {
-    eyebrow: "Về Minsen Export",
+    eyebrow: "Về MISO JAPAN",
     title: "Giúp nguồn cung gỗ Việt Nam trở nên đáng tin cậy hơn.",
-    intro: "Minsen Export là đơn vị xúc tiến thương mại và sourcing quốc tế, kết nối buyer với các nhà máy Việt Nam phù hợp cho plywood, veneer và sản phẩm gỗ.",
+    intro: "MISO JAPAN là đơn vị xúc tiến thương mại và sourcing quốc tế, giúp buyer giảm rủi ro khi mua plywood, veneer và sản phẩm gỗ từ Việt Nam.",
     missionTitle: "Một cách tốt hơn để mua hàng từ Việt Nam.",
     missionText: "Tìm nguồn cung quốc tế không nên là một quyết định đầy rủi ro. Chúng tôi mang đến quy trình rõ ràng, hiểu biết địa phương và trách nhiệm xuyên suốt để buyer ra quyết định với nhiều thông tin hơn và ít bất ngờ hơn.",
     networkTitle: "Một đối tác đứng sau chuỗi cung ứng của bạn.",
-    networkText: "Mạng lưới hơn 230 nhà máy giúp buyer tiếp cận nhiều năng lực sản xuất mà không phải tự mình quản lý quá nhiều mối quan hệ nhà máy.",
+    networkText: "Chúng tôi làm việc với mạng lưới nhà máy được qualification và duy trì một đội ngũ MISO JAPAN chịu trách nhiệm xuyên suốt chuỗi cung ứng.",
     valuesEyebrow: "Giá trị chúng tôi theo đuổi",
     values: [
       { title: "Đặt buyer làm trung tâm", text: "Chúng tôi bắt đầu từ yêu cầu của buyer, không bắt đầu từ hàng có sẵn của nhà máy." },
@@ -202,13 +203,13 @@ export const detailPageContent = {
   en: {
     products: { eyebrow: "Product categories", title: "Wood products selected for serious buyers.", description: "From commercial plywood to custom wood products, we help you find the right specification and the right factory for your market." },
     protection: { eyebrow: "Buyer protection", title: "A safer way to source from Vietnam.", description: "Seven practical layers reduce uncertainty and keep your order moving from factory verification to final shipment." },
-    network: { eyebrow: "Our factory network", title: "230+ factories. One accountable partner.", description: "Access a broad Vietnamese manufacturing network without having to manage every factory relationship by yourself." },
+    network: { eyebrow: "Our manufacturing network", title: "A qualified network. One accountable partner.", description: "Access suitable Vietnamese manufacturing capabilities without managing every factory relationship by yourself." },
     process: { eyebrow: "Our process", title: "A clear path from inquiry to shipment.", description: "We turn your product brief into a matched supplier proposal, controlled production and a coordinated export process." },
   },
   vi: {
     products: { eyebrow: "Danh mục sản phẩm", title: "Sản phẩm gỗ được chọn cho buyer chuyên nghiệp.", description: "Từ plywood thương mại đến sản phẩm gỗ theo yêu cầu, chúng tôi giúp bạn tìm đúng quy cách và đúng nhà máy cho thị trường của mình." },
     protection: { eyebrow: "Bảo vệ Buyer", title: "Một cách an tâm hơn để sourcing từ Việt Nam.", description: "7 lớp bảo vệ thực tế giúp giảm rủi ro và giữ đơn hàng đi đúng hướng từ xác minh nhà máy đến khi xuất hàng." },
-    network: { eyebrow: "Mạng lưới nhà máy", title: "230+ nhà máy. Một đầu mối chịu trách nhiệm.", description: "Tiếp cận mạng lưới sản xuất rộng khắp Việt Nam mà không phải tự mình quản lý từng mối quan hệ nhà máy." },
+    network: { eyebrow: "Mạng lưới sản xuất", title: "Mạng lưới được qualification. Một đầu mối chịu trách nhiệm.", description: "Tiếp cận năng lực sản xuất phù hợp mà không phải tự mình quản lý từng mối quan hệ nhà máy." },
     process: { eyebrow: "Quy trình của chúng tôi", title: "Lộ trình rõ ràng từ yêu cầu đến xuất hàng.", description: "Chúng tôi biến yêu cầu sản phẩm thành đề xuất nhà cung cấp phù hợp, sản xuất được kiểm soát và quy trình xuất khẩu đồng bộ." },
   },
 };

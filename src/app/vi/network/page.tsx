@@ -1,4 +1,4 @@
 import { DetailPage } from "@/components/DetailPage";
 
-export const metadata = { title: "Mạng lưới nhà máy | Minsen Export", description: "Mạng lưới hơn 230 nhà máy gỗ Việt Nam đã được xác minh." };
+export const metadata = { title: "Mạng lưới sản xuất | MISO JAPAN", description: "Mạng lưới sản xuất plywood Việt Nam theo định hướng qualification." };
 export default function VietnameseNetworkPage() { return <DetailPage kind="network" locale="vi" />; }

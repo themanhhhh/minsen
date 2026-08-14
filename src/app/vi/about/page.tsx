@@ -1,8 +1,8 @@
 import { CompanyAbout } from "@/components/CompanyAbout";
 
 export const metadata = {
-  title: "Về Minsen Export | Nguồn cung gỗ Việt Nam",
-  description: "Tìm hiểu cách Minsen Export kết nối buyer quốc tế với các nhà máy gỗ Việt Nam đã được xác minh.",
+  title: "Về MISO JAPAN | Sourcing Plywood Việt Nam",
+  description: "Tìm hiểu cách MISO JAPAN giúp buyer giảm rủi ro khi mua plywood từ Việt Nam.",
 };
 
 export default function VietnameseAboutPage() {

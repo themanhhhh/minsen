@@ -12,7 +12,7 @@ export function Header({ locale }: { locale: Locale }) {
         aria-label={`${company.name}, home`}
       >
         <span className="brand-mark" aria-hidden="true">
-          V
+          M
         </span>
         <span>{company.name}</span>
       </Link>
