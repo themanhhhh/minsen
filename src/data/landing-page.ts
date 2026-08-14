@@ -20,6 +20,7 @@ export const navigation = [
 export const heroContent = {
   eyebrow: "Vietnam Plywood Sourcing & Buyer Risk Elimination",
   title: "Source Vietnam plywood with controlled quality and one accountable partner.",
+  titleLines: ["Source Vietnam plywood", "with controlled quality", "and one accountable partner."],
   description:
     "MISO JAPAN clarifies your RFQ, selects suitable Vietnamese manufacturers and controls factory verification, sample approval, production, inspection, documentation and shipment through defined control gates.",
   primaryAction: "Submit your RFQ",
@@ -109,10 +110,11 @@ const vietnameseContent = {
   ],
   heroContent: {
     eyebrow: "Trung tâm sourcing gỗ uy tín từ Việt Nam",
-    title: "Kết nối trực tiếp với các nhà máy plywood tốt nhất Việt Nam",
-    description: "Kết nối buyer quốc tế với hơn 230 nhà máy Việt Nam đã được xác minh. Đúng sản phẩm, đúng giá và kiểm soát chất lượng rõ ràng.",
-    primaryAction: "Tìm nhà máy phù hợp",
-    secondaryAction: "Khám phá hệ thống bảo vệ Buyer",
+    title: "Mua plywood từ Việt Nam với chất lượng được kiểm soát và một đầu mối chịu trách nhiệm.",
+    titleLines: ["Mua plywood từ Việt Nam", "với chất lượng được kiểm soát", "và một đầu mối chịu trách nhiệm."],
+    description: "MISO JAPAN phân tích RFQ, lựa chọn năng lực phù hợp và kiểm soát các bước quan trọng trong đơn hàng.",
+    primaryAction: "Gửi RFQ",
+    secondaryAction: "Xem hệ thống kiểm soát",
     searchPlaceholder: "Bạn đang tìm sản phẩm gì? (ví dụ: Commercial plywood)",
   },
   buyerConcerns: [

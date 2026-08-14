@@ -7,7 +7,7 @@ export function Hero({ locale }: { locale: Locale }) {
     <section className="hero" id="top">
       <div className="hero-content">
         <p className="eyebrow"><span className="eyebrow-dot" />{heroContent.eyebrow}</p>
-        <h1>{heroContent.title}</h1>
+        <h1>{heroContent.titleLines.map((line) => <span key={line}>{line}</span>)}</h1>
         <p className="hero-description">{heroContent.description}</p>
         <form className="hero-search" action="#contact">
           <label className="sr-only" htmlFor="product-search">Product you are looking for</label>
