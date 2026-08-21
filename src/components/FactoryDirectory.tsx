@@ -24,19 +24,26 @@ const emptyFilters: Filters = {
   regions: [],
   markets: [],
 };
+const shortlistStorageKey = "minsen-shortlist";
+const compareStorageKey = "minsen-compare";
+
+function readIds(key: string) {
+  try {
+    const value = JSON.parse(window.localStorage.getItem(key) || "[]");
+    return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
+  } catch {
+    return [];
+  }
+}
+
 export function FactoryDirectory({ locale }: { locale: Locale }) {
   const [filters, setFilters] = useState<Filters>(emptyFilters);
   const [shortlist, setShortlist] = useState<string[]>([]);
   const [compare, setCompare] = useState<string[]>([]);
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      try {
-        setShortlist(
-          JSON.parse(window.localStorage.getItem("minsen-shortlist") || "[]"),
-        );
-      } catch {
-        setShortlist([]);
-      }
+      setShortlist(readIds(shortlistStorageKey));
+      setCompare(readIds(compareStorageKey).filter((id) => factories.some((factory) => factory.id === id)).slice(0, 3));
     }, 0);
     return () => window.clearTimeout(timer);
   }, []);
@@ -87,21 +94,35 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
     (filters.markets.length === 0 ||
       filters.markets.some((item) => factory.exportMarkets.includes(item)));
   const filtered = factories.filter(matches);
+  const comparedFactories = factories.filter((factory) => compare.includes(factory.id));
+  const comparisonRows: { label: string; value: (factory: Factory) => string }[] = [
+    { label: vi ? "Địa điểm" : "Location", value: (factory) => factory.location },
+    { label: vi ? "Sản phẩm" : "Products", value: (factory) => factory.products.slice(0, 3).join(", ") },
+    { label: vi ? "Công suất" : "Capacity", value: (factory) => factory.monthlyCapacity },
+    { label: vi ? "Thị trường" : "Markets", value: (factory) => factory.exportMarkets.slice(0, 3).join(", ") },
+    { label: "Score", value: (factory) => `${factory.score}/5` },
+  ];
   const toggleShortlist = (id: string) => {
     const next = shortlist.includes(id)
       ? shortlist.filter((item) => item !== id)
       : [...shortlist, id];
     setShortlist(next);
-    window.localStorage.setItem("minsen-shortlist", JSON.stringify(next));
+    window.localStorage.setItem(shortlistStorageKey, JSON.stringify(next));
   };
-  const toggleCompare = (id: string) =>
-    setCompare((current) =>
-      current.includes(id)
-        ? current.filter((item) => item !== id)
-        : current.length < 3
-          ? [...current, id]
-          : current,
-    );
+  const toggleCompare = (id: string) => {
+    const next = compare.includes(id)
+      ? compare.filter((item) => item !== id)
+      : compare.length < 3
+        ? [...compare, id]
+        : compare;
+    setCompare(next);
+    window.localStorage.setItem(compareStorageKey, JSON.stringify(next));
+    window.setTimeout(() => document.getElementById("compare-preview")?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+  };
+  const clearCompare = () => {
+    setCompare([]);
+    window.localStorage.removeItem(compareStorageKey);
+  };
   const factoryImage = (id: string) =>
     (
       ({
@@ -248,8 +269,10 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
                       type="button"
                       className={compare.includes(factory.id) ? "is-saved" : ""}
                       onClick={() => toggleCompare(factory.id)}
+                      aria-pressed={compare.includes(factory.id)}
+                      disabled={!compare.includes(factory.id) && compare.length >= 3}
                     >
-                      + {labels.add}
+                      {compare.includes(factory.id) ? "✓ " : "+ "}{compare.includes(factory.id) ? (vi ? "Đã chọn" : "Selected") : labels.add}
                     </button>
                   </div>
                 </article>
@@ -264,19 +287,28 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
             )}
           </div>
         </section>
+        {comparedFactories.length > 0 && (
+          <section className="directory-inline-compare" id="compare-preview">
+            <div className="inline-compare-heading">
+              <div><p className="eyebrow">{vi ? "So sánh nhanh" : "Quick comparison"}</p><h2>{vi ? "Đặt các lựa chọn cạnh nhau." : "Compare your factory options."}</h2></div>
+              <Link className="button button-primary" href={`${vi ? "/vi" : ""}/shortlist?compare=${encodeURIComponent(compare.join(","))}`}>{vi ? "Mở bảng đầy đủ" : "Open full comparison"} <span aria-hidden="true">↗</span></Link>
+            </div>
+            <div className="compare-table" role="table" aria-label={vi ? "So sánh nhanh nhà máy" : "Quick factory comparison"}>
+              <div className="compare-row compare-heading" role="row"><strong>{vi ? "Tiêu chí" : "Criteria"}</strong>{comparedFactories.map((factory) => <div className="compare-factory-heading" key={factory.id}><strong>{factory.id}</strong><small>{factory.location}</small></div>)}</div>
+              {comparisonRows.map((row) => <div className="compare-row" role="row" key={row.label}><span>{row.label}</span>{comparedFactories.map((factory) => <span key={factory.id}>{row.value(factory)}</span>)}</div>)}
+            </div>
+          </section>
+        )}
         {compare.length > 0 && (
           <div className="compare-bar">
-            <strong>
-              {compare.length} {labels.compare}
-            </strong>
-            <div>
+            <div><strong>{compare.length}/3</strong><span>{vi ? "nhà máy đã chọn" : "factories selected"}</span></div>
+            <div className="compare-bar-factories">
               {compare.map((id) => (
                 <span key={id}>{id}</span>
               ))}
             </div>
-            <Link href={`${vi ? "/vi" : ""}/shortlist`}>
-              {labels.compare} ↗
-            </Link>
+            <button type="button" onClick={clearCompare}>{vi ? "Xóa" : "Clear"}</button>
+            <Link className="button button-primary" href={`${vi ? "/vi" : ""}/shortlist?compare=${encodeURIComponent(compare.join(","))}`}>{labels.compare} <span aria-hidden="true">→</span></Link>
           </div>
         )}
       </main>
