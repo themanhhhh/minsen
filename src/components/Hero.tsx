@@ -6,18 +6,66 @@ export function Hero({ locale }: { locale: Locale }) {
   return (
     <section className="hero" id="top">
       <div className="hero-content">
-        <p className="eyebrow"><span className="eyebrow-dot" />{heroContent.eyebrow}</p>
-        <h1>{heroContent.titleLines.map((line) => <span key={line}>{line}</span>)}</h1>
+        <p className="eyebrow">
+          <span className="eyebrow-dot" />
+          {heroContent.eyebrow}
+        </p>
+        <h1>
+          {heroContent.titleLines.map((line) => (
+            <span key={line}>{line}</span>
+          ))}
+        </h1>
         <p className="hero-description">{heroContent.description}</p>
         <form className="hero-search" action="#contact">
-          <label className="sr-only" htmlFor="product-search">Product you are looking for</label>
-          <input id="product-search" name="product" placeholder={heroContent.searchPlaceholder} />
-          <button className="button button-search" type="submit">{heroContent.primaryAction} <span aria-hidden="true">›</span></button>
+          <label className="sr-only" htmlFor="product-search">
+            Product you are looking for
+          </label>
+          <input
+            id="product-search"
+            name="product"
+            placeholder={heroContent.searchPlaceholder}
+          />
+          <button className="button button-search" type="submit">
+            {heroContent.searchAction} <span aria-hidden="true">›</span>
+          </button>
         </form>
-        <a className="hero-secondary-link" href="#protection">{heroContent.secondaryAction} <span aria-hidden="true">↓</span></a>
+        <div className="hero-popular">
+          <strong>Popular searches:</strong>
+          {heroContent.popularSearches.map((search) => (
+            <a href="#products" key={search}>
+              {search}
+            </a>
+          ))}
+        </div>
+        <div className="hero-actions">
+          <a className="button button-primary" href="#contact">
+            {heroContent.primaryAction} <span aria-hidden="true">›</span>
+          </a>
+          <a className="button button-outline" href="#protection">
+            {heroContent.secondaryAction} <span aria-hidden="true">›</span>
+          </a>
+        </div>
       </div>
-      <Image className="hero-background" src="/images/hero/hero-vietnam-plywood-factory.png" alt="" fill priority sizes="100vw" />
-      <div className="hero-stats">{heroStats.map((stat) => <div key={stat.label}><strong>{stat.value}</strong><span>{stat.label}</span></div>)}</div>
+      <Image
+        className="hero-background"
+        src="/images/hero/hero-vietnam-plywood-factory.png"
+        alt=""
+        fill
+        preload
+        sizes="100vw"
+      />
+      <div className="hero-stats">
+        {heroStats.map((stat) => (
+          <div key={stat.label}>
+            <span className="stat-icon" aria-hidden="true">
+              {stat.icon}
+            </span>
+            <strong>{stat.value}</strong>
+            <span className="stat-label">{stat.label}</span>
+            <small>{stat.detail}</small>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

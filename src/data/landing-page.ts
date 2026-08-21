@@ -1,7 +1,7 @@
 export const company = {
   name: "MISO JAPAN",
   legalName: "Công ty TNHH Liên doanh MISO JAPAN",
-  descriptor: "Vietnam Plywood Sourcing & Buyer Risk Elimination Partner",
+  descriptor: "Vietnam Plywood Sourcing & Buyer Risk Elimination",
   email: "[official email to be confirmed]",
   whatsapp: "[official WhatsApp to be confirmed]",
   location: "[registered address to be confirmed]",
@@ -9,7 +9,7 @@ export const company = {
 
 export const navigation = [
   { label: "Products", href: "/products" },
-  { label: "Manufacturers", href: "/manufacturers" },
+  { label: "Factory Network", href: "/manufacturers" },
   { label: "Sourcing Services", href: "/sourcing" },
   { label: "How It Works", href: "/process" },
   { label: "Factory Videos", href: "/factory-videos" },
@@ -22,17 +22,19 @@ export const heroContent = {
   title: "Source Vietnam plywood with controlled quality and one accountable partner.",
   titleLines: ["Source Vietnam plywood", "with controlled quality", "and one accountable partner."],
   description:
-    "MISO JAPAN clarifies your RFQ, selects suitable Vietnamese manufacturers and controls factory verification, sample approval, production, inspection, documentation and shipment through defined control gates.",
-  primaryAction: "Submit your RFQ",
-  secondaryAction: "See our control system",
+    "MISO JAPAN clarifies your requirements, selects the right Vietnamese manufacturers, controls quality at every step and arranges safe shipment through our 12 control gates.",
+  primaryAction: "Submit Your RFQ",
+  secondaryAction: "How It Works",
+  searchAction: "Find Solutions",
+  popularSearches: ["Commercial Plywood", "Film Faced Plywood", "Packing Plywood", "Veneer", "LVL"],
   searchPlaceholder: "What product are you looking for? (e.g. Commercial plywood)",
 };
 
 export const heroStats = [
-  { value: "01", label: "Accountable partner" },
-  { value: "05", label: "Buyer-facing phases" },
-  { value: "12", label: "Control gates planned" },
-  { value: "02", label: "Priority regions" },
+  { icon: "▥", value: "230+", label: "Vietnam factory profiles", detail: "Wide & diversified network" },
+  { icon: "◇", value: "12", label: "Control gates in our system", detail: "Reduce risks at every step" },
+  { icon: "♧", value: "01", label: "Accountable partner", detail: "One team, one responsibility" },
+  { icon: "◎", value: "02", label: "Priority export regions", detail: "India & Middle East" },
 ];
 
 export const buyerConcerns = [
@@ -78,9 +80,11 @@ export const protectionLayers = [
 ];
 
 export const networkStats = [
-  { value: "01", label: "accountable partner" },
-  { value: "05", label: "buyer-facing phases" },
-  { value: "12", label: "control gates planned" },
+  { value: "230+", label: "factory profiles", detail: "Wide & diversified network" },
+  { value: "01", label: "accountable partner", detail: "One team, one responsibility" },
+  { value: "05", label: "buyer-facing phases", detail: "From inquiry to shipment" },
+  { value: "12", label: "control gates", detail: "Reduce risks at every step" },
+  { value: "02", label: "priority export regions", detail: "India & Middle East" },
 ];
 
 export const sourcingSteps = [
@@ -114,7 +118,9 @@ const vietnameseContent = {
     titleLines: ["Mua plywood từ Việt Nam", "với chất lượng được kiểm soát", "và một đầu mối chịu trách nhiệm."],
     description: "MISO JAPAN phân tích RFQ, lựa chọn năng lực phù hợp và kiểm soát các bước quan trọng trong đơn hàng.",
     primaryAction: "Gửi RFQ",
-    secondaryAction: "Xem hệ thống kiểm soát",
+    secondaryAction: "Cách chúng tôi làm việc",
+    searchAction: "Tìm giải pháp",
+    popularSearches: ["Plywood thương mại", "Plywood phủ phim", "Plywood đóng gói", "Veneer", "LVL"],
     searchPlaceholder: "Bạn đang tìm sản phẩm gì? (ví dụ: Commercial plywood)",
   },
   buyerConcerns: [
@@ -139,9 +145,11 @@ const vietnameseContent = {
     { number: "07", title: "Đồng hành lâu dài", description: "Tiếp tục chịu trách nhiệm sau giao hàng để mỗi đơn tiếp theo dễ dàng hơn." },
   ],
   networkStats: [
-    { value: "01", label: "đầu mối chịu trách nhiệm" },
-    { value: "05", label: "giai đoạn dành cho buyer" },
-    { value: "12", label: "control gate dự kiến" },
+    { value: "230+", label: "hồ sơ nhà máy", detail: "Mạng lưới đa dạng" },
+    { value: "01", label: "đầu mối chịu trách nhiệm", detail: "Một đội ngũ, một trách nhiệm" },
+    { value: "05", label: "giai đoạn dành cho buyer", detail: "Từ yêu cầu đến xuất hàng" },
+    { value: "12", label: "control gate", detail: "Giảm rủi ro từng bước" },
+    { value: "02", label: "khu vực xuất khẩu", detail: "Ấn Độ & Trung Đông" },
   ],
   sourcingSteps: [
     { number: "01", title: "Gửi nhu cầu", description: "Chia sẻ sản phẩm, quy cách, số lượng và điểm đến của bạn." },

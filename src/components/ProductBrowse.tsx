@@ -15,30 +15,31 @@ export function ProductBrowse({ locale }: { locale: Locale }) {
       "mdf-hdf": "/images/products/product-mdf-hdf.jpg",
       "finger-joint-board": "/images/products/product-finger-joint-board.jpg",
     })[slug];
+  const iconFor = (slug: string) =>
+    ({
+      "commercial-plywood": "▰",
+      "film-faced-plywood": "▤",
+      "packing-plywood": "◇",
+      "natural-veneer": "◒",
+    })[slug] ?? "▰";
+
   return (
     <section className="product-browse">
       <div className="section-heading">
         <p className="eyebrow">
           {vi ? "Tìm theo sản phẩm" : "Browse by product"}
         </p>
-        <h2>
-          {vi ? (
-            <>
-              Bạn cần gì?
-              <br />
-              <em>Chúng tôi tìm giúp.</em>
-            </>
-          ) : (
-            <>
-              Know what you need?
-              <br />
-              <em>Start here.</em>
-            </>
-          )}
-        </h2>
+        <p className="browse-heading-copy">
+          {vi
+            ? "Tìm đúng sản phẩm cho nhu cầu của bạn. Chúng tôi kết nối bạn với nhà sản xuất phù hợp."
+            : "Find the right plywood for your business. We match you with suitable manufacturers."}
+        </p>
+        <Link className="browse-heading-link" href={vi ? "/vi/products" : "/products"}>
+          {vi ? "Xem tất cả sản phẩm" : "View all products"} <span aria-hidden="true">›</span>
+        </Link>
       </div>
       <div className="browse-grid">
-        {productCatalog.slice(0, 6).map((product) => (
+        {productCatalog.slice(0, 4).map((product) => (
           <Link
             className="browse-card"
             href={`${vi ? "/vi" : ""}/products/${product.slug}`}
@@ -50,30 +51,24 @@ export function ProductBrowse({ locale }: { locale: Locale }) {
                   src={imageFor(product.slug)!}
                   alt={vi ? product.viName : product.name}
                   fill
-                  sizes="(max-width: 820px) 100vw, 33vw"
+                  sizes="(max-width: 900px) 50vw, 25vw"
                 />
               )}
-              <span>{product.category}</span>
-              <strong>{product.name}</strong>
+              <span className="browse-art-category">{product.category}</span>
             </div>
-            <p>{vi ? product.viName : product.name}</p>
-            <small>{product.specs}</small>
-            <span className="browse-arrow" aria-hidden="true">
-              ↗
+            <div className="browse-card-icon" aria-hidden="true">{iconFor(product.slug)}</div>
+            <h3>{vi ? product.viName : product.name}</h3>
+            <p className="browse-card-description">{product.description}</p>
+            <ul className="browse-card-specs">
+              {product.specs.split(" · ").map((spec) => (
+                <li key={spec}>{spec}</li>
+              ))}
+            </ul>
+            <span className="browse-card-details">
+              {vi ? "Xem chi tiết" : "View details"} <span aria-hidden="true">›</span>
             </span>
           </Link>
         ))}
-      </div>
-      <div className="browse-footer">
-        <p>
-          {vi ? "Không chắc nên bắt đầu từ đâu?" : "Not sure where to start?"}
-        </p>
-        <Link className="text-link" href={vi ? "/vi/rfq" : "/rfq"}>
-          {vi
-            ? "Để Minsen tìm nhà máy phù hợp"
-            : "Let Minsen find your supplier"}{" "}
-          <span aria-hidden="true">↗</span>
-        </Link>
       </div>
     </section>
   );
