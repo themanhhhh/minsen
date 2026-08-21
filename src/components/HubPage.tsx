@@ -50,17 +50,17 @@ const content = {
     },
     insights: {
       eyebrow: "Sourcing insights",
-      title: "Useful knowledge for better buying decisions.",
+      title: "Practical sourcing intelligence for better buying decisions.",
       description:
-        "Practical guidance for international buyers sourcing plywood, veneer and wood panels from Vietnam.",
+        "Practical guidance for international buyers on product specifications, factory qualification, quality control and shipment risk when sourcing plywood, veneer and wood products from Vietnam.",
       cards: [
         [
           "How to source plywood from Vietnam",
           "The key questions to ask about specification, factory and shipment.",
         ],
         [
-          "MR vs Melamine vs Phenolic",
-          "Understand glue types and choose the right performance for your application.",
+          "Understanding Plywood Bonding Systems",
+          "Learn the differences between MR performance, melamine-bonded systems and phenolic bonding, and choose the right option for the required application and market.",
         ],
         [
           "How to inspect plywood",
