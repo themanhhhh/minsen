@@ -1,7 +1,9 @@
-import { getLandingContent, type Locale } from "@/data/landing-page";
+import Image from "next/image";
+import Link from "next/link";
+import { getLandingContent, productCatalog, type Locale } from "@/data/landing-page";
 
 export function Features({ locale }: { locale: Locale }) {
-  const { buyerConcerns, products } = getLandingContent(locale);
+  const { buyerConcerns } = getLandingContent(locale);
   return (
     <section className="section products-section" id="products">
       <div className="section-heading">
@@ -25,26 +27,32 @@ export function Features({ locale }: { locale: Locale }) {
         </h2>
       </div>
       <div className="product-grid">
-        {products.map((product) => (
+        {productCatalog.slice(0, 6).map((product, index) => (
           <article
             className={`product-card ${product.className}`}
-            key={product.index}
+            key={product.slug}
           >
             <div className="product-art">
-              <span>{product.index}</span>
+              <Image
+                src={`/images/products/product-${product.slug}.jpg`}
+                alt={locale === "vi" ? product.viName : product.name}
+                fill
+                sizes="(max-width: 820px) 100vw, 33vw"
+              />
+              <span>{String(index + 1).padStart(2, "0")}</span>
             </div>
             <div>
-              <p className="product-detail">{product.detail}</p>
-              <h3>{product.name}</h3>
+              <p className="product-detail">{product.category}</p>
+              <h3>{locale === "vi" ? product.viName : product.name}</h3>
               <p>{product.description}</p>
             </div>
-            <a
-              href="#contact"
+            <Link
+              href={`${locale === "vi" ? "/vi" : ""}/products/${product.slug}`}
               className="feature-arrow"
-              aria-label={`Request ${product.name} information`}
+              aria-label={`${locale === "vi" ? "Xem chi tiết" : "View details"}: ${product.name}`}
             >
               ↗
-            </a>
+            </Link>
           </article>
         ))}
       </div>

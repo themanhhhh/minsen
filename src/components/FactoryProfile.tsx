@@ -3,6 +3,7 @@ import Image from "next/image";
 import { factories, type Locale } from "@/data/landing-page";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { ScrollCue } from "@/components/ScrollCue";
 
 export function FactoryProfile({
   factoryId,
@@ -74,8 +75,9 @@ export function FactoryProfile({
               PENDING
             </small>
           </div>
+          <ScrollCue targetId="profile-body" label={vi ? "Cuộn để xem hồ sơ" : "Scroll to view profile"} />
         </section>
-        <section className="profile-body">
+        <section className="profile-body" id="profile-body">
           <div className="profile-main">
             <div className="profile-heading">
               <p className="eyebrow">

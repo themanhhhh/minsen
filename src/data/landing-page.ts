@@ -7,12 +7,17 @@ export const company = {
   location: "[registered address to be confirmed]",
 };
 
+export const socialLinks = [
+  { label: "Instagram", href: "https://www.instagram.com/" },
+  { label: "Facebook", href: "https://www.facebook.com/" },
+  { label: "TikTok", href: "https://www.tiktok.com/" },
+];
+
 export const navigation = [
   { label: "Products", href: "/products" },
   { label: "Factory Network", href: "/manufacturers" },
   { label: "Sourcing Services", href: "/sourcing" },
   { label: "How It Works", href: "/process" },
-  { label: "Factory Videos", href: "/factory-videos" },
   { label: "Insights", href: "/insights" },
   { label: "About MISO JAPAN", href: "/about" },
 ];
@@ -108,7 +113,6 @@ const vietnameseContent = {
     { label: "Nhà máy", href: "/vi/manufacturers" },
     { label: "Dịch vụ sourcing", href: "/vi/sourcing" },
     { label: "Quy trình", href: "/vi/process" },
-    { label: "Video nhà máy", href: "/vi/factory-videos" },
     { label: "Kiến thức", href: "/vi/insights" },
     { label: "Về chúng tôi", href: "/vi/about" },
   ],

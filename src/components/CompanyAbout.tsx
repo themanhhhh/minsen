@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import Link from "next/link";
 import Image from "next/image";
+import { ScrollCue } from "@/components/ScrollCue";
 
 export function CompanyAbout({ locale }: { locale: Locale }) {
   const content = aboutPageContent[locale];
@@ -35,6 +36,7 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
               PARTNER
             </small>
           </div>
+          <ScrollCue targetId="mission" label={locale === "vi" ? "Cuộn để tìm hiểu thêm" : "Scroll to learn more"} />
         </section>
         <section className="about-story" id="mission">
           <div className="about-story-label">

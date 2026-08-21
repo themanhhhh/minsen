@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { factories, type Factory, type Locale } from "@/data/landing-page";
+import { ScrollCue } from "@/components/ScrollCue";
 
 const shortlistStorageKey = "minsen-shortlist";
 const compareStorageKey = "minsen-compare";
@@ -135,8 +136,9 @@ export function ShortlistPage({ locale }: { locale: Locale }) {
               ? "Gửi danh sách này cho MISO JAPAN để chúng tôi đánh giá và kết nối các lựa chọn phù hợp nhất."
               : "Send this list to MISO JAPAN and we will evaluate and connect the most suitable options."}
         </p>
+        <ScrollCue targetId="shortlist-content" label={vi ? "Cuộn để xem danh sách" : "Scroll to view the list"} />
       </section>
-      <section className="shortlist-content">
+      <section className="shortlist-content" id="shortlist-content">
         {selected.length === 0 ? (
           <div className="empty-results">
             <h2>

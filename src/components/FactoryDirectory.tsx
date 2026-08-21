@@ -11,6 +11,7 @@ import {
 } from "@/data/landing-page";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { ScrollCue } from "@/components/ScrollCue";
 
 type Filters = {
   products: string[];
@@ -164,8 +165,9 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
             <strong>230+</strong>
             <span>{vi ? "hồ sơ trong mạng lưới" : "network profiles"}</span>
           </div>
+          <ScrollCue targetId="directory-content" label={vi ? "Cuộn để khám phá nhà máy" : "Scroll to explore factories"} />
         </section>
-        <section className="directory-content">
+        <section className="directory-content" id="directory-content">
           <aside className="factory-filters">
             <div className="filter-heading">
               <strong>{labels.filter}</strong>

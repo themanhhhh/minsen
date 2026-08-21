@@ -7,6 +7,7 @@ import { Features } from "@/components/Features";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Process } from "@/components/Process";
+import { ScrollCue } from "@/components/ScrollCue";
 
 export type DetailPageKind = keyof typeof detailPageContent.en;
 
@@ -39,7 +40,7 @@ export function DetailPage({
           >
             <span>
               {kind === "products"
-                ? "03"
+                ? "06"
                 : kind === "protection"
                   ? "07"
                   : kind === "network"
@@ -47,6 +48,7 @@ export function DetailPage({
                     : "04"}
             </span>
           </div>
+          <ScrollCue targetId={kind} label={locale === "vi" ? "Cuộn để xem thêm" : "Scroll to explore"} />
         </section>
         {kind === "products" && <Features locale={locale} />}
         {kind === "protection" && <BuyerProtection locale={locale} />}

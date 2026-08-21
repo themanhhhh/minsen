@@ -1,5 +1,12 @@
-import { company, getLandingContent, type Locale } from "@/data/landing-page";
+import { company, getLandingContent, socialLinks, type Locale } from "@/data/landing-page";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
+
+const socialIcons = {
+  Instagram: FaInstagram,
+  Facebook: FaFacebookF,
+  TikTok: FaTiktok,
+};
 
 export function Footer({ locale }: { locale: Locale }) {
   const { navigation, products } = getLandingContent(locale);
@@ -51,6 +58,15 @@ export function Footer({ locale }: { locale: Locale }) {
           </p>
           <small>{company.legalName}</small>
           <small>{company.location}</small>
+          <div className="footer-socials">
+            <strong>{locale === "vi" ? "Theo dõi chúng tôi" : "Follow us"}</strong>
+            <div>
+              {socialLinks.map((social) => {
+                const Icon = socialIcons[social.label as keyof typeof socialIcons];
+                return <a href={social.href} key={social.label} target="_blank" rel="noreferrer" aria-label={social.label} title={social.label}><Icon size={16} aria-hidden="true" /></a>;
+              })}
+            </div>
+          </div>
         </div>
         <div className="footer-column">
           <strong>{locale === "vi" ? "Khám phá" : "Explore"}</strong>

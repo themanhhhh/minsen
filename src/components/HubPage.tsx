@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { ScrollCue } from "@/components/ScrollCue";
 import { type Locale } from "@/data/landing-page";
 
 type HubKind = "sourcing" | "factory-videos" | "insights";
@@ -169,10 +170,11 @@ export function HubPage({ kind, locale }: { kind: HubKind; locale: Locale }) {
               ? "01"
               : kind === "factory-videos"
                 ? "02"
-                : "03"}
+            : "03"}
           </div>
+          <ScrollCue targetId="hub-cards" label={vi ? "Cuộn để khám phá" : "Scroll to explore"} />
         </section>
-        <section className="hub-cards">
+        <section className="hub-cards" id="hub-cards">
           {page.cards.map(([title, description], index) => (
             <article key={title}>
               {kind !== "sourcing" && (

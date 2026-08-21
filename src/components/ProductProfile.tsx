@@ -3,6 +3,7 @@ import Image from "next/image";
 import { productCatalog, type Locale } from "@/data/landing-page";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { ScrollCue } from "@/components/ScrollCue";
 
 export function ProductProfile({
   slug,
@@ -70,8 +71,9 @@ export function ProductProfile({
             <strong>{product.name}</strong>
             <span>{product.category}</span>
           </div>
+          <ScrollCue targetId="product-profile-body" label={vi ? "Cuộn để xem thông tin" : "Scroll to view details"} />
         </section>
-        <section className="product-profile-body">
+        <section className="product-profile-body" id="product-profile-body">
           <div>
             <p className="eyebrow">
               {vi ? "Thông tin sản phẩm" : "Product information"}

@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { type Locale } from "@/data/landing-page";
+import { ScrollCue } from "@/components/ScrollCue";
 
 export function RfqWizard({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
@@ -66,9 +67,10 @@ export function RfqWizard({ locale }: { locale: Locale }) {
           {vi
             ? "Chúng tôi sẽ tìm kiếm trong mạng lưới nhà máy và chọn ra các phương án phù hợp nhất."
             : "We will search across our manufacturing network and shortlist the most suitable options."}
-        </p>
+          </p>
+          <ScrollCue targetId="rfq-form" label={vi ? "Cuộn đến biểu mẫu" : "Scroll to the form"} />
       </section>
-      <form className="rfq-form" onSubmit={next}>
+      <form className="rfq-form" id="rfq-form" onSubmit={next}>
         <div className="rfq-progress">
           <span className={step >= 1 ? "active" : ""}>
             01 <small>{vi ? "Sản phẩm" : "Product"}</small>
