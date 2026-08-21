@@ -1,53 +1,24 @@
 import { getLandingContent, type Locale } from "@/data/landing-page";
+import { Factory, Globe2, ShieldCheck, UsersRound, type LucideIcon } from "lucide-react";
 import Image from "next/image";
+
+type NetworkFeature = { icon: LucideIcon; title: string; description: string };
 
 export function About({ locale }: { locale: Locale }) {
   const { networkStats } = getLandingContent(locale);
-  const features =
+  const features: NetworkFeature[] =
     locale === "vi"
       ? [
-          [
-            "▥",
-            "Mạng lưới nhà máy rộng",
-            "Tiếp cận hơn 230 nhà sản xuất plywood tại Việt Nam",
-          ],
-          [
-            "◇",
-            "Kiểm soát rủi ro chặt chẽ",
-            "12 control gate trong hệ thống sourcing",
-          ],
-          [
-            "♧",
-            "Một đầu mối liên hệ",
-            "Tiết kiệm thời gian và giảm chi phí trao đổi",
-          ],
-          [
-            "◎",
-            "Hỗ trợ xuất khẩu tập trung",
-            "Tập trung vào thị trường Ấn Độ và Trung Đông",
-          ],
+          { icon: Factory, title: "Mạng lưới nhà máy rộng", description: "Tiếp cận hơn 230 nhà sản xuất plywood tại Việt Nam" },
+          { icon: ShieldCheck, title: "Kiểm soát rủi ro chặt chẽ", description: "12 control gate trong hệ thống sourcing" },
+          { icon: UsersRound, title: "Một đầu mối liên hệ", description: "Tiết kiệm thời gian và giảm chi phí trao đổi" },
+          { icon: Globe2, title: "Hỗ trợ xuất khẩu tập trung", description: "Tập trung vào thị trường Ấn Độ và Trung Đông" },
         ]
       : [
-          [
-            "▥",
-            "Wide factory network",
-            "Access to 230+ plywood manufacturers in Vietnam",
-          ],
-          [
-            "◇",
-            "Stricter risk control",
-            "12 control gates in our sourcing system",
-          ],
-          [
-            "♧",
-            "One point of contact",
-            "Save time and reduce communication costs",
-          ],
-          [
-            "◎",
-            "Focused export support",
-            "Main focus on India and Middle East markets",
-          ],
+          { icon: Factory, title: "Wide factory network", description: "Access to 230+ plywood manufacturers in Vietnam" },
+          { icon: ShieldCheck, title: "Stricter risk control", description: "12 control gates in our sourcing system" },
+          { icon: UsersRound, title: "One point of contact", description: "Save time and reduce communication costs" },
+          { icon: Globe2, title: "Focused export support", description: "Main focus on India and Middle East markets" },
         ];
 
   return (
@@ -118,10 +89,10 @@ export function About({ locale }: { locale: Locale }) {
         </div>
       </div>
       <div className="network-features">
-        {features.map(([icon, title, description]) => (
+        {features.map(({ icon: Icon, title, description }) => (
           <article key={title}>
             <span className="network-feature-icon" aria-hidden="true">
-              {icon}
+              <Icon size={30} strokeWidth={1.8} />
             </span>
             <div>
               <strong>{title}</strong>

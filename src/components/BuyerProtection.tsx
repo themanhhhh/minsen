@@ -1,4 +1,5 @@
 import { getLandingContent, type Locale } from "@/data/landing-page";
+import { ShieldCheck } from "lucide-react";
 import Image from "next/image";
 
 export function BuyerProtection({ locale }: { locale: Locale }) {
@@ -67,8 +68,8 @@ export function BuyerProtection({ locale }: { locale: Locale }) {
           </article>
         ))}
       </div>
-      {/* <div className="protection-badge">
-        <span aria-hidden="true">⌁</span>
+      <div className="protection-badge">
+        <span aria-hidden="true"><ShieldCheck size={27} strokeWidth={1.8} /></span>
         <strong>
           {locale === "vi" ? "Buyer là trung tâm" : "Buyer first"}
         </strong>
@@ -87,7 +88,7 @@ export function BuyerProtection({ locale }: { locale: Locale }) {
             </>
           )}
         </small>
-      </div> */}
+      </div>
     </section>
   );
 }

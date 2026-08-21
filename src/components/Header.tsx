@@ -29,6 +29,9 @@ export function Header({ locale }: { locale: Locale }) {
           <small>{company.descriptor}</small>
         </span>
       </Link>
+      <Link className="header-home" href={locale === "vi" ? "/vi" : "/"}>
+        {locale === "vi" ? "Trang chủ" : "Home"}
+      </Link>
       <nav className="desktop-nav" aria-label="Điều hướng chính">
         {navigation.map((item) => (
           <Link

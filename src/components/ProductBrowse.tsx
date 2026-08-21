@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Layers3, Leaf, Package, TableProperties, type LucideIcon } from "lucide-react";
 import Image from "next/image";
 import { productCatalog, type Locale } from "@/data/landing-page";
 
@@ -15,13 +16,13 @@ export function ProductBrowse({ locale }: { locale: Locale }) {
       "mdf-hdf": "/images/products/product-mdf-hdf.jpg",
       "finger-joint-board": "/images/products/product-finger-joint-board.jpg",
     })[slug];
-  const iconFor = (slug: string) =>
+  const iconFor = (slug: string): LucideIcon =>
     ({
-      "commercial-plywood": "▰",
-      "film-faced-plywood": "▤",
-      "packing-plywood": "◇",
-      "natural-veneer": "◒",
-    })[slug] ?? "▰";
+      "commercial-plywood": Layers3,
+      "film-faced-plywood": TableProperties,
+      "packing-plywood": Package,
+      "natural-veneer": Leaf,
+    })[slug] ?? Layers3;
 
   return (
     <section className="product-browse">
@@ -56,7 +57,7 @@ export function ProductBrowse({ locale }: { locale: Locale }) {
               )}
               <span className="browse-art-category">{product.category}</span>
             </div>
-            <div className="browse-card-icon" aria-hidden="true">{iconFor(product.slug)}</div>
+            <div className="browse-card-icon" aria-hidden="true">{(() => { const Icon = iconFor(product.slug); return <Icon size={20} strokeWidth={1.8} />; })()}</div>
             <h3>{vi ? product.viName : product.name}</h3>
             <p className="browse-card-description">{product.description}</p>
             <ul className="browse-card-specs">

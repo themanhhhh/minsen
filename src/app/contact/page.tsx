@@ -1,5 +1,19 @@
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-export const metadata = { title: "Contact MISO JAPAN", description: "Contact MISO JAPAN for plywood, veneer and Vietnam wood sourcing." };
-export default function ContactPage() { return <><Header locale="en" /><main><Contact locale="en" /></main><Footer locale="en" /></>; }
+export const metadata = {
+  title: "Contact MISO JAPAN",
+  description:
+    "Contact MISO JAPAN for plywood, veneer and Vietnam wood sourcing.",
+};
+export default function ContactPage() {
+  return (
+    <>
+      <Header locale="en" />
+      <main>
+        <Contact locale="en" />
+      </main>
+      <Footer locale="en" />
+    </>
+  );
+}

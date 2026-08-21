@@ -3,6 +3,90 @@ import { type Locale } from "@/data/landing-page";
 
 export function HomeResources({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
-  const cards = vi ? [["01", "Cách sourcing plywood từ Việt Nam", "Những câu hỏi quan trọng về quy cách, nhà máy và lô hàng."], ["02", "MR, Melamine hay Phenolic?", "Chọn loại keo phù hợp với ứng dụng và tiêu chuẩn buyer."], ["03", "Cách kiểm tra plywood trước xuất hàng", "Một checklist thực tế cho duyệt mẫu và kiểm soát chất lượng."]] : [["01", "How to source plywood from Vietnam", "The key questions to ask about specification, factory and shipment."], ["02", "MR, Melamine or Phenolic?", "Choose the right glue performance for your application and market."], ["03", "How to inspect plywood before shipment", "A practical checklist for sample approval and quality control."]];
-  return <section className="home-resources"><div className="resources-intro"><p className="eyebrow eyebrow-light">{vi ? "Kiến thức sourcing" : "Sourcing insights"}</p><h2>{vi ? <>Mua hàng tốt hơn<br /><em>bắt đầu từ hiểu biết.</em></> : <>Better buying<br /><em>starts with insight.</em></>}</h2><p>{vi ? "Thông tin thực tế giúp buyer quốc tế ra quyết định tự tin hơn khi sourcing sản phẩm gỗ từ Việt Nam." : "Practical knowledge to help international buyers make more confident decisions when sourcing wood products from Vietnam."}</p><Link className="button button-light" href={vi ? "/vi/insights" : "/insights"}>{vi ? "Xem tất cả kiến thức" : "Explore all insights"} ↗</Link></div><div className="resources-list">{cards.map(([number, title, description]) => <Link className="resource-card" href={vi ? "/vi/insights" : "/insights"} key={number}><span>{number}</span><div><h3>{title}</h3><p>{description}</p></div><strong>↗</strong></Link>)}</div></section>;
+  const cards = vi
+    ? [
+        [
+          "01",
+          "Cách sourcing plywood từ Việt Nam",
+          "Những câu hỏi quan trọng về quy cách, nhà máy và lô hàng.",
+        ],
+        [
+          "02",
+          "MR, Melamine hay Phenolic?",
+          "Chọn loại keo phù hợp với ứng dụng và tiêu chuẩn buyer.",
+        ],
+        [
+          "03",
+          "Cách kiểm tra plywood trước xuất hàng",
+          "Một checklist thực tế cho duyệt mẫu và kiểm soát chất lượng.",
+        ],
+      ]
+    : [
+        [
+          "01",
+          "How to source plywood from Vietnam",
+          "The key questions to ask about specification, factory and shipment.",
+        ],
+        [
+          "02",
+          "MR, Melamine or Phenolic?",
+          "Choose the right glue performance for your application and market.",
+        ],
+        [
+          "03",
+          "How to inspect plywood before shipment",
+          "A practical checklist for sample approval and quality control.",
+        ],
+      ];
+  return (
+    <section className="home-resources">
+      <div className="resources-intro">
+        <p className="eyebrow eyebrow-light">
+          {vi ? "Kiến thức sourcing" : "Sourcing insights"}
+        </p>
+        <h2>
+          {vi ? (
+            <>
+              Mua hàng tốt hơn
+              <br />
+              <em>bắt đầu từ hiểu biết.</em>
+            </>
+          ) : (
+            <>
+              Better buying
+              <br />
+              <em>starts with insight.</em>
+            </>
+          )}
+        </h2>
+        <p>
+          {vi
+            ? "Thông tin thực tế giúp buyer quốc tế ra quyết định tự tin hơn khi sourcing sản phẩm gỗ từ Việt Nam."
+            : "Practical knowledge to help international buyers make more confident decisions when sourcing wood products from Vietnam."}
+        </p>
+        <Link
+          className="button button-light"
+          href={vi ? "/vi/insights" : "/insights"}
+        >
+          {vi ? "Xem tất cả kiến thức" : "Explore all insights"} ↗
+        </Link>
+      </div>
+      <div className="resources-list">
+        {cards.map(([number, title, description]) => (
+          <Link
+            className="resource-card"
+            href={vi ? "/vi/insights" : "/insights"}
+            key={number}
+          >
+            <span>{number}</span>
+            <div>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </div>
+            <strong>↗</strong>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
 }

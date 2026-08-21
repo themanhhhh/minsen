@@ -1,5 +1,8 @@
 import { getLandingContent, heroStats, type Locale } from "@/data/landing-page";
+import { Factory, Globe2, Handshake, ShieldCheck } from "lucide-react";
 import Image from "next/image";
+
+const statIcons = [Factory, ShieldCheck, Handshake, Globe2];
 
 export function Hero({ locale }: { locale: Locale }) {
   const { heroContent } = getLandingContent(locale);
@@ -55,16 +58,17 @@ export function Hero({ locale }: { locale: Locale }) {
         sizes="100vw"
       />
       <div className="hero-stats">
-        {heroStats.map((stat) => (
-          <div key={stat.label}>
+        {heroStats.map((stat, index) => {
+          const Icon = statIcons[index] || Factory;
+          return <div key={stat.label}>
             <span className="stat-icon" aria-hidden="true">
-              {stat.icon}
+              <Icon size={28} strokeWidth={1.8} />
             </span>
             <strong>{stat.value}</strong>
             <span className="stat-label">{stat.label}</span>
             <small>{stat.detail}</small>
-          </div>
-        ))}
+          </div>;
+        })}
       </div>
     </section>
   );

@@ -31,10 +31,10 @@ export const heroContent = {
 };
 
 export const heroStats = [
-  { icon: "▥", value: "230+", label: "Vietnam factory profiles", detail: "Wide & diversified network" },
-  { icon: "◇", value: "12", label: "Control gates in our system", detail: "Reduce risks at every step" },
-  { icon: "♧", value: "01", label: "Accountable partner", detail: "One team, one responsibility" },
-  { icon: "◎", value: "02", label: "Priority export regions", detail: "India & Middle East" },
+  { value: "230+", label: "Vietnam factory profiles", detail: "Wide & diversified network" },
+  { value: "12", label: "Control gates in our system", detail: "Reduce risks at every step" },
+  { value: "01", label: "Accountable partner", detail: "One team, one responsibility" },
+  { value: "02", label: "Priority export regions", detail: "India & Middle East" },
 ];
 
 export const buyerConcerns = [
