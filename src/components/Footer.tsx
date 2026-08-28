@@ -34,6 +34,11 @@ export function Footer({ locale }: { locale: Locale }) {
               </>
             )}
           </h2>
+          <p className="footer-cta-description">
+            {locale === "vi"
+              ? "MISO JAPAN kết nối yêu cầu của bạn với các nhà sản xuất Việt Nam phù hợp và hỗ trợ xác minh nhà máy, kiểm soát chất lượng và điều phối vận chuyển thông qua quy trình sourcing bài bản."
+              : "MISO JAPAN matches your requirements with suitable Vietnamese manufacturers and supports factory verification, quality control and shipment coordination through a structured sourcing process."}
+          </p>
         </div>
         <a
           className="button button-light footer-cta-button"
@@ -53,8 +58,8 @@ export function Footer({ locale }: { locale: Locale }) {
           </a>
           <p>
             {locale === "vi"
-              ? "Đối tác sourcing plywood Việt Nam và kiểm soát rủi ro cho buyer."
-              : "Vietnam plywood sourcing and buyer risk elimination partner."}
+              ? "Đối tác sourcing plywood Việt Nam, phát triển nhà cung cấp và quản trị rủi ro cho Buyer."
+              : "Vietnam plywood sourcing, supplier development and buyer risk management partner."}
           </p>
           <small>{company.legalName}</small>
           <small>{company.location}</small>

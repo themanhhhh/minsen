@@ -1,9 +1,13 @@
 import Image from "next/image";
-import Link from "next/link";
-import { getLandingContent, productCatalog, type Locale } from "@/data/landing-page";
+import { getLandingContent, type Locale } from "@/data/landing-page";
 
 export function Features({ locale }: { locale: Locale }) {
-  const { buyerConcerns } = getLandingContent(locale);
+  const { buyerConcerns, products } = getLandingContent(locale);
+  const imageFor = {
+    "product-plywood": "/images/products/product-commercial-plywood.jpg",
+    "product-veneer": "/images/products/product-natural-veneer.jpg",
+    "product-custom": "/images/products/product-packing-plywood.jpg",
+  };
   return (
     <section className="section products-section" id="products">
       <div className="section-heading">
@@ -27,32 +31,26 @@ export function Features({ locale }: { locale: Locale }) {
         </h2>
       </div>
       <div className="product-grid">
-        {productCatalog.slice(0, 6).map((product, index) => (
+        {products.map((product) => (
           <article
             className={`product-card ${product.className}`}
-            key={product.slug}
+            key={product.index}
           >
             <div className="product-art">
-              <Image
-                src={`/images/products/product-${product.slug}.jpg`}
-                alt={locale === "vi" ? product.viName : product.name}
-                fill
-                sizes="(max-width: 820px) 100vw, 33vw"
-              />
-              <span>{String(index + 1).padStart(2, "0")}</span>
+              <Image src={imageFor[product.className as keyof typeof imageFor]} alt={product.name} fill sizes="(max-width: 820px) 100vw, 33vw" />
+              <span>{product.index}</span>
             </div>
             <div>
-              <p className="product-detail">{product.category}</p>
-              <h3>{locale === "vi" ? product.viName : product.name}</h3>
-              <p>{product.description}</p>
+              <p className="product-detail">{product.detail}</p>
+              <h3>{product.name}</h3>
             </div>
-            <Link
-              href={`${locale === "vi" ? "/vi" : ""}/products/${product.slug}`}
+            <a
+              href="#contact"
               className="feature-arrow"
-              aria-label={`${locale === "vi" ? "Xem chi tiết" : "View details"}: ${product.name}`}
+              aria-label={`${locale === "vi" ? "Gửi yêu cầu" : "Send an inquiry"}: ${product.name}`}
             >
               ↗
-            </Link>
+            </a>
           </article>
         ))}
       </div>

@@ -1,7 +1,7 @@
 import { getLandingContent, type Locale } from "@/data/landing-page";
 import Image from "next/image";
 
-export function Process({ locale }: { locale: Locale }) {
+export function Process({ locale, full = false }: { locale: Locale; full?: boolean }) {
   const { sourcingSteps } = getLandingContent(locale);
   const images = [
     "/images/process/buyer-inquiry.jpg",
@@ -9,34 +9,35 @@ export function Process({ locale }: { locale: Locale }) {
     "/images/process/sample-approval.jpg",
     "/images/process/container-shipment.jpg",
   ];
+  const steps = full ? sourcingSteps : sourcingSteps.slice(0, 4);
   return (
     <section className="section process-section" id="process">
       <div className="section-heading">
         <p className="eyebrow">
-          {locale === "vi" ? "Quy trình sourcing" : "Our sourcing process"}
+          {locale === "vi" ? "MISO JAPAN làm gì" : "What MISO JAPAN does"}
         </p>
         <h2>
           {locale === "vi" ? (
             <>
-              Từ yêu cầu đầu tiên
+              Từ yêu cầu của Buyer
               <br />
-              <em>đến lô hàng xuất khẩu.</em>
+              <em>đến khi giao hàng.</em>
             </>
           ) : (
             <>
-              From first inquiry
+              From buyer requirement
               <br />
-              <em>to final shipment.</em>
+              <em>to shipment.</em>
             </>
           )}
         </h2>
       </div>
       <div className="process-grid">
-        {sourcingSteps.map((step, index) => (
+        {steps.map((step, index) => (
           <article key={step.number}>
             <div className="process-image">
               <Image
-                src={images[index]}
+                src={images[index % images.length]}
                 alt={step.title}
                 fill
                 sizes="(max-width: 820px) 100vw, 25vw"

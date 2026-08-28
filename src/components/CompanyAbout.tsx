@@ -52,6 +52,13 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
             </Link>
           </div>
         </section>
+        <section className="about-positioning">
+          <p className="eyebrow">
+            {locale === "vi" ? "Định vị của MISO JAPAN" : "Our positioning"}
+          </p>
+          <blockquote>{content.positioningTitle}</blockquote>
+          <p>{content.positioningText}</p>
+        </section>
         <section className="about-network">
           <div className="network-copy">
             <p className="eyebrow">
@@ -87,6 +94,28 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
             </div>
           </div>
         </section>
+        <section className="about-local">
+          <div>
+            <p className="eyebrow">{locale === "vi" ? "Đối tác thực thi tại Việt Nam" : "Your local execution partner in Vietnam"}</p>
+            <h2>{content.localTitle}</h2>
+            <p>{content.localText}</p>
+            <blockquote>{locale === "vi" ? "Một đội ngũ địa phương ở gần nhà máy hơn, trong khi buyer vẫn giữ quyền kiểm soát các quyết định thương mại." : "A local team closer to the factory, while the buyer remains in control of commercial decisions."}</blockquote>
+          </div>
+          <div className="about-local-support">
+            <h3>{locale === "vi" ? "Các hỗ trợ có thể bao gồm" : "Local support may include"}</h3>
+            <ul>
+              {content.localSupport.map((item) => <li key={item}>{item}</li>)}
+            </ul>
+          </div>
+        </section>
+        <section className="factory-intelligence">
+          <div>
+            <p className="eyebrow">{locale === "vi" ? "Dữ liệu nhà máy plywood Việt Nam" : "Vietnam factory intelligence"}</p>
+            <strong>230</strong>
+            <span>{locale === "vi" ? "hồ sơ nhà máy đã được lập bản đồ dữ liệu" : "mapped factory records"}</span>
+          </div>
+          <p>{content.factoryIntelligence}</p>
+        </section>
         <section className="about-values">
           <div className="about-values-heading">
             <p className="eyebrow">{content.valuesEyebrow}</p>
@@ -109,6 +138,39 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
                 <h3>{value.title}</h3>
                 <p>{value.text}</p>
               </article>
+            ))}
+          </div>
+        </section>
+        <section className="about-why">
+          <div>
+            <p className="eyebrow">{locale === "vi" ? "Tại sao chọn MISO JAPAN" : "Why MISO JAPAN"}</p>
+            <h2>{content.whyTitle}</h2>
+          </div>
+          <div className="about-why-grid">
+            {content.whyItems.map((item, index) => (
+              <article key={item.title}>
+                <span>0{index + 1}</span>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="founder-message">
+          <p className="eyebrow">{locale === "vi" ? "Thông điệp từ nhà sáng lập" : "Founder message"}</p>
+          <blockquote>“{content.founderMessage}”</blockquote>
+          <p>Founder &amp; Managing Director<br />MISO JAPAN</p>
+        </section>
+        <section className="core-message">
+          <div>
+            <p className="eyebrow">{locale === "vi" ? "Thông điệp cốt lõi" : "Core message"}</p>
+            <h2>{content.coreTitle}</h2>
+            <p>{content.coreText}</p>
+          </div>
+          <div className="commercial-logic">
+            <p className="eyebrow">{locale === "vi" ? "Logic thương mại của MISO JAPAN" : "Our commercial logic"}</p>
+            {content.commercialLogic.map((item, index) => (
+              <span key={item}><strong>0{index + 1}</strong>{item}</span>
             ))}
           </div>
         </section>

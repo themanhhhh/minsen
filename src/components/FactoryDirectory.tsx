@@ -2,6 +2,19 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Bookmark,
+  CalendarDays,
+  ClipboardList,
+  Factory as FactoryIcon,
+  Globe2,
+  Info,
+  MapPin,
+  ShieldCheck,
+  UsersRound,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   factories,
@@ -39,6 +52,7 @@ function readIds(key: string) {
 
 export function FactoryDirectory({ locale }: { locale: Locale }) {
   const [filters, setFilters] = useState<Filters>(emptyFilters);
+  const [appliedFilters, setAppliedFilters] = useState<Filters>(emptyFilters);
   const [shortlist, setShortlist] = useState<string[]>([]);
   const [compare, setCompare] = useState<string[]>([]);
   useEffect(() => {
@@ -54,29 +68,65 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
         eyebrow: "Mạng lưới sản xuất",
         title: "Tìm năng lực phù hợp cho yêu cầu của bạn.",
         description:
-          "Khám phá các hồ sơ mẫu trong mạng lưới sản xuất. MISO JAPAN sẽ qualification và kết nối nhà cung cấp phù hợp qua quy trình kiểm soát riêng.",
-        filter: "Bộ lọc",
+          "Tiếp cận hơn 230 nhà sản xuất gỗ tại Việt Nam. MISO JAPAN pre-qualify và kết nối bạn với nhà cung cấp phù hợp qua quy trình kiểm soát để giảm rủi ro ở mọi bước.",
+        filter: "BỘ LỌC",
         results: "hồ sơ phù hợp",
         shortlist: "đã lưu",
         compare: "So sánh",
         match: "Yêu cầu MISO JAPAN kết nối",
+        profileDetails: "Xem chi tiết hồ sơ",
         save: "Lưu",
         saved: "Đã lưu",
         add: "So sánh",
+        productCategory: "Danh mục sản phẩm",
+        coreMaterial: "Vật liệu lõi",
+        location: "Khu vực (Việt Nam)",
+        exportMarket: "Thị trường xuất khẩu",
+        allRegions: "Tất cả khu vực",
+        allMarkets: "Tất cả thị trường",
+        applyFilters: "Áp dụng bộ lọc",
+        factoryType: "Loại nhà máy",
+        manufacturer: "Nhà sản xuất",
+        capacity: "Công suất sản xuất",
+        established: "Thành lập",
+        markets: "Thị trường xuất khẩu",
+        certifications: "Chứng nhận",
+        status: "Trạng thái MISO JAPAN",
+        documentReviewed: "Đã xem xét hồ sơ",
+        qualificationPending: "Đang chờ qualification",
+        disclaimer: "Hồ sơ được hiển thị với dữ liệu mẫu cho mục đích minh họa.",
       }
     : {
-        eyebrow: "Manufacturing network",
+        eyebrow: "MANUFACTURING NETWORK",
         title: "Find the right capability for your requirement.",
         description:
-          "Explore sample profiles from our manufacturing network. MISO JAPAN qualifies and connects suitable suppliers through its control process.",
-        filter: "Filters",
+          "Access 230+ wood manufacturers in Vietnam. MISO JAPAN pre-qualifies and connects you with suitable suppliers through a structured control process to reduce risk at every step.",
+        filter: "FILTERS",
         results: "matching profiles",
         shortlist: "saved",
         compare: "Compare",
         match: "Ask MISO JAPAN to connect",
+        profileDetails: "View profile details",
         save: "Save",
         saved: "Saved",
         add: "Compare",
+        productCategory: "PRODUCT CATEGORY",
+        coreMaterial: "CORE MATERIAL",
+        location: "LOCATION (VIETNAM)",
+        exportMarket: "EXPORT MARKETS",
+        allRegions: "All regions",
+        allMarkets: "All markets",
+        applyFilters: "Apply filters",
+        factoryType: "Factory type",
+        manufacturer: "Manufacturer",
+        capacity: "Production capacity",
+        established: "Established",
+        markets: "Export markets",
+        certifications: "Certifications",
+        status: "MISO JAPAN status",
+        documentReviewed: "Document reviewed",
+        qualificationPending: "Qualification pending",
+        disclaimer: "Profiles shown are sample data for demonstration purposes.",
       };
   const toggleFilter = (group: keyof Filters, value: string) =>
     setFilters((current) => ({
@@ -86,14 +136,32 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
         : [...current[group], value],
     }));
   const matches = (factory: Factory) =>
-    (filters.products.length === 0 ||
-      filters.products.some((item) => factory.products.includes(item))) &&
-    (filters.materials.length === 0 ||
-      filters.materials.some((item) => factory.materials.includes(item))) &&
-    (filters.regions.length === 0 ||
-      filters.regions.includes(factory.region)) &&
-    (filters.markets.length === 0 ||
-      filters.markets.some((item) => factory.exportMarkets.includes(item)));
+    (appliedFilters.products.length === 0 ||
+      appliedFilters.products.some((item) =>
+        item === "Other Wood Products"
+          ? factory.products.some(
+              (product) =>
+                !factoryFilterOptions.products
+                  .filter((option) => option !== "Other Wood Products")
+                  .includes(product),
+            )
+          : factory.products.includes(item),
+      )) &&
+    (appliedFilters.materials.length === 0 ||
+      appliedFilters.materials.some((item) =>
+        item === "Other"
+          ? factory.materials.some(
+              (material) =>
+                !factoryFilterOptions.materials
+                  .filter((option) => option !== "Other")
+                  .includes(material),
+            )
+          : factory.materials.includes(item),
+      )) &&
+    (appliedFilters.regions.length === 0 ||
+      appliedFilters.regions.includes(factory.region)) &&
+    (appliedFilters.markets.length === 0 ||
+      appliedFilters.markets.some((item) => factory.exportMarkets.includes(item)));
   const filtered = factories.filter(matches);
   const comparedFactories = factories.filter((factory) => compare.includes(factory.id));
   const comparisonRows: { label: string; value: (factory: Factory) => string }[] = [
@@ -124,6 +192,10 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
     setCompare([]);
     window.localStorage.removeItem(compareStorageKey);
   };
+  const clearFilters = () => {
+    setFilters(emptyFilters);
+    setAppliedFilters(emptyFilters);
+  };
   const factoryImage = (id: string) =>
     (
       ({
@@ -151,6 +223,32 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
       ))}
     </fieldset>
   );
+  const filterSelect = (
+    title: string,
+    group: "regions" | "markets",
+    options: string[],
+    allLabel: string,
+  ) => (
+    <fieldset className="factory-filter-select-group">
+      <legend>{title}</legend>
+      <select
+        value={filters[group][0] ?? ""}
+        onChange={(event) =>
+          setFilters((current) => ({
+            ...current,
+            [group]: event.target.value ? [event.target.value] : [],
+          }))
+        }
+      >
+        <option value="">{allLabel}</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </fieldset>
+  );
   return (
     <>
       <Header locale={locale} />
@@ -160,10 +258,34 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
             <p className="eyebrow eyebrow-light">{labels.eyebrow}</p>
             <h1>{labels.title}</h1>
             <p>{labels.description}</p>
+            <div className="directory-features">
+              <div>
+                <ShieldCheck size={28} strokeWidth={1.5} aria-hidden="true" />
+                <span>
+                  <strong>{vi ? "Nhà sản xuất pre-qualified" : "Pre-qualified manufacturers"}</strong>
+                  <small>{vi ? "Thông tin và năng lực cơ bản đã được xác minh." : "Verified basic information and capabilities."}</small>
+                </span>
+              </div>
+              <div>
+                <ClipboardList size={28} strokeWidth={1.5} aria-hidden="true" />
+                <span>
+                  <strong>{vi ? "Quy trình có cấu trúc" : "Structured control process"}</strong>
+                  <small>{vi ? "12 control gate từ yêu cầu đến xuất hàng." : "12 control gates from inquiry to shipment."}</small>
+                </span>
+              </div>
+              <div>
+                <UsersRound size={28} strokeWidth={1.5} aria-hidden="true" />
+                <span>
+                  <strong>{vi ? "Một đầu mối chịu trách nhiệm" : "One accountable partner"}</strong>
+                  <small>{vi ? "Một đội ngũ, một trách nhiệm cho đơn hàng." : "One team, one responsibility for your order."}</small>
+                </span>
+              </div>
+            </div>
           </div>
           <div className="directory-count">
             <strong>230+</strong>
-            <span>{vi ? "hồ sơ trong mạng lưới" : "network profiles"}</span>
+            <span>{vi ? "HỒ SƠ NHÀ SẢN XUẤT" : "MANUFACTURER PROFILES"}</span>
+            <small>{vi ? "Mạng lưới đa dạng tại Việt Nam" : "Wide & diversified network across Vietnam"}</small>
           </div>
           <ScrollCue targetId="directory-content" label={vi ? "Cuộn để khám phá nhà máy" : "Scroll to explore factories"} />
         </section>
@@ -171,39 +293,32 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
           <aside className="factory-filters">
             <div className="filter-heading">
               <strong>{labels.filter}</strong>
-              <button type="button" onClick={() => setFilters(emptyFilters)}>
-                Clear all
+              <button type="button" onClick={clearFilters}>
+                {vi ? "Xóa tất cả" : "Clear all"}
               </button>
             </div>
             {filterGroup(
-              vi ? "Sản phẩm" : "Product",
+              labels.productCategory,
               "products",
               factoryFilterOptions.products,
             )}
             {filterGroup(
-              vi ? "Nguyên liệu" : "Core material",
+              labels.coreMaterial,
               "materials",
               factoryFilterOptions.materials,
             )}
-            {filterGroup(
-              vi ? "Khu vực" : "Location",
-              "regions",
-              factoryFilterOptions.regions,
-            )}
-            {filterGroup(
-              vi ? "Thị trường xuất khẩu" : "Export market",
-              "markets",
-              factoryFilterOptions.markets,
-            )}
+            {filterSelect(labels.location, "regions", factoryFilterOptions.regions, labels.allRegions)}
+            {filterSelect(labels.exportMarket, "markets", factoryFilterOptions.markets, labels.allMarkets)}
+            <button className="apply-filters-button" type="button" onClick={() => setAppliedFilters(filters)}>
+              {labels.applyFilters}
+            </button>
           </aside>
           <div className="directory-results">
             <div className="directory-toolbar">
               <p>
                 <strong>{filtered.length}</strong> {labels.results}
               </p>
-              <span>
-                {shortlist.length} {labels.shortlist}
-              </span>
+              <span className="saved-count"><Bookmark size={16} strokeWidth={1.7} aria-hidden="true" /> {shortlist.length} {labels.shortlist}</span>
             </div>
             <div className="factory-grid">
               {filtered.map((factory) => (
@@ -224,9 +339,9 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
                       />
                     )}
                     <span>VN</span>
-                    <strong>{factory.region}</strong>
+                    <strong>{factory.location.split(",")[0]}</strong>
                   </div>
-                  <p className="factory-location">{factory.location}</p>
+                  <p className="factory-location"><MapPin size={13} strokeWidth={2} aria-hidden="true" />{factory.location}</p>
                   <h2>
                     {vi
                       ? "Đối tác sản xuất plywood"
@@ -237,45 +352,50 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
                       <span key={product}>{product}</span>
                     ))}
                   </div>
-                  <dl>
-                    <div>
-                      <dt>{vi ? "Nguyên liệu" : "Core"}</dt>
-                      <dd>{factory.materials.join(" · ")}</dd>
-                    </div>
-                    <div>
-                      <dt>
-                        {vi ? "Năng lực tham khảo" : "Reference capacity"}
-                      </dt>
-                      <dd>{factory.monthlyCapacity}</dd>
-                    </div>
-                  </dl>
+                  <div className="factory-details">
+                    <div><FactoryIcon size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.factoryType}</small><strong>{labels.manufacturer}</strong></span></div>
+                    <div><ClipboardList size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.capacity}</small><strong>{factory.monthlyCapacity}</strong></span></div>
+                    <div><CalendarDays size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.established}</small><strong>{2026 - factory.years}</strong></span></div>
+                    <div><Globe2 size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.markets}</small><strong>{factory.exportMarkets.slice(0, 3).join(", ")}</strong></span></div>
+                    <div><BadgeCheck size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.certifications}</small><strong>{factory.certifications.join(", ")}</strong></span></div>
+                    <div><ShieldCheck size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.status}</small><strong className={factory.verified ? "is-reviewed" : "is-pending"}>{factory.verified ? labels.documentReviewed : labels.qualificationPending}</strong></span></div>
+                  </div>
                   <div className="factory-actions">
                     <Link
+                      className="factory-profile-link"
                       href={`${vi ? "/vi" : ""}/manufacturers/${factory.id.toLowerCase()}`}
+                    >
+                      {labels.profileDetails} <ArrowRight size={17} strokeWidth={1.8} aria-hidden="true" />
+                    </Link>
+                    <Link
+                      className="factory-connect-button"
+                      href={`${vi ? "/vi" : ""}/rfq?factory=${factory.id}`}
                     >
                       {labels.match} <span aria-hidden="true">↗</span>
                     </Link>
+                    <div className="factory-card-utilities">
                     <button
                       type="button"
-                      className={
+                      className={`factory-action-button ${
                         shortlist.includes(factory.id) ? "is-saved" : ""
-                      }
+                      }`}
                       onClick={() => toggleShortlist(factory.id)}
                     >
-                      {shortlist.includes(factory.id) ? "★" : "☆"}{" "}
+                      <Bookmark size={14} strokeWidth={1.7} fill={shortlist.includes(factory.id) ? "currentColor" : "none"} aria-hidden="true" />
                       {shortlist.includes(factory.id)
                         ? labels.saved
                         : labels.save}
                     </button>
                     <button
                       type="button"
-                      className={compare.includes(factory.id) ? "is-saved" : ""}
+                      className={`factory-action-button ${compare.includes(factory.id) ? "is-compared" : ""}`}
                       onClick={() => toggleCompare(factory.id)}
                       aria-pressed={compare.includes(factory.id)}
                       disabled={!compare.includes(factory.id) && compare.length >= 3}
                     >
                       {compare.includes(factory.id) ? "✓ " : "+ "}{compare.includes(factory.id) ? (vi ? "Đã chọn" : "Selected") : labels.add}
                     </button>
+                    </div>
                   </div>
                 </article>
               ))}
@@ -289,6 +409,10 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
             )}
           </div>
         </section>
+        <div className="directory-disclaimer">
+          <Info size={17} strokeWidth={1.7} aria-hidden="true" />
+          <span>{labels.disclaimer}</span>
+        </div>
         {comparedFactories.length > 0 && (
           <section className="directory-inline-compare" id="compare-preview">
             <div className="inline-compare-heading">

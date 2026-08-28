@@ -7,6 +7,7 @@ import { Features } from "@/components/Features";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Process } from "@/components/Process";
+import { ProductKnowledge } from "@/components/ProductKnowledge";
 import { ScrollCue } from "@/components/ScrollCue";
 
 export type DetailPageKind = keyof typeof detailPageContent.en;
@@ -24,7 +25,7 @@ export function DetailPage({
     <>
       <Header locale={locale} />
       <main className="detail-page">
-        <section className="detail-hero">
+        <section className={`detail-hero detail-page-${kind}`}>
           <div>
             <p className="eyebrow eyebrow-light">{content.eyebrow}</p>
             <h1>{content.title}</h1>
@@ -34,26 +35,44 @@ export function DetailPage({
               <span aria-hidden="true">↗</span>
             </Link>
           </div>
-          <div
-            className={`detail-hero-number detail-${kind}`}
-            aria-hidden="true"
-          >
-            <span>
-              {kind === "products"
-                ? "06"
-                : kind === "protection"
-                  ? "07"
+          {kind === "products" ? (
+            <div className="product-hero-visual" aria-hidden="true">
+              <div className="product-hero-segment product-hero-plywood">
+                <span>PLYWOOD</span>
+              </div>
+              <div className="product-hero-segment product-hero-veneer">
+                <span>VENEER</span>
+              </div>
+              <div className="product-hero-segment product-hero-custom">
+                <span>{locale === "vi" ? "SẢN PHẨM GỖ" : "WOOD PRODUCTS"}</span>
+                <small>OEM &amp; CUSTOM SUPPLY</small>
+              </div>
+              <div className="product-hero-center">
+                <strong>03</strong>
+                <span>{locale === "vi" ? "NHÓM SẢN PHẨM\nCHÍNH" : "CORE PRODUCT\nGROUPS"}</span>
+              </div>
+            </div>
+          ) : (
+            <div
+              className={`detail-hero-number detail-${kind}`}
+              aria-hidden="true"
+            >
+              <span>
+                {kind === "protection"
+                  ? "12"
                   : kind === "network"
                     ? "230+"
                     : "04"}
-            </span>
-          </div>
+              </span>
+            </div>
+          )}
           <ScrollCue targetId={kind} label={locale === "vi" ? "Cuộn để xem thêm" : "Scroll to explore"} />
         </section>
-        {kind === "products" && <Features locale={locale} />}
+         {kind === "products" && <Features locale={locale} />}
+         {kind === "products" && <ProductKnowledge locale={locale} />}
         {kind === "protection" && <BuyerProtection locale={locale} />}
         {kind === "network" && <About locale={locale} />}
-        {kind === "process" && <Process locale={locale} />}
+         {kind === "process" && <Process locale={locale} full />}
         <Contact locale={locale} />
       </main>
       <Footer locale={locale} />

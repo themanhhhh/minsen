@@ -16,7 +16,7 @@ export function FactoryPreview({ locale }: { locale: Locale }) {
     <section className="factory-preview">
       <div className="section-heading">
         <p className="eyebrow">
-          {vi ? "Mạng lưới Minsen" : "The Minsen network"}
+          {vi ? "Mạng lưới MISO JAPAN" : "The MISO JAPAN network"}
         </p>
         <h2>
           {vi ? (

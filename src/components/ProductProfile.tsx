@@ -102,8 +102,8 @@ export function ProductProfile({
             </h1>
             <p>
               {vi
-                ? "Chia sẻ quy cách và nhu cầu của bạn. Minsen sẽ tìm kiếm trong mạng lưới nhà máy để chọn ra các phương án phù hợp."
-                : "Share your specification and requirements. Minsen will search the manufacturing network and shortlist suitable options."}
+                ? "Chia sẻ quy cách và nhu cầu của bạn. MISO JAPAN sẽ tìm kiếm trong mạng lưới nhà máy để chọn ra các phương án phù hợp."
+                : "Share your specification and requirements. MISO JAPAN will search the manufacturing network and shortlist suitable options."}
             </p>
             <Link
               className="button button-light"
@@ -209,8 +209,8 @@ export function ProductProfile({
           </p>
           <h2>
             {vi
-              ? "Để Minsen tìm nhà máy phù hợp cho bạn."
-              : "Let Minsen find the right factory for you."}
+              ? "Để MISO JAPAN tìm nhà máy phù hợp cho bạn."
+              : "Let MISO JAPAN find the right factory for you."}
           </h2>
           <Link
             className="button button-primary"

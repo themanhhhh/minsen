@@ -12,12 +12,12 @@ export function HomeResources({ locale }: { locale: Locale }) {
         ],
         [
           "02",
-          "MR, Melamine hay Phenolic?",
+          "MR vs Melamine vs Phenolic",
           "Chọn loại keo phù hợp với ứng dụng và tiêu chuẩn buyer.",
         ],
         [
           "03",
-          "Cách kiểm tra plywood trước xuất hàng",
+          "Cách kiểm tra plywood",
           "Một checklist thực tế cho duyệt mẫu và kiểm soát chất lượng.",
         ],
       ]
@@ -29,12 +29,12 @@ export function HomeResources({ locale }: { locale: Locale }) {
         ],
         [
           "02",
-          "MR, Melamine or Phenolic?",
+          "MR vs Melamine vs Phenolic",
           "Choose the right glue performance for your application and market.",
         ],
         [
           "03",
-          "How to inspect plywood before shipment",
+          "How to inspect plywood",
           "A practical checklist for sample approval and quality control.",
         ],
       ];

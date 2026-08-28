@@ -19,35 +19,46 @@ export function BuyerProtection({ locale }: { locale: Locale }) {
       <div className="protection-intro">
         <p className="eyebrow eyebrow-light">
           {locale === "vi"
-            ? "Hệ thống bảo vệ Buyer"
-            : "Our buyer protection system"}
+            ? "Hệ thống quản trị rủi ro Buyer"
+            : "Buyer risk elimination system"}
         </p>
         <h2>
           {locale === "vi" ? (
             <>
-              7 lớp bảo vệ.
+              Một phương pháp
               <br />
-              <em>Một đầu mối trách nhiệm.</em>
+              <em>có cấu trúc.</em>
             </>
           ) : (
             <>
-              Seven layers
+              A structured approach
               <br />
-              of protection.
+              to buyer risk
               <br />
-              <em>
-                One clear
-                <br />
-                responsibility.
-              </em>
+              <em>management.</em>
             </>
           )}
         </h2>
         <p>
           {locale === "vi"
-            ? "Mỗi đơn hàng được quản lý qua một quy trình có cấu trúc nhằm giảm rủi ro, đảm bảo chất lượng ổn định và giúp bạn an tâm từ yêu cầu đầu tiên đến lô hàng cuối cùng."
-            : "Every order is managed through a structured process designed to reduce risk, ensure consistent quality and give you peace of mind from the first inquiry to the final shipment."}
-        </p>
+            ? "100 nhóm rủi ro, 30 SOP tổng thể, biểu mẫu có kiểm soát, bộ bằng chứng và 12 control gate giúp giảm sự phụ thuộc vào lời hứa bằng miệng."
+            : "100 buyer risks, 30 master SOPs, controlled forms, evidence packs and 12 control gates reduce dependence on verbal promises and make critical sourcing stages traceable."}
+          </p>
+        <div className="protection-system">
+          <p className="eyebrow eyebrow-light">MISO JAPAN BUYER RISK ELIMINATION SYSTEM™</p>
+          <div className="protection-system-flow">
+            <span><strong>100</strong>{locale === "vi" ? "nhóm rủi ro Buyer" : "buyer risks"}</span>
+            <span><strong>30</strong>{locale === "vi" ? "SOP tổng thể" : "master SOPs"}</span>
+            <span>{locale === "vi" ? "Biểu mẫu và checklist có kiểm soát" : "Controlled forms & checklists"}</span>
+            <span>{locale === "vi" ? "Bộ hồ sơ bằng chứng" : "Evidence packs"}</span>
+            <span><strong>12</strong>{locale === "vi" ? "control gates" : "control gates"}</span>
+          </div>
+          <p className="protection-system-logic">
+            {locale === "vi"
+              ? "Nỗi lo Buyer → Rủi ro → Kiểm soát → Bằng chứng → Phê duyệt → Giám sát"
+              : "Buyer fear → Risk → Control → Evidence → Approval → Monitoring"}
+          </p>
+        </div>
       </div>
       <div className="protection-list">
         {protectionLayers.map((layer) => (
@@ -56,7 +67,7 @@ export function BuyerProtection({ locale }: { locale: Locale }) {
               <span className="layer-number">{layer.number}</span>
               <div className="protection-thumb">
                 <Image
-                  src={images[layer.number]}
+                  src={images[layer.number] ?? images["05"]}
                   alt={layer.title}
                   fill
                   sizes="(max-width: 820px) 35vw, 140px"
@@ -66,25 +77,41 @@ export function BuyerProtection({ locale }: { locale: Locale }) {
             </div>
             <p>{layer.description}</p>
           </article>
-        ))}
+          ))}
+      </div>
+      <div className="protection-evidence">
+        <p className="eyebrow eyebrow-light">{locale === "vi" ? "Sourcing dựa trên bằng chứng" : "Evidence-based sourcing"}</p>
+        <h3>{locale === "vi" ? "Không chỉ nói cho Buyer biết. Hãy cho Buyer nhìn thấy." : "Do not just tell the buyer. Show the buyer."}</h3>
+        <p>
+          {locale === "vi"
+            ? "Tùy theo phạm vi đã thống nhất, bộ bằng chứng có thể bao gồm hồ sơ xác minh nhà máy, xác nhận yêu cầu, hồ sơ duyệt mẫu, ảnh sản xuất, hồ sơ QC, bằng chứng đóng gói, loading và đối chiếu chứng từ shipment."
+            : "Depending on the agreed scope, a buyer evidence package may include factory verification, requirement confirmation, sample approval, production photos, QC records, packing and loading evidence, and shipment document reconciliation."}
+        </p>
+        <div className="protection-evidence-list">
+          {(locale === "vi"
+            ? ["Hồ sơ xác minh nhà máy", "Xác nhận yêu cầu Buyer", "Hồ sơ phê duyệt mẫu", "Hồ sơ QC / Inspection", "Bằng chứng đóng gói và loading", "Đối chiếu chứng từ shipment"]
+            : ["Factory verification record", "Buyer requirement confirmation", "Sample approval record", "QC / inspection records", "Packing and loading evidence", "Shipment document reconciliation"]
+          ).map((item) => <span key={item}>{item}</span>)}
+        </div>
+        <strong className="protection-evidence-principle">{locale === "vi" ? "CAM KẾT → KIỂM SOÁT → BẰNG CHỨNG" : "CLAIM → CONTROL → EVIDENCE"}</strong>
       </div>
       <div className="protection-badge">
         <span aria-hidden="true"><ShieldCheck size={27} strokeWidth={1.8} /></span>
         <strong>
-          {locale === "vi" ? "Buyer là trung tâm" : "Buyer first"}
+          {locale === "vi" ? "12 control gates" : "12 control gates"}
         </strong>
         <small>
           {locale === "vi" ? (
             <>
-              Rủi ro của bạn là ưu tiên.
+              Kiểm soát có cấu trúc.
               <br />
-              Bảo vệ doanh nghiệp ở mọi bước.
+              Bằng chứng tại các bước quan trọng.
             </>
           ) : (
             <>
-              Your risk is our priority.
+              Structured control.
               <br />
-              We protect your business at every step.
+              Evidence at critical stages.
             </>
           )}
         </small>

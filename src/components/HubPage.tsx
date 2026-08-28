@@ -9,22 +9,22 @@ type HubKind = "sourcing" | "factory-videos" | "insights";
 const content = {
   en: {
     sourcing: {
-      eyebrow: "Sourcing services",
-      title: "One partner between your requirement and the right factory.",
+      eyebrow: "What MISO JAPAN does",
+      title: "From buyer requirement to shipment.",
       description:
-        "Minsen identifies, verifies and coordinates suitable manufacturers so you can source with less uncertainty.",
+        "Our sourcing process begins with the buyer's actual requirement, then moves through factory matching, controlled execution and documented evidence.",
       cards: [
         [
-          "Factory matching",
-          "Tell us your product and we will shortlist 3–5 suitable manufacturers.",
+          "Requirement clarification",
+          "We convert product application, specification, quantity and destination into clear technical and commercial criteria.",
         ],
         [
-          "Verification and QC",
-          "We review capability, production and quality requirements before cooperation.",
+          "Factory search and matching",
+          "We verify relevant capability and compare suitable Vietnam manufacturers against the buyer requirement.",
         ],
         [
-          "Export coordination",
-          "From quotation and sample to documents, loading and shipment.",
+          "Controlled execution and evidence",
+          "We coordinate samples, production, QC, packing, loading, shipment and documented evidence within the agreed scope.",
         ],
       ],
     },
@@ -50,17 +50,17 @@ const content = {
     },
     insights: {
       eyebrow: "Sourcing insights",
-      title: "Practical sourcing intelligence for better buying decisions.",
+      title: "Useful knowledge for better buying decisions.",
       description:
-        "Practical guidance for international buyers on product specifications, factory qualification, quality control and shipment risk when sourcing plywood, veneer and wood products from Vietnam.",
+        "Practical guidance for international buyers sourcing plywood, veneer and wood panels from Vietnam.",
       cards: [
         [
           "How to source plywood from Vietnam",
           "The key questions to ask about specification, factory and shipment.",
         ],
         [
-          "Understanding Plywood Bonding Systems",
-          "Learn the differences between MR performance, melamine-bonded systems and phenolic bonding, and choose the right option for the required application and market.",
+          "MR vs Melamine vs Phenolic",
+          "Understand glue types and choose the right performance for your application.",
         ],
         [
           "How to inspect plywood",
@@ -71,22 +71,22 @@ const content = {
   },
   vi: {
     sourcing: {
-      eyebrow: "Dịch vụ sourcing",
-      title: "Một đối tác giữa yêu cầu của bạn và nhà máy phù hợp.",
+      eyebrow: "MISO JAPAN làm gì",
+      title: "Từ yêu cầu của Buyer đến khi giao hàng.",
       description:
-        "Minsen tìm kiếm, xác minh và điều phối các nhà máy phù hợp để bạn sourcing với ít rủi ro hơn.",
+        "Quy trình sourcing bắt đầu từ yêu cầu thực tế của buyer, sau đó đi qua matching nhà máy, thực thi có kiểm soát và bằng chứng đầy đủ.",
       cards: [
         [
-          "Kết nối nhà máy",
-          "Gửi sản phẩm cần tìm để chúng tôi chọn ra 3–5 nhà máy phù hợp.",
+          "Làm rõ yêu cầu",
+          "Chuyển ứng dụng, thông số, số lượng và điểm đến thành tiêu chí kỹ thuật và thương mại rõ ràng.",
         ],
         [
-          "Xác minh và QC",
-          "Xem xét năng lực, sản xuất và yêu cầu chất lượng trước khi hợp tác.",
+          "Tìm kiếm và matching nhà máy",
+          "Xác minh năng lực liên quan và đối chiếu các nhà sản xuất Việt Nam phù hợp với yêu cầu buyer.",
         ],
         [
-          "Điều phối xuất khẩu",
-          "Từ báo giá, mẫu đến chứng từ, đóng hàng và vận chuyển.",
+          "Thực thi và bằng chứng",
+          "Điều phối mẫu, sản xuất, QC, đóng gói, loading, shipment và bằng chứng trong phạm vi đã thống nhất.",
         ],
       ],
     },
@@ -112,7 +112,7 @@ const content = {
     },
     insights: {
       eyebrow: "Kiến thức sourcing",
-      title: "Thông tin hữu ích cho quyết định mua hàng tốt hơn.",
+      title: "Kiến thức hữu ích cho quyết định mua hàng tốt hơn.",
       description:
         "Hướng dẫn thực tế cho buyer quốc tế khi sourcing plywood, veneer và ván gỗ từ Việt Nam.",
       cards: [
@@ -121,12 +121,12 @@ const content = {
           "Những câu hỏi quan trọng về quy cách, nhà máy và lô hàng.",
         ],
         [
-          "MR, Melamine và Phenolic",
+          "MR vs Melamine vs Phenolic",
           "Hiểu các loại keo và lựa chọn hiệu năng phù hợp với ứng dụng.",
         ],
         [
           "Cách kiểm tra plywood",
-          "Điểm bắt đầu thực tế cho duyệt mẫu và kiểm soát chất lượng trước xuất hàng.",
+          "Một điểm bắt đầu thực tế cho duyệt mẫu và kiểm soát chất lượng trước xuất hàng.",
         ],
       ],
     },
@@ -208,7 +208,7 @@ export function HubPage({ kind, locale }: { kind: HubKind; locale: Locale }) {
               : "Can't find exactly what you need?"}
           </p>
           <h2>
-            {vi ? "Hãy để Minsen tìm giúp bạn." : "Let Minsen search for you."}
+            {vi ? "Hãy để MISO JAPAN tìm giúp bạn." : "Let MISO JAPAN search for you."}
           </h2>
           <Link
             className="button button-primary"

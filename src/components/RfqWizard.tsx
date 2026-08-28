@@ -1,20 +1,15 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { type Locale } from "@/data/landing-page";
-import { ScrollCue } from "@/components/ScrollCue";
+import { getLandingContent, type Locale } from "@/data/landing-page";
 
 export function RfqWizard({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
-  const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const { buyerConcerns } = getLandingContent(locale);
   const [form, setForm] = useState({
-    product: "Plywood",
+    product: "Commercial Plywood",
     specification: "",
-    core: "",
-    glue: "",
-    quantity: "",
-    destination: "",
     name: "",
     company: "",
     email: "",
@@ -22,10 +17,9 @@ export function RfqWizard({ locale }: { locale: Locale }) {
   });
   const update = (key: keyof typeof form, value: string) =>
     setForm((current) => ({ ...current, [key]: value }));
-  const next = (event: FormEvent) => {
+  const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (step < 3) setStep(step + 1);
-    else setSubmitted(true);
+    setSubmitted(true);
   };
   if (submitted)
     return (
@@ -37,13 +31,13 @@ export function RfqWizard({ locale }: { locale: Locale }) {
           </p>
           <h1>
             {vi
-              ? "Minsen sẽ tìm các nhà máy phù hợp cho bạn."
-              : "Minsen will find the right manufacturers for you."}
+              ? "MISO JAPAN sẽ tìm các nhà máy phù hợp cho bạn."
+              : "MISO JAPAN will find the right manufacturers for you."}
           </h1>
           <p>
             {vi
-              ? "Đội ngũ sourcing sẽ xem xét yêu cầu và phản hồi với 3–5 lựa chọn phù hợp trong vòng một ngày làm việc."
-              : "Our sourcing team will review your requirements and respond with 3–5 suitable options within one business day."}
+              ? "Chúng tôi sẽ xem xét yêu cầu và xác định phương án sourcing, qualification nhà cung cấp phù hợp."
+              : "We will review your requirement and determine the appropriate sourcing and supplier qualification approach."}
           </p>
           <a className="button button-primary" href={vi ? "/vi" : "/"}>
             {vi ? "Về trang chủ" : "Back to home"}{" "}
@@ -54,190 +48,78 @@ export function RfqWizard({ locale }: { locale: Locale }) {
     );
   return (
     <main className="rfq-page">
-      <section className="rfq-header">
-        <p className="eyebrow eyebrow-light">
-          {vi ? "Minsen sourcing request" : "Minsen sourcing request"}
-        </p>
-        <h1>
-          {vi
-            ? "Hãy cho chúng tôi biết bạn cần tìm gì."
-            : "Tell us what you need to source."}
-        </h1>
-        <p>
-          {vi
-            ? "Chúng tôi sẽ tìm kiếm trong mạng lưới nhà máy và chọn ra các phương án phù hợp nhất."
-            : "We will search across our manufacturing network and shortlist the most suitable options."}
-          </p>
-          <ScrollCue targetId="rfq-form" label={vi ? "Cuộn đến biểu mẫu" : "Scroll to the form"} />
-      </section>
-      <form className="rfq-form" id="rfq-form" onSubmit={next}>
-        <div className="rfq-progress">
-          <span className={step >= 1 ? "active" : ""}>
-            01 <small>{vi ? "Sản phẩm" : "Product"}</small>
-          </span>
-          <span className={step >= 2 ? "active" : ""}>
-            02 <small>{vi ? "Yêu cầu" : "Requirements"}</small>
-          </span>
-          <span className={step >= 3 ? "active" : ""}>
-            03 <small>{vi ? "Thông tin" : "Contact"}</small>
-          </span>
+      <section className="rfq-concerns">
+        <div>
+          <p className="eyebrow">{vi ? "MỐI QUAN TÂM CỦA BUYER" : "COMMON BUYER CONCERNS"}</p>
+          <h2>{vi ? "Những câu hỏi bạn không cần phải lo lắng." : "Questions you should not have to worry about."}</h2>
         </div>
-        {step === 1 && (
+        <div className="rfq-concern-list">
+          {buyerConcerns.map((concern) => (
+            <span key={concern}>{concern}</span>
+          ))}
+        </div>
+      </section>
+      <section className="rfq-request">
+        <div className="rfq-request-copy">
+          <p className="eyebrow eyebrow-light">
+            {vi ? "HÃY BẮT ĐẦU TỪ YÊU CẦU CỦA BẠN" : "START WITH YOUR REQUIREMENT"}
+          </p>
+          <h1>{vi ? "Bạn đang tìm nhà cung cấp Plywood tại Việt Nam? Hãy bắt đầu từ yêu cầu — không chỉ từ một yêu cầu báo giá." : "Looking for a Vietnam Plywood Supplier? Start with Your Requirement — Not Just a Price Request."}</h1>
+          <p>
+            {vi
+              ? "Hãy gửi mục đích sử dụng, thông số, số lượng, điểm đến và tiến độ giao hàng. MISO JAPAN sẽ xem xét yêu cầu và xác định phương án sourcing, qualification nhà cung cấp phù hợp."
+              : "Send MISO JAPAN your product application, specification, quantity, destination and delivery expectation. We will review the requirement and determine the appropriate sourcing and supplier qualification approach."}
+          </p>
+          <div className="rfq-company-info">
+            <span>{vi ? "Thông tin công ty chính thức" : "Official company information"}</span>
+            <span>MISO JAPAN JOINT VENTURE COMPANY LIMITED</span>
+            <span>{vi ? "Đối tác xuất khẩu và sourcing Việt Nam" : "Vietnam Export & Sourcing Partner"}</span>
+          </div>
+        </div>
+        <form className="rfq-form" id="rfq-form" onSubmit={submit}>
           <div className="rfq-fields">
             <label>
-              {vi ? "Bạn đang mua gì?" : "What are you buying?"}
-              <select
-                value={form.product}
-                onChange={(event) => update("product", event.target.value)}
-              >
-                <option>Plywood</option>
+              {vi ? "HỌ VÀ TÊN" : "FULL NAME"}
+              <input value={form.name} onChange={(event) => update("name", event.target.value)} placeholder={vi ? "Họ và tên của bạn" : "Your full name"} required />
+            </label>
+            <label>
+              {vi ? "TÊN CÔNG TY" : "COMPANY NAME"}
+              <input value={form.company} onChange={(event) => update("company", event.target.value)} placeholder={vi ? "Tên công ty của bạn" : "Your company name"} required />
+            </label>
+            <label>
+              {vi ? "EMAIL CÔNG VIỆC" : "WORK EMAIL"}
+              <input type="email" value={form.email} onChange={(event) => update("email", event.target.value)} placeholder="name@company.com" required />
+            </label>
+            <label>
+              WHATSAPP
+              <input value={form.whatsapp} onChange={(event) => update("whatsapp", event.target.value)} placeholder={vi ? "Số WhatsApp của bạn" : "Your WhatsApp number"} />
+            </label>
+            <label className="rfq-field-full">
+              {vi ? "DANH MỤC SẢN PHẨM" : "PRODUCT CATEGORY"}
+              <select value={form.product} onChange={(event) => update("product", event.target.value)}>
+                <option>Commercial Plywood</option>
+                <option>Furniture Plywood</option>
+                <option>Packing Plywood</option>
+                <option>Construction Plywood</option>
+                <option>Film-Faced Plywood</option>
                 <option>Veneer</option>
                 <option>LVL</option>
                 <option>MDF / HDF</option>
-                <option>Other wood panels</option>
+                <option>{vi ? "Sản phẩm gỗ khác" : "Other wood products"}</option>
               </select>
             </label>
-            <label>
-              {vi ? "Quy cách sản phẩm" : "Product specification"}
-              <input
-                value={form.specification}
-                onChange={(event) =>
-                  update("specification", event.target.value)
-                }
-                placeholder="1220 × 2440 × 18mm"
-                required
-              />
-            </label>
-            <label>
-              {vi ? "Nguyên liệu lõi" : "Core material"}
-              <select
-                value={form.core}
-                onChange={(event) => update("core", event.target.value)}
-              >
-                <option value="">Select material</option>
-                <option>Acacia</option>
-                <option>Eucalyptus</option>
-                <option>Rubberwood</option>
-                <option>Poplar</option>
-                <option>Mixed hardwood</option>
-              </select>
-            </label>
-            <label>
-              {vi ? "Loại keo" : "Glue type"}
-              <select
-                value={form.glue}
-                onChange={(event) => update("glue", event.target.value)}
-              >
-                <option value="">Select glue</option>
-                <option>MR</option>
-                <option>E0</option>
-                <option>E1</option>
-                <option>Melamine</option>
-                <option>Phenolic / WBP</option>
-              </select>
+            <label className="rfq-field-full">
+              {vi ? "QUY CÁCH VÀ YÊU CẦU" : "SPECIFICATION & REQUIREMENTS"}
+              <textarea value={form.specification} onChange={(event) => update("specification", event.target.value)} placeholder={vi ? "Kích thước, độ dày, lõi, keo, số lượng, điểm đến và các yêu cầu khác" : "Size, thickness, core, glue, quantity, destination and other requirements"} rows={3} required />
             </label>
           </div>
-        )}
-        {step === 2 && (
-          <div className="rfq-fields">
-            <label>
-              {vi ? "Số lượng dự kiến" : "Estimated quantity"}
-              <input
-                value={form.quantity}
-                onChange={(event) => update("quantity", event.target.value)}
-                placeholder="10 containers / month"
-                required
-              />
-            </label>
-            <label>
-              {vi ? "Điểm đến" : "Destination"}
-              <input
-                value={form.destination}
-                onChange={(event) => update("destination", event.target.value)}
-                placeholder="Nhava Sheva, India"
-                required
-              />
-            </label>
-            <label>
-              {vi
-                ? "Mức giá mục tiêu (không bắt buộc)"
-                : "Target price (optional)"}
-              <input placeholder="Your target price and currency" />
-            </label>
-            <label>
-              {vi ? "Ghi chú thêm" : "Additional notes"}
-              <textarea
-                placeholder={
-                  vi
-                    ? "Tiêu chuẩn, chứng nhận, ứng dụng..."
-                    : "Standards, certifications, application..."
-                }
-              />
-            </label>
-          </div>
-        )}
-        {step === 3 && (
-          <div className="rfq-fields">
-            <label>
-              {vi ? "Họ và tên" : "Full name"}
-              <input
-                value={form.name}
-                onChange={(event) => update("name", event.target.value)}
-                placeholder="Your name"
-                required
-              />
-            </label>
-            <label>
-              {vi ? "Tên công ty" : "Company name"}
-              <input
-                value={form.company}
-                onChange={(event) => update("company", event.target.value)}
-                placeholder="Your company"
-                required
-              />
-            </label>
-            <label>
-              {vi ? "Email công việc" : "Work email"}
-              <input
-                type="email"
-                value={form.email}
-                onChange={(event) => update("email", event.target.value)}
-                placeholder="name@company.com"
-                required
-              />
-            </label>
-            <label>
-              WhatsApp
-              <input
-                value={form.whatsapp}
-                onChange={(event) => update("whatsapp", event.target.value)}
-                placeholder="+91... / +971..."
-              />
-            </label>
-          </div>
-        )}
-        <div className="rfq-actions">
-          {step > 1 && (
-            <button
-              className="text-link"
-              type="button"
-              onClick={() => setStep(step - 1)}
-            >
-              ← {vi ? "Quay lại" : "Back"}
+          <div className="rfq-actions">
+            <button className="button button-light" type="submit">
+              {vi ? "Gửi RFQ" : "Submit RFQ"} <span aria-hidden="true">↗</span>
             </button>
-          )}
-          <button className="button button-primary" type="submit">
-            {step === 3
-              ? vi
-                ? "Gửi yêu cầu"
-                : "Submit RFQ"
-              : vi
-                ? "Tiếp tục"
-                : "Continue"}{" "}
-            <span aria-hidden="true">→</span>
-          </button>
-        </div>
-      </form>
+          </div>
+        </form>
+      </section>
     </main>
   );
 }
