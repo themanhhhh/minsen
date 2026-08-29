@@ -6666,6 +6666,14 @@ p {
   margin-top: 24px;
 }
 
+.protection-section > .protection-badge {
+  bottom: auto;
+  grid-column: 1;
+  left: auto;
+  margin: 20px 0 0 20px;
+  position: relative;
+}
+
 .footer-brand-block > p {
   max-width: 310px;
 }
