@@ -50,9 +50,12 @@ function readIds(key: string) {
   }
 }
 
-export function FactoryDirectory({ locale }: { locale: Locale }) {
-  const [filters, setFilters] = useState<Filters>(emptyFilters);
-  const [appliedFilters, setAppliedFilters] = useState<Filters>(emptyFilters);
+export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; initialProduct?: string }) {
+  const initialFilters = initialProduct && factoryFilterOptions.products.includes(initialProduct)
+    ? { ...emptyFilters, products: [initialProduct] }
+    : emptyFilters;
+  const [filters, setFilters] = useState<Filters>(initialFilters);
+  const [appliedFilters, setAppliedFilters] = useState<Filters>(initialFilters);
   const [shortlist, setShortlist] = useState<string[]>([]);
   const [savedOnly, setSavedOnly] = useState(false);
   const [compare, setCompare] = useState<string[]>([]);

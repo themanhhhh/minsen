@@ -55,7 +55,7 @@ export function Features({ locale }: { locale: Locale }) {
               <Link href={`${locale === "vi" ? "/vi" : ""}/products/${product.slug}`}>
                 {locale === "vi" ? "Xem chi tiết" : "View details"} <span aria-hidden="true">↗</span>
               </Link>
-              <Link href={`${locale === "vi" ? "/vi" : ""}/products/${product.slug}#matched-factories`}>
+              <Link href={`${locale === "vi" ? "/vi" : ""}/manufacturers?product=${encodeURIComponent(product.name)}`}>
                 {locale === "vi" ? "Tìm nhà máy" : "Find factories"} <span aria-hidden="true">→</span>
               </Link>
             </div>

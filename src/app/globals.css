@@ -5881,6 +5881,7 @@ p {
   color: #fff;
   display: flex;
   flex-direction: column;
+  inset: 0;
   justify-content: center;
   position: absolute;
   text-align: center;
@@ -5896,7 +5897,7 @@ p {
 
 .product-hero-segment span,
 .product-hero-segment small {
-  position: relative;
+  position: absolute;
   z-index: 1;
 }
 
@@ -5913,22 +5914,45 @@ p {
 
 .product-hero-plywood {
   background-image: url("/images/products/product-commercial-plywood.jpg");
-  clip-path: polygon(0 0, 100% 0, 100% 50%, 0 100%);
-  inset: 0 50% 0 0;
-  align-items: flex-start;
-  padding-left: 20px;
+  -webkit-mask: conic-gradient(from 240deg at 50% 50%, #000 0 120deg, transparent 120deg 360deg);
+  mask: conic-gradient(from 240deg at 50% 50%, #000 0 120deg, transparent 120deg 360deg);
+}
+
+.product-hero-plywood span {
+  left: 12%;
+  top: 48%;
 }
 
 .product-hero-veneer {
   background-image: url("/images/products/product-natural-veneer.jpg");
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 50%);
-  inset: 0 0 50% 50%;
+  background-position: 15% center;
+  -webkit-mask: conic-gradient(from 0deg at 50% 50%, #000 0 120deg, transparent 120deg 360deg);
+  mask: conic-gradient(from 0deg at 50% 50%, #000 0 120deg, transparent 120deg 360deg);
+}
+
+.product-hero-veneer span {
+  right: 13%;
+  top: 29%;
 }
 
 .product-hero-custom {
   background-image: url("/images/products/product-packing-plywood.jpg");
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  inset: 50% 0 0;
+  -webkit-mask: conic-gradient(from 120deg at 50% 50%, #000 0 120deg, transparent 120deg 360deg);
+  mask: conic-gradient(from 120deg at 50% 50%, #000 0 120deg, transparent 120deg 360deg);
+}
+
+.product-hero-custom span {
+  bottom: 23%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.product-hero-custom small {
+  bottom: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
 
 .product-hero-center {
