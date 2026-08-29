@@ -1,10 +1,10 @@
 export const company = {
   name: "MISO JAPAN",
-  legalName: "MISO JAPAN JOINT VENTURE COMPANY LIMITED",
+  legalName: "CÔNG TY TNHH LIÊN DOANH MISO JAPAN",
   descriptor: "Vietnam Plywood Sourcing, Supplier Development & Buyer Risk Management Partner",
   email: "[TO BE UPDATED]",
   whatsapp: "[TO BE UPDATED]",
-  location: "Vietnam",
+  location: "Đội 3, Thôn Cấn Hạ, Xã Kiều Phú, Thành phố Hà Nội, Việt Nam",
 };
 
 export const socialLinks = [

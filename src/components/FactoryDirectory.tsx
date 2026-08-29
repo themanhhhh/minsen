@@ -54,6 +54,7 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
   const [filters, setFilters] = useState<Filters>(emptyFilters);
   const [appliedFilters, setAppliedFilters] = useState<Filters>(emptyFilters);
   const [shortlist, setShortlist] = useState<string[]>([]);
+  const [savedOnly, setSavedOnly] = useState(false);
   const [compare, setCompare] = useState<string[]>([]);
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -162,7 +163,9 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
       appliedFilters.regions.includes(factory.region)) &&
     (appliedFilters.markets.length === 0 ||
       appliedFilters.markets.some((item) => factory.exportMarkets.includes(item)));
-  const filtered = factories.filter(matches);
+  const filtered = factories.filter(
+    (factory) => (!savedOnly || shortlist.includes(factory.id)) && matches(factory),
+  );
   const comparedFactories = factories.filter((factory) => compare.includes(factory.id));
   const comparisonRows: { label: string; value: (factory: Factory) => string }[] = [
     { label: vi ? "Địa điểm" : "Location", value: (factory) => factory.location },
@@ -195,6 +198,7 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
   const clearFilters = () => {
     setFilters(emptyFilters);
     setAppliedFilters(emptyFilters);
+    setSavedOnly(false);
   };
   const factoryImage = (id: string) =>
     (
@@ -297,6 +301,15 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
                 {vi ? "Xóa tất cả" : "Clear all"}
               </button>
             </div>
+            <label className="factory-saved-filter">
+              <input
+                type="checkbox"
+                checked={savedOnly}
+                onChange={(event) => setSavedOnly(event.target.checked)}
+              />
+              <Bookmark size={14} strokeWidth={1.7} aria-hidden="true" />
+              {vi ? "Chỉ nhà máy đã lưu" : "Saved factories only"}
+            </label>
             {filterGroup(
               labels.productCategory,
               "products",
@@ -329,7 +342,11 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
                       {vi ? "Hồ sơ mẫu" : "Sample profile"}
                     </span>
                   </div>
-                  <div className="factory-placeholder" aria-hidden="true">
+                  <Link
+                    className="factory-placeholder"
+                    href={`${vi ? "/vi" : ""}/manufacturers/${factory.id.toLowerCase()}`}
+                    aria-label={`${vi ? "Xem hồ sơ" : "View profile"}: ${factory.id}`}
+                  >
                     {factoryImage(factory.id) && (
                       <Image
                         src={factoryImage(factory.id)!}
@@ -340,7 +357,7 @@ export function FactoryDirectory({ locale }: { locale: Locale }) {
                     )}
                     <span>VN</span>
                     <strong>{factory.location.split(",")[0]}</strong>
-                  </div>
+                  </Link>
                   <p className="factory-location"><MapPin size={13} strokeWidth={2} aria-hidden="true" />{factory.location}</p>
                   <h2>
                     {vi

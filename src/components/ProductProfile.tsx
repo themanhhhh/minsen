@@ -137,7 +137,7 @@ export function ProductProfile({
             </p>
           </div>
         </section>
-        <section className="product-factories">
+        <section className="product-factories" id="matched-factories">
           <div className="product-factories-heading">
             <div>
               <p className="eyebrow">

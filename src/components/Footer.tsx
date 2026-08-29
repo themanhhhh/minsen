@@ -61,8 +61,8 @@ export function Footer({ locale }: { locale: Locale }) {
               ? "Đối tác sourcing plywood Việt Nam, phát triển nhà cung cấp và quản trị rủi ro cho Buyer."
               : "Vietnam plywood sourcing, supplier development and buyer risk management partner."}
           </p>
-          <small>{company.legalName}</small>
-          <small>{company.location}</small>
+           <small>{locale === "vi" ? "Tên công ty" : "Company name"}: {company.legalName}</small>
+           <small>{locale === "vi" ? "Địa chỉ" : "Address"}: {company.location}</small>
           <div className="footer-socials">
             <strong>{locale === "vi" ? "Theo dõi chúng tôi" : "Follow us"}</strong>
             <div>

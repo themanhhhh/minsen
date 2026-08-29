@@ -1748,7 +1748,9 @@ p {
 
 .footer-brand-block small {
   color: #8296bf;
+  display: block;
   font-size: 10px;
+  line-height: 1.5;
 }
 
 .footer-socials {
@@ -5768,6 +5770,33 @@ p {
   padding: 15px max(48px, calc((100vw - 1304px) / 2));
 }
 
+.factory-placeholder {
+  color: #fff;
+  text-decoration: none;
+}
+
+.factory-placeholder:hover {
+  color: #fff;
+}
+
+.factory-saved-filter {
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  color: var(--blue);
+  cursor: pointer;
+  display: flex;
+  font-size: 10px;
+  gap: 6px;
+  padding: 14px 0;
+}
+
+.factory-saved-filter input {
+  accent-color: var(--blue);
+  height: 15px;
+  margin: 0;
+  width: 15px;
+}
+
 @media (max-width: 820px) {
   .directory-hero {
     padding: 65px 20px 80px;
@@ -5886,6 +5915,8 @@ p {
   background-image: url("/images/products/product-commercial-plywood.jpg");
   clip-path: polygon(0 0, 100% 0, 100% 50%, 0 100%);
   inset: 0 50% 0 0;
+  align-items: flex-start;
+  padding-left: 20px;
 }
 
 .product-hero-veneer {
@@ -5990,9 +6021,26 @@ p {
   margin: 0;
 }
 
-.products-section .feature-arrow {
-  bottom: 16px;
-  right: 17px;
+.product-card-actions {
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 14px;
+  margin-top: 18px;
+  padding-top: 12px;
+}
+
+.product-card-actions a {
+  color: var(--blue);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.product-card-actions a:last-child {
+  margin-left: auto;
+}
+
+.product-card-actions a:hover {
+  color: var(--primary-dark);
 }
 
 .product-knowledge {
