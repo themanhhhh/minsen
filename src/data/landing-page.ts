@@ -2,8 +2,11 @@ export const company = {
   name: "MISO JAPAN",
   legalName: "CÔNG TY TNHH LIÊN DOANH MISO JAPAN",
   descriptor: "Vietnam Plywood Sourcing, Supplier Development & Buyer Risk Management Partner",
+  descriptorVi: "Đối tác sourcing Plywood Việt Nam, phát triển nhà cung cấp và quản trị rủi ro cho Buyer",
   email: "[TO BE UPDATED]",
+  emailVi: "[CẦN CẬP NHẬT]",
   whatsapp: "[TO BE UPDATED]",
+  whatsappVi: "[CẦN CẬP NHẬT]",
   location: "Đội 3, Thôn Cấn Hạ, Xã Kiều Phú, Thành phố Hà Nội, Việt Nam",
 };
 
@@ -40,6 +43,13 @@ export const heroStats = [
   { value: "12", label: "Control gates planned", detail: "Structured buyer risk management" },
   { value: "01", label: "Accountable partner", detail: "One team between buyer and factory" },
   { value: "02", label: "Primary markets", detail: "India · Middle East" },
+];
+
+export const heroStatsVi = [
+  { value: "230", label: "Hồ sơ nhà máy đã lập bản đồ", detail: "Dữ liệu plywood tại Việt Nam" },
+  { value: "12", label: "Control gate dự kiến", detail: "Quản trị rủi ro Buyer có cấu trúc" },
+  { value: "01", label: "Đầu mối chịu trách nhiệm", detail: "Một đội ngũ giữa Buyer và nhà máy" },
+  { value: "02", label: "Thị trường chính", detail: "Ấn Độ · Trung Đông" },
 ];
 
 export const buyerConcerns = [
@@ -299,14 +309,14 @@ export const detailPageContent = {
 };
 
 export const productCatalog = [
-  { slug: "commercial-plywood", name: "Commercial Plywood", viName: "Plywood thương mại", category: "Plywood", description: "Reliable plywood for furniture, construction and interior applications.", specs: "3–25mm · Eucalyptus, Acacia · MR / E1", className: "product-plywood" },
-  { slug: "film-faced-plywood", name: "Film Faced Plywood", viName: "Plywood phủ phim", category: "Plywood", description: "Durable panels for concrete formwork and demanding construction projects.", specs: "12–21mm · Phenolic film · WBP glue", className: "product-custom" },
-  { slug: "packing-plywood", name: "Packing Plywood", viName: "Plywood đóng gói", category: "Plywood", description: "Cost-effective panels for packaging, pallets and industrial protection.", specs: "2.7–18mm · Poplar, mixed hardwood · MR", className: "product-veneer" },
-  { slug: "natural-veneer", name: "Natural Veneer", viName: "Veneer tự nhiên", category: "Veneer", description: "Selected wood surfaces with natural grain, colour and character.", specs: "0.2–3mm · Acacia, Rubberwood, Eucalyptus", className: "product-veneer" },
-  { slug: "engineered-veneer", name: "Engineered Veneer", viName: "Veneer kỹ thuật", category: "Veneer", description: "Consistent decorative surfaces for scalable furniture production.", specs: "0.2–1.2mm · Custom patterns and finish", className: "product-plywood" },
-  { slug: "lvl", name: "LVL", viName: "LVL", category: "Wood Panels", description: "Structural laminated veneer lumber for packaging and construction.", specs: "Custom size · Eucalyptus, Poplar · OEM", className: "product-custom" },
-  { slug: "mdf-hdf", name: "MDF / HDF", viName: "MDF / HDF", category: "Wood Panels", description: "Stable engineered panels for furniture and interior components.", specs: "Custom thickness · E0 / E1 · Melamine", className: "product-plywood" },
-  { slug: "finger-joint-board", name: "Finger Joint Board", viName: "Ván ghép thanh", category: "Wood Panels", description: "Custom-sized boards for furniture, doors and interior products.", specs: "Rubberwood, Acacia · Custom edge and finish", className: "product-veneer" },
+  { slug: "commercial-plywood", name: "Commercial Plywood", viName: "Plywood thương mại", category: "Plywood", viCategory: "Plywood", description: "Reliable plywood for furniture, construction and interior applications.", viDescription: "Plywood đáng tin cậy cho nội thất, xây dựng và các ứng dụng bên trong.", specs: "3–25mm · Eucalyptus, Acacia · MR / E1", viSpecs: "3–25mm · Bạch đàn, keo · MR / E1", className: "product-plywood" },
+  { slug: "film-faced-plywood", name: "Film Faced Plywood", viName: "Plywood phủ phim", category: "Plywood", viCategory: "Plywood", description: "Durable panels for concrete formwork and demanding construction projects.", viDescription: "Tấm bền chắc cho cốp pha bê tông và các dự án xây dựng yêu cầu cao.", specs: "12–21mm · Phenolic film · WBP glue", viSpecs: "12–21mm · Phim Phenolic · Keo WBP", className: "product-custom" },
+  { slug: "packing-plywood", name: "Packing Plywood", viName: "Plywood đóng gói", category: "Plywood", viCategory: "Plywood", description: "Cost-effective panels for packaging, pallets and industrial protection.", viDescription: "Tấm hiệu quả về chi phí cho đóng gói, pallet và bảo vệ hàng công nghiệp.", specs: "2.7–18mm · Poplar, mixed hardwood · MR", viSpecs: "2.7–18mm · Bạch dương, gỗ cứng hỗn hợp · MR", className: "product-veneer" },
+  { slug: "natural-veneer", name: "Natural Veneer", viName: "Veneer tự nhiên", category: "Veneer", viCategory: "Veneer", description: "Selected wood surfaces with natural grain, colour and character.", viDescription: "Bề mặt gỗ được tuyển chọn với vân, màu sắc và đặc tính tự nhiên.", specs: "0.2–3mm · Acacia, Rubberwood, Eucalyptus", viSpecs: "0.2–3mm · Keo, cao su, bạch đàn", className: "product-veneer" },
+  { slug: "engineered-veneer", name: "Engineered Veneer", viName: "Veneer kỹ thuật", category: "Veneer", viCategory: "Veneer", description: "Consistent decorative surfaces for scalable furniture production.", viDescription: "Bề mặt trang trí đồng nhất cho sản xuất nội thất quy mô lớn.", specs: "0.2–1.2mm · Custom patterns and finish", viSpecs: "0.2–1.2mm · Mẫu vân và hoàn thiện theo yêu cầu", className: "product-plywood" },
+  { slug: "lvl", name: "LVL", viName: "LVL", category: "Wood Panels", viCategory: "Ván gỗ", description: "Structural laminated veneer lumber for packaging and construction.", viDescription: "Gỗ veneer ghép lớp kết cấu cho đóng gói và xây dựng.", specs: "Custom size · Eucalyptus, Poplar · OEM", viSpecs: "Kích thước theo yêu cầu · Bạch đàn, Poplar · OEM", className: "product-custom" },
+  { slug: "mdf-hdf", name: "MDF / HDF", viName: "MDF / HDF", category: "Wood Panels", viCategory: "Ván gỗ công nghiệp", description: "Stable engineered panels for furniture and interior components.", viDescription: "Tấm gỗ công nghiệp ổn định cho nội thất và các chi tiết bên trong.", specs: "Custom thickness · E0 / E1 · Melamine", viSpecs: "Độ dày theo yêu cầu · E0 / E1 · Melamine", className: "product-plywood" },
+  { slug: "finger-joint-board", name: "Finger Joint Board", viName: "Ván ghép thanh", category: "Wood Panels", viCategory: "Ván gỗ", description: "Custom-sized boards for furniture, doors and interior products.", viDescription: "Ván theo kích thước yêu cầu cho nội thất, cửa và sản phẩm bên trong.", specs: "Rubberwood, Acacia · Custom edge and finish", viSpecs: "Cao su, keo · Cạnh và hoàn thiện theo yêu cầu", className: "product-veneer" },
 ];
 
 export type Factory = {

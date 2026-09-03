@@ -1,4 +1,4 @@
-import { getLandingContent, heroStats, type Locale } from "@/data/landing-page";
+import { getLandingContent, heroStats, heroStatsVi, type Locale } from "@/data/landing-page";
 import { Factory, Globe2, Handshake, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 
@@ -6,6 +6,7 @@ const statIcons = [Factory, ShieldCheck, Handshake, Globe2];
 
 export function Hero({ locale }: { locale: Locale }) {
   const { heroContent } = getLandingContent(locale);
+  const stats = locale === "vi" ? heroStatsVi : heroStats;
   return (
     <section className="hero" id="top">
       <div className="hero-content">
@@ -21,7 +22,7 @@ export function Hero({ locale }: { locale: Locale }) {
         <p className="hero-description">{heroContent.description}</p>
         <form className="hero-search" action="#contact">
           <label className="sr-only" htmlFor="product-search">
-            Product you are looking for
+            {locale === "vi" ? "Sản phẩm bạn đang tìm kiếm" : "Product you are looking for"}
           </label>
           <input
             id="product-search"
@@ -33,7 +34,7 @@ export function Hero({ locale }: { locale: Locale }) {
           </button>
         </form>
         <div className="hero-popular">
-          <strong>Popular searches:</strong>
+          <strong>{locale === "vi" ? "Tìm kiếm phổ biến:" : "Popular searches:"}</strong>
           {heroContent.popularSearches.map((search) => (
             <a href="#products" key={search}>
               {search}
@@ -58,7 +59,7 @@ export function Hero({ locale }: { locale: Locale }) {
         sizes="100vw"
       />
       <div className="hero-stats">
-        {heroStats.map((stat, index) => {
+         {stats.map((stat, index) => {
           const Icon = statIcons[index] || Factory;
           return <div key={stat.label}>
             <span className="stat-icon" aria-hidden="true">

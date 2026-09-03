@@ -26,7 +26,7 @@ export function Header({ locale }: { locale: Locale }) {
         </span>
         <span className="brand-copy">
           <strong>{company.name}</strong>
-          <small>{company.descriptor}</small>
+           <small>{locale === "vi" ? company.descriptorVi : company.descriptor}</small>
         </span>
       </Link>
       <Link className="header-home" href={locale === "vi" ? "/vi" : "/"}>

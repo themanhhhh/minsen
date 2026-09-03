@@ -4,6 +4,21 @@ import { factories, type Locale } from "@/data/landing-page";
 
 export function FactoryPreview({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
+  const regionNames = { North: "Miền Bắc", Central: "Miền Trung", South: "Miền Nam" };
+  const productNames: Record<string, string> = {
+    "Commercial Plywood": "Plywood thương mại",
+    "Packing Plywood": "Plywood đóng gói",
+    "Film Faced Plywood": "Plywood phủ phim",
+    "Natural Veneer": "Veneer tự nhiên",
+    "MDF / HDF": "MDF / HDF",
+    LVL: "LVL",
+    Veneer: "Veneer",
+  };
+  const locations: Record<string, string> = {
+    "VN-PW-018": "Bắc Ninh, Việt Nam",
+    "VN-PW-038": "Bắc Giang, Việt Nam",
+    "VN-PW-052": "Thái Nguyên, Việt Nam",
+  };
   const imageFor = (id: string) =>
     id === "VN-PW-018"
       ? "/images/factories/vn-pw-018/exterior.jpg"
@@ -47,17 +62,17 @@ export function FactoryPreview({ locale }: { locale: Locale }) {
                 />
               )}
               <span>VN</span>
-              <strong>{factory.region}</strong>
+               <strong>{vi ? regionNames[factory.region] : factory.region}</strong>
             </div>
             <span className="factory-id">
-              {factory.id} · {factory.location}
+               {factory.id} · {vi ? locations[factory.id] ?? factory.location : factory.location}
             </span>
             <h3>
               {vi ? "Đối tác sản xuất plywood" : "Wood manufacturing partner"}
             </h3>
             <p>
-              {factory.products.slice(0, 2).join(" · ")} ·{" "}
-              {factory.monthlyCapacity}
+              {factory.products.slice(0, 2).map((product) => vi ? productNames[product] ?? product : product).join(" · ")} ·{" "}
+              {vi ? factory.monthlyCapacity.replace(" containers", " container/tháng") : factory.monthlyCapacity}
             </p>
             <Link
               href={`${vi ? "/vi" : ""}/manufacturers/${factory.id.toLowerCase()}`}

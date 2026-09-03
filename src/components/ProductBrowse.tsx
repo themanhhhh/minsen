@@ -55,13 +55,13 @@ export function ProductBrowse({ locale }: { locale: Locale }) {
                   sizes="(max-width: 900px) 50vw, 25vw"
                 />
               )}
-              <span className="browse-art-category">{product.category}</span>
+              <span className="browse-art-category">{vi ? product.viCategory : product.category}</span>
             </div>
             <div className="browse-card-icon" aria-hidden="true">{(() => { const Icon = iconFor(product.slug); return <Icon size={20} strokeWidth={1.8} />; })()}</div>
             <h3>{vi ? product.viName : product.name}</h3>
-            <p className="browse-card-description">{product.description}</p>
+            <p className="browse-card-description">{vi ? product.viDescription : product.description}</p>
             <ul className="browse-card-specs">
-              {product.specs.split(" · ").map((spec) => (
+              {(vi ? product.viSpecs : product.specs).split(" · ").map((spec) => (
                 <li key={spec}>{spec}</li>
               ))}
             </ul>

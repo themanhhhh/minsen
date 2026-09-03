@@ -124,11 +124,11 @@ export function ProductProfile({
               {vi ? "Thông tin sản phẩm" : "Product information"}
             </p>
             <h2>{vi ? product.viName : product.name}</h2>
-            <p>{product.description}</p>
+            <p>{vi ? product.viDescription : product.description}</p>
           </div>
           <div className="product-profile-spec">
             <h3>{vi ? "Quy cách tham khảo" : "Reference specifications"}</h3>
-            <p>{product.specs}</p>
+            <p>{vi ? product.viSpecs : product.specs}</p>
             <h3>{vi ? "Ứng dụng" : "Typical applications"}</h3>
             <p>
               {vi

@@ -47,9 +47,9 @@ export function Features({ locale }: { locale: Locale }) {
               <span>{String(index + 1).padStart(2, "0")}</span>
             </div>
             <div>
-              <p className="product-detail">{product.category}</p>
+              <p className="product-detail">{locale === "vi" ? product.viCategory : product.category}</p>
               <h3>{locale === "vi" ? product.viName : product.name}</h3>
-              <p>{product.description}</p>
+              <p>{locale === "vi" ? product.viDescription : product.description}</p>
             </div>
             <div className="product-card-actions">
               <Link href={`${locale === "vi" ? "/vi" : ""}/products/${product.slug}`}>

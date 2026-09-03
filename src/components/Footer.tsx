@@ -96,8 +96,8 @@ export function Footer({ locale }: { locale: Locale }) {
         </div>
         <div className="footer-column footer-contact">
           <strong>{locale === "vi" ? "Liên hệ" : "Contact"}</strong>
-          <span>{company.email}</span>
-          <span>{company.whatsapp}</span>
+           <span>{locale === "vi" ? company.emailVi : company.email}</span>
+           <span>{locale === "vi" ? company.whatsappVi : company.whatsapp}</span>
           <a href={locale === "vi" ? "/vi/contact" : "/contact"}>
             {locale === "vi" ? "Mở contact form" : "Open contact form"}{" "}
             <span aria-hidden="true">↗</span>
