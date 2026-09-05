@@ -18,6 +18,7 @@ export const socialLinks = [
 
 export const navigation = [
   { label: "Products", href: "/products" },
+  { label: "International Buyers", href: "/buyer" },
   { label: "Factory Network", href: "/manufacturers" },
   { label: "Sourcing Services", href: "/sourcing" },
   { label: "How It Works", href: "/process" },
@@ -136,6 +137,7 @@ export type Locale = "en" | "vi";
 const vietnameseContent = {
   navigation: [
     { label: "Sản phẩm", href: "/vi/products" },
+    { label: "Buyer quốc tế", href: "/vi/buyer" },
     { label: "Nhà máy", href: "/vi/manufacturers" },
     { label: "Dịch vụ sourcing", href: "/vi/sourcing" },
     { label: "Quy trình", href: "/vi/process" },

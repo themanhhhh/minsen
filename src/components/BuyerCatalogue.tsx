@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useDeferredValue, useState } from "react";
+import type { Locale } from "@/data/landing-page";
 import {
   BadgeCheck,
   Building2,
@@ -16,6 +18,7 @@ type BuyerIconName = "factory" | "cart" | "clipboard" | "shield" | "users" | "bu
 type BuyerProfile = {
   number: string;
   id: string;
+  country: string;
   mainProduct: string[];
   core: string[];
   glue: string[];
@@ -34,6 +37,7 @@ const buyerProfiles: BuyerProfile[] = [
   {
     number: "01",
     id: "MJB-IN-0001",
+    country: "India",
     mainProduct: ["Commercial Plywood,", "Film Faced Plywood"],
     core: ["Eucalyptus Core,", "Combi Core"],
     glue: ["MR, E2", "Melamine"],
@@ -54,6 +58,7 @@ const buyerProfiles: BuyerProfile[] = [
   {
     number: "02",
     id: "MJB-IN-0002",
+    country: "India",
     mainProduct: ["Film Faced Plywood,", "Marine Plywood"],
     core: ["Hardwood Core,", "Combi Core"],
     glue: ["Phenolic,", "WBP"],
@@ -74,6 +79,7 @@ const buyerProfiles: BuyerProfile[] = [
   {
     number: "03",
     id: "MJB-IN-0003",
+    country: "India",
     mainProduct: ["Furniture Plywood", "BWP Plywood"],
     core: ["Poplar Core", "Combi Core"],
     glue: ["E1, Formaldehyde", "Melamine"],
@@ -94,6 +100,7 @@ const buyerProfiles: BuyerProfile[] = [
   {
     number: "04",
     id: "MJB-IN-0004",
+    country: "India",
     mainProduct: ["Commercial Plywood,", "Blockboard"],
     core: ["Eucalyptus Core", "Combi Core"],
     glue: ["MR, E2,", "Melamine"],
@@ -110,6 +117,7 @@ const buyerProfiles: BuyerProfile[] = [
   {
     number: "05",
     id: "MJB-IN-0005",
+    country: "India",
     mainProduct: ["Industrial Plywood,", "Packing Plywood"],
     core: ["Hardwood Core,", "Eucalyptus Core"],
     glue: ["MR, E1", "Melamine"],
@@ -126,6 +134,7 @@ const buyerProfiles: BuyerProfile[] = [
   {
     number: "06",
     id: "MJB-IN-0006",
+    country: "India",
     mainProduct: ["Film Faced Plywood,", "Construction Plywood"],
     core: ["Eucalyptus Core,", "Combi Core"],
     glue: ["Phenolic,", "WBP"],
@@ -159,17 +168,42 @@ const fitOptions = ["Rất cao", "Cao", "Trung bình"];
 const buyerPageSize = 4;
 
 const marketRail = [
-  { label: "ẤN ĐỘ", className: "buyer-rail-india" },
-  { label: "TRUNG QUỐC", className: "buyer-rail-china" },
-  { label: "VIỆT NAM", className: "buyer-rail-vietnam" },
-  { label: "BANGLADESH", className: "buyer-rail-bangladesh" },
-  { label: "INDONESIA", className: "buyer-rail-indonesia" },
-  { label: "TRUNG ĐÔNG", className: "buyer-rail-middle-east" },
-  { label: "CHÂU PHI", className: "buyer-rail-africa" },
-  { label: "KHÁC / GLOBAL", className: "buyer-rail-global" },
-  { label: "KHÁC / MỸ", className: "buyer-rail-america" },
-  { label: "KHÁC / KHÁC", className: "buyer-rail-other" },
+  { country: "India", label: "ẤN ĐỘ", labelEn: "INDIA", className: "buyer-rail-india" },
+  { country: "China", label: "TRUNG QUỐC", labelEn: "CHINA", className: "buyer-rail-china" },
+  { country: "Vietnam", label: "VIỆT NAM", labelEn: "VIETNAM", className: "buyer-rail-vietnam" },
+  { country: "Bangladesh", label: "BANGLADESH", labelEn: "BANGLADESH", className: "buyer-rail-bangladesh" },
+  { country: "Indonesia", label: "INDONESIA", labelEn: "INDONESIA", className: "buyer-rail-indonesia" },
+  { country: "Middle East", label: "TRUNG ĐÔNG", labelEn: "MIDDLE EAST", className: "buyer-rail-middle-east" },
+  { country: "Africa", label: "CHÂU PHI", labelEn: "AFRICA", className: "buyer-rail-africa" },
+  { country: "Global", label: "KHÁC / GLOBAL", labelEn: "GLOBAL", className: "buyer-rail-global" },
+  { country: "Americas", label: "KHÁC / MỸ", labelEn: "AMERICAS", className: "buyer-rail-america" },
+  { country: "Other", label: "KHÁC / KHÁC", labelEn: "OTHER", className: "buyer-rail-other" },
 ];
+
+const buyerPageCopy = {
+  en: {
+    eyebrow: "INTERNATIONAL BUYER DIRECTORY",
+    title: "Find buyers aligned with your manufacturing capability.",
+    description: "Explore structured buyer profiles by country, product requirements and buying context. MISO JAPAN helps qualified manufacturers identify relevant opportunities and manage the connection locally.",
+    action: "Ask MISO JAPAN to connect",
+    catalogueTitle: "INTERNATIONAL BUYER DIRECTORY",
+    catalogueDescription: "600 TRUSTED BUYER PROFILES MAPPED ACROSS PLYWOOD & WOOD PRODUCTS",
+    countryLabel: "Filter by country",
+    featuredCountry: "INDIA",
+    featuredCountryType: "BUYER DIRECTORY",
+  },
+  vi: {
+    eyebrow: "DANH MỤC BUYER QUỐC TẾ",
+    title: "Tìm đúng buyer phù hợp với năng lực nhà máy của bạn.",
+    description: "Khám phá hồ sơ buyer có cấu trúc theo quốc gia, yêu cầu sản phẩm và bối cảnh mua hàng. MISO JAPAN giúp nhà máy phù hợp xác định cơ hội liên quan và điều phối kết nối tại địa phương.",
+    action: "Yêu cầu MISO JAPAN kết nối",
+    catalogueTitle: "DANH MỤC BUYER QUỐC TẾ",
+    catalogueDescription: "600 HỒ SƠ BUYER UY TÍN TRONG NGÀNH PLYWOOD & VÁN GỖ ĐƯỢC LẬP BẢN ĐỒ DỮ LIỆU",
+    countryLabel: "Lọc theo quốc gia",
+    featuredCountry: "ẤN ĐỘ",
+    featuredCountryType: "DANH MỤC BUYER",
+  },
+} as const;
 
 function BuyerIcon({ name }: { name: BuyerIconName }) {
   const props = { size: 18, strokeWidth: 1.65, "aria-hidden": true } as const;
@@ -342,11 +376,14 @@ function CatalogueCategories() {
   );
 }
 
-export function BuyerCatalogue() {
+export function BuyerCatalogue({ locale }: { locale: Locale }) {
+  const vi = locale === "vi";
+  const copy = buyerPageCopy[locale];
   const [query, setQuery] = useState("");
   const [productFilter, setProductFilter] = useState("");
   const [fitFilter, setFitFilter] = useState("");
   const [marketFilter, setMarketFilter] = useState("");
+  const [countryFilter, setCountryFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const deferredQuery = useDeferredValue(query);
 
@@ -374,7 +411,8 @@ export function BuyerCatalogue() {
       (!normalizedQuery || searchableText.includes(normalizedQuery)) &&
       (!productFilter || buyer.mainProduct.some((product) => product.replace(/,$/, "") === productFilter)) &&
       (!fitFilter || buyer.fit === fitFilter) &&
-      (!marketFilter || buyer.market === marketFilter)
+      (!marketFilter || buyer.market === marketFilter) &&
+      (!countryFilter || buyer.country === countryFilter)
     );
   });
 
@@ -388,27 +426,43 @@ export function BuyerCatalogue() {
     safePage * buyerPageSize,
   );
   const hasFilters = Boolean(
-    query.trim() || productFilter || fitFilter || marketFilter,
+    query.trim() || productFilter || fitFilter || marketFilter || countryFilter,
   );
   const clearFilters = () => {
     setQuery("");
     setProductFilter("");
     setFitFilter("");
     setMarketFilter("");
+    setCountryFilter("");
     setCurrentPage(1);
   };
 
   return (
     <div className="buyer-catalogue-page">
       <div className="buyer-catalogue-sheet">
+        <section className="buyer-page-intro">
+          <div className="buyer-page-intro-copy">
+            <p className="eyebrow">{copy.eyebrow}</p>
+            <h1>{copy.title}</h1>
+            <p>{copy.description}</p>
+            <Link className="button button-primary" href={vi ? "/vi/rfq" : "/rfq"}>
+              {copy.action} <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
+          <div className="buyer-page-intro-stats" aria-label="Buyer catalogue overview">
+            <strong>600+</strong>
+            <span>{vi ? "HỒ SƠ BUYER" : "BUYER PROFILES"}</span>
+            <small>{vi ? "Được lập bản đồ theo nhu cầu" : "Mapped by buying requirement"}</small>
+          </div>
+        </section>
         <header className="buyer-catalogue-cover">
           <div className="buyer-cover-copy">
-            <h1>DANH MỤC BUYER QUỐC TẾ</h1>
-            <p>600 HỒ SƠ BUYER UY TÍN TRONG NGÀNH PLYWOOD &amp; VÁN GỖ ĐƯỢC LẬP BẢN ĐỒ DỮ LIỆU</p>
+            <h2>{copy.catalogueTitle}</h2>
+            <p>{copy.catalogueDescription}</p>
             <div className="buyer-cover-meta"><span>TRANG DANH MỤC 018 / 100</span><i /> <span>TRANG CATALOGUE 046 / 146</span></div>
           </div>
           <IndiaLandmark />
-          <div className="buyer-cover-stamp"><strong>ẤN ĐỘ</strong><span>DANH MỤC BUYER</span></div>
+          <div className="buyer-cover-stamp"><strong>{copy.featuredCountry}</strong><span>{copy.featuredCountryType}</span></div>
         </header>
 
         <CatalogueCategories />
@@ -535,8 +589,25 @@ export function BuyerCatalogue() {
         )}
 
       </div>
-      <aside className="buyer-market-rail" aria-label="Danh mục thị trường">
-        {marketRail.map((market) => <span className={market.className} key={market.label}>{market.label}</span>)}
+      <aside className="buyer-market-rail" aria-label={copy.countryLabel}>
+        {marketRail.map((market) => {
+          const isActive = countryFilter === market.country;
+          return (
+            <button
+              className={`${market.className}${isActive ? " is-active" : ""}`}
+              type="button"
+              aria-pressed={isActive}
+              aria-label={`${copy.countryLabel}: ${vi ? market.label : market.labelEn}`}
+              onClick={() => {
+                setCountryFilter(isActive ? "" : market.country);
+                setCurrentPage(1);
+              }}
+              key={market.country}
+            >
+              {vi ? market.label : market.labelEn}
+            </button>
+          );
+        })}
       </aside>
     </div>
   );

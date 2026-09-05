@@ -11,7 +11,7 @@ export default function VietnameseBuyerPage() {
   return (
     <>
       <Header locale="vi" />
-      <BuyerCatalogue />
+      <BuyerCatalogue locale="vi" />
       <Footer locale="vi" />
     </>
   );

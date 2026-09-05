@@ -3,15 +3,15 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 
 export const metadata = {
-  title: "Danh mục Buyer quốc tế | MISO JAPAN",
-  description: "Danh mục hồ sơ buyer quốc tế trong ngành plywood và ván gỗ.",
+  title: "International Buyer Directory | MISO JAPAN",
+  description: "Explore structured international buyer profiles for plywood and wood products.",
 };
 
 export default function BuyerPage() {
   return (
     <>
       <Header locale="en" />
-      <BuyerCatalogue />
+      <BuyerCatalogue locale="en" />
       <Footer locale="en" />
     </>
   );
