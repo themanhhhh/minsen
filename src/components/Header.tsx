@@ -2,6 +2,7 @@
 
 import { company, getLandingContent, type Locale } from "@/data/landing-page";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -21,12 +22,14 @@ export function Header({ locale }: { locale: Locale }) {
         href={locale === "vi" ? "/vi" : "/"}
         aria-label={`${company.name}, home`}
       >
-        <span className="brand-mark" aria-hidden="true">
-          M
-        </span>
-        <span className="brand-copy">
-          <strong>{company.name}</strong>
-           <small>{locale === "vi" ? company.descriptorVi : company.descriptor}</small>
+        <span className="brand-logo">
+          <Image
+            src="/images/logo/577e0a8a-c480-40d7-b31b-28c602ad95e1.png"
+            alt=""
+            fill
+            preload
+            sizes="(max-width: 560px) 160px, 190px"
+          />
         </span>
       </Link>
       <Link className="header-home" href={locale === "vi" ? "/vi" : "/"}>

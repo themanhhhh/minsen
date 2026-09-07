@@ -1,6 +1,7 @@
 import { company, getLandingContent, socialLinks, type Locale } from "@/data/landing-page";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
+import Image from "next/image";
 
 const socialIcons = {
   Instagram: FaInstagram,
@@ -47,14 +48,18 @@ export function Footer({ locale }: { locale: Locale }) {
           {locale === "vi" ? "Gửi RFQ" : "Submit RFQ"}
           <span aria-hidden="true">↗</span>
         </a>
-      </div>
-      <div className="footer-main">
-        <div className="footer-brand-block">
-          <a className="brand" href="#top">
-            <span className="brand-mark" aria-hidden="true">
-              M
+        </div>
+        <div className="footer-main">
+          <div className="footer-brand-block">
+          <a className="footer-brand-logo" href="#top" aria-label={`${company.name}, home`}>
+            <span>
+              <Image
+                src="/images/logo/577e0a8a-c480-40d7-b31b-28c602ad95e1.png"
+                alt=""
+                fill
+                sizes="220px"
+              />
             </span>
-            <span>{company.name}</span>
           </a>
           <p>
             {locale === "vi"
