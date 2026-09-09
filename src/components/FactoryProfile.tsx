@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { factories, type Locale } from "@/data/landing-page";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -13,7 +12,7 @@ export function FactoryProfile({
   locale: Locale;
 }) {
   const factory = factories.find(
-    (item) => item.id.toLowerCase() === factoryId.toLowerCase(),
+    (item) => item.slug === factoryId.toLowerCase() || item.id.toLowerCase() === factoryId.toLowerCase(),
   );
   if (!factory)
     return (
@@ -25,11 +24,7 @@ export function FactoryProfile({
       </main>
     );
   const vi = locale === "vi";
-  const factoryImage = {
-    "VN-PW-018": "/images/factories/vn-pw-018/exterior.jpg",
-    "VN-PW-038": "/images/factories/vn-pw-038/exterior.jpg",
-    "VN-PW-052": "/images/factories/vn-pw-052/exterior.jpg",
-  }[factory.id as "VN-PW-018" | "VN-PW-038" | "VN-PW-052"];
+  const missing = vi ? "Chưa cung cấp trong tài liệu" : "Not provided in submitted file";
   return (
     <>
       <Header locale={locale} />
@@ -37,17 +32,14 @@ export function FactoryProfile({
         <section className="profile-hero">
           <div>
             <p className="eyebrow eyebrow-light">
-              {vi ? "Hồ sơ năng lực tham khảo" : "Reference capability profile"}
+                {vi ? "Hồ sơ năng lực do doanh nghiệp cung cấp" : "Company-submitted capability profile"}
             </p>
             <div className="profile-id">{factory.id}</div>
             <h1>
-              {vi
-                ? "Hồ sơ mẫu cho qualification qua MISO JAPAN"
-                : "Sample profile for qualification through MISO JAPAN"}
+              {vi ? factory.companyNameVi : factory.displayName}
             </h1>
-            <p>
-              {factory.location} · {factory.region} Vietnam
-            </p>
+            <p className="profile-company-name">{vi ? factory.companyNameEn : factory.companyNameVi}</p>
+            <p>{factory.location} · {factory.region} Vietnam</p>
             <Link
               className="button button-light"
               href={`${vi ? "/vi" : ""}/rfq?factory=${factory.id}`}
@@ -59,20 +51,10 @@ export function FactoryProfile({
             </Link>
           </div>
           <div className="profile-mark" aria-hidden="true">
-            {factoryImage && (
-              <Image
-                src={factoryImage}
-                alt={`${factory.id} factory`}
-                fill
-                sizes="220px"
-              />
-            )}
-            <span>MISO JAPAN</span>
+            <span className="factory-image-status">{factory.imagePath ? "FACTORY IMAGE" : "IMAGE PENDING"}</span>
             <strong>Q</strong>
             <small>
-              QUALIFICATION
-              <br />
-              PENDING
+              {factory.misoStatus.toUpperCase()}
             </small>
           </div>
           <ScrollCue targetId="profile-body" label={vi ? "Cuộn để xem hồ sơ" : "Scroll to view profile"} />
@@ -85,27 +67,31 @@ export function FactoryProfile({
               </p>
               <h2>
                 {vi
-                  ? "Năng lực tham khảo, cần được đánh giá trước khi công bố."
-                  : "Reference capability, to be assessed before publication."}
+                  ? "Năng lực được cung cấp, đang chờ qualification."
+                  : "Submitted capability, pending qualification."}
               </h2>
             </div>
             <div className="profile-spec-grid">
               <div>
-                <span>{vi ? "Loại hình" : "Factory type"}</span>
-                <strong>{vi ? "Nhà sản xuất" : "Manufacturer"}</strong>
+                <span>{vi ? "Năm thành lập" : "Established"}</span>
+                <strong>{factory.establishedYear}</strong>
               </div>
               <div>
-                <span>{vi ? "Hoạt động tham khảo" : "Operating history"}</span>
-                <strong>{factory.years}+ years</strong>
+                <span>{vi ? "Nhân sự" : "Workforce"}</span>
+                <strong>{factory.workforce || missing}</strong>
               </div>
               <div>
-                <span>{vi ? "Nhân sự tham khảo" : "Reference workforce"}</span>
-                <strong>{factory.employees}</strong>
+                <span>{vi ? "Công suất" : "Capacity"}</span>
+                <strong>{factory.capacity || missing}</strong>
               </div>
               <div>
-                <span>{vi ? "Công suất tham khảo" : "Reference capacity"}</span>
-                <strong>{factory.monthlyCapacity}</strong>
+                <span>{vi ? "Trạng thái" : "Status"}</span>
+                <strong>{vi ? "Đang chờ qualification" : factory.misoStatus}</strong>
               </div>
+            </div>
+            <div className="profile-block">
+              <h3>{vi ? "Mô tả hồ sơ" : "Profile description"}</h3>
+              <p>{factory.shortDescription}</p>
             </div>
             <div className="profile-block">
               <h3>{vi ? "Sản phẩm chính" : "Main products"}</h3>
@@ -122,29 +108,41 @@ export function FactoryProfile({
                   : "Materials and specifications"}
               </h3>
               <p>
-                {factory.materials.join(" · ")} · {factory.thicknessRange}
+                {factory.materials.join(" · ") || missing}
               </p>
+              {factory.materialsAndSpecs && <p>{factory.materialsAndSpecs}</p>}
             </div>
             <div className="profile-block">
               <h3>{vi ? "Thị trường tham khảo" : "Reference markets"}</h3>
               <div className="profile-tags">
-                {factory.exportMarkets.map((item) => (
+                {factory.exportMarkets.length > 0 ? factory.exportMarkets.map((item) => (
                   <span key={item}>{item}</span>
-                ))}
+                )) : <p>{missing}</p>}
+              </div>
+            </div>
+            <div className="profile-block">
+              <h3>{vi ? "Chứng nhận" : "Certifications"}</h3>
+              <div className="profile-tags">
+                {factory.certifications.length > 0 ? factory.certifications.map((item) => (
+                  <span key={item}>{item}</span>
+                )) : <p>{missing}</p>}
               </div>
             </div>
           </div>
           <aside className="profile-sidebar">
             <div className="verification-card">
-              <span>!</span>
-              <strong>
-                {vi ? "CHƯA PHẢI HỒ SƠ VERIFIED" : "NOT A VERIFIED PROFILE"}
-              </strong>
+              <span className="is-pending">!</span>
+              <strong>{vi ? "TRẠNG THÁI MISO JAPAN" : "MISO JAPAN STATUS"}</strong>
               <p>
                 {vi
-                  ? "Thông tin này là dữ liệu mẫu. Bằng chứng, phạm vi và ngày đánh giá sẽ được bổ sung sau qualification."
-                  : "This is sample data. Evidence, scope and assessment dates will be added after qualification."}
+                  ? "Đây là thông tin do doanh nghiệp cung cấp và đang chờ qualification. Chưa có ảnh nhà máy hoặc bản scan chứng nhận trong tài liệu."
+                  : "This information was submitted by the company and remains pending qualification. No factory images or certification scans were included in the source material."}
               </p>
+            </div>
+            <div className="profile-source">
+              <h3>{vi ? "Nguồn dữ liệu công khai" : "Public data source"}</h3>
+              <p><strong>{vi ? "File nguồn" : "Source file"}</strong>{factory.sourceFile}</p>
+              <p><strong>{vi ? "Ghi chú phát triển" : "Development note"}</strong>{factory.devNote}</p>
             </div>
             <Link
               className="button button-primary profile-cta"

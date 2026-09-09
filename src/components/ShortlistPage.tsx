@@ -21,6 +21,7 @@ function readIds(key: string) {
 
 export function ShortlistPage({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
+  const missing = vi ? "Chưa cung cấp" : "Not provided";
   const [shortlistIds, setShortlistIds] = useState<string[]>([]);
   const [compareIds, setCompareIds] = useState<string[]>([]);
 
@@ -79,31 +80,33 @@ export function ShortlistPage({ locale }: { locale: Locale }) {
       value: (factory) => factory.products.join(", "),
     },
     {
-      label: vi ? "Nguyên liệu lõi" : "Core materials",
-      value: (factory) => factory.materials.join(", "),
+      label: vi ? "Nguyên liệu và quy cách" : "Materials and specifications",
+      value: (factory) => factory.materialsAndSpecs || factory.materials.join(", ") || missing,
     },
     {
-      label: vi ? "Độ dày" : "Thickness",
-      value: (factory) => factory.thicknessRange,
-    },
-    {
-      label: vi ? "Công suất tháng" : "Monthly capacity",
-      value: (factory) => factory.monthlyCapacity,
+      label: vi ? "Công suất" : "Capacity",
+      value: (factory) => factory.capacity || missing,
     },
     {
       label: vi ? "Thị trường xuất khẩu" : "Export markets",
-      value: (factory) => factory.exportMarkets.join(", "),
+      value: (factory) => factory.exportMarkets.join(", ") || missing,
     },
     {
       label: vi ? "Chứng nhận" : "Certifications",
-      value: (factory) => factory.certifications.join(", "),
+      value: (factory) => factory.certifications.join(", ") || missing,
     },
-    { label: "OEM", value: (factory) => (factory.oem ? "Yes" : "No") },
     {
-      label: vi ? "Kinh nghiệm" : "Experience",
-      value: (factory) => `${factory.years} years`,
+      label: vi ? "Năm thành lập" : "Established",
+      value: (factory) => `${factory.establishedYear}`,
     },
-    { label: "Score", value: (factory) => `${factory.score}/5` },
+    {
+      label: vi ? "Nhân sự" : "Workforce",
+      value: (factory) => factory.workforce || missing,
+    },
+    {
+      label: vi ? "Trạng thái" : "Status",
+      value: (factory) => factory.misoStatus,
+    },
   ];
 
   return (

@@ -78,14 +78,11 @@ export function ProductProfile({
             : `${product.name} application`,
     }),
   );
+  const normalizeProduct = (value: string) => value.toLowerCase().replace(/-/g, " ").replace(/\s+/g, " ").trim();
   const matchingFactories = factories.filter((factory) =>
-    factory.products.includes(product.name),
+    factory.products.some((item) => normalizeProduct(item) === normalizeProduct(product.name)),
   );
-  const factoryImages: Record<string, string> = {
-    "VN-PW-018": "/images/factories/vn-pw-018/exterior.jpg",
-    "VN-PW-038": "/images/factories/vn-pw-038/exterior.jpg",
-    "VN-PW-052": "/images/factories/vn-pw-052/exterior.jpg",
-  };
+  const missing = vi ? "Chưa cung cấp" : "Not provided";
   return (
     <>
       <Header locale={locale} />
@@ -159,18 +156,18 @@ export function ProductProfile({
             {matchingFactories.map((factory) => (
               <article className="product-factory-card" key={factory.id}>
                 <div className="product-factory-image">
-                  {factoryImages[factory.id] && (
+                  {factory.imagePath && (
                     <Image
-                      src={factoryImages[factory.id]}
+                      src={factory.imagePath}
                       alt={`${factory.id} factory`}
                       fill
                       sizes="(max-width: 820px) 100vw, 33vw"
                     />
                   )}
-                  <span>{factory.region}</span>
+                  <span>{factory.imagePath ? factory.region : vi ? "CHƯA CÓ ẢNH" : "IMAGE PENDING"}</span>
                 </div>
                 <p className="product-factory-location">{factory.location}</p>
-                <h3>{factory.id}</h3>
+                <h3>{vi ? factory.companyNameVi : factory.displayName}</h3>
                 <div className="product-factory-tags">
                   {factory.products.map((item) => (
                     <span key={item}>{item}</span>
@@ -179,16 +176,16 @@ export function ProductProfile({
                 <dl>
                   <div>
                     <dt>{vi ? "Công suất" : "Capacity"}</dt>
-                    <dd>{factory.monthlyCapacity}</dd>
+                    <dd>{factory.capacity || missing}</dd>
                   </div>
                   <div>
-                    <dt>{vi ? "Vật liệu" : "Materials"}</dt>
-                    <dd>{factory.materials.join(" · ")}</dd>
+                    <dt>{vi ? "Vật liệu và quy cách" : "Materials and specifications"}</dt>
+                    <dd>{factory.materialsAndSpecs || factory.materials.join(" · ") || missing}</dd>
                   </div>
                 </dl>
                 <Link
                   className="product-factory-link"
-                  href={`${vi ? "/vi" : ""}/manufacturers/${factory.id.toLowerCase()}`}
+                  href={`${vi ? "/vi" : ""}/manufacturers/${factory.slug}`}
                 >
                   {vi ? "Xem hồ sơ nhà máy" : "View factory profile"} <span aria-hidden="true">↗</span>
                 </Link>

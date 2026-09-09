@@ -323,35 +323,187 @@ export const productCatalog = [
 
 export type Factory = {
   id: string;
+  slug: string;
+  displayName: string;
+  companyNameVi: string;
+  companyNameEn: string;
   location: string;
   region: "North" | "Central" | "South";
+  establishedYear: number;
+  workforce: string;
+  capacity: string;
   products: string[];
   materials: string[];
-  thicknessRange: string;
-  monthlyCapacity: string;
+  materialsAndSpecs: string;
   exportMarkets: string[];
   certifications: string[];
-  oem: boolean;
-  verified: boolean;
-  years: number;
-  employees: string;
-  score: number;
+  misoStatus: string;
+  shortDescription: string;
+  imagePath: string;
+  sourceFile: string;
+  devNote: string;
 };
 
 export const factories: Factory[] = [
-  { id: "VN-PW-018", location: "Bac Ninh, Vietnam", region: "North", products: ["Commercial Plywood", "Packing Plywood", "Veneer"], materials: ["Acacia", "Eucalyptus"], thicknessRange: "3–25mm", monthlyCapacity: "180 containers", exportMarkets: ["India", "Middle East", "Korea"], certifications: ["E1", "CARB P2"], oem: true, verified: true, years: 14, employees: "220+", score: 4.8 },
-  { id: "VN-PW-038", location: "Bac Giang, Vietnam", region: "North", products: ["Commercial Plywood", "Film Faced Plywood", "LVL"], materials: ["Eucalyptus", "Poplar"], thicknessRange: "5–25mm", monthlyCapacity: "240 containers", exportMarkets: ["India", "Middle East", "USA"], certifications: ["E0", "E1", "FSC"], oem: true, verified: true, years: 12, employees: "150+", score: 4.9 },
-  { id: "VN-PW-052", location: "Thai Nguyen, Vietnam", region: "North", products: ["Packing Plywood", "MDF / HDF"], materials: ["Mixed Hardwood", "Eucalyptus"], thicknessRange: "2.7–18mm", monthlyCapacity: "120 containers", exportMarkets: ["India", "Japan"], certifications: ["E1"], oem: false, verified: true, years: 9, employees: "110+", score: 4.5 },
-  { id: "VN-PW-071", location: "Thanh Hoa, Vietnam", region: "Central", products: ["Commercial Plywood", "Natural Veneer"], materials: ["Acacia", "Rubberwood"], thicknessRange: "3–21mm", monthlyCapacity: "160 containers", exportMarkets: ["Middle East", "Korea", "Japan"], certifications: ["E1", "FSC"], oem: true, verified: true, years: 17, employees: "260+", score: 4.7 },
-  { id: "VN-PW-107", location: "Binh Dinh, Vietnam", region: "Central", products: ["Film Faced Plywood", "Commercial Plywood", "LVL"], materials: ["Eucalyptus", "Acacia"], thicknessRange: "9–30mm", monthlyCapacity: "210 containers", exportMarkets: ["India", "Middle East", "Europe"], certifications: ["WBP", "CARB P2"], oem: true, verified: true, years: 11, employees: "190+", score: 4.6 },
-  { id: "VN-PW-126", location: "Nghe An, Vietnam", region: "Central", products: ["Natural Veneer", "Engineered Veneer", "Finger Joint Board"], materials: ["Acacia", "Rubberwood"], thicknessRange: "0.2–3mm", monthlyCapacity: "90 containers", exportMarkets: ["India", "Korea", "Japan"], certifications: ["FSC", "E1"], oem: true, verified: true, years: 8, employees: "95+", score: 4.4 },
-  { id: "VN-PW-154", location: "Dong Nai, Vietnam", region: "South", products: ["Commercial Plywood", "MDF / HDF", "Furniture Plywood"], materials: ["Rubberwood", "Eucalyptus"], thicknessRange: "3–25mm", monthlyCapacity: "200 containers", exportMarkets: ["Middle East", "USA", "Europe"], certifications: ["E0", "E1", "FSC"], oem: true, verified: true, years: 19, employees: "320+", score: 4.9 },
-  { id: "VN-PW-201", location: "Binh Duong, Vietnam", region: "South", products: ["Fancy Plywood", "Natural Veneer", "MDF / HDF"], materials: ["Rubberwood", "Acacia"], thicknessRange: "0.5–25mm", monthlyCapacity: "140 containers", exportMarkets: ["India", "Middle East", "Korea"], certifications: ["E1", "CARB P2"], oem: true, verified: true, years: 15, employees: "180+", score: 4.7 },
+  {
+    id: "VN-PW-001",
+    slug: "vn-pw-001",
+    displayName: "Bison Wood Panel",
+    companyNameVi: "CÔNG TY CỔ PHẦN VÁN CÔNG NGHỆ CAO BISON",
+    companyNameEn: "BISON ADVANCE TECHNOLOGY PANEL JOINT STOCK COMPANY",
+    location: "Lam Dong, Vietnam",
+    region: "South",
+    establishedYear: 2016,
+    workforce: "",
+    capacity: "120,000 m³/year",
+    products: ["Hardwood Plywood", "Birch-Faced Plywood", "Film-Faced Plywood", "Veneer-Faced / UV-Coated Plywood", "Moisture-Resistant Plywood"],
+    materials: ["Rubberwood plantation core", "Birch veneer"],
+    materialsAndSpecs: "Rubberwood plantation core | Birch veneer — Examples reported: 9 x 1233 x 2452 mm / 5-ply; 15 x 1233 x 2452 mm / 10-ply / UV-painted; 18 x 1233 x 2452 mm / 11-ply;",
+    exportMarkets: ["United States", "South Korea"],
+    certifications: ["CARB Phase 2", "HWPW-VC", "HWPW-CC", "TPC-44"],
+    misoStatus: "Qualification pending",
+    shortDescription: "Plywood manufacturer with two reported production sites in Lam Dong. Submitted information states equipment capacity of 120,000 m³/year and recorded shipments to the United States and South Korea. Claims require qualification before publication.",
+    imagePath: "",
+    sourceFile: "Info(1).txt",
+    devNote: "Missing establishment year, workforce and images; confirm primary factory address and certification evidence.",
+  },
+  {
+    id: "VN-PW-002",
+    slug: "vn-pw-002",
+    displayName: "A&C Ha Noi",
+    companyNameVi: "CÔNG TY TNHH A&C HÀ NỘI",
+    companyNameEn: "A&C HA NOI COMPANY LIMITED",
+    location: "Bac Ninh, Vietnam",
+    region: "North",
+    establishedYear: 2015,
+    workforce: "11-50",
+    capacity: "",
+    products: ["Acacia Wood Pallets", "Plywood Pallets", "Plywood Crates", "Acacia Wood Crates", "Wood Packaging", "Carton Packaging"],
+    materials: ["Acacia", "Pine", "Melaleuca", "Plywood"],
+    materialsAndSpecs: "Standard and custom-designed pallets; 2-way and 4-way pallets; listed pallet sizes include 120 x 1100 x 1100 mm and 135 x 1130 x 1130 mm",
+    exportMarkets: ["Vietnam", "Japan", "South Korea"],
+    certifications: [],
+    misoStatus: "Qualification pending",
+    shortDescription: "Manufacturer of wood pallets, plywood pallets, wooden crates and packaging products, with reported branches in Bac Ninh and Thai Nguyen. Submitted information lists domestic, Japanese and South Korean markets.",
+    imagePath: "",
+    sourceFile: "Thông Tin DN (3)(2).txt",
+    devNote: "Main products are pallets/crates/packaging; confirm inclusion in plywood directory and profile branch.",
+  },
+  {
+    id: "VN-PW-003",
+    slug: "vn-pw-003",
+    displayName: "A-One Timber Vietnam",
+    companyNameVi: "CÔNG TY CỔ PHẦN SẢN XUẤT A-ONE TIMBER VIỆT NAM",
+    companyNameEn: "A-ONE TIMBER CO., JSC",
+    location: "Bac Ninh, Vietnam",
+    region: "North",
+    establishedYear: 2019,
+    workforce: "",
+    capacity: "",
+    products: ["Plywood", "Veneer", "Other Wood Products"],
+    materials: [],
+    materialsAndSpecs: "",
+    exportMarkets: [],
+    certifications: [],
+    misoStatus: "Qualification pending",
+    shortDescription: "Registered wood-processing manufacturer with plywood and veneer as its principal business line. Capacity, detailed product specifications, export markets and certifications were not included in the submitted file.",
+    imagePath: "",
+    sourceFile: "Thông tin DN (1)(2).txt",
+    devNote: "Missing capacity, workforce, detailed products, markets, certifications and images.",
+  },
+  {
+    id: "VN-PW-004",
+    slug: "vn-pw-004",
+    displayName: "Baifar Lang Son",
+    companyNameVi: "CÔNG TY TNHH BAIFAR LẠNG SƠN",
+    companyNameEn: "BAIFAR LANG SON COMPANY LIMITED",
+    location: "Lang Son, Vietnam",
+    region: "North",
+    establishedYear: 2022,
+    workforce: "",
+    capacity: "",
+    products: ["Furniture Plywood", "Commercial Plywood", "Packaging Plywood", "Industrial Plywood"],
+    materials: ["Eucalyptus", "Acacia", "Pine", "Styrax", "Rubberwood", "Mixed Light Hardwood (MLH)"],
+    materialsAndSpecs: "",
+    exportMarkets: [],
+    certifications: [],
+    misoStatus: "Qualification pending",
+    shortDescription: "Plywood manufacturer in Lang Son with two reported production facilities, focused on furniture, commercial, packaging and industrial plywood. The submitted profile references product positioning for European and North American requirements, not confirmed export markets.",
+    imagePath: "",
+    sourceFile: "Thông tin DN (2)(2).txt",
+    devNote: "Two facilities reported; confirm canonical address. Europe/North America are standards, not confirmed export markets.",
+  },
+  {
+    id: "VN-PW-005",
+    slug: "vn-pw-005",
+    displayName: "An Lam Plywood",
+    companyNameVi: "CÔNG TY TNHH AN LÂM",
+    companyNameEn: "AN LAM COMPANY LIMITED",
+    location: "Bac Ninh, Vietnam",
+    region: "North",
+    establishedYear: 2009,
+    workforce: "201-300",
+    capacity: "3,000 m³/month (~40 containers/month; ~36,000 m³/year)",
+    products: ["Plywood", "LVL", "Veneer"],
+    materials: ["Eucalyptus", "Acacia", "Pine", "Styrax", "Rubberwood", "Mixed Light Hardwood (MLH)"],
+    materialsAndSpecs: "",
+    exportMarkets: [],
+    certifications: [],
+    misoStatus: "Qualification pending",
+    shortDescription: "Plywood, LVL and veneer manufacturer. Company-provided figures indicate a 20,000 m² factory and approximately 3,000 m³/month production capacity, equivalent to about 40 containers/month.",
+    imagePath: "",
+    sourceFile: "Thông tin DN(2).txt",
+    devNote: "Capacity/workforce are company-reported; verify before publication. Images and certifications missing.",
+  },
+  {
+    id: "VN-PW-006",
+    slug: "vn-pw-006",
+    displayName: "An An Plywood",
+    companyNameVi: "CÔNG TY CỔ PHẦN AN AN PLYWOOD",
+    companyNameEn: "AN AN PLYWOOD JOINT STOCK COMPANY",
+    location: "Phu Tho, Vietnam",
+    region: "North",
+    establishedYear: 2018,
+    workforce: "",
+    capacity: "",
+    products: ["Plywood", "Veneer", "Wood Packaging", "Other Wood Products"],
+    materials: [],
+    materialsAndSpecs: "",
+    exportMarkets: [],
+    certifications: [],
+    misoStatus: "Qualification pending",
+    shortDescription: "Registered wood-processing manufacturer focused on plywood, veneer and related wood products. Capacity, workforce, specifications and export markets were not included in the submitted file.",
+    imagePath: "",
+    sourceFile: "Thông tin doanh nghiệp(2).txt",
+    devNote: "Missing capacity, workforce, product specifications, markets, certifications and images.",
+  },
+  {
+    id: "VN-PW-007",
+    slug: "vn-pw-007",
+    displayName: "Bao Thinh Plywood",
+    companyNameVi: "CÔNG TY TNHH SẢN XUẤT VÁN ÉP BẢO THỊNH",
+    companyNameEn: "BAO THINH PLYWOOD MANUFACTURING COMPANY LIMITED",
+    location: "Ho Chi Minh City, Vietnam",
+    region: "South",
+    establishedYear: 2005,
+    workforce: "",
+    capacity: "",
+    products: ["Plywood", "Particleboard / Okal"],
+    materials: [],
+    materialsAndSpecs: "",
+    exportMarkets: [],
+    certifications: [],
+    misoStatus: "Qualification pending",
+    shortDescription: "Plywood manufacturer established in 2005. Submitted company information indicates plywood and particleboard/Okal-related manufacturing; operational metrics and export markets were not included.",
+    imagePath: "",
+    sourceFile: "Thông tin(2).txt",
+    devNote: "Confirm whether Okal should be published as particleboard and whether it is produced or traded.",
+  },
 ];
 
 export const factoryFilterOptions = {
-  products: ["Commercial Plywood", "Film Faced Plywood", "Packing Plywood", "Natural Veneer", "MDF / HDF", "LVL", "Other Wood Products"],
-  materials: ["Acacia", "Eucalyptus", "Rubberwood", "Poplar", "Mixed Hardwood", "Other"],
+  products: ["Hardwood Plywood", "Birch-Faced Plywood", "Film-Faced Plywood", "Veneer-Faced / UV-Coated Plywood", "Moisture-Resistant Plywood", "Acacia Wood Pallets", "Plywood Pallets", "Plywood Crates", "Acacia Wood Crates", "Wood Packaging", "Carton Packaging", "Plywood", "Veneer", "Furniture Plywood", "Commercial Plywood", "Packaging Plywood", "Industrial Plywood", "LVL", "Particleboard / Okal", "Other Wood Products"],
+  materials: ["Rubberwood plantation core", "Birch veneer", "Acacia", "Pine", "Melaleuca", "Plywood", "Eucalyptus", "Styrax", "Rubberwood", "Mixed Light Hardwood (MLH)", "Other"],
   regions: ["North", "Central", "South"],
-  markets: ["India", "Middle East", "Korea", "Japan", "USA", "Europe"],
+  markets: ["Vietnam", "Japan", "South Korea", "United States"],
 };

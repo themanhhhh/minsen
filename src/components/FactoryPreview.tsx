@@ -7,26 +7,11 @@ export function FactoryPreview({ locale }: { locale: Locale }) {
   const regionNames = { North: "Miền Bắc", Central: "Miền Trung", South: "Miền Nam" };
   const productNames: Record<string, string> = {
     "Commercial Plywood": "Plywood thương mại",
-    "Packing Plywood": "Plywood đóng gói",
-    "Film Faced Plywood": "Plywood phủ phim",
-    "Natural Veneer": "Veneer tự nhiên",
-    "MDF / HDF": "MDF / HDF",
+    "Film-Faced Plywood": "Plywood phủ phim",
     LVL: "LVL",
     Veneer: "Veneer",
   };
-  const locations: Record<string, string> = {
-    "VN-PW-018": "Bắc Ninh, Việt Nam",
-    "VN-PW-038": "Bắc Giang, Việt Nam",
-    "VN-PW-052": "Thái Nguyên, Việt Nam",
-  };
-  const imageFor = (id: string) =>
-    id === "VN-PW-018"
-      ? "/images/factories/vn-pw-018/exterior.jpg"
-      : id === "VN-PW-038"
-        ? "/images/factories/vn-pw-038/exterior.jpg"
-        : id === "VN-PW-052"
-          ? "/images/factories/vn-pw-052/exterior.jpg"
-          : undefined;
+  const missing = vi ? "Chưa cung cấp" : "Not provided";
   return (
     <section className="factory-preview">
       <div className="section-heading">
@@ -53,29 +38,27 @@ export function FactoryPreview({ locale }: { locale: Locale }) {
         {factories.slice(0, 3).map((factory) => (
           <article key={factory.id}>
             <div className="factory-placeholder">
-              {imageFor(factory.id) && (
+              {factory.imagePath && (
                 <Image
-                  src={imageFor(factory.id)!}
+                  src={factory.imagePath}
                   alt={`${factory.id} factory`}
                   fill
                   sizes="(max-width: 820px) 100vw, 33vw"
                 />
               )}
-              <span>VN</span>
+              <span className="factory-image-status">{factory.imagePath ? "VN" : vi ? "CHƯA CÓ ẢNH" : "IMAGE PENDING"}</span>
                <strong>{vi ? regionNames[factory.region] : factory.region}</strong>
             </div>
             <span className="factory-id">
-               {factory.id} · {vi ? locations[factory.id] ?? factory.location : factory.location}
+               {factory.id} · {factory.location}
             </span>
-            <h3>
-              {vi ? "Đối tác sản xuất plywood" : "Wood manufacturing partner"}
-            </h3>
+            <h3>{vi ? factory.companyNameVi : factory.displayName}</h3>
             <p>
               {factory.products.slice(0, 2).map((product) => vi ? productNames[product] ?? product : product).join(" · ")} ·{" "}
-              {vi ? factory.monthlyCapacity.replace(" containers", " container/tháng") : factory.monthlyCapacity}
+              {factory.capacity || missing}
             </p>
             <Link
-              href={`${vi ? "/vi" : ""}/manufacturers/${factory.id.toLowerCase()}`}
+              href={`${vi ? "/vi" : ""}/manufacturers/${factory.slug}`}
             >
               {vi ? "Xem hồ sơ" : "View profile"} ↗
             </Link>
