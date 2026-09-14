@@ -1,16 +1,17 @@
 import Link from "next/link";
 import { ClipboardList, ShieldCheck, UsersRound } from "lucide-react";
-import { aboutPageContent, type Locale } from "@/data/landing-page";
+import { aboutPageContent, getLocalizedPath, type Locale } from "@/data/landing-page";
 
 export function HomeTrustSections({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
+  const ar = locale === "ar";
   const content = aboutPageContent[locale];
 
   return (
     <>
       <section className="about-network home-network-section" id="network">
         <div className="network-copy">
-          <p className="eyebrow">{vi ? "Mạng lưới phía sau chúng tôi" : "The network behind us"}</p>
+           <p className="eyebrow">{vi ? "Mạng lưới phía sau chúng tôi" : ar ? "الشبكة التي تقف خلفنا" : "The network behind us"}</p>
           <h2>{content.networkTitle}</h2>
           <p>{content.networkText}</p>
         </div>
@@ -18,20 +19,20 @@ export function HomeTrustSections({ locale }: { locale: Locale }) {
           <div>
             <UsersRound size={28} strokeWidth={1.7} aria-hidden="true" />
             <strong>01</strong>
-            <span>{vi ? "đầu mối chịu trách nhiệm" : "accountable partner"}</span>
-            <small>{vi ? "MISO JAPAN là đầu mối duy nhất của bạn" : "MISO JAPAN as your single point of contact"}</small>
+             <span>{vi ? "đầu mối chịu trách nhiệm" : ar ? "شريك مسؤول" : "accountable partner"}</span>
+             <small>{vi ? "MISO JAPAN là đầu mối duy nhất của bạn" : ar ? "MISO JAPAN نقطة الاتصال الوحيدة لك" : "MISO JAPAN as your single point of contact"}</small>
           </div>
           <div>
             <ClipboardList size={28} strokeWidth={1.7} aria-hidden="true" />
             <strong>05</strong>
-            <span>{vi ? "giai đoạn dành cho buyer" : "buyer-facing phases"}</span>
-            <small>{vi ? "Từ yêu cầu đến giao hàng với đầy đủ thông tin" : "From requirement to delivery with full visibility"}</small>
+             <span>{vi ? "giai đoạn dành cho buyer" : ar ? "مراحل مخصصة للمشتري" : "buyer-facing phases"}</span>
+             <small>{vi ? "Từ yêu cầu đến giao hàng với đầy đủ thông tin" : ar ? "من المتطلبات إلى التسليم برؤية كاملة" : "From requirement to delivery with full visibility"}</small>
           </div>
           <div>
             <ShieldCheck size={28} strokeWidth={1.7} aria-hidden="true" />
             <strong>12</strong>
-            <span>{vi ? "control gate dự kiến" : "control gates planned"}</span>
-            <small>{vi ? "Kiểm tra tích hợp để giảm rủi ro từng bước" : "Built-in checks to reduce risk at every step"}</small>
+             <span>{vi ? "control gate dự kiến" : ar ? "نقاط تحكم مخططة" : "control gates planned"}</span>
+             <small>{vi ? "Kiểm tra tích hợp để giảm rủi ro từng bước" : ar ? "فحوصات مدمجة لتقليل المخاطر في كل خطوة" : "Built-in checks to reduce risk at every step"}</small>
           </div>
         </div>
       </section>
@@ -41,6 +42,8 @@ export function HomeTrustSections({ locale }: { locale: Locale }) {
           <h2>
             {vi ? (
               <>Làm việc với <em>chủ đích.</em></>
+            ) : ar ? (
+              <>مبني على <em>العمل الجيد.</em></>
             ) : (
               <>Built on <em>good work.</em></>
             )}
@@ -58,11 +61,11 @@ export function HomeTrustSections({ locale }: { locale: Locale }) {
       </section>
       <section className="about-page-cta home-trust-cta">
         <p className="eyebrow eyebrow-light">
-          {vi ? "Cùng bắt đầu" : "LET'S WORK TOGETHER"}
+          {vi ? "Cùng bắt đầu" : ar ? "لنعمل معًا" : "LET'S WORK TOGETHER"}
         </p>
         <h2>{content.ctaTitle}</h2>
         <p>{content.ctaText}</p>
-        <Link className="button button-light" href={vi ? "/vi/rfq" : "/rfq"}>
+        <Link className="button button-light" href={getLocalizedPath(locale, "/rfq")}>
           {content.cta} <span aria-hidden="true">↗</span>
         </Link>
       </section>

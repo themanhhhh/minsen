@@ -1,22 +1,24 @@
 import Link from "next/link";
 import Image from "next/image";
-import { factories, type Locale } from "@/data/landing-page";
+import { factories, getLocalizedPath, type Locale } from "@/data/landing-page";
 
 export function FactoryPreview({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
+  const ar = locale === "ar";
   const regionNames = { North: "Miền Bắc", Central: "Miền Trung", South: "Miền Nam" };
+  const regionNamesAr = { North: "الشمال", Central: "الوسط", South: "الجنوب" };
   const productNames: Record<string, string> = {
     "Commercial Plywood": "Plywood thương mại",
     "Film-Faced Plywood": "Plywood phủ phim",
     LVL: "LVL",
     Veneer: "Veneer",
   };
-  const missing = vi ? "Chưa cung cấp" : "Not provided";
+  const missing = vi ? "Chưa cung cấp" : ar ? "غير متوفر" : "Not provided";
   return (
     <section className="factory-preview">
       <div className="section-heading">
         <p className="eyebrow">
-          {vi ? "Mạng lưới MISO JAPAN" : "The MISO JAPAN network"}
+          {vi ? "Mạng lưới MISO JAPAN" : ar ? "شبكة MISO JAPAN" : "The MISO JAPAN network"}
         </p>
         <h2>
           {vi ? (
@@ -25,6 +27,8 @@ export function FactoryPreview({ locale }: { locale: Locale }) {
               <br />
               <em>phù hợp với bạn.</em>
             </>
+          ) : ar ? (
+            <>استكشف المصانع<br /><em>المناسبة لاحتياجاتك.</em></>
           ) : (
             <>
               Explore factories
@@ -46,8 +50,8 @@ export function FactoryPreview({ locale }: { locale: Locale }) {
                   sizes="(max-width: 820px) 100vw, 33vw"
                 />
               )}
-              <span className="factory-image-status">{factory.imagePath ? "VN" : vi ? "CHƯA CÓ ẢNH" : "IMAGE PENDING"}</span>
-               <strong>{vi ? regionNames[factory.region] : factory.region}</strong>
+              <span className="factory-image-status">{factory.imagePath ? "VN" : vi ? "CHƯA CÓ ẢNH" : ar ? "الصورة قيد التجهيز" : "IMAGE PENDING"}</span>
+               <strong>{vi ? regionNames[factory.region] : ar ? regionNamesAr[factory.region] : factory.region}</strong>
             </div>
             <span className="factory-id">
                {factory.id} · {factory.location}
@@ -58,18 +62,18 @@ export function FactoryPreview({ locale }: { locale: Locale }) {
               {factory.capacity || missing}
             </p>
             <Link
-              href={`${vi ? "/vi" : ""}/manufacturers/${factory.slug}`}
+              href={getLocalizedPath(locale, `/manufacturers/${factory.slug}`)}
             >
-              {vi ? "Xem hồ sơ" : "View profile"} ↗
+              {vi ? "Xem hồ sơ" : ar ? "عرض الملف" : "View profile"} ↗
             </Link>
           </article>
         ))}
       </div>
       <Link
         className="button button-primary"
-        href={vi ? "/vi/manufacturers" : "/manufacturers"}
+        href={getLocalizedPath(locale, "/manufacturers")}
       >
-        {vi ? "Xem toàn bộ mạng lưới" : "Explore all manufacturers"}{" "}
+        {vi ? "Xem toàn bộ mạng lưới" : ar ? "استكشف جميع المصانع" : "Explore all manufacturers"}{" "}
         <span aria-hidden="true">↗</span>
       </Link>
     </section>

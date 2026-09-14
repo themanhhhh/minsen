@@ -1,4 +1,4 @@
-import { getLandingContent, heroStats, heroStatsVi, type Locale } from "@/data/landing-page";
+import { getLandingContent, heroStats, heroStatsAr, heroStatsVi, type Locale } from "@/data/landing-page";
 import { Factory, Globe2, Handshake, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 
@@ -6,7 +6,9 @@ const statIcons = [Factory, ShieldCheck, Handshake, Globe2];
 
 export function Hero({ locale }: { locale: Locale }) {
   const { heroContent } = getLandingContent(locale);
-  const stats = locale === "vi" ? heroStatsVi : heroStats;
+  const stats = locale === "vi" ? heroStatsVi : locale === "ar" ? heroStatsAr : heroStats;
+  const vi = locale === "vi";
+  const ar = locale === "ar";
   return (
     <section className="hero" id="top">
       <div className="hero-content">
@@ -22,7 +24,7 @@ export function Hero({ locale }: { locale: Locale }) {
         <p className="hero-description">{heroContent.description}</p>
         <form className="hero-search" action="#contact">
           <label className="sr-only" htmlFor="product-search">
-            {locale === "vi" ? "Sản phẩm bạn đang tìm kiếm" : "Product you are looking for"}
+            {vi ? "Sản phẩm bạn đang tìm kiếm" : ar ? "المنتج الذي تبحث عنه" : "Product you are looking for"}
           </label>
           <input
             id="product-search"
@@ -34,7 +36,7 @@ export function Hero({ locale }: { locale: Locale }) {
           </button>
         </form>
         <div className="hero-popular">
-          <strong>{locale === "vi" ? "Tìm kiếm phổ biến:" : "Popular searches:"}</strong>
+          <strong>{vi ? "Tìm kiếm phổ biến:" : ar ? "عمليات البحث الشائعة:" : "Popular searches:"}</strong>
           {heroContent.popularSearches.map((search) => (
             <a href="#products" key={search}>
               {search}

@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import {
   factories,
   factoryFilterOptions,
+  getLocalizedPath,
   type Factory,
   type Locale,
 } from "@/data/landing-page";
@@ -67,6 +68,7 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
     return () => window.clearTimeout(timer);
   }, []);
   const vi = locale === "vi";
+  const ar = locale === "ar";
   const labels = vi
     ? {
         eyebrow: "Mạng lưới sản xuất",
@@ -99,7 +101,36 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
         qualificationPending: "Đang chờ qualification",
         disclaimer: "Các hồ sơ dưới đây sử dụng thông tin do doanh nghiệp cung cấp và đang chờ MISO JAPAN qualification.",
       }
-    : {
+     : ar ? {
+         eyebrow: "شبكة التصنيع",
+         title: "اعثر على القدرات المناسبة لمتطلباتك.",
+         description: "استكشف ملفات 7 مصنعين من بيانات الشركات المقدمة. ستواصل MISO JAPAN التأهيل وتوصلك بالموردين المناسبين.",
+         filter: "الفلاتر",
+         results: "ملفات مطابقة",
+         shortlist: "محفوظة",
+         compare: "مقارنة",
+         match: "اطلب من MISO JAPAN التواصل",
+         profileDetails: "عرض تفاصيل الملف",
+         save: "حفظ",
+         saved: "محفوظ",
+         add: "مقارنة",
+         productCategory: "فئة المنتج",
+         coreMaterial: "مادة القلب",
+         location: "الموقع (فيتنام)",
+         exportMarket: "أسواق التصدير",
+         allRegions: "جميع المناطق",
+         allMarkets: "جميع الأسواق",
+         applyFilters: "تطبيق الفلاتر",
+         factoryType: "اسم الشركة",
+         manufacturer: "المصنع",
+         capacity: "الطاقة الإنتاجية",
+         established: "سنة التأسيس",
+         markets: "أسواق التصدير",
+         certifications: "الشهادات",
+         status: "حالة MISO JAPAN",
+         qualificationPending: "بانتظار التأهيل",
+         disclaimer: "تستخدم الملفات معلومات مقدمة من الشركات ولا تزال بانتظار تأهيل MISO JAPAN.",
+       } : {
         eyebrow: "MANUFACTURING NETWORK",
         title: "Find the right capability for your requirement.",
         description:
@@ -130,7 +161,7 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
         qualificationPending: "Qualification pending",
         disclaimer: "Profiles use company-submitted information and remain pending MISO JAPAN qualification.",
       };
-  const missing = vi ? "Chưa cung cấp" : "Not provided";
+  const missing = vi ? "Chưa cung cấp" : ar ? "غير متوفر" : "Not provided";
   const filterOptionLabels: Partial<Record<keyof Filters, Record<string, string>>> = {
     products: {
       "Hardwood Plywood": "Plywood gỗ cứng",
@@ -220,11 +251,11 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
   );
   const comparedFactories = factories.filter((factory) => compare.includes(factory.id));
   const comparisonRows: { label: string; value: (factory: Factory) => string }[] = [
-    { label: vi ? "Địa điểm" : "Location", value: (factory) => factory.location },
-    { label: vi ? "Sản phẩm" : "Products", value: (factory) => factory.products.slice(0, 3).join(", ") },
-    { label: vi ? "Công suất" : "Capacity", value: (factory) => factory.capacity || missing },
-    { label: vi ? "Thị trường" : "Markets", value: (factory) => factory.exportMarkets.slice(0, 3).join(", ") || missing },
-    { label: vi ? "Trạng thái" : "Status", value: (factory) => factory.misoStatus },
+    { label: vi ? "Địa điểm" : ar ? "الموقع" : "Location", value: (factory) => factory.location },
+    { label: vi ? "Sản phẩm" : ar ? "المنتجات" : "Products", value: (factory) => factory.products.slice(0, 3).join(", ") },
+    { label: vi ? "Công suất" : ar ? "الطاقة الإنتاجية" : "Capacity", value: (factory) => factory.capacity || missing },
+    { label: vi ? "Thị trường" : ar ? "الأسواق" : "Markets", value: (factory) => factory.exportMarkets.slice(0, 3).join(", ") || missing },
+    { label: vi ? "Trạng thái" : ar ? "الحالة" : "Status", value: (factory) => factory.misoStatus },
   ];
   const toggleShortlist = (id: string) => {
     const next = shortlist.includes(id)
@@ -310,39 +341,39 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
               <div>
                 <ShieldCheck size={28} strokeWidth={1.5} aria-hidden="true" />
                 <span>
-                  <strong>{vi ? "Dữ liệu doanh nghiệp cung cấp" : "Company-submitted data"}</strong>
-                  <small>{vi ? "Thông tin được công khai đúng theo tài liệu nguồn." : "Information published from submitted source files."}</small>
+                  <strong>{vi ? "Dữ liệu doanh nghiệp cung cấp" : ar ? "بيانات مقدمة من الشركة" : "Company-submitted data"}</strong>
+                  <small>{vi ? "Thông tin được công khai đúng theo tài liệu nguồn." : ar ? "معلومات منشورة من الملفات المصدرية المقدمة." : "Information published from submitted source files."}</small>
                 </span>
               </div>
               <div>
                 <ClipboardList size={28} strokeWidth={1.5} aria-hidden="true" />
                 <span>
-                  <strong>{vi ? "Quy trình có cấu trúc" : "Structured control process"}</strong>
-                  <small>{vi ? "12 control gate từ yêu cầu đến xuất hàng." : "12 control gates from inquiry to shipment."}</small>
+                  <strong>{vi ? "Quy trình có cấu trúc" : ar ? "عملية تحكم منظمة" : "Structured control process"}</strong>
+                  <small>{vi ? "12 control gate từ yêu cầu đến xuất hàng." : ar ? "12 نقطة تحكم من الاستفسار إلى الشحن." : "12 control gates from inquiry to shipment."}</small>
                 </span>
               </div>
               <div>
                 <UsersRound size={28} strokeWidth={1.5} aria-hidden="true" />
                 <span>
-                  <strong>{vi ? "Một đầu mối chịu trách nhiệm" : "One accountable partner"}</strong>
-                  <small>{vi ? "Một đội ngũ, một trách nhiệm cho đơn hàng." : "One team, one responsibility for your order."}</small>
+                  <strong>{vi ? "Một đầu mối chịu trách nhiệm" : ar ? "شريك مسؤول واحد" : "One accountable partner"}</strong>
+                  <small>{vi ? "Một đội ngũ, một trách nhiệm cho đơn hàng." : ar ? "فريق واحد ومسؤولية واحدة لطلبك." : "One team, one responsibility for your order."}</small>
                 </span>
               </div>
             </div>
           </div>
            <div className="directory-count">
              <strong>{factories.length}</strong>
-             <span>{vi ? "HỒ SƠ CÔNG KHAI" : "PUBLIC PROFILES"}</span>
-             <small>{vi ? "Mạng lưới đa dạng tại Việt Nam" : "Wide & diversified network across Vietnam"}</small>
-          </div>
-          <ScrollCue targetId="directory-content" label={vi ? "Cuộn để khám phá nhà máy" : "Scroll to explore factories"} />
+              <span>{vi ? "HỒ SƠ CÔNG KHAI" : ar ? "الملفات العامة" : "PUBLIC PROFILES"}</span>
+              <small>{vi ? "Mạng lưới đa dạng tại Việt Nam" : ar ? "شبكة واسعة ومتنوعة في فيتنام" : "Wide & diversified network across Vietnam"}</small>
+           </div>
+           <ScrollCue targetId="directory-content" label={vi ? "Cuộn để khám phá nhà máy" : ar ? "مرر لاستكشاف المصانع" : "Scroll to explore factories"} />
         </section>
         <section className="directory-content" id="directory-content">
           <aside className="factory-filters">
             <div className="filter-heading">
               <strong>{labels.filter}</strong>
               <button type="button" onClick={clearFilters}>
-                {vi ? "Xóa tất cả" : "Clear all"}
+                 {vi ? "Xóa tất cả" : ar ? "مسح الكل" : "Clear all"}
               </button>
             </div>
             <label className="factory-saved-filter">
@@ -352,7 +383,7 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
                 onChange={(event) => setSavedOnly(event.target.checked)}
               />
               <Bookmark size={14} strokeWidth={1.7} aria-hidden="true" />
-              {vi ? "Chỉ nhà máy đã lưu" : "Saved factories only"}
+               {vi ? "Chỉ nhà máy đã lưu" : ar ? "المصانع المحفوظة فقط" : "Saved factories only"}
             </label>
             {filterGroup(
               labels.productCategory,
@@ -386,8 +417,8 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
                   </div>
                   <Link
                     className="factory-placeholder"
-                    href={`${vi ? "/vi" : ""}/manufacturers/${factory.slug}`}
-                    aria-label={`${vi ? "Xem hồ sơ" : "View profile"}: ${factory.id}`}
+                     href={getLocalizedPath(locale, `/manufacturers/${factory.slug}`)}
+                     aria-label={`${vi ? "Xem hồ sơ" : ar ? "عرض الملف" : "View profile"}: ${factory.id}`}
                   >
                      {factory.imagePath && (
                        <Image
@@ -397,7 +428,7 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
                         sizes="(max-width: 820px) 100vw, 50vw"
                       />
                     )}
-                     <span className="factory-image-status">{factory.imagePath ? "VN" : vi ? "CHƯA CÓ ẢNH" : "IMAGE PENDING"}</span>
+                      <span className="factory-image-status">{factory.imagePath ? "VN" : vi ? "CHƯA CÓ ẢNH" : ar ? "الصورة قيد التجهيز" : "IMAGE PENDING"}</span>
                      <strong>{factory.location.split(",")[0]}</strong>
                   </Link>
                   <p className="factory-location"><MapPin size={13} strokeWidth={2} aria-hidden="true" />{factory.location}</p>
@@ -413,18 +444,18 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
                      <div><CalendarDays size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.established}</small><strong>{factory.establishedYear}</strong></span></div>
                      <div><Globe2 size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.markets}</small><strong>{factory.exportMarkets.slice(0, 3).join(", ") || missing}</strong></span></div>
                      <div><BadgeCheck size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.certifications}</small><strong>{factory.certifications.join(", ") || missing}</strong></span></div>
-                     <div><ShieldCheck size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.status}</small><strong className="is-pending">{vi ? "Đang chờ qualification" : factory.misoStatus}</strong></span></div>
+                      <div><ShieldCheck size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.status}</small><strong className="is-pending">{vi ? "Đang chờ qualification" : ar ? "بانتظار التأهيل" : factory.misoStatus}</strong></span></div>
                   </div>
                   <div className="factory-actions">
                     <Link
                       className="factory-profile-link"
-                      href={`${vi ? "/vi" : ""}/manufacturers/${factory.slug}`}
+                     href={getLocalizedPath(locale, `/manufacturers/${factory.slug}`)}
                     >
                       {labels.profileDetails} <ArrowRight size={17} strokeWidth={1.8} aria-hidden="true" />
                     </Link>
                     <Link
                       className="factory-connect-button"
-                      href={`${vi ? "/vi" : ""}/rfq?factory=${factory.id}`}
+                     href={`${getLocalizedPath(locale, "/rfq")}?factory=${factory.id}`}
                     >
                       {labels.match} <span aria-hidden="true">↗</span>
                     </Link>
@@ -448,7 +479,7 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
                       aria-pressed={compare.includes(factory.id)}
                       disabled={!compare.includes(factory.id) && compare.length >= 3}
                     >
-                      {compare.includes(factory.id) ? "✓ " : "+ "}{compare.includes(factory.id) ? (vi ? "Đã chọn" : "Selected") : labels.add}
+                       {compare.includes(factory.id) ? "✓ " : "+ "}{compare.includes(factory.id) ? (vi ? "Đã chọn" : ar ? "تم الاختيار" : "Selected") : labels.add}
                     </button>
                     </div>
                   </div>
@@ -457,9 +488,9 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
             </div>
             {filtered.length === 0 && (
               <div className="empty-results">
-                {vi
-                  ? "Chưa có hồ sơ phù hợp. Hãy gửi RFQ để MISO JAPAN tìm giúp bạn."
-                  : "No profiles match these filters. Submit an RFQ and let MISO JAPAN search for you."}
+                 {vi
+                   ? "Chưa có hồ sơ phù hợp. Hãy gửi RFQ để MISO JAPAN tìm giúp bạn."
+                   : ar ? "لا توجد ملفات مطابقة لهذه الفلاتر. أرسل طلب عرض سعر ودع MISO JAPAN تبحث لك." : "No profiles match these filters. Submit an RFQ and let MISO JAPAN search for you."}
               </div>
             )}
           </div>
@@ -471,25 +502,25 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
         {comparedFactories.length > 0 && (
           <section className="directory-inline-compare" id="compare-preview">
             <div className="inline-compare-heading">
-              <div><p className="eyebrow">{vi ? "So sánh nhanh" : "Quick comparison"}</p><h2>{vi ? "Đặt các lựa chọn cạnh nhau." : "Compare your factory options."}</h2></div>
-              <Link className="button button-primary" href={`${vi ? "/vi" : ""}/shortlist?compare=${encodeURIComponent(compare.join(","))}`}>{vi ? "Mở bảng đầy đủ" : "Open full comparison"} <span aria-hidden="true">↗</span></Link>
+               <div><p className="eyebrow">{vi ? "So sánh nhanh" : ar ? "مقارنة سريعة" : "Quick comparison"}</p><h2>{vi ? "Đặt các lựa chọn cạnh nhau." : ar ? "قارن خيارات المصانع." : "Compare your factory options."}</h2></div>
+               <Link className="button button-primary" href={`${getLocalizedPath(locale, "/shortlist")}?compare=${encodeURIComponent(compare.join(","))}`}>{vi ? "Mở bảng đầy đủ" : ar ? "فتح المقارنة الكاملة" : "Open full comparison"} <span aria-hidden="true">↗</span></Link>
             </div>
-            <div className="compare-table" role="table" aria-label={vi ? "So sánh nhanh nhà máy" : "Quick factory comparison"}>
-              <div className="compare-row compare-heading" role="row"><strong>{vi ? "Tiêu chí" : "Criteria"}</strong>{comparedFactories.map((factory) => <div className="compare-factory-heading" key={factory.id}><strong>{factory.id}</strong><small>{factory.location}</small></div>)}</div>
+             <div className="compare-table" role="table" aria-label={vi ? "So sánh nhanh nhà máy" : ar ? "مقارنة سريعة للمصانع" : "Quick factory comparison"}>
+               <div className="compare-row compare-heading" role="row"><strong>{vi ? "Tiêu chí" : ar ? "المعايير" : "Criteria"}</strong>{comparedFactories.map((factory) => <div className="compare-factory-heading" key={factory.id}><strong>{factory.id}</strong><small>{factory.location}</small></div>)}</div>
               {comparisonRows.map((row) => <div className="compare-row" role="row" key={row.label}><span>{row.label}</span>{comparedFactories.map((factory) => <span key={factory.id}>{row.value(factory)}</span>)}</div>)}
             </div>
           </section>
         )}
         {compare.length > 0 && (
           <div className="compare-bar">
-            <div><strong>{compare.length}/3</strong><span>{vi ? "nhà máy đã chọn" : "factories selected"}</span></div>
+             <div><strong>{compare.length}/3</strong><span>{vi ? "nhà máy đã chọn" : ar ? "مصانع مختارة" : "factories selected"}</span></div>
             <div className="compare-bar-factories">
               {compare.map((id) => (
                 <span key={id}>{id}</span>
               ))}
             </div>
-            <button type="button" onClick={clearCompare}>{vi ? "Xóa" : "Clear"}</button>
-            <Link className="button button-primary" href={`${vi ? "/vi" : ""}/shortlist?compare=${encodeURIComponent(compare.join(","))}`}>{labels.compare} <span aria-hidden="true">→</span></Link>
+             <button type="button" onClick={clearCompare}>{vi ? "Xóa" : ar ? "مسح" : "Clear"}</button>
+             <Link className="button button-primary" href={`${getLocalizedPath(locale, "/shortlist")}?compare=${encodeURIComponent(compare.join(","))}`}>{labels.compare} <span aria-hidden="true">→</span></Link>
           </div>
         )}
       </main>

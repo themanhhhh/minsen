@@ -1,6 +1,6 @@
 "use client";
 
-import { company, getLandingContent, type Locale } from "@/data/landing-page";
+import { company, getLandingContent, getLocalizedPath, type Locale } from "@/data/landing-page";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
@@ -12,18 +12,17 @@ export function Header({ locale }: { locale: Locale }) {
   const { navigation } = getLandingContent(locale);
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const normalizedPath = pathname.replace(/^\/vi(?=\/|$)/, "") || "/";
-  const homeHref = locale === "vi" ? "/vi" : "/";
-  const rfqHref = locale === "vi" ? "/vi/rfq" : "/rfq";
-  const openMenuLabel = locale === "vi" ? "Mở menu" : "Open menu";
-  const closeMenuLabel = locale === "vi" ? "Đóng menu" : "Close menu";
+  const normalizedPath = pathname.replace(/^\/(vi|ar)(?=\/|$)/, "") || "/";
+  const homeHref = getLocalizedPath(locale, "/");
+  const rfqHref = getLocalizedPath(locale, "/rfq");
+  const openMenuLabel = locale === "vi" ? "Mở menu" : locale === "ar" ? "فتح القائمة" : "Open menu";
+  const closeMenuLabel = locale === "vi" ? "Đóng menu" : locale === "ar" ? "إغلاق القائمة" : "Close menu";
 
   const isActive = (href: string) =>
     normalizedPath === href ||
     (href !== "/" && normalizedPath.startsWith(`${href}/`));
 
-  const getNavigationHref = (href: string) =>
-    locale === "vi" && !href.startsWith("/vi") ? `/vi${href}` : href;
+  const getNavigationHref = (href: string) => getLocalizedPath(locale, href);
 
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -67,11 +66,11 @@ export function Header({ locale }: { locale: Locale }) {
           </span>
         </Link>
         <Link className="header-home" href={homeHref}>
-          {locale === "vi" ? "Trang chủ" : "Home"}
+          {locale === "vi" ? "Trang chủ" : locale === "ar" ? "الرئيسية" : "Home"}
         </Link>
-        <nav className="desktop-nav" aria-label="Điều hướng chính">
+        <nav className="desktop-nav" aria-label={locale === "ar" ? "التنقل الرئيسي" : "Điều hướng chính"}>
           {navigation.map((item) => {
-            const itemPath = item.href.replace(/^\/vi(?=\/|$)/, "") || "/";
+            const itemPath = item.href.replace(/^\/(vi|ar)(?=\/|$)/, "") || "/";
             return (
               <Link
                 href={getNavigationHref(item.href)}
@@ -87,7 +86,7 @@ export function Header({ locale }: { locale: Locale }) {
         <div className="header-actions">
           <LanguageSwitcher locale={locale} />
           <Link className="header-cta" href={rfqHref}>
-            {locale === "vi" ? "Gửi RFQ" : "Submit RFQ"}
+            {locale === "vi" ? "Gửi RFQ" : locale === "ar" ? "إرسال RFQ" : "Submit RFQ"}
           </Link>
         </div>
         <button
@@ -114,7 +113,7 @@ export function Header({ locale }: { locale: Locale }) {
           <aside
             className="mobile-sidebar"
             id="mobile-sidebar"
-            aria-label={locale === "vi" ? "Điều hướng chính" : "Main navigation"}
+            aria-label={locale === "vi" ? "Điều hướng chính" : locale === "ar" ? "التنقل الرئيسي" : "Main navigation"}
             role="dialog"
             aria-modal="true"
           >
@@ -129,12 +128,12 @@ export function Header({ locale }: { locale: Locale }) {
                 <X size={21} strokeWidth={1.8} aria-hidden="true" />
               </button>
             </div>
-            <nav className="mobile-nav" aria-label={locale === "vi" ? "Điều hướng chính" : "Main navigation"}>
+            <nav className="mobile-nav" aria-label={locale === "vi" ? "Điều hướng chính" : locale === "ar" ? "التنقل الرئيسي" : "Main navigation"}>
               <Link className={isActive("/") ? "is-active" : undefined} href={homeHref} onClick={closeMenu}>
-                {locale === "vi" ? "Trang chủ" : "Home"}
+                {locale === "vi" ? "Trang chủ" : locale === "ar" ? "الرئيسية" : "Home"}
               </Link>
               {navigation.map((item) => {
-                const itemPath = item.href.replace(/^\/vi(?=\/|$)/, "") || "/";
+                const itemPath = item.href.replace(/^\/(vi|ar)(?=\/|$)/, "") || "/";
                 return (
                   <Link
                     href={getNavigationHref(item.href)}
@@ -151,7 +150,7 @@ export function Header({ locale }: { locale: Locale }) {
             <div className="mobile-sidebar-actions">
               <LanguageSwitcher locale={locale} />
               <Link className="header-cta" href={rfqHref} onClick={closeMenu}>
-                {locale === "vi" ? "Gửi RFQ" : "Submit RFQ"}
+                {locale === "vi" ? "Gửi RFQ" : locale === "ar" ? "إرسال RFQ" : "Submit RFQ"}
               </Link>
             </div>
           </aside>

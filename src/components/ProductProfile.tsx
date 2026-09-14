@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { factories, productCatalog, type Locale } from "@/data/landing-page";
+import { factories, getLocalizedPath, productCatalog, type Locale } from "@/data/landing-page";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ProductGallery } from "@/components/ProductGallery";
@@ -15,11 +15,12 @@ export function ProductProfile({
 }) {
   const product = productCatalog.find((item) => item.slug === slug);
   const vi = locale === "vi";
+  const ar = locale === "ar";
   if (!product)
     return (
       <main className="not-found-panel">
         <h1>Product not found</h1>
-        <Link href={vi ? "/vi/products" : "/products"}>Back to products</Link>
+        <Link href={getLocalizedPath(locale, "/products")}>{vi ? "Quay lại sản phẩm" : ar ? "العودة إلى المنتجات" : "Back to products"}</Link>
       </main>
     );
   const image = `/images/products/product-${product.slug}.jpg`;
@@ -70,12 +71,8 @@ export function ProductProfile({
       src,
       alt:
         index === 0
-          ? vi
-            ? product.viName
-            : product.name
-          : vi
-            ? `${product.viName} - hình ảnh ứng dụng`
-            : `${product.name} application`,
+           ? vi ? product.viName : ar ? product.arName : product.name
+           : vi ? `${product.viName} - hình ảnh ứng dụng` : ar ? `${product.arName} - صورة تطبيق` : `${product.name} application`,
     }),
   );
   const normalizeProduct = (value: string) => value.toLowerCase().replace(/-/g, " ").replace(/\s+/g, " ").trim();
@@ -90,47 +87,47 @@ export function ProductProfile({
         <section className="product-profile-hero">
           <div>
             <p className="eyebrow eyebrow-light">
-              {vi ? product.viName : product.name}
+              {vi ? product.viName : ar ? product.arName : product.name}
             </p>
             <h1>
               {vi
                 ? "Tìm nguồn cung phù hợp cho sản phẩm này."
-                : "Find the right source for this product."}
+                : ar ? "اعثر على المصدر المناسب لهذا المنتج." : "Find the right source for this product."}
             </h1>
             <p>
               {vi
                 ? "Chia sẻ quy cách và nhu cầu của bạn. MISO JAPAN sẽ tìm kiếm trong mạng lưới nhà máy để chọn ra các phương án phù hợp."
-                : "Share your specification and requirements. MISO JAPAN will search the manufacturing network and shortlist suitable options."}
+                : ar ? "شارك المواصفات والمتطلبات. ستبحث MISO JAPAN في شبكة المصانع وتختار الخيارات المناسبة." : "Share your specification and requirements. MISO JAPAN will search the manufacturing network and shortlist suitable options."}
             </p>
             <Link
               className="button button-light"
-              href={`${vi ? "/vi" : ""}/rfq?product=${product.slug}`}
+              href={`${getLocalizedPath(locale, "/rfq")}?product=${product.slug}`}
             >
-              {vi ? "Gửi yêu cầu sản phẩm" : "Request this product"} ↗
+              {vi ? "Gửi yêu cầu sản phẩm" : ar ? "طلب هذا المنتج" : "Request this product"} ↗
             </Link>
           </div>
           <ProductGallery
             images={galleryImages}
-            productName={vi ? product.viName : product.name}
+             productName={vi ? product.viName : ar ? product.arName : product.name}
           />
-          <ScrollCue targetId="product-profile-body" label={vi ? "Cuộn để xem thông tin" : "Scroll to view details"} />
+           <ScrollCue targetId="product-profile-body" label={vi ? "Cuộn để xem thông tin" : ar ? "مرر لعرض التفاصيل" : "Scroll to view details"} />
         </section>
         <section className="product-profile-body" id="product-profile-body">
           <div>
             <p className="eyebrow">
-              {vi ? "Thông tin sản phẩm" : "Product information"}
+               {vi ? "Thông tin sản phẩm" : ar ? "معلومات المنتج" : "Product information"}
             </p>
-            <h2>{vi ? product.viName : product.name}</h2>
-            <p>{vi ? product.viDescription : product.description}</p>
+             <h2>{vi ? product.viName : ar ? product.arName : product.name}</h2>
+             <p>{vi ? product.viDescription : ar ? product.arDescription : product.description}</p>
           </div>
           <div className="product-profile-spec">
-            <h3>{vi ? "Quy cách tham khảo" : "Reference specifications"}</h3>
-            <p>{vi ? product.viSpecs : product.specs}</p>
-            <h3>{vi ? "Ứng dụng" : "Typical applications"}</h3>
+             <h3>{vi ? "Quy cách tham khảo" : ar ? "المواصفات المرجعية" : "Reference specifications"}</h3>
+             <p>{vi ? product.viSpecs : ar ? product.arSpecs : product.specs}</p>
+             <h3>{vi ? "Ứng dụng" : ar ? "التطبيقات المعتادة" : "Typical applications"}</h3>
             <p>
               {vi
                 ? "Nội thất · Xây dựng · Đóng gói · Trang trí · Sản xuất OEM"
-                : "Furniture · Construction · Packaging · Interior · OEM production"}
+                 : ar ? "الأثاث · البناء · التغليف · التصميم الداخلي · إنتاج OEM" : "Furniture · Construction · Packaging · Interior · OEM production"}
             </p>
           </div>
         </section>
@@ -138,18 +135,18 @@ export function ProductProfile({
           <div className="product-factories-heading">
             <div>
               <p className="eyebrow">
-                {vi ? "Nhà máy phù hợp" : "Matched manufacturers"}
+                 {vi ? "Nhà máy phù hợp" : ar ? "المصنعون المطابقون" : "Matched manufacturers"}
               </p>
               <h2>
                 {vi
-                  ? "Nhà máy đang sản xuất sản phẩm này."
-                  : "Factories producing this product."}
+                   ? "Nhà máy đang sản xuất sản phẩm này."
+                   : ar ? "مصانع تنتج هذا المنتج." : "Factories producing this product."}
               </h2>
             </div>
             <p>
               {vi
-                ? "Xem nhanh các hồ sơ có năng lực tham khảo phù hợp, sau đó mở chi tiết hoặc gửi yêu cầu sourcing."
-                : "Review manufacturers with relevant reference capabilities, then open a profile or start a sourcing request."}
+                 ? "Xem nhanh các hồ sơ có năng lực tham khảo phù hợp, sau đó mở chi tiết hoặc gửi yêu cầu sourcing."
+                 : ar ? "راجع ملفات المصنعين ذوي القدرات المناسبة، ثم افتح ملفًا أو ابدأ طلب توريد." : "Review manufacturers with relevant reference capabilities, then open a profile or start a sourcing request."}
             </p>
           </div>
           <div className="product-factory-grid">
@@ -164,7 +161,7 @@ export function ProductProfile({
                       sizes="(max-width: 820px) 100vw, 33vw"
                     />
                   )}
-                  <span>{factory.imagePath ? factory.region : vi ? "CHƯA CÓ ẢNH" : "IMAGE PENDING"}</span>
+                   <span>{factory.imagePath ? factory.region : vi ? "CHƯA CÓ ẢNH" : ar ? "الصورة قيد التجهيز" : "IMAGE PENDING"}</span>
                 </div>
                 <p className="product-factory-location">{factory.location}</p>
                 <h3>{vi ? factory.companyNameVi : factory.displayName}</h3>
@@ -175,19 +172,19 @@ export function ProductProfile({
                 </div>
                 <dl>
                   <div>
-                    <dt>{vi ? "Công suất" : "Capacity"}</dt>
+                   <dt>{vi ? "Công suất" : ar ? "الطاقة الإنتاجية" : "Capacity"}</dt>
                     <dd>{factory.capacity || missing}</dd>
                   </div>
                   <div>
-                    <dt>{vi ? "Vật liệu và quy cách" : "Materials and specifications"}</dt>
+                   <dt>{vi ? "Vật liệu và quy cách" : ar ? "المواد والمواصفات" : "Materials and specifications"}</dt>
                     <dd>{factory.materialsAndSpecs || factory.materials.join(" · ") || missing}</dd>
                   </div>
                 </dl>
                 <Link
                   className="product-factory-link"
-                  href={`${vi ? "/vi" : ""}/manufacturers/${factory.slug}`}
+                   href={getLocalizedPath(locale, `/manufacturers/${factory.slug}`)}
                 >
-                  {vi ? "Xem hồ sơ nhà máy" : "View factory profile"} <span aria-hidden="true">↗</span>
+                   {vi ? "Xem hồ sơ nhà máy" : ar ? "عرض ملف المصنع" : "View factory profile"} <span aria-hidden="true">↗</span>
                 </Link>
               </article>
             ))}
@@ -195,25 +192,25 @@ export function ProductProfile({
           {matchingFactories.length === 0 && (
             <p className="product-factories-empty">
               {vi
-                ? "Chưa có hồ sơ nhà máy phù hợp. Hãy gửi yêu cầu để chúng tôi tìm thêm lựa chọn."
-                : "No matching factory profiles yet. Submit an inquiry and we will find more options."}
+                 ? "Chưa có hồ sơ nhà máy phù hợp. Hãy gửi yêu cầu để chúng tôi tìm thêm lựa chọn."
+                 : ar ? "لا توجد ملفات مصانع مطابقة بعد. أرسل استفسارًا وسنبحث عن خيارات إضافية." : "No matching factory profiles yet. Submit an inquiry and we will find more options."}
             </p>
           )}
         </section>
         <section className="product-profile-cta">
           <p className="eyebrow">
-            {vi ? "Cần quy cách riêng?" : "Need a custom specification?"}
+             {vi ? "Cần quy cách riêng?" : ar ? "هل تحتاج إلى مواصفات مخصصة؟" : "Need a custom specification?"}
           </p>
           <h2>
             {vi
-              ? "Để MISO JAPAN tìm nhà máy phù hợp cho bạn."
-              : "Let MISO JAPAN find the right factory for you."}
+               ? "Để MISO JAPAN tìm nhà máy phù hợp cho bạn."
+               : ar ? "دع MISO JAPAN تجد المصنع المناسب لك." : "Let MISO JAPAN find the right factory for you."}
           </h2>
           <Link
             className="button button-primary"
-            href={vi ? "/vi/rfq" : "/rfq"}
+             href={getLocalizedPath(locale, "/rfq")}
           >
-            {vi ? "Bắt đầu RFQ" : "Start an RFQ"} ↗
+             {vi ? "Bắt đầu RFQ" : ar ? "ابدأ طلب عرض سعر" : "Start an RFQ"} ↗
           </Link>
         </section>
       </main>

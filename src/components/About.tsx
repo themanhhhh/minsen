@@ -14,7 +14,12 @@ export function About({ locale }: { locale: Locale }) {
           { icon: UsersRound, title: "Một đầu mối liên hệ", description: "Tiết kiệm thời gian và giảm chi phí trao đổi" },
           { icon: Globe2, title: "Hỗ trợ xuất khẩu tập trung", description: "Tập trung vào thị trường Ấn Độ và Trung Đông" },
         ]
-      : [
+      : locale === "ar" ? [
+          { icon: Factory, title: "شبكة مصانع واسعة", description: "الوصول إلى أكثر من 230 مصنع خشب رقائقي في فيتنام" },
+          { icon: ShieldCheck, title: "رقابة صارمة على المخاطر", description: "12 نقطة تحكم في نظام التوريد" },
+          { icon: UsersRound, title: "جهة اتصال واحدة", description: "توفير الوقت وتقليل تكاليف التواصل" },
+          { icon: Globe2, title: "دعم تصدير مركز", description: "تركيز رئيسي على أسواق الهند والشرق الأوسط" },
+        ] : [
           { icon: Factory, title: "Wide factory network", description: "Access to 230+ plywood manufacturers in Vietnam" },
           { icon: ShieldCheck, title: "Stricter risk control", description: "12 control gates in our sourcing system" },
           { icon: UsersRound, title: "One point of contact", description: "Save time and reduce communication costs" },
@@ -43,7 +48,7 @@ export function About({ locale }: { locale: Locale }) {
           <p className="eyebrow">
             {locale === "vi"
               ? "Vì sao là Việt Nam, vì sao là MISO JAPAN"
-              : "Why Vietnam, why MISO JAPAN"}
+              : locale === "ar" ? "لماذا فيتنام، ولماذا MISO JAPAN" : "Why Vietnam, why MISO JAPAN"}
           </p>
           <h2 className="about-heading">
             {locale === "vi" ? (
@@ -59,6 +64,8 @@ export function About({ locale }: { locale: Locale }) {
                   <em>hơn.</em>
                 </span>
               </>
+            ) : locale === "ar" ? (
+              <><span className="about-heading-line"><span>شبكة</span><span>واحدة.</span></span><span className="about-heading-line"><em>مزيد من</em><em>اليقين.</em></span></>
             ) : (
               <>
                 <span className="about-heading-line">
@@ -75,15 +82,15 @@ export function About({ locale }: { locale: Locale }) {
           <p>
             {locale === "vi"
               ? "Việt Nam có nền tảng sản xuất plywood đa dạng và mạnh. MISO JAPAN giúp bạn tiếp cận các nhà sản xuất phù hợp qua một đội ngũ am hiểu sản phẩm, sản xuất và yêu cầu xuất khẩu."
-              : "Vietnam offers a strong and diversified manufacturing base for plywood. MISO JAPAN gives you direct access to qualified manufacturers through one experienced team that understands products, production and export requirements. You get more options, lower risk and a smoother sourcing process."}
+              : locale === "ar" ? "تقدم فيتنام قاعدة تصنيع قوية ومتنوعة للخشب الرقائقي. تمنحك MISO JAPAN وصولًا مباشرًا إلى المصنعين المؤهلين عبر فريق واحد يفهم المنتجات والإنتاج ومتطلبات التصدير. تحصل على خيارات أكثر ومخاطر أقل وعملية توريد أكثر سلاسة." : "Vietnam offers a strong and diversified manufacturing base for plywood. MISO JAPAN gives you direct access to qualified manufacturers through one experienced team that understands products, production and export requirements. You get more options, lower risk and a smoother sourcing process."}
           </p>
           <a
             className="text-link"
-            href={locale === "vi" ? "/vi/process" : "/process"}
+            href={locale === "vi" ? "/vi/process" : locale === "ar" ? "/ar/process" : "/process"}
           >
             {locale === "vi"
               ? "Xem quy trình sourcing"
-              : "See how sourcing works"}{" "}
+              : locale === "ar" ? "شاهد كيف يعمل التوريد" : "See how sourcing works"}{" "}
             <span aria-hidden="true">↗</span>
           </a>
         </div>

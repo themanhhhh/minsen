@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { factories, type Locale } from "@/data/landing-page";
+import { factories, getLocalizedPath, type Locale } from "@/data/landing-page";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ScrollCue } from "@/components/ScrollCue";
@@ -18,13 +18,14 @@ export function FactoryProfile({
     return (
       <main className="not-found-panel">
         <h1>Factory not found</h1>
-        <Link href={locale === "vi" ? "/vi/manufacturers" : "/manufacturers"}>
-          Back to manufacturers
+         <Link href={getLocalizedPath(locale, "/manufacturers")}>
+           {locale === "vi" ? "Quay lại danh sách nhà máy" : locale === "ar" ? "العودة إلى المصانع" : "Back to manufacturers"}
         </Link>
       </main>
     );
   const vi = locale === "vi";
-  const missing = vi ? "Chưa cung cấp trong tài liệu" : "Not provided in submitted file";
+  const ar = locale === "ar";
+  const missing = vi ? "Chưa cung cấp trong tài liệu" : ar ? "غير مذكور في الملف المقدم" : "Not provided in submitted file";
   return (
     <>
       <Header locale={locale} />
@@ -32,7 +33,7 @@ export function FactoryProfile({
         <section className="profile-hero">
           <div>
             <p className="eyebrow eyebrow-light">
-                {vi ? "Hồ sơ năng lực do doanh nghiệp cung cấp" : "Company-submitted capability profile"}
+                {vi ? "Hồ sơ năng lực do doanh nghiệp cung cấp" : ar ? "ملف القدرات المقدم من الشركة" : "Company-submitted capability profile"}
             </p>
             <div className="profile-id">{factory.id}</div>
             <h1>
@@ -42,11 +43,11 @@ export function FactoryProfile({
             <p>{factory.location} · {factory.region} Vietnam</p>
             <Link
               className="button button-light"
-              href={`${vi ? "/vi" : ""}/rfq?factory=${factory.id}`}
+              href={`${getLocalizedPath(locale, "/rfq")}?factory=${factory.id}`}
             >
-              {vi
-                ? "Yêu cầu MISO JAPAN qualification"
-                : "Request MISO JAPAN qualification"}
+               {vi
+                 ? "Yêu cầu MISO JAPAN qualification"
+                 : ar ? "اطلب تأهيل MISO JAPAN" : "Request MISO JAPAN qualification"}
               <span aria-hidden="true">↗</span>
             </Link>
           </div>
@@ -57,44 +58,44 @@ export function FactoryProfile({
               {factory.misoStatus.toUpperCase()}
             </small>
           </div>
-          <ScrollCue targetId="profile-body" label={vi ? "Cuộn để xem hồ sơ" : "Scroll to view profile"} />
+           <ScrollCue targetId="profile-body" label={vi ? "Cuộn để xem hồ sơ" : ar ? "مرر لعرض الملف" : "Scroll to view profile"} />
         </section>
         <section className="profile-body" id="profile-body">
           <div className="profile-main">
             <div className="profile-heading">
               <p className="eyebrow">
-                {vi ? "Tổng quan hồ sơ" : "Profile overview"}
+                 {vi ? "Tổng quan hồ sơ" : ar ? "نظرة عامة على الملف" : "Profile overview"}
               </p>
               <h2>
                 {vi
-                  ? "Năng lực được cung cấp, đang chờ qualification."
-                  : "Submitted capability, pending qualification."}
+                   ? "Năng lực được cung cấp, đang chờ qualification."
+                   : ar ? "القدرات المقدمة بانتظار التأهيل." : "Submitted capability, pending qualification."}
               </h2>
             </div>
             <div className="profile-spec-grid">
               <div>
-                <span>{vi ? "Năm thành lập" : "Established"}</span>
+                 <span>{vi ? "Năm thành lập" : ar ? "سنة التأسيس" : "Established"}</span>
                 <strong>{factory.establishedYear}</strong>
               </div>
               <div>
-                <span>{vi ? "Nhân sự" : "Workforce"}</span>
+                 <span>{vi ? "Nhân sự" : ar ? "القوى العاملة" : "Workforce"}</span>
                 <strong>{factory.workforce || missing}</strong>
               </div>
               <div>
-                <span>{vi ? "Công suất" : "Capacity"}</span>
+                 <span>{vi ? "Công suất" : ar ? "الطاقة الإنتاجية" : "Capacity"}</span>
                 <strong>{factory.capacity || missing}</strong>
               </div>
               <div>
-                <span>{vi ? "Trạng thái" : "Status"}</span>
-                <strong>{vi ? "Đang chờ qualification" : factory.misoStatus}</strong>
+                 <span>{vi ? "Trạng thái" : ar ? "الحالة" : "Status"}</span>
+                 <strong>{vi ? "Đang chờ qualification" : ar ? "بانتظار التأهيل" : factory.misoStatus}</strong>
               </div>
             </div>
             <div className="profile-block">
-              <h3>{vi ? "Mô tả hồ sơ" : "Profile description"}</h3>
+               <h3>{vi ? "Mô tả hồ sơ" : ar ? "وصف الملف" : "Profile description"}</h3>
               <p>{factory.shortDescription}</p>
             </div>
             <div className="profile-block">
-              <h3>{vi ? "Sản phẩm chính" : "Main products"}</h3>
+               <h3>{vi ? "Sản phẩm chính" : ar ? "المنتجات الرئيسية" : "Main products"}</h3>
               <div className="profile-tags">
                 {factory.products.map((item) => (
                   <span key={item}>{item}</span>
@@ -104,8 +105,8 @@ export function FactoryProfile({
             <div className="profile-block">
               <h3>
                 {vi
-                  ? "Nguyên liệu và quy cách"
-                  : "Materials and specifications"}
+                   ? "Nguyên liệu và quy cách"
+                   : ar ? "المواد والمواصفات" : "Materials and specifications"}
               </h3>
               <p>
                 {factory.materials.join(" · ") || missing}
@@ -113,7 +114,7 @@ export function FactoryProfile({
               {factory.materialsAndSpecs && <p>{factory.materialsAndSpecs}</p>}
             </div>
             <div className="profile-block">
-              <h3>{vi ? "Thị trường tham khảo" : "Reference markets"}</h3>
+               <h3>{vi ? "Thị trường tham khảo" : ar ? "الأسواق المرجعية" : "Reference markets"}</h3>
               <div className="profile-tags">
                 {factory.exportMarkets.length > 0 ? factory.exportMarkets.map((item) => (
                   <span key={item}>{item}</span>
@@ -121,7 +122,7 @@ export function FactoryProfile({
               </div>
             </div>
             <div className="profile-block">
-              <h3>{vi ? "Chứng nhận" : "Certifications"}</h3>
+               <h3>{vi ? "Chứng nhận" : ar ? "الشهادات" : "Certifications"}</h3>
               <div className="profile-tags">
                 {factory.certifications.length > 0 ? factory.certifications.map((item) => (
                   <span key={item}>{item}</span>
@@ -132,23 +133,23 @@ export function FactoryProfile({
           <aside className="profile-sidebar">
             <div className="verification-card">
               <span className="is-pending">!</span>
-              <strong>{vi ? "TRẠNG THÁI MISO JAPAN" : "MISO JAPAN STATUS"}</strong>
+               <strong>{vi ? "TRẠNG THÁI MISO JAPAN" : ar ? "حالة MISO JAPAN" : "MISO JAPAN STATUS"}</strong>
               <p>
                 {vi
                   ? "Đây là thông tin do doanh nghiệp cung cấp và đang chờ qualification. Chưa có ảnh nhà máy hoặc bản scan chứng nhận trong tài liệu."
-                  : "This information was submitted by the company and remains pending qualification. No factory images or certification scans were included in the source material."}
+                   : ar ? "قدمت الشركة هذه المعلومات ولا تزال بانتظار التأهيل. لم تُرفق صور للمصنع أو نسخ ممسوحة من الشهادات في المصدر." : "This information was submitted by the company and remains pending qualification. No factory images or certification scans were included in the source material."}
               </p>
             </div>
             <div className="profile-source">
-              <h3>{vi ? "Nguồn dữ liệu công khai" : "Public data source"}</h3>
-              <p><strong>{vi ? "File nguồn" : "Source file"}</strong>{factory.sourceFile}</p>
-              <p><strong>{vi ? "Ghi chú phát triển" : "Development note"}</strong>{factory.devNote}</p>
+               <h3>{vi ? "Nguồn dữ liệu công khai" : ar ? "مصدر البيانات العامة" : "Public data source"}</h3>
+               <p><strong>{vi ? "File nguồn" : ar ? "الملف المصدر" : "Source file"}</strong>{factory.sourceFile}</p>
+               <p><strong>{vi ? "Ghi chú phát triển" : ar ? "ملاحظة التطوير" : "Development note"}</strong>{factory.devNote}</p>
             </div>
             <Link
               className="button button-primary profile-cta"
-              href={`${vi ? "/vi" : ""}/rfq?factory=${factory.id}`}
+               href={`${getLocalizedPath(locale, "/rfq")}?factory=${factory.id}`}
             >
-              {vi ? "Yêu cầu MISO JAPAN đánh giá" : "Ask MISO JAPAN to assess"}
+               {vi ? "Yêu cầu MISO JAPAN đánh giá" : ar ? "اطلب من MISO JAPAN التقييم" : "Ask MISO JAPAN to assess"}
               <span aria-hidden="true">↗</span>
             </Link>
           </aside>

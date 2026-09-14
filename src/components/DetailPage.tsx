@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { detailPageContent, type Locale } from "@/data/landing-page";
+import { detailPageContent, getLocalizedPath, type Locale } from "@/data/landing-page";
 import { About } from "@/components/About";
 import { BuyerProtection } from "@/components/BuyerProtection";
 import { Contact } from "@/components/Contact";
@@ -20,7 +20,7 @@ export function DetailPage({
   locale: Locale;
 }) {
   const content = detailPageContent[locale][kind];
-  const homePath = locale === "vi" ? "/vi" : "/";
+  const homePath = getLocalizedPath(locale, "/");
   return (
     <>
       <Header locale={locale} />
@@ -31,7 +31,7 @@ export function DetailPage({
             <h1>{content.title}</h1>
             <p>{content.description}</p>
             <Link className="button button-light" href={`${homePath}#contact`}>
-              {locale === "vi" ? "Gửi yêu cầu" : "Send an inquiry"}
+              {locale === "vi" ? "Gửi yêu cầu" : locale === "ar" ? "إرسال استفسار" : "Send an inquiry"}
               <span aria-hidden="true">↗</span>
             </Link>
           </div>
@@ -44,12 +44,12 @@ export function DetailPage({
                 <span>VENEER</span>
               </div>
               <div className="product-hero-segment product-hero-custom">
-                <span>{locale === "vi" ? "SẢN PHẨM GỖ" : "WOOD PRODUCTS"}</span>
+                 <span>{locale === "vi" ? "SẢN PHẨM GỖ" : locale === "ar" ? "منتجات خشبية" : "WOOD PRODUCTS"}</span>
                 <small>OEM &amp; CUSTOM SUPPLY</small>
               </div>
               <div className="product-hero-center">
                 <strong>03</strong>
-                <span>{locale === "vi" ? "NHÓM SẢN PHẨM\nCHÍNH" : "CORE PRODUCT\nGROUPS"}</span>
+                 <span>{locale === "vi" ? "NHÓM SẢN PHẨM\nCHÍNH" : locale === "ar" ? "مجموعات\nالمنتجات الأساسية" : "CORE PRODUCT\nGROUPS"}</span>
               </div>
             </div>
           ) : (
@@ -66,7 +66,7 @@ export function DetailPage({
               </span>
             </div>
           )}
-          <ScrollCue targetId={kind} label={locale === "vi" ? "Cuộn để xem thêm" : "Scroll to explore"} />
+          <ScrollCue targetId={kind} label={locale === "vi" ? "Cuộn để xem thêm" : locale === "ar" ? "مرر للاستكشاف" : "Scroll to explore"} />
         </section>
          {kind === "products" && <Features locale={locale} />}
          {kind === "products" && <ProductKnowledge locale={locale} />}

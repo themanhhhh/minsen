@@ -14,7 +14,7 @@ export function Process({ locale, full = false }: { locale: Locale; full?: boole
     <section className="section process-section" id="process">
       <div className="section-heading">
         <p className="eyebrow">
-          {locale === "vi" ? "MISO JAPAN làm gì" : "What MISO JAPAN does"}
+          {locale === "vi" ? "MISO JAPAN làm gì" : locale === "ar" ? "ماذا تقدم MISO JAPAN" : "What MISO JAPAN does"}
         </p>
         <h2>
           {locale === "vi" ? (
@@ -23,6 +23,8 @@ export function Process({ locale, full = false }: { locale: Locale; full?: boole
               <br />
               <em>đến khi giao hàng.</em>
             </>
+          ) : locale === "ar" ? (
+            <>من متطلبات المشتري<br /><em>إلى الشحن.</em></>
           ) : (
             <>
               From buyer requirement

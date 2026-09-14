@@ -54,6 +54,13 @@ export const heroStatsVi = [
   { value: "02", label: "Thị trường chính", detail: "Ấn Độ · Trung Đông" },
 ];
 
+export const heroStatsAr = [
+  { value: "230", label: "ملفات مصانع موثقة", detail: "بيانات صناعة الخشب في فيتنام" },
+  { value: "12", label: "نقاط تحكم مخططة", detail: "إدارة منظمة لمخاطر المشتري" },
+  { value: "01", label: "شريك مسؤول", detail: "فريق واحد بين المشتري والمصنع" },
+  { value: "02", label: "أسواق رئيسية", detail: "الهند والشرق الأوسط" },
+];
+
 export const buyerConcerns = [
   "Is the factory real and capable?",
   "Will the actual product match the agreed specification?",
@@ -133,7 +140,17 @@ export const contactContent = {
   description: "Send us your product application, specification, quantity, destination and delivery expectation. We will review the requirement and determine the appropriate sourcing and supplier qualification approach.",
 };
 
-export type Locale = "en" | "vi";
+export type Locale = "en" | "vi" | "ar";
+
+export function getLocalePrefix(locale: Locale) {
+  return locale === "vi" ? "/vi" : locale === "ar" ? "/ar" : "";
+}
+
+export function getLocalizedPath(locale: Locale, path: string) {
+  const cleanPath = path.replace(/^\/(vi|ar)(?=\/|$)/, "") || "/";
+  const prefix = getLocalePrefix(locale);
+  return cleanPath === "/" ? prefix || "/" : `${prefix}${cleanPath}`;
+}
 
 const vietnameseContent = {
   navigation: [
@@ -213,10 +230,88 @@ const vietnameseContent = {
   },
 };
 
+const arabicContent = {
+  navigation: [
+    { label: "المنتجات", href: "/ar/products" },
+    { label: "المشترون الدوليون", href: "/ar/buyer" },
+    { label: "شبكة المصانع", href: "/ar/manufacturers" },
+    { label: "خدمات التوريد", href: "/ar/sourcing" },
+    { label: "كيف نعمل", href: "/ar/process" },
+    { label: "المعرفة", href: "/ar/insights" },
+    { label: "عن MISO JAPAN", href: "/ar/about" },
+  ],
+  heroContent: {
+    eyebrow: "شريك توريد وتطوير مورّدين وإدارة مخاطر مشتري الأخشاب في فيتنام",
+    title: "نربط المشترين الدوليين بمصنّعي الخشب الرقائقي المناسبين في فيتنام",
+    titleLines: ["نربط المشترين الدوليين", "بمصنّعي الخشب الرقائقي", "المناسبين في فيتنام"],
+    description: "نبدأ من متطلبات المشتري · تنفيذ محلي في فيتنام · تحكم قائم على الأدلة",
+    primaryAction: "أرسل طلبك إلينا",
+    secondaryAction: "كيف نعمل",
+    searchAction: "ابحث عن المصانع",
+    popularSearches: ["الخشب الرقائقي التجاري", "الخشب الرقائقي المغطى بالفيلم", "خشب التغليف الرقائقي", "خشب الأثاث الرقائقي", "القشرة الخشبية"],
+    searchPlaceholder: "ما المنتج أو المواصفات التي تبحث عنها؟",
+  },
+  buyerConcerns: [
+    "هل المصنع حقيقي وقادر على تنفيذ الطلب؟",
+    "هل سيتطابق المنتج الفعلي مع المواصفات المتفق عليها؟",
+    "هل ستبقى الجودة ثابتة أثناء الإنتاج الكامل؟",
+    "هل يستطيع المورّد الالتزام بالكمية والموعد؟",
+    "هل تم فهم المتطلبات الفنية والتجارية ومتطلبات الجودة؟",
+    "هل تم التحقق من الشهادات وتقارير الاختبار ومتطلبات السوق؟",
+    "من يتابع الإنتاج والفحص والتعبئة والتحميل والشحن محلياً؟",
+  ],
+  products: [
+    { index: "01", name: "الخشب الرقائقي", detail: "ألواح تجارية ومغطاة بالفيلم وزخرفية", description: "ألواح موثوقة للأثاث والبناء والتصميم الداخلي.", className: "product-plywood" },
+    { index: "02", name: "القشرة الخشبية", detail: "أسطح طبيعية ومصنّعة", description: "أسطح خشبية مختارة بلون وحبيبات وتشطيب متناسق.", className: "product-veneer" },
+    { index: "03", name: "منتجات خشبية", detail: "مواصفات مخصصة وتوريد OEM", description: "شبكة تصنيع مرنة لمتطلباتكم الفنية وحجمكم المطلوب.", className: "product-custom" },
+  ],
+  protectionLayers: [
+    { number: "01", title: "استلام طلب التوريد", description: "نسجل المنتج والاستخدام والكمية والوجهة والمتطلبات التجارية." },
+    { number: "02", title: "توضيح المتطلبات", description: "نحوّل متطلبات المشتري إلى معايير فنية ومعايير قبول واضحة." },
+    { number: "03", title: "مراجعة المخاطر والسوق", description: "نحدد مخاطر المنتج والامتثال والجودة والسوق المستهدف." },
+    { number: "04", title: "التحقق من المصنع", description: "نراجع الهوية القانونية وموقع الإنتاج والآلات والطاقة وخبرة التصدير." },
+    { number: "05", title: "مطابقة المصنع المناسب", description: "نقارن قدرة المصنع بمتطلبات المشتري الفعلية، وليس بالسعر فقط." },
+    { number: "06", title: "مقارنة الأسعار والمواصفات", description: "نوضح الفروقات التجارية والفنية قبل اتخاذ القرار." },
+    { number: "07", title: "تطوير العينات", description: "يتم تطوير العينات وفق المواصفات والاستخدام المتفق عليهما." },
+    { number: "08", title: "اعتماد العينة المرجعية", description: "نحدد مرجعاً معتمداً للإنتاج وفحوص الجودة اللاحقة." },
+    { number: "09", title: "تنسيق الطلب والإنتاج", description: "نتابع المتطلبات والتغييرات والتقدم مع المورّد محلياً." },
+    { number: "10", title: "ضبط الجودة والفحص", description: "ننسق الفحوص أثناء الإنتاج وفي نهايته وفق المتطلبات المعتمدة." },
+    { number: "11", title: "ضبط التعبئة والتحميل", description: "نفحص التعبئة وحالة الحاوية وتسلسل التحميل وسجلات الختم." },
+    { number: "12", title: "تنسيق الشحن والوثائق", description: "ننسق تقدم الشحنة ووثائق التصدير حتى التسليم." },
+  ],
+  networkStats: [
+    { value: "230+", label: "ملف مصنع", detail: "شبكة متنوعة" },
+    { value: "01", label: "شريك مسؤول", detail: "فريق واحد ومسؤولية واحدة" },
+    { value: "05", label: "مراحل للمشتري", detail: "من الطلب حتى الشحن" },
+    { value: "12", label: "نقطة تحكم", detail: "تقليل المخاطر في كل خطوة" },
+    { value: "02", label: "مناطق تصدير", detail: "الهند والشرق الأوسط" },
+  ],
+  sourcingSteps: [
+    { number: "01", title: "استلام طلب التوريد", description: "نسجل المنتج والاستخدام والكمية والوجهة والمتطلبات التجارية." },
+    { number: "02", title: "توضيح المتطلبات", description: "نحوّل متطلبات المشتري إلى معايير فنية ومعايير قبول واضحة." },
+    { number: "03", title: "مراجعة المخاطر والسوق", description: "نحدد مخاطر المنتج والامتثال والجودة والسوق المستهدف." },
+    { number: "04", title: "البحث عن المصنع والتحقق منه", description: "نراجع هوية المصنع وقدرته وطاقته وظروف الإنتاج." },
+    { number: "05", title: "مطابقة المصنع", description: "نقارن قدرة المصنع بمتطلبات المشتري الفعلية." },
+    { number: "06", title: "مقارنة الأسعار والفنيات", description: "نوضح الفروقات التجارية والفنية قبل الاختيار." },
+    { number: "07", title: "تطوير العينات", description: "نطور العينات وفق المواصفات والاستخدام المتفق عليهما." },
+    { number: "08", title: "اعتماد العينة المرجعية", description: "نحدد مرجعاً معتمداً للإنتاج وفحوص الجودة." },
+    { number: "09", title: "تنسيق الطلب والإنتاج", description: "نتابع المتطلبات والتغييرات والتقدم مع المورّد محلياً." },
+    { number: "10", title: "فحص الجودة", description: "ننسق الفحوص أثناء الإنتاج وفي نهايته." },
+    { number: "11", title: "ضبط التعبئة والتحميل", description: "نفحص التعبئة والحاوية وتسلسل التحميل وسجلات الختم." },
+    { number: "12", title: "تنسيق الشحن والوثائق", description: "ننسق الشحن ووثائق التصدير حتى التسليم." },
+    { number: "13", title: "دعم الاستلام والمطالبات والطلبات المتكررة", description: "ندعم تصعيد المشكلات والمطالبات وتحسين الطلب التالي." },
+  ],
+  contactContent: {
+    eyebrow: "ابدأ بمتطلباتك",
+    title: "هل تبحث عن مورّد للخشب الرقائقي من فيتنام؟ ابدأ بمتطلباتك، وليس بالسعر فقط.",
+    description: "أرسل الاستخدام والمواصفات والكمية والوجهة وتوقعات التسليم. سنراجع المتطلبات ونحدد طريقة التوريد وتأهيل المورّد المناسبة.",
+  },
+};
+
 const englishContent = { navigation, heroContent, buyerConcerns, products, protectionLayers, networkStats, sourcingSteps, contactContent };
 
 export function getLandingContent(locale: Locale) {
-  return locale === "vi" ? vietnameseContent : englishContent;
+  return locale === "vi" ? vietnameseContent : locale === "ar" ? arabicContent : englishContent;
 }
 
 export const aboutPageContent = {
@@ -294,6 +389,43 @@ export const aboutPageContent = {
     coreText: "MISO JAPAN giúp buyer quốc tế xác định đúng nhà sản xuất plywood tại Việt Nam, kiểm soát rủi ro sourcing và hỗ trợ thực thi tại địa phương thông qua quy trình có cấu trúc và bằng chứng được ghi nhận.",
     commercialLogic: ["Yêu cầu Buyer", "Đúng nhà máy", "Thực thi có kiểm soát", "Bằng chứng đầy đủ", "Quan hệ cung ứng dài hạn đáng tin cậy"],
   },
+  ar: {
+    eyebrow: "عن MISO JAPAN",
+    title: "شريك التوريد والتنفيذ الخاص بك في فيتنام.",
+    intro: "شركة MISO JAPAN JOINT VENTURE COMPANY LIMITED هي شركة مقرها فيتنام متخصصة في التوريد وتطوير المورّدين وتنسيق التصدير في قطاع الخشب الرقائقي. نساعد المشترين الدوليين على تحديد وتقييم والتعامل مع مصنّعي الخشب الرقائقي المناسبين في فيتنام.",
+    missionTitle: "من متطلبات المشتري إلى علاقة توريد منظمة.",
+    missionText: "يتجاوز دورنا مجرد تعريف المشتري بالمصنع. نحوّل المتطلبات إلى معايير فنية وتجارية واضحة، ونتحقق من قدرة المورّد، وننسق الأسعار وتطوير العينات، وندعم تنفيذ الطلب مع أدلة موثقة في مراحل التوريد المهمة.",
+    positioningTitle: "نحن جسر مهني بين متطلبات المشترين الدوليين وقدرات التصنيع في فيتنام.",
+    positioningText: "هدفنا ليس إنشاء علاقات مؤقتة، بل مساعدة المشترين على بناء علاقات توريد أكثر شفافية وتحكماً واستدامة مع المصنّعين المناسبين في فيتنام.",
+    networkTitle: "شريك واحد خلف سلسلة التوريد الخاصة بك.",
+    networkText: "نعمل عبر شبكة تصنيع مؤهلة مع إبقاء فريق MISO JAPAN واحد مسؤولاً بين المشتري وسلسلة التوريد. يحصل المشترون على تنفيذ محلي مع الحفاظ على التحكم في القرارات التجارية.",
+    localTitle: "لا ينبغي أن تضطر إلى إدارة التوريد في فيتنام عن بُعد بمفردك.",
+    localText: "قد تجعل المسافة واللغة وفروق التوقيت وإدارة المورّدين المحليين التوريد الدولي معقداً. توفر MISO JAPAN تنسيقاً محلياً في فيتنام ضمن نطاق المشروع المتفق عليه.",
+    localSupport: ["التواصل مع المصنع", "زيارة المصنع والتحقق منه", "توضيح متطلبات المشتري", "تنسيق عروض الأسعار", "متابعة تطوير العينات", "متابعة الإنتاج", "تنسيق فحص الجودة", "تصعيد المشكلات", "تنسيق التعبئة والتحميل", "متابعة وثائق التصدير", "تنسيق الشحن", "تنسيق ما بعد البيع والمطالبات"],
+    whyTitle: "لماذا يعمل المشترون الدوليون مع MISO JAPAN؟",
+    whyItems: [
+      { title: "البدء بمتطلبات المشتري", text: "نبدأ بمتطلبات المشتري الفعلية قبل اقتراح المورّد." },
+      { title: "التحقق من المصنع وتأهيله", text: "نراجع قدرة المورّد وفقاً لمتطلبات التوريد الفعلية." },
+      { title: "إدارة مخاطر المشتري", text: "نحوّل مخاطر التوريد المهمة إلى ضوابط ونقاط تحقق محددة." },
+      { title: "تنفيذ محلي في فيتنام", text: "ندعم التواصل والتنفيذ بالقرب من مصدر التصنيع." },
+      { title: "توريد قائم على الأدلة", text: "يمكن دعم الأنشطة المهمة بسجلات وتقارير وأدلة مرئية." },
+      { title: "تنسيق شامل", text: "من طلب التوريد والمطابقة إلى الإنتاج والتحميل والشحن وما بعد البيع." },
+    ],
+    factoryIntelligence: "تحافظ MISO JAPAN على قاعدة بيانات منظمة لمصادر تصنيع الخشب الرقائقي والمنتجات الخشبية المرتبطة في فيتنام. لا يعني وجود المصنع في قاعدة البيانات أنه معتمد تلقائياً. يعتمد التأهيل على متطلبات المشتري وحالة التحقق ونطاق كل مشروع.",
+    valuesEyebrow: "ما نؤمن به",
+    values: [
+      { title: "المشتري أولاً", text: "نبدأ بمتطلباتك، وليس بالمخزون المتاح لدى المصنع." },
+      { title: "شفافية عملية", text: "مواصفات واضحة وجداول واقعية وتواصل مباشر في كل خطوة." },
+      { title: "قيمة طويلة الأمد", text: "الهدف ليس شحنة واحدة، بل علاقة توريد تصبح أقوى مع الوقت." },
+    ],
+    ctaTitle: "هل تبحث عن مورّد للخشب الرقائقي من فيتنام؟",
+    ctaText: "ابدأ بمتطلباتك وليس بطلب السعر فقط. دع فريقنا يحدد حل التصنيع المناسب في فيتنام.",
+    cta: "أرسل طلب التوريد",
+    founderMessage: "هدفنا ليس مجرد ربط المشتري بالمصنع. مسؤوليتنا هي مساعدة الطرفين على فهم المتطلبات وتحديد المخاطر وضبط التنفيذ وبناء علاقة توريد موثوقة طويلة الأمد.",
+    coreTitle: "MISO JAPAN ليست مجرد جهة لربط المصانع بالمشترين.",
+    coreText: "تساعد MISO JAPAN المشترين الدوليين على تحديد مصنع الخشب الرقائقي المناسب في فيتنام وإدارة مخاطر التوريد والتنفيذ محلياً عبر عمليات منظمة وأدلة موثقة.",
+    commercialLogic: ["متطلبات المشتري", "المصنع المناسب", "تنفيذ منضبط", "أدلة موثقة", "علاقة توريد موثوقة طويلة الأمد"],
+  },
 };
 
 export const detailPageContent = {
@@ -309,17 +441,23 @@ export const detailPageContent = {
     network: { eyebrow: "Mạng lưới sản xuất", title: "Mạng lưới được qualification. Một đầu mối chịu trách nhiệm.", description: "Tiếp cận năng lực sản xuất phù hợp mà không phải tự mình quản lý từng mối quan hệ nhà máy." },
     process: { eyebrow: "MISO JAPAN làm gì", title: "Từ yêu cầu của Buyer đến khi giao hàng.", description: "Quy trình 13 bước biến yêu cầu của buyer thành đúng nhà máy, thực thi có kiểm soát và bằng chứng đầy đủ." },
   },
+  ar: {
+    products: { eyebrow: "فئات المنتجات", title: "منتجات خشبية مختارة للمشترين المحترفين.", description: "نبدأ بمتطلباتك وليس بمخزون المصنع. تساعدك MISO JAPAN على العثور على المنتجات والمصنّعين والجودة المناسبة مع تحكم كامل حتى التسليم الآمن." },
+    protection: { eyebrow: "نظام التخلص من مخاطر المشتري™", title: "نهج منظم لإدارة مخاطر المشتري.", description: "نحوّل مخاوف المشترين المتكررة إلى ضوابط وأدلة موثقة ونقاط اعتماد ومتابعة في مراحل التوريد المهمة." },
+    network: { eyebrow: "شبكة التصنيع لدينا", title: "شبكة مؤهلة. شريك واحد مسؤول.", description: "يمكنك الوصول إلى قدرات التصنيع الفيتنامية المناسبة دون إدارة كل علاقة مصنع بنفسك." },
+    process: { eyebrow: "ما الذي تقدمه MISO JAPAN؟", title: "من متطلبات المشتري إلى الشحن.", description: "يحوّل مسار التوريد المؤلف من 13 مرحلة متطلبات المشتري إلى المصنع المناسب والتنفيذ المنضبط والأدلة الموثقة." },
+  },
 };
 
 export const productCatalog = [
-  { slug: "commercial-plywood", name: "Commercial Plywood", viName: "Plywood thương mại", category: "Plywood", viCategory: "Plywood", description: "Reliable plywood for furniture, construction and interior applications.", viDescription: "Plywood đáng tin cậy cho nội thất, xây dựng và các ứng dụng bên trong.", specs: "3–25mm · Eucalyptus, Acacia · MR / E1", viSpecs: "3–25mm · Bạch đàn, keo · MR / E1", className: "product-plywood" },
-  { slug: "film-faced-plywood", name: "Film Faced Plywood", viName: "Plywood phủ phim", category: "Plywood", viCategory: "Plywood", description: "Durable panels for concrete formwork and demanding construction projects.", viDescription: "Tấm bền chắc cho cốp pha bê tông và các dự án xây dựng yêu cầu cao.", specs: "12–21mm · Phenolic film · WBP glue", viSpecs: "12–21mm · Phim Phenolic · Keo WBP", className: "product-custom" },
-  { slug: "packing-plywood", name: "Packing Plywood", viName: "Plywood đóng gói", category: "Plywood", viCategory: "Plywood", description: "Cost-effective panels for packaging, pallets and industrial protection.", viDescription: "Tấm hiệu quả về chi phí cho đóng gói, pallet và bảo vệ hàng công nghiệp.", specs: "2.7–18mm · Poplar, mixed hardwood · MR", viSpecs: "2.7–18mm · Bạch dương, gỗ cứng hỗn hợp · MR", className: "product-veneer" },
-  { slug: "natural-veneer", name: "Natural Veneer", viName: "Veneer tự nhiên", category: "Veneer", viCategory: "Veneer", description: "Selected wood surfaces with natural grain, colour and character.", viDescription: "Bề mặt gỗ được tuyển chọn với vân, màu sắc và đặc tính tự nhiên.", specs: "0.2–3mm · Acacia, Rubberwood, Eucalyptus", viSpecs: "0.2–3mm · Keo, cao su, bạch đàn", className: "product-veneer" },
-  { slug: "engineered-veneer", name: "Engineered Veneer", viName: "Veneer kỹ thuật", category: "Veneer", viCategory: "Veneer", description: "Consistent decorative surfaces for scalable furniture production.", viDescription: "Bề mặt trang trí đồng nhất cho sản xuất nội thất quy mô lớn.", specs: "0.2–1.2mm · Custom patterns and finish", viSpecs: "0.2–1.2mm · Mẫu vân và hoàn thiện theo yêu cầu", className: "product-plywood" },
-  { slug: "lvl", name: "LVL", viName: "LVL", category: "Wood Panels", viCategory: "Ván gỗ", description: "Structural laminated veneer lumber for packaging and construction.", viDescription: "Gỗ veneer ghép lớp kết cấu cho đóng gói và xây dựng.", specs: "Custom size · Eucalyptus, Poplar · OEM", viSpecs: "Kích thước theo yêu cầu · Bạch đàn, Poplar · OEM", className: "product-custom" },
-  { slug: "mdf-hdf", name: "MDF / HDF", viName: "MDF / HDF", category: "Wood Panels", viCategory: "Ván gỗ công nghiệp", description: "Stable engineered panels for furniture and interior components.", viDescription: "Tấm gỗ công nghiệp ổn định cho nội thất và các chi tiết bên trong.", specs: "Custom thickness · E0 / E1 · Melamine", viSpecs: "Độ dày theo yêu cầu · E0 / E1 · Melamine", className: "product-plywood" },
-  { slug: "finger-joint-board", name: "Finger Joint Board", viName: "Ván ghép thanh", category: "Wood Panels", viCategory: "Ván gỗ", description: "Custom-sized boards for furniture, doors and interior products.", viDescription: "Ván theo kích thước yêu cầu cho nội thất, cửa và sản phẩm bên trong.", specs: "Rubberwood, Acacia · Custom edge and finish", viSpecs: "Cao su, keo · Cạnh và hoàn thiện theo yêu cầu", className: "product-veneer" },
+  { slug: "commercial-plywood", name: "Commercial Plywood", viName: "Plywood thương mại", arName: "الخشب الرقائقي التجاري", category: "Plywood", viCategory: "Plywood", arCategory: "الخشب الرقائقي", description: "Reliable plywood for furniture, construction and interior applications.", viDescription: "Plywood đáng tin cậy cho nội thất, xây dựng và các ứng dụng bên trong.", arDescription: "خشب رقائقي موثوق للأثاث والبناء والتصميم الداخلي.", specs: "3–25mm · Eucalyptus, Acacia · MR / E1", viSpecs: "3–25mm · Bạch đàn, keo · MR / E1", arSpecs: "3–25 مم · أوكالبتوس، أكاسيا · MR / E1", className: "product-plywood" },
+  { slug: "film-faced-plywood", name: "Film Faced Plywood", viName: "Plywood phủ phim", arName: "الخشب الرقائقي المغطى بالفيلم", category: "Plywood", viCategory: "Plywood", arCategory: "الخشب الرقائقي", description: "Durable panels for concrete formwork and demanding construction projects.", viDescription: "Tấm bền chắc cho cốp pha bê tông và các dự án xây dựng yêu cầu cao.", arDescription: "ألواح متينة للقوالب الخرسانية ومشاريع البناء الصعبة.", specs: "12–21mm · Phenolic film · WBP glue", viSpecs: "12–21mm · Phim Phenolic · Keo WBP", arSpecs: "12–21 مم · فيلم فينولي · غراء WBP", className: "product-custom" },
+  { slug: "packing-plywood", name: "Packing Plywood", viName: "Plywood đóng gói", arName: "خشب التغليف الرقائقي", category: "Plywood", viCategory: "Plywood", arCategory: "الخشب الرقائقي", description: "Cost-effective panels for packaging, pallets and industrial protection.", viDescription: "Tấm hiệu quả về chi phí cho đóng gói, pallet và bảo vệ hàng công nghiệp.", arDescription: "ألواح اقتصادية للتغليف والمنصات والحماية الصناعية.", specs: "2.7–18mm · Poplar, mixed hardwood · MR", viSpecs: "2.7–18mm · Bạch dương, gỗ cứng hỗn hợp · MR", arSpecs: "2.7–18 مم · حور، خشب صلب مختلط · MR", className: "product-veneer" },
+  { slug: "natural-veneer", name: "Natural Veneer", viName: "Veneer tự nhiên", arName: "القشرة الخشبية الطبيعية", category: "Veneer", viCategory: "Veneer", arCategory: "القشرة الخشبية", description: "Selected wood surfaces with natural grain, colour and character.", viDescription: "Bề mặt gỗ được tuyển chọn với vân, màu sắc và đặc tính tự nhiên.", arDescription: "أسطح خشبية مختارة بحبيبات ولون وطابع طبيعي.", specs: "0.2–3mm · Acacia, Rubberwood, Eucalyptus", viSpecs: "0.2–3mm · Keo, cao su, bạch đàn", arSpecs: "0.2–3 مم · أكاسيا، خشب المطاط، أوكالبتوس", className: "product-veneer" },
+  { slug: "engineered-veneer", name: "Engineered Veneer", viName: "Veneer kỹ thuật", arName: "القشرة الخشبية الهندسية", category: "Veneer", viCategory: "Veneer", arCategory: "القشرة الخشبية", description: "Consistent decorative surfaces for scalable furniture production.", viDescription: "Bề mặt trang trí đồng nhất cho sản xuất nội thất quy mô lớn.", arDescription: "أسطح زخرفية متناسقة لإنتاج الأثاث على نطاق واسع.", specs: "0.2–1.2mm · Custom patterns and finish", viSpecs: "0.2–1.2mm · Mẫu vân và hoàn thiện theo yêu cầu", arSpecs: "0.2–1.2 مم · نقوش وتشطيبات مخصصة", className: "product-plywood" },
+  { slug: "lvl", name: "LVL", viName: "LVL", arName: "خشب القشرة الرقائقي LVL", category: "Wood Panels", viCategory: "Ván gỗ", arCategory: "ألواح خشبية", description: "Structural laminated veneer lumber for packaging and construction.", viDescription: "Gỗ veneer ghép lớp kết cấu cho đóng gói và xây dựng.", arDescription: "خشب قشرة مصفح إنشائي للتغليف والبناء.", specs: "Custom size · Eucalyptus, Poplar · OEM", viSpecs: "Kích thước theo yêu cầu · Bạch đàn, Poplar · OEM", arSpecs: "مقاس مخصص · أوكالبتوس، حور · OEM", className: "product-custom" },
+  { slug: "mdf-hdf", name: "MDF / HDF", viName: "MDF / HDF", arName: "MDF / HDF", category: "Wood Panels", viCategory: "Ván gỗ công nghiệp", arCategory: "ألواح خشبية هندسية", description: "Stable engineered panels for furniture and interior components.", viDescription: "Tấm gỗ công nghiệp ổn định cho nội thất và các chi tiết bên trong.", arDescription: "ألواح هندسية مستقرة للأثاث ومكونات التصميم الداخلي.", specs: "Custom thickness · E0 / E1 · Melamine", viSpecs: "Độ dày theo yêu cầu · E0 / E1 · Melamine", arSpecs: "سماكة مخصصة · E0 / E1 · ميلامين", className: "product-plywood" },
+  { slug: "finger-joint-board", name: "Finger Joint Board", viName: "Ván ghép thanh", arName: "ألواح الوصل الإصبعي", category: "Wood Panels", viCategory: "Ván gỗ", arCategory: "ألواح خشبية", description: "Custom-sized boards for furniture, doors and interior products.", viDescription: "Ván theo kích thước yêu cầu cho nội thất, cửa và sản phẩm bên trong.", arDescription: "ألواح بمقاسات مخصصة للأثاث والأبواب ومنتجات التصميم الداخلي.", specs: "Rubberwood, Acacia · Custom edge and finish", viSpecs: "Cao su, keo · Cạnh và hoàn thiện theo yêu cầu", arSpecs: "خشب المطاط، أكاسيا · حواف وتشطيب مخصص", className: "product-veneer" },
 ];
 
 export type Factory = {

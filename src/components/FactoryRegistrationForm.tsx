@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { type FormEvent, useState } from "react";
+import { getLocalizedPath, type Locale } from "@/data/landing-page";
 
-export function FactoryRegistrationForm() {
+export function FactoryRegistrationForm({ locale = "en" }: { locale?: Locale }) {
   const [submitted, setSubmitted] = useState(false);
   const [fileError, setFileError] = useState(false);
+  const isArabic = locale === "ar";
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -24,15 +26,13 @@ export function FactoryRegistrationForm() {
       <main className="registration-page">
         <section className="registration-success" aria-live="polite">
           <span aria-hidden="true">✓</span>
-          <p className="eyebrow">ĐÃ NHẬN ĐĂNG KÝ / REGISTRATION RECEIVED</p>
-          <h1>Cảm ơn bạn đã đăng ký / Thank you for registering.</h1>
+          <p className="eyebrow">{isArabic ? "تم استلام التسجيل" : "ĐÃ NHẬN ĐĂNG KÝ / REGISTRATION RECEIVED"}</p>
+          <h1>{isArabic ? "شكرًا لتسجيلكم." : "Cảm ơn bạn đã đăng ký / Thank you for registering."}</h1>
           <p>
-            MISO JAPAN sẽ xem xét thông tin nhà máy và liên hệ khi cần thêm tài liệu cho quá trình qualification.
-            <br />
-            MISO JAPAN will review the factory information and contact you if additional qualification documents are needed.
+            {isArabic ? "ستراجع MISO JAPAN معلومات المصنع وتتواصل معكم إذا لزم تقديم مستندات إضافية للتأهيل." : <>MISO JAPAN sẽ xem xét thông tin nhà máy và liên hệ khi cần thêm tài liệu cho quá trình qualification.<br />MISO JAPAN will review the factory information and contact you if additional qualification documents are needed.</>}
           </p>
-          <Link className="button button-primary" href="/">
-            Về trang chủ / Back to home <span aria-hidden="true">↗</span>
+          <Link className="button button-primary" href={getLocalizedPath(locale, "/")}>
+            {isArabic ? "العودة إلى الصفحة الرئيسية" : "Về trang chủ / Back to home"} <span aria-hidden="true">↗</span>
           </Link>
         </section>
       </main>
@@ -44,11 +44,9 @@ export function FactoryRegistrationForm() {
       <section className="registration-hero">
         <div>
           <p className="eyebrow eyebrow-light">MISO JAPAN FACTORY NETWORK</p>
-          <h1>ĐĂNG KÝ NHÀ MÁY / REGISTER FACTORY</h1>
+          <h1>{isArabic ? "تسجيل المصنع" : "ĐĂNG KÝ NHÀ MÁY / REGISTER FACTORY"}</h1>
           <p>
-            Chia sẻ thông tin nhà máy để MISO JAPAN xem xét cơ hội qualification và hợp tác.
-            <br />
-            Share your factory information for MISO JAPAN to review qualification and partnership opportunities.
+            {isArabic ? "شاركوا معلومات مصنعكم لتراجع MISO JAPAN فرص التأهيل والشراكة." : <>Chia sẻ thông tin nhà máy để MISO JAPAN xem xét cơ hội qualification và hợp tác.<br />Share your factory information for MISO JAPAN to review qualification and partnership opportunities.</>}
           </p>
         </div>
         <div className="registration-hero-mark" aria-hidden="true">
@@ -59,18 +57,18 @@ export function FactoryRegistrationForm() {
 
       <section className="registration-content">
         <form className="registration-form" onSubmit={handleSubmit}>
-          <div className="registration-form-heading">
-            <p className="eyebrow">THÔNG TIN NHÀ MÁY / FACTORY INFORMATION</p>
-            <p>Vui lòng cung cấp thông tin chính xác. Các trường có dấu ** hoặc * là bắt buộc.</p>
+           <div className="registration-form-heading">
+             <p className="eyebrow">{isArabic ? "معلومات المصنع" : "THÔNG TIN NHÀ MÁY / FACTORY INFORMATION"}</p>
+             <p>{isArabic ? "يرجى تقديم معلومات دقيقة. الحقول المميزة بعلامة * إلزامية." : "Vui lòng cung cấp thông tin chính xác. Các trường có dấu ** hoặc * là bắt buộc."}</p>
           </div>
 
           <div className="registration-fields">
             <label>
-              <span>Tên công ty / Company Name <sup>**</sup></span>
+               <span>{isArabic ? "اسم الشركة" : "Tên công ty / Company Name"} <sup>**</sup></span>
               <input name="companyName" type="text" autoComplete="organization" required />
             </label>
             <label>
-              <span>Địa chỉ nhà máy / Factory Address <sup>**</sup></span>
+               <span>{isArabic ? "عنوان المصنع" : "Địa chỉ nhà máy / Factory Address"} <sup>**</sup></span>
               <input name="factoryAddress" type="text" autoComplete="street-address" required />
             </label>
             <label>
@@ -78,11 +76,11 @@ export function FactoryRegistrationForm() {
               <input name="website" type="url" placeholder="https://" />
             </label>
             <label>
-              <span>Người liên hệ / Contact Person <sup>**</sup></span>
+               <span>{isArabic ? "جهة الاتصال" : "Người liên hệ / Contact Person"} <sup>**</sup></span>
               <input name="contactPerson" type="text" autoComplete="name" required />
             </label>
             <label>
-              <span>Chức vụ / Position</span>
+               <span>{isArabic ? "المنصب" : "Chức vụ / Position"}</span>
               <input name="position" type="text" />
             </label>
             <label>
@@ -90,43 +88,43 @@ export function FactoryRegistrationForm() {
               <input name="email" type="email" autoComplete="email" required />
             </label>
             <label>
-              <span>WhatsApp / Điện thoại / WhatsApp / Phone <sup>**</sup></span>
+               <span>{isArabic ? "واتساب / الهاتف" : "WhatsApp / Điện thoại / WhatsApp / Phone"} <sup>**</sup></span>
               <input name="phone" type="tel" autoComplete="tel" required />
             </label>
             <label className="registration-field-full">
-              <span>Sản phẩm Plywood chính / Main Plywood Products <sup>**</sup></span>
+               <span>{isArabic ? "منتجات الخشب الرقائقي الرئيسية" : "Sản phẩm Plywood chính / Main Plywood Products"} <sup>**</sup></span>
               <textarea name="mainProducts" rows={3} required placeholder="Ví dụ / Example: Commercial plywood, film-faced plywood, LVL..." />
             </label>
             <label className="registration-field-full">
-              <span>Quy cách sản phẩm chính / Main Product Specifications <sup>**</sup></span>
+               <span>{isArabic ? "مواصفات المنتجات الرئيسية" : "Quy cách sản phẩm chính / Main Product Specifications"} <sup>**</sup></span>
               <textarea name="specifications" rows={4} required placeholder="Độ dày / Thickness · Kích thước / Size · Lõi / Core · Keo / Glue" />
             </label>
             <label>
-              <span>Công suất sản xuất / Production Capacity <sup>**</sup></span>
+               <span>{isArabic ? "الطاقة الإنتاجية" : "Công suất sản xuất / Production Capacity"} <sup>**</sup></span>
               <input name="capacity" type="text" required placeholder="Ví dụ / Example: 3,000 CBM/month" />
             </label>
             <label>
-              <span>Thị trường xuất khẩu chính / Main Export Markets</span>
+               <span>{isArabic ? "أسواق التصدير الرئيسية" : "Thị trường xuất khẩu chính / Main Export Markets"}</span>
               <input name="exportMarkets" type="text" placeholder="Ví dụ / Example: Japan, Korea, USA" />
             </label>
             <label className="registration-field-full registration-file-field">
-              <span>Hồ sơ công ty / Catalogue / Company Profile / Catalogue</span>
+               <span>{isArabic ? "ملف الشركة / الكتالوج" : "Hồ sơ công ty / Catalogue / Company Profile / Catalogue"}</span>
               <input name="companyProfile" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx" />
-              <small>PDF, Word, Excel hoặc PowerPoint · Tối đa 10MB / PDF, Word, Excel or PowerPoint · Max 10MB</small>
-              {fileError && <small className="registration-file-error" role="alert">Tệp vượt quá 10MB. Vui lòng chọn tệp khác / This file exceeds 10MB. Please choose another file.</small>}
+               <small>{isArabic ? "PDF أو Word أو Excel أو PowerPoint · الحد الأقصى 10 ميغابايت" : "PDF, Word, Excel hoặc PowerPoint · Tối đa 10MB / PDF, Word, Excel or PowerPoint · Max 10MB"}</small>
+               {fileError && <small className="registration-file-error" role="alert">{isArabic ? "يتجاوز الملف 10 ميغابايت. يرجى اختيار ملف آخر." : "Tệp vượt quá 10MB. Vui lòng chọn tệp khác / This file exceeds 10MB. Please choose another file."}</small>}
             </label>
           </div>
 
           <label className="registration-consent">
             <input name="consent" type="checkbox" required />
             <span>
-              Tôi đồng ý để MISO JAPAN liên hệ về đánh giá nhà máy và cơ hội hợp tác / I agree to be contacted by MISO JAPAN regarding factory qualification and business opportunities.
+               {isArabic ? "أوافق على تواصل MISO JAPAN معي بشأن تأهيل المصنع وفرص التعاون." : "Tôi đồng ý để MISO JAPAN liên hệ về đánh giá nhà máy và cơ hội hợp tác / I agree to be contacted by MISO JAPAN regarding factory qualification and business opportunities."}
             </span>
           </label>
 
           <div className="registration-actions">
             <button className="button button-primary" type="submit">
-              ĐĂNG KÝ NHÀ MÁY / REGISTER FACTORY <span aria-hidden="true">↗</span>
+               {isArabic ? "تسجيل المصنع" : "ĐĂNG KÝ NHÀ MÁY / REGISTER FACTORY"} <span aria-hidden="true">↗</span>
             </button>
           </div>
         </form>

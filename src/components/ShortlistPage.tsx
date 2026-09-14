@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { factories, type Factory, type Locale } from "@/data/landing-page";
+import { factories, getLocalizedPath, type Factory, type Locale } from "@/data/landing-page";
 import { ScrollCue } from "@/components/ScrollCue";
 
 const shortlistStorageKey = "minsen-shortlist";
@@ -21,7 +21,8 @@ function readIds(key: string) {
 
 export function ShortlistPage({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
-  const missing = vi ? "Chưa cung cấp" : "Not provided";
+  const ar = locale === "ar";
+  const missing = vi ? "Chưa cung cấp" : ar ? "غير متوفر" : "Not provided";
   const [shortlistIds, setShortlistIds] = useState<string[]>([]);
   const [compareIds, setCompareIds] = useState<string[]>([]);
 
@@ -72,39 +73,39 @@ export function ShortlistPage({ locale }: { locale: Locale }) {
 
   const rows: { label: string; value: (factory: Factory) => string }[] = [
     {
-      label: vi ? "Địa điểm" : "Location",
+      label: vi ? "Địa điểm" : ar ? "الموقع" : "Location",
       value: (factory) => factory.location,
     },
     {
-      label: vi ? "Sản phẩm" : "Products",
+      label: vi ? "Sản phẩm" : ar ? "المنتجات" : "Products",
       value: (factory) => factory.products.join(", "),
     },
     {
-      label: vi ? "Nguyên liệu và quy cách" : "Materials and specifications",
+      label: vi ? "Nguyên liệu và quy cách" : ar ? "المواد والمواصفات" : "Materials and specifications",
       value: (factory) => factory.materialsAndSpecs || factory.materials.join(", ") || missing,
     },
     {
-      label: vi ? "Công suất" : "Capacity",
+      label: vi ? "Công suất" : ar ? "الطاقة الإنتاجية" : "Capacity",
       value: (factory) => factory.capacity || missing,
     },
     {
-      label: vi ? "Thị trường xuất khẩu" : "Export markets",
+      label: vi ? "Thị trường xuất khẩu" : ar ? "أسواق التصدير" : "Export markets",
       value: (factory) => factory.exportMarkets.join(", ") || missing,
     },
     {
-      label: vi ? "Chứng nhận" : "Certifications",
+      label: vi ? "Chứng nhận" : ar ? "الشهادات" : "Certifications",
       value: (factory) => factory.certifications.join(", ") || missing,
     },
     {
-      label: vi ? "Năm thành lập" : "Established",
+      label: vi ? "Năm thành lập" : ar ? "سنة التأسيس" : "Established",
       value: (factory) => `${factory.establishedYear}`,
     },
     {
-      label: vi ? "Nhân sự" : "Workforce",
+      label: vi ? "Nhân sự" : ar ? "القوى العاملة" : "Workforce",
       value: (factory) => factory.workforce || missing,
     },
     {
-      label: vi ? "Trạng thái" : "Status",
+      label: vi ? "Trạng thái" : ar ? "الحالة" : "Status",
       value: (factory) => factory.misoStatus,
     },
   ];
@@ -116,30 +117,30 @@ export function ShortlistPage({ locale }: { locale: Locale }) {
           {compareMode
             ? vi
               ? "So sánh nhà máy"
-              : "Factory comparison"
+               : ar ? "مقارنة المصانع" : "Factory comparison"
             : vi
               ? "Danh sách sourcing của tôi"
-              : "My sourcing list"}
+               : ar ? "قائمتي للتوريد" : "My sourcing list"}
         </p>
         <h1>
           {compareMode
             ? vi
               ? "Đặt các lựa chọn cạnh nhau."
-              : "Compare your factory options."
+               : ar ? "قارن خيارات المصانع." : "Compare your factory options."
             : vi
               ? "Các nhà máy bạn đang cân nhắc."
-              : "Factories you are considering."}
+               : ar ? "المصانع التي تفكر فيها." : "Factories you are considering."}
         </h1>
         <p>
           {compareMode
             ? vi
               ? "So sánh năng lực, thị trường và mức độ phù hợp trước khi yêu cầu MISO JAPAN kết nối."
-              : "Compare capability, markets and fit before asking MISO JAPAN to make an introduction."
+               : ar ? "قارن القدرات والأسواق والملاءمة قبل أن تطلب من MISO JAPAN تقديمك." : "Compare capability, markets and fit before asking MISO JAPAN to make an introduction."
             : vi
               ? "Gửi danh sách này cho MISO JAPAN để chúng tôi đánh giá và kết nối các lựa chọn phù hợp nhất."
-              : "Send this list to MISO JAPAN and we will evaluate and connect the most suitable options."}
+               : ar ? "أرسل هذه القائمة إلى MISO JAPAN وسنقيّم الخيارات الأنسب ونوصلك بها." : "Send this list to MISO JAPAN and we will evaluate and connect the most suitable options."}
         </p>
-        <ScrollCue targetId="shortlist-content" label={vi ? "Cuộn để xem danh sách" : "Scroll to view the list"} />
+         <ScrollCue targetId="shortlist-content" label={vi ? "Cuộn để xem danh sách" : ar ? "مرر لعرض القائمة" : "Scroll to view the list"} />
       </section>
       <section className="shortlist-content" id="shortlist-content">
         {selected.length === 0 ? (
@@ -160,9 +161,9 @@ export function ShortlistPage({ locale }: { locale: Locale }) {
             </p>
             <Link
               className="button button-primary"
-              href={vi ? "/vi/manufacturers" : "/manufacturers"}
+               href={getLocalizedPath(locale, "/manufacturers")}
             >
-              {vi ? "Khám phá nhà máy" : "Explore manufacturers"}{" "}
+               {vi ? "Khám phá nhà máy" : ar ? "استكشف المصانع" : "Explore manufacturers"}{" "}
               <span aria-hidden="true">↗</span>
             </Link>
           </div>
@@ -171,11 +172,11 @@ export function ShortlistPage({ locale }: { locale: Locale }) {
             <div className="compare-toolbar">
               <div>
                 <strong>{selected.length}</strong>{" "}
-                {vi ? "nhà máy đang hiển thị" : "factories shown"}
+                 {vi ? "nhà máy đang hiển thị" : ar ? "مصانع معروضة" : "factories shown"}
               </div>
               {compareMode && (
                 <button type="button" onClick={clearCompare}>
-                  {vi ? "Xóa so sánh" : "Clear comparison"}
+                   {vi ? "Xóa so sánh" : ar ? "مسح المقارنة" : "Clear comparison"}
                 </button>
               )}
             </div>
@@ -183,11 +184,11 @@ export function ShortlistPage({ locale }: { locale: Locale }) {
               className="compare-table"
               role="table"
               aria-label={
-                vi ? "Bảng so sánh nhà máy" : "Factory comparison table"
+                 vi ? "Bảng so sánh nhà máy" : ar ? "جدول مقارنة المصانع" : "Factory comparison table"
               }
             >
               <div className="compare-row compare-heading" role="row">
-                <strong>{vi ? "Tiêu chí" : "Criteria"}</strong>
+                 <strong>{vi ? "Tiêu chí" : ar ? "المعايير" : "Criteria"}</strong>
                 {selected.map((factory) => (
                   <div className="compare-factory-heading" key={factory.id}>
                     <strong>{factory.id}</strong>
@@ -195,7 +196,7 @@ export function ShortlistPage({ locale }: { locale: Locale }) {
                       <button
                         type="button"
                         onClick={() => removeFromCompare(factory.id)}
-                        aria-label={`${vi ? "Xóa" : "Remove"} ${factory.id}`}
+                         aria-label={`${vi ? "Xóa" : ar ? "إزالة" : "Remove"} ${factory.id}`}
                       >
                         ×
                       </button>
@@ -216,18 +217,18 @@ export function ShortlistPage({ locale }: { locale: Locale }) {
             <div className="compare-actions">
               <Link
                 className="button button-primary"
-                href={vi ? "/vi/rfq" : "/rfq"}
+                 href={getLocalizedPath(locale, "/rfq")}
               >
                 {vi
                   ? "Yêu cầu MISO JAPAN kết nối"
-                  : "Ask MISO JAPAN to connect"}{" "}
+                   : ar ? "اطلب من MISO JAPAN التواصل" : "Ask MISO JAPAN to connect"}{" "}
                 <span aria-hidden="true">↗</span>
               </Link>
               <Link
                 className="text-link"
-                href={vi ? "/vi/manufacturers" : "/manufacturers"}
+                 href={getLocalizedPath(locale, "/manufacturers")}
               >
-                {vi ? "Tiếp tục chọn nhà máy" : "Continue exploring factories"}{" "}
+                 {vi ? "Tiếp tục chọn nhà máy" : ar ? "مواصلة استكشاف المصانع" : "Continue exploring factories"}{" "}
                 <span aria-hidden="true">↗</span>
               </Link>
             </div>

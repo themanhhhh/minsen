@@ -2,19 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import type { Locale } from "@/data/landing-page";
+import { getLocalizedPath, type Locale } from "@/data/landing-page";
 
 export function LanguageSwitcher({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const englishPath = pathname.startsWith("/vi")
-    ? pathname.slice(3) || "/"
-    : pathname;
-  const vietnamesePath = pathname.startsWith("/vi")
-    ? pathname
-    : `/vi${pathname === "/" ? "" : pathname}`;
-  const currentLabel = locale === "vi" ? "VIE" : "ENG";
+  const basePath = pathname.replace(/^\/(vi|ar)(?=\/|$)/, "") || "/";
+  const currentLabel = locale === "vi" ? "VIE" : locale === "ar" ? "ARA" : "ENG";
+  const options: { locale: Locale; label: string }[] = [
+    { locale: "en", label: "ENG" },
+    { locale: "vi", label: "VIE" },
+    { locale: "ar", label: "ARA" },
+  ];
 
   useEffect(() => {
     const closeMenu = (event: MouseEvent) => {
@@ -43,32 +43,23 @@ export function LanguageSwitcher({ locale }: { locale: Locale }) {
         <div
           className="language-options"
           role="listbox"
-          aria-label="Language selection"
+          aria-label={locale === "ar" ? "اختيار اللغة" : "Language selection"}
         >
-          <a
-            className={locale === "en" ? "selected" : ""}
-            href={englishPath}
-            role="option"
-            aria-selected={locale === "en"}
-            onClick={() => setOpen(false)}
-          >
-            <span className="language-check" aria-hidden="true">
-              {locale === "en" ? "✓" : ""}
-            </span>
-            ENG
-          </a>
-          <a
-            className={locale === "vi" ? "selected" : ""}
-            href={vietnamesePath}
-            role="option"
-            aria-selected={locale === "vi"}
-            onClick={() => setOpen(false)}
-          >
-            <span className="language-check" aria-hidden="true">
-              {locale === "vi" ? "✓" : ""}
-            </span>
-            VIE
-          </a>
+          {options.map((option) => (
+            <a
+              className={locale === option.locale ? "selected" : ""}
+              href={getLocalizedPath(option.locale, basePath)}
+              key={option.locale}
+              role="option"
+              aria-selected={locale === option.locale}
+              onClick={() => setOpen(false)}
+            >
+              <span className="language-check" aria-hidden="true">
+                {locale === option.locale ? "✓" : ""}
+              </span>
+              {option.label}
+            </a>
+          ))}
         </div>
       )}
     </div>

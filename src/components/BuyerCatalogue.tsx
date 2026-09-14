@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useDeferredValue, useState } from "react";
-import type { Locale } from "@/data/landing-page";
+import { getLocalizedPath, type Locale } from "@/data/landing-page";
 import {
   BadgeCheck,
   Building2,
@@ -203,6 +203,17 @@ const buyerPageCopy = {
     featuredCountry: "ẤN ĐỘ",
     featuredCountryType: "DANH MỤC BUYER",
   },
+  ar: {
+    eyebrow: "دليل المشترين الدوليين",
+    title: "اعثر على مشترين متوافقين مع قدرات مصنعك.",
+    description: "استكشف ملفات المشترين حسب الدولة ومتطلبات المنتج وسياق الشراء. تساعد MISO JAPAN المصانع المؤهلة على تحديد الفرص المناسبة وإدارة التواصل محليًا.",
+    action: "اطلب من MISO JAPAN التواصل",
+    catalogueTitle: "دليل المشترين الدوليين",
+    catalogueDescription: "600 ملف مشتري موثوق في مجال الخشب الرقائقي والمنتجات الخشبية",
+    countryLabel: "تصفية حسب الدولة",
+    featuredCountry: "الهند",
+    featuredCountryType: "دليل المشترين",
+  },
 } as const;
 
 function BuyerIcon({ name }: { name: BuyerIconName }) {
@@ -378,6 +389,7 @@ function CatalogueCategories() {
 
 export function BuyerCatalogue({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
+  const ar = locale === "ar";
   const copy = buyerPageCopy[locale];
   const [query, setQuery] = useState("");
   const [productFilter, setProductFilter] = useState("");
@@ -445,14 +457,14 @@ export function BuyerCatalogue({ locale }: { locale: Locale }) {
             <p className="eyebrow">{copy.eyebrow}</p>
             <h1>{copy.title}</h1>
             <p>{copy.description}</p>
-            <Link className="button button-primary" href={vi ? "/vi/rfq" : "/rfq"}>
+            <Link className="button button-primary" href={getLocalizedPath(locale, "/rfq")}>
               {copy.action} <span aria-hidden="true">↗</span>
             </Link>
           </div>
           <div className="buyer-page-intro-stats" aria-label="Buyer catalogue overview">
             <strong>600+</strong>
-            <span>{vi ? "HỒ SƠ BUYER" : "BUYER PROFILES"}</span>
-            <small>{vi ? "Được lập bản đồ theo nhu cầu" : "Mapped by buying requirement"}</small>
+            <span>{vi ? "HỒ SƠ BUYER" : ar ? "ملفات المشترين" : "BUYER PROFILES"}</span>
+            <small>{vi ? "Được lập bản đồ theo nhu cầu" : ar ? "مصنفة حسب متطلبات الشراء" : "Mapped by buying requirement"}</small>
           </div>
         </section>
         <header className="buyer-catalogue-cover">

@@ -7,6 +7,7 @@ type Step = 1 | 2 | 3;
 
 export function RfqWizard({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
+  const ar = locale === "ar";
   const [step, setStep] = useState<Step>(1);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
@@ -61,7 +62,40 @@ export function RfqWizard({ locale }: { locale: Locale }) {
           "Chúng tôi sẽ xem xét yêu cầu và xác định phương án sourcing, qualification nhà cung cấp phù hợp.",
         home: "Về trang chủ",
       }
-    : {
+    : ar ? {
+        eyebrow: "طلب توريد من MISO JAPAN",
+        title: "أخبرنا بما تحتاج إلى توريده من فيتنام.",
+        description: "نراجع متطلباتك ونختار المصنعين الفيتناميين المناسبين من خلال عملية التوريد ومراقبة مخاطر المشتري.",
+        steps: ["المنتج", "المتطلبات التقنية", "جهة الاتصال"],
+        product: "فئة المنتج",
+        specification: "مواصفات المنتج",
+        core: "القلب / المادة",
+        bond: "متطلبات اللصق",
+        application: "التطبيق والاستخدام النهائي",
+        quantity: "الكمية المتوقعة",
+        destination: "السوق / ميناء الوصول",
+        delivery: "الجدول الزمني المفضل للتسليم",
+        name: "الاسم الكامل",
+        company: "اسم الشركة",
+        email: "البريد الإلكتروني للعمل",
+        whatsapp: "واتساب",
+        specificationPlaceholder: "مثال: 1220 × 2440 × 18 مم",
+        corePlaceholder: "اختر القلب / غير متأكد",
+        bondPlaceholder: "اختر نوع اللصق / غير متأكد",
+        applicationPlaceholder: "كيف سيُستخدم هذا المنتج؟",
+        quantityPlaceholder: "مثال: حاوية 40 قدم شهريًا",
+        destinationPlaceholder: "مثال: حيفا فونغ، دبي...",
+        deliveryPlaceholder: "مثال: مطلوب بحلول أكتوبر",
+        namePlaceholder: "اسمك الكامل",
+        companyPlaceholder: "اسم شركتك",
+        continue: "متابعة",
+        back: "رجوع",
+        submit: "إرسال طلب عرض السعر",
+        received: "تم استلام الاستفسار",
+        successTitle: "ستجد MISO JAPAN المصانع المناسبة لك.",
+        successDescription: "سنراجع متطلباتك ونحدد منهج التوريد وتأهيل المورد المناسب.",
+        home: "العودة إلى الرئيسية",
+      } : {
         eyebrow: "MISO JAPAN SOURCING REQUEST",
         title: "Tell us what you need to source from Vietnam.",
         description:
@@ -119,7 +153,7 @@ export function RfqWizard({ locale }: { locale: Locale }) {
           <p className="eyebrow">{copy.received}</p>
           <h1>{copy.successTitle}</h1>
           <p>{copy.successDescription}</p>
-          <a className="button button-primary" href={vi ? "/vi" : "/"}>
+          <a className="button button-primary" href={ar ? "/ar" : vi ? "/vi" : "/"}>
             {copy.home} <span aria-hidden="true">↗</span>
           </a>
         </section>
@@ -159,7 +193,7 @@ export function RfqWizard({ locale }: { locale: Locale }) {
                   <option>Veneer</option>
                   <option>LVL</option>
                   <option>MDF / HDF</option>
-                  <option>{vi ? "Sản phẩm gỗ khác" : "Other wood products"}</option>
+                   <option>{vi ? "Sản phẩm gỗ khác" : ar ? "منتجات خشبية أخرى" : "Other wood products"}</option>
                 </select>
               </label>
               <label>
@@ -170,10 +204,10 @@ export function RfqWizard({ locale }: { locale: Locale }) {
                 {copy.core}
                 <select name="core" value={form.core} onChange={(event) => update("core", event.target.value)} required>
                   <option value="" disabled>{copy.corePlaceholder}</option>
-                  <option>{vi ? "Lõi bạch đàn" : "Poplar core"}</option>
-                  <option>{vi ? "Lõi keo" : "Acacia core"}</option>
-                  <option>{vi ? "Lõi combi" : "Combi core"}</option>
-                  <option>{vi ? "Khác / Chưa chắc chắn" : "Other / Not sure"}</option>
+                   <option>{vi ? "Lõi bạch đàn" : ar ? "قلب أوكالبتوس" : "Poplar core"}</option>
+                   <option>{vi ? "Lõi keo" : ar ? "قلب أكاسيا" : "Acacia core"}</option>
+                   <option>{vi ? "Lõi combi" : ar ? "قلب مركب" : "Combi core"}</option>
+                   <option>{vi ? "Khác / Chưa chắc chắn" : ar ? "أخرى / غير متأكد" : "Other / Not sure"}</option>
                 </select>
               </label>
               <label>
@@ -183,7 +217,7 @@ export function RfqWizard({ locale }: { locale: Locale }) {
                   <option>MR / E1</option>
                   <option>WBP</option>
                   <option>Melamine</option>
-                  <option>{vi ? "Khác / Chưa chắc chắn" : "Other / Not sure"}</option>
+                   <option>{vi ? "Khác / Chưa chắc chắn" : ar ? "أخرى / غير متأكد" : "Other / Not sure"}</option>
                 </select>
               </label>
             </div>

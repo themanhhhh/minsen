@@ -13,6 +13,6 @@ export default function Home() {
   return <LandingPage locale="en" />;
 }
 
-export function LandingPage({ locale }: { locale: "en" | "vi" }) {
+export function LandingPage({ locale }: { locale: "en" | "vi" | "ar" }) {
   return <><Header locale={locale} /><main><Hero locale={locale} /><ProductBrowse locale={locale} /><FactoryPreview locale={locale} /><BuyerProtection locale={locale} /><Process locale={locale} /><HomeResources locale={locale} /><Contact locale={locale} /><HomeTrustSections locale={locale} /></main><Footer locale={locale} /></>;
 }

@@ -4303,6 +4303,40 @@ p {
   }
 }
 
+html[dir="rtl"] body {
+  font-family: Tahoma, Arial, sans-serif;
+  text-align: right;
+}
+
+html[dir="rtl"] .eyebrow {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[dir="rtl"] .desktop-nav {
+  margin-left: 0;
+  margin-right: 100px;
+}
+
+html[dir="rtl"] .button span,
+html[dir="rtl"] .text-link span,
+html[dir="rtl"] .header-cta span,
+html[dir="rtl"] .layer-arrow,
+html[dir="rtl"] .footer-contact span {
+  margin-left: 0;
+  margin-right: 5px;
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] textarea,
+html[dir="rtl"] select {
+  text-align: right;
+}
+
+html[dir="rtl"] .registration-form input[type="file"] {
+  text-align: left;
+}
+
 /* Homepage protection and network sections. */
 .protection-section {
   background-color: var(--primary-dark);

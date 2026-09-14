@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { type Locale } from "@/data/landing-page";
+import { getLocalizedPath, type Locale } from "@/data/landing-page";
 
 export function HomeResources({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
+  const ar = locale === "ar";
   const cards = vi
     ? [
         [
@@ -21,7 +22,11 @@ export function HomeResources({ locale }: { locale: Locale }) {
           "Một checklist thực tế cho duyệt mẫu và kiểm soát chất lượng.",
         ],
       ]
-    : [
+    : ar ? [
+        ["01", "كيفية توريد الخشب الرقائقي من فيتنام", "الأسئلة الرئيسية حول المواصفات والمصنع والشحن."],
+        ["02", "MR مقابل الميلامين والفينوليك", "اختر أداء الغراء المناسب لتطبيقك وسوقك."],
+        ["03", "كيفية فحص الخشب الرقائقي", "قائمة عملية لاعتماد العينات ومراقبة الجودة."],
+      ] : [
         [
           "01",
           "How to source plywood from Vietnam",
@@ -42,7 +47,7 @@ export function HomeResources({ locale }: { locale: Locale }) {
     <section className="home-resources">
       <div className="resources-intro">
         <p className="eyebrow eyebrow-light">
-          {vi ? "Kiến thức sourcing" : "Sourcing insights"}
+          {vi ? "Kiến thức sourcing" : ar ? "رؤى التوريد" : "Sourcing insights"}
         </p>
         <h2>
           {vi ? (
@@ -51,6 +56,8 @@ export function HomeResources({ locale }: { locale: Locale }) {
               <br />
               <em>bắt đầu từ hiểu biết.</em>
             </>
+          ) : ar ? (
+            <>شراء أفضل<br /><em>يبدأ بالمعرفة.</em></>
           ) : (
             <>
               Better buying
@@ -60,22 +67,22 @@ export function HomeResources({ locale }: { locale: Locale }) {
           )}
         </h2>
         <p>
-          {vi
-            ? "Thông tin thực tế giúp buyer quốc tế ra quyết định tự tin hơn khi sourcing sản phẩm gỗ từ Việt Nam."
-            : "Practical knowledge to help international buyers make more confident decisions when sourcing wood products from Vietnam."}
+            {vi
+              ? "Thông tin thực tế giúp buyer quốc tế ra quyết định tự tin hơn khi sourcing sản phẩm gỗ từ Việt Nam."
+              : ar ? "معرفة عملية تساعد المشترين الدوليين على اتخاذ قرارات أكثر ثقة عند توريد المنتجات الخشبية من فيتنام." : "Practical knowledge to help international buyers make more confident decisions when sourcing wood products from Vietnam."}
         </p>
         <Link
           className="button button-light"
-          href={vi ? "/vi/insights" : "/insights"}
+          href={getLocalizedPath(locale, "/insights")}
         >
-          {vi ? "Xem tất cả kiến thức" : "Explore all insights"} ↗
+          {vi ? "Xem tất cả kiến thức" : ar ? "استكشف جميع الرؤى" : "Explore all insights"} ↗
         </Link>
       </div>
       <div className="resources-list">
         {cards.map(([number, title, description]) => (
           <Link
             className="resource-card"
-            href={vi ? "/vi/insights" : "/insights"}
+            href={getLocalizedPath(locale, "/insights")}
             key={number}
           >
             <span>{number}</span>

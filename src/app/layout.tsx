@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Inter, Manrope } from "next/font/google";
+import { LocaleDirection } from "@/components/LocaleDirection";
 import "./globals.css";
 
 const manrope = Manrope({ variable: "--font-heading", subsets: ["latin"] });
@@ -12,5 +13,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
-  return <html lang="en" data-scroll-behavior="smooth" className={`${manrope.variable} ${inter.variable}`}><body>{children}</body></html>;
+  return <html lang="en" dir="ltr" data-scroll-behavior="smooth" className={`${manrope.variable} ${inter.variable}`}><body><LocaleDirection />{children}</body></html>;
 }

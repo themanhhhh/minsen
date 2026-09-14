@@ -131,11 +131,44 @@ const content = {
       ],
     },
   },
+  ar: {
+    sourcing: {
+      eyebrow: "ماذا تقدم MISO JAPAN",
+      title: "من متطلبات المشتري إلى الشحن.",
+      description: "تبدأ عملية التوريد من متطلبات المشتري الفعلية، ثم تمر بمطابقة المصنع والتنفيذ المنضبط والأدلة الموثقة.",
+      cards: [
+        ["توضيح المتطلبات", "نحوّل التطبيق والمواصفات والكمية والوجهة إلى معايير تقنية وتجارية واضحة."],
+        ["البحث عن المصنع ومطابقته", "نتحقق من القدرات المناسبة ونقارن مصانع فيتنام بمتطلبات المشتري."],
+        ["التنفيذ المنضبط والأدلة", "ننسق العينات والإنتاج والفحص والتعبئة والتحميل والشحن ضمن النطاق المتفق عليه."],
+      ],
+    },
+    "factory-videos": {
+      eyebrow: "فيديوهات المصانع",
+      title: "شاهد كيف تُصنع المنتجات الخشبية في فيتنام.",
+      description: "مكتبة متنامية من جولات المصانع ومراحل الإنتاج لمساعدة المشترين على فهم مصدر كل منتج.",
+      cards: [
+        ["جولة في المصنع", "استكشف الأفراد والمساحة والقدرات الإنتاجية لدى الشريك الذي تم التحقق منه."],
+        ["إنتاج الخشب الرقائقي", "شاهد التقشير والتجفيف واللصق والكبس الساخن والصنفرة ضمن العملية."],
+        ["الجودة والتحميل", "تابع الفحص والتعبئة وتحميل الحاويات قبل التصدير."],
+      ],
+    },
+    insights: {
+      eyebrow: "رؤى التوريد",
+      title: "معرفة مفيدة لاتخاذ قرارات شراء أفضل.",
+      description: "إرشادات عملية للمشترين الدوليين الذين يشترون الخشب الرقائقي والقشرة والألواح الخشبية من فيتنام.",
+      cards: [
+        ["كيفية توريد الخشب الرقائقي من فيتنام", "الأسئلة الرئيسية حول المواصفات والمصنع والشحن."],
+        ["MR مقابل الميلامين والفينوليك", "افهم أنواع الغراء واختر الأداء المناسب لتطبيقك."],
+        ["كيفية فحص الخشب الرقائقي", "نقطة بداية عملية لاعتماد العينات وفحص الجودة قبل الشحن."],
+      ],
+    },
+  },
 } as const;
 
 export function HubPage({ kind, locale }: { kind: HubKind; locale: Locale }) {
   const page = content[locale][kind];
   const vi = locale === "vi";
+  const ar = locale === "ar";
   const imageFor = (index: number) =>
     kind === "factory-videos"
       ? [
@@ -159,9 +192,9 @@ export function HubPage({ kind, locale }: { kind: HubKind; locale: Locale }) {
             <p>{page.description}</p>
             <Link
               className="button button-light"
-              href={vi ? "/vi/rfq" : "/rfq"}
+              href={ar ? "/ar/rfq" : vi ? "/vi/rfq" : "/rfq"}
             >
-              {vi ? "Gửi yêu cầu sourcing" : "Submit your RFQ"}{" "}
+              {vi ? "Gửi yêu cầu sourcing" : ar ? "إرسال طلب عرض سعر" : "Submit your RFQ"}{" "}
               <span aria-hidden="true">↗</span>
             </Link>
           </div>
@@ -172,7 +205,7 @@ export function HubPage({ kind, locale }: { kind: HubKind; locale: Locale }) {
                 ? "02"
             : "03"}
           </div>
-          <ScrollCue targetId="hub-cards" label={vi ? "Cuộn để khám phá" : "Scroll to explore"} />
+          <ScrollCue targetId="hub-cards" label={vi ? "Cuộn để khám phá" : ar ? "مرر للاستكشاف" : "Scroll to explore"} />
         </section>
         <section className="hub-cards" id="hub-cards">
           {page.cards.map(([title, description], index) => (
@@ -191,11 +224,11 @@ export function HubPage({ kind, locale }: { kind: HubKind; locale: Locale }) {
               <h2>{title}</h2>
               <p>{description}</p>
               {kind === "insights" && (
-                <a href="#top">{vi ? "Đọc thêm" : "Read article"} ↗</a>
+                <a href="#top">{vi ? "Đọc thêm" : ar ? "اقرأ المقال" : "Read article"} ↗</a>
               )}
               {kind === "factory-videos" && (
                 <button type="button" className="video-placeholder">
-                  ▶ {vi ? "Xem video mẫu" : "Preview video"}
+                  ▶ {vi ? "Xem video mẫu" : ar ? "معاينة الفيديو" : "Preview video"}
                 </button>
               )}
             </article>
@@ -203,18 +236,16 @@ export function HubPage({ kind, locale }: { kind: HubKind; locale: Locale }) {
         </section>
         <section className="hub-bottom">
           <p className="eyebrow">
-            {vi
-              ? "Không tìm thấy đúng sản phẩm?"
-              : "Can't find exactly what you need?"}
+            {vi ? "Không tìm thấy đúng sản phẩm?" : ar ? "لم تجد ما تحتاجه تمامًا؟" : "Can't find exactly what you need?"}
           </p>
           <h2>
-            {vi ? "Hãy để MISO JAPAN tìm giúp bạn." : "Let MISO JAPAN search for you."}
+            {vi ? "Hãy để MISO JAPAN tìm giúp bạn." : ar ? "دع MISO JAPAN تبحث لك." : "Let MISO JAPAN search for you."}
           </h2>
           <Link
             className="button button-primary"
-            href={vi ? "/vi/rfq" : "/rfq"}
+            href={ar ? "/ar/rfq" : vi ? "/vi/rfq" : "/rfq"}
           >
-            {vi ? "Yêu cầu hỗ trợ sourcing" : "Request sourcing support"} ↗
+            {vi ? "Yêu cầu hỗ trợ sourcing" : ar ? "طلب دعم التوريد" : "Request sourcing support"} ↗
           </Link>
         </section>
       </main>
