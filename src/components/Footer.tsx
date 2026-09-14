@@ -1,12 +1,13 @@
 import { company, getLandingContent, socialLinks, type Locale } from "@/data/landing-page";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
 import Image from "next/image";
 
 const socialIcons = {
   Instagram: FaInstagram,
   Facebook: FaFacebookF,
   TikTok: FaTiktok,
+  YouTube: FaYoutube,
 };
 
 export function Footer({ locale }: { locale: Locale }) {
@@ -101,8 +102,12 @@ export function Footer({ locale }: { locale: Locale }) {
         </div>
         <div className="footer-column footer-contact">
           <strong>{locale === "vi" ? "Liên hệ" : "Contact"}</strong>
-           <span>{locale === "vi" ? company.emailVi : company.email}</span>
-           <span>{locale === "vi" ? company.whatsappVi : company.whatsapp}</span>
+           <a href={`mailto:${locale === "vi" ? company.emailVi : company.email}`}>
+             {locale === "vi" ? company.emailVi : company.email}
+           </a>
+           <a href={`tel:${(locale === "vi" ? company.whatsappVi : company.whatsapp).replace(/\s/g, "")}`}>
+             {locale === "vi" ? company.whatsappVi : company.whatsapp}
+           </a>
           <a href={locale === "vi" ? "/vi/contact" : "/contact"}>
             {locale === "vi" ? "Mở contact form" : "Open contact form"}{" "}
             <span aria-hidden="true">↗</span>

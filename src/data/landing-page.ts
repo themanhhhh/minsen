@@ -3,17 +3,18 @@ export const company = {
   legalName: "CÔNG TY TNHH LIÊN DOANH MISO JAPAN",
   descriptor: "Vietnam Plywood Sourcing, Supplier Development & Buyer Risk Management Partner",
   descriptorVi: "Đối tác sourcing Plywood Việt Nam, phát triển nhà cung cấp và quản trị rủi ro cho Buyer",
-  email: "[TO BE UPDATED]",
-  emailVi: "[CẦN CẬP NHẬT]",
-  whatsapp: "[TO BE UPDATED]",
-  whatsappVi: "[CẦN CẬP NHẬT]",
+  email: "misojapan.global@gmail.com",
+  emailVi: "misojapan.global@gmail.com",
+  whatsapp: "+84 833 158 866",
+  whatsappVi: "+84 833 158 866",
   location: "Đội 3, Thôn Cấn Hạ, Xã Kiều Phú, Thành phố Hà Nội, Việt Nam",
 };
 
 export const socialLinks = [
-  { label: "Instagram", href: "https://www.instagram.com/" },
-  { label: "Facebook", href: "https://www.facebook.com/" },
-  { label: "TikTok", href: "https://www.tiktok.com/" },
+  { label: "Instagram", href: "https://www.instagram.com/misoplywood/" },
+  { label: "Facebook", href: "https://www.facebook.com/misoplywood/" },
+  { label: "TikTok", href: "https://www.tiktok.com/@misoplywood" },
+  { label: "YouTube", href: "https://www.youtube.com/@misoplywood" },
 ];
 
 export const navigation = [

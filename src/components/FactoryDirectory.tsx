@@ -131,6 +131,56 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
         disclaimer: "Profiles use company-submitted information and remain pending MISO JAPAN qualification.",
       };
   const missing = vi ? "Chưa cung cấp" : "Not provided";
+  const filterOptionLabels: Partial<Record<keyof Filters, Record<string, string>>> = {
+    products: {
+      "Hardwood Plywood": "Plywood gỗ cứng",
+      "Birch-Faced Plywood": "Plywood phủ mặt bạch dương",
+      "Film-Faced Plywood": "Plywood phủ phim",
+      "Veneer-Faced / UV-Coated Plywood": "Plywood phủ veneer / sơn UV",
+      "Moisture-Resistant Plywood": "Plywood chống ẩm",
+      "Acacia Wood Pallets": "Pallet gỗ keo",
+      "Plywood Pallets": "Pallet plywood",
+      "Plywood Crates": "Thùng plywood",
+      "Acacia Wood Crates": "Thùng gỗ keo",
+      "Wood Packaging": "Bao bì gỗ",
+      "Carton Packaging": "Bao bì carton",
+      Plywood: "Plywood",
+      Veneer: "Veneer",
+      "Furniture Plywood": "Plywood nội thất",
+      "Commercial Plywood": "Plywood thương mại",
+      "Packaging Plywood": "Plywood đóng gói",
+      "Industrial Plywood": "Plywood công nghiệp",
+      LVL: "LVL",
+      "Particleboard / Okal": "Ván dăm / Okal",
+      "Other Wood Products": "Sản phẩm gỗ khác",
+    },
+    materials: {
+      "Rubberwood plantation core": "Lõi cao su trồng",
+      "Birch veneer": "Veneer bạch dương",
+      Acacia: "Gỗ keo",
+      Pine: "Gỗ thông",
+      Melaleuca: "Gỗ tràm",
+      Plywood: "Plywood",
+      Eucalyptus: "Gỗ bạch đàn",
+      Styrax: "Gỗ Styrax",
+      Rubberwood: "Gỗ cao su",
+      "Mixed Light Hardwood (MLH)": "Gỗ cứng nhẹ hỗn hợp (MLH)",
+      Other: "Khác",
+    },
+    regions: {
+      North: "Miền Bắc",
+      Central: "Miền Trung",
+      South: "Miền Nam",
+    },
+    markets: {
+      Vietnam: "Việt Nam",
+      Japan: "Nhật Bản",
+      "South Korea": "Hàn Quốc",
+      "United States": "Hoa Kỳ",
+    },
+  };
+  const filterOptionLabel = (group: keyof Filters, option: string) =>
+    vi ? filterOptionLabels[group]?.[option] ?? option : option;
   const toggleFilter = (group: keyof Filters, value: string) =>
     setFilters((current) => ({
       ...current,
@@ -216,7 +266,7 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
             checked={filters[group].includes(option)}
             onChange={() => toggleFilter(group, option)}
           />
-          {option}
+          {filterOptionLabel(group, option)}
         </label>
       ))}
     </fieldset>
@@ -241,7 +291,7 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
         <option value="">{allLabel}</option>
         {options.map((option) => (
           <option key={option} value={option}>
-            {option}
+            {filterOptionLabel(group, option)}
           </option>
         ))}
       </select>

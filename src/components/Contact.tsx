@@ -19,10 +19,10 @@ export function Contact({ locale }: { locale: Locale }) {
         <p>{contactContent.description}</p>
         <div className="contact-direct">
           <span>
-            {vi
-              ? "Thông tin liên hệ chính thức sẽ được cập nhật sau khi xác nhận."
-              : "Official contact details will be added after confirmation."}
+            {vi ? "Liên hệ trực tiếp với MISO JAPAN" : "Contact MISO JAPAN directly"}
           </span>
+          <a href={`mailto:${vi ? company.emailVi : company.email}`}>{vi ? company.emailVi : company.email}</a>
+          <a href={`tel:${(vi ? company.whatsappVi : company.whatsapp).replace(/\s/g, "")}`}>{vi ? company.whatsappVi : company.whatsapp}</a>
           <small>{company.legalName}</small>
           <small>{company.location}</small>
         </div>
