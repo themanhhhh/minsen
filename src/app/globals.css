@@ -8226,6 +8226,10 @@ html[dir="rtl"] .registration-form input[type="file"] {
   font-weight: 800;
   gap: 6px;
   margin-left: auto;
+  max-width: 27%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -8238,6 +8242,36 @@ html[dir="rtl"] .registration-form input[type="file"] {
 .buyer-country-mark svg {
   height: 14px;
   width: 14px;
+}
+
+.buyer-save-button {
+  align-items: center;
+  background: #f4f7fa;
+  border: 1px solid #cbd5e0;
+  border-radius: 3px;
+  color: #25436d;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font: inherit;
+  font-size: clamp(6px, .62vw, 9px);
+  font-weight: 800;
+  gap: 4px;
+  padding: 4px 6px;
+  white-space: nowrap;
+}
+
+.buyer-save-button:hover,
+.buyer-save-button.is-saved {
+  background: #e9f1e8;
+  border-color: #6d9a67;
+  color: #356232;
+}
+
+.buyer-save-button:focus-visible,
+.buyer-saved-filter:focus-visible {
+  outline: 2px solid #18519a;
+  outline-offset: 2px;
 }
 
 .buyer-layer {
@@ -8654,6 +8688,14 @@ html[dir="rtl"] .registration-form input[type="file"] {
     font-size: 9px;
   }
 
+  .buyer-save-button {
+    padding: 4px;
+  }
+
+  .buyer-save-button span {
+    display: none;
+  }
+
   .buyer-layer-heading strong {
     font-size: 8px;
   }
@@ -8871,9 +8913,29 @@ html[dir="rtl"] .registration-form input[type="file"] {
   font-weight: 900;
 }
 
-.buyer-directory-results-bar span:last-child {
+.buyer-directory-results-bar span:nth-child(2) {
   color: #4c7c49;
   font-weight: 800;
+}
+
+.buyer-saved-filter {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: #536579;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: clamp(6px, .62vw, 9px);
+  font-weight: 800;
+  gap: 4px;
+  padding: 2px 0;
+  white-space: nowrap;
+}
+
+.buyer-saved-filter:hover,
+.buyer-saved-filter.is-active {
+  color: #356232;
 }
 
 .buyer-empty-results {

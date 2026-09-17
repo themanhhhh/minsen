@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useDeferredValue, useState } from "react";
+import { useDeferredValue, useEffect, useState } from "react";
 import { getLocalizedPath, type Locale } from "@/data/landing-page";
 import type { BuyerProfile } from "@/data/buyers";
 import {
   BadgeCheck,
+  Bookmark,
   Building2,
   ClipboardList,
   Factory,
@@ -18,6 +19,77 @@ import {
 type BuyerIconName = "factory" | "cart" | "clipboard" | "shield" | "users" | "building" | "badge" | "globe";
 
 const buyerPageSize = 6;
+const savedBuyerCookieName = "minsen-saved-buyers";
+const savedBuyerCookieMaxAge = 60 * 60 * 24 * 365;
+const maxBuyerSequence = 600;
+
+function buyerIdToSequence(id: string) {
+  const match = /^MJB-IN-(\d{4})$/.exec(id);
+  return match ? Number(match[1]) : null;
+}
+
+function sequenceToBuyerId(sequence: number) {
+  return `MJB-IN-${String(sequence).padStart(4, "0")}`;
+}
+
+function encodeSavedBuyerIds(ids: string[]) {
+  const sequences = Array.from(
+    new Set(ids.flatMap((id) => {
+      const sequence = buyerIdToSequence(id);
+      return sequence === null ? [] : [sequence];
+    })),
+  ).sort((left, right) => left - right);
+  const ranges: string[] = [];
+
+  for (const sequence of sequences) {
+    const previous = ranges.at(-1);
+    if (!previous) {
+      ranges.push(String(sequence));
+      continue;
+    }
+
+    const [start, end = start] = previous.split("-").map(Number);
+    if (sequence === end + 1) {
+      ranges[ranges.length - 1] = `${start}-${sequence}`;
+    } else {
+      ranges.push(String(sequence));
+    }
+  }
+
+  return ranges.join(",");
+}
+
+function decodeSavedBuyerIds(value: string) {
+  const sequences = value.split(",").flatMap((range) => {
+    const [startValue, endValue = startValue] = range.split("-");
+    const start = Number(startValue);
+    const end = Number(endValue);
+
+    if (!Number.isInteger(start) || !Number.isInteger(end) || start < 1 || end < start || end > maxBuyerSequence) {
+      return [];
+    }
+
+    return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+  });
+
+  return Array.from(new Set(sequences)).map(sequenceToBuyerId);
+}
+
+function readSavedBuyerIds() {
+  try {
+    const cookie = document.cookie
+      .split(/;\s*/)
+      .find((item) => item.startsWith(`${savedBuyerCookieName}=`));
+    return cookie ? decodeSavedBuyerIds(decodeURIComponent(cookie.slice(savedBuyerCookieName.length + 1))) : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeSavedBuyerIds(ids: string[]) {
+  const secure = window.location.protocol === "https:" ? "; Secure" : "";
+  document.cookie = `${savedBuyerCookieName}=${encodeURIComponent(encodeSavedBuyerIds(ids))}; Max-Age=${savedBuyerCookieMaxAge}; Path=/; SameSite=Lax${secure}`;
+}
 
 const marketRail = [
   { country: "India", label: "ẤN ĐỘ", labelEn: "INDIA", className: "buyer-rail-india" },
@@ -191,13 +263,35 @@ function BuyerList({ items }: { items: string[] }) {
   );
 }
 
-function BuyerCard({ buyer }: { buyer: BuyerProfile }) {
+function BuyerCard({
+  buyer,
+  isSaved,
+  onToggleSaved,
+  saveLabel,
+  savedLabel,
+}: {
+  buyer: BuyerProfile;
+  isSaved: boolean;
+  onToggleSaved: (id: string) => void;
+  saveLabel: string;
+  savedLabel: string;
+}) {
   return (
     <article className={`buyer-profile buyer-profile-${buyer.number}`}>
       <header className="buyer-profile-header">
         <span className="buyer-profile-number">{buyer.number}</span>
         <strong>MÃ BUYER: {buyer.id}</strong>
         <span className="buyer-profile-country"><CountryMark /> {buyer.country}</span>
+        <button
+          className={`buyer-save-button${isSaved ? " is-saved" : ""}`}
+          type="button"
+          aria-label={`${isSaved ? savedLabel : saveLabel}: ${buyer.id}`}
+          aria-pressed={isSaved}
+          onClick={() => onToggleSaved(buyer.id)}
+        >
+          <Bookmark size={14} strokeWidth={1.8} fill={isSaved ? "currentColor" : "none"} aria-hidden="true" />
+          <span>{isSaved ? savedLabel : saveLabel}</span>
+        </button>
       </header>
 
       <section className="buyer-layer buyer-signal-layer">
@@ -292,13 +386,27 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
   const productOptions = Array.from(new Set(profiles.flatMap((buyer) => buyer.mainProduct))).sort();
   const marketOptions = Array.from(new Set(profiles.map((buyer) => buyer.market))).sort();
   const paymentOptions = Array.from(new Set(profiles.map((buyer) => buyer.payment))).sort();
+  const saveLabel = vi ? "Lưu buyer" : ar ? "حفظ المشتري" : "Save buyer";
+  const savedLabel = vi ? "Đã lưu" : ar ? "محفوظ" : "Saved";
+  const savedBuyersLabel = vi ? "Buyer đã lưu" : ar ? "المشترون المحفوظون" : "Saved buyers";
+  const showAllLabel = vi ? "Xem tất cả" : ar ? "عرض الكل" : "Show all";
   const [query, setQuery] = useState("");
   const [productFilter, setProductFilter] = useState("");
   const [paymentFilter, setPaymentFilter] = useState("");
   const [marketFilter, setMarketFilter] = useState("");
   const [countryFilter, setCountryFilter] = useState("");
+  const [savedBuyerIds, setSavedBuyerIds] = useState<string[]>([]);
+  const [savedOnly, setSavedOnly] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const deferredQuery = useDeferredValue(query);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      const validIds = new Set(profiles.map((buyer) => buyer.id));
+      setSavedBuyerIds(readSavedBuyerIds().filter((id) => validIds.has(id)));
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, [profiles]);
 
   const normalizedQuery = deferredQuery.trim().toLowerCase();
   const filteredProfiles = profiles.filter((buyer) => {
@@ -326,6 +434,7 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
       (!productFilter || buyer.mainProduct.includes(productFilter)) &&
       (!paymentFilter || buyer.payment === paymentFilter) &&
       (!marketFilter || buyer.market === marketFilter) &&
+      (!savedOnly || savedBuyerIds.includes(buyer.id)) &&
       matchesCountryRail(buyer.country, countryFilter)
     );
   });
@@ -341,14 +450,22 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
   );
   const paginationItems = getPaginationItems(totalPages, safePage);
   const hasFilters = Boolean(
-    query.trim() || productFilter || paymentFilter || marketFilter || countryFilter,
+    query.trim() || productFilter || paymentFilter || marketFilter || countryFilter || savedOnly,
   );
+  const toggleSavedBuyer = (id: string) => {
+    const next = savedBuyerIds.includes(id)
+      ? savedBuyerIds.filter((item) => item !== id)
+      : [...savedBuyerIds, id];
+    setSavedBuyerIds(next);
+    writeSavedBuyerIds(next);
+  };
   const clearFilters = () => {
     setQuery("");
     setProductFilter("");
     setPaymentFilter("");
     setMarketFilter("");
     setCountryFilter("");
+    setSavedOnly(false);
     setCurrentPage(1);
   };
 
@@ -456,11 +573,32 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
               Hiển thị <strong>{filteredProfiles.length === 0 ? 0 : (safePage - 1) * buyerPageSize + 1}-{Math.min(safePage * buyerPageSize, filteredProfiles.length)}</strong> trong tổng số <strong>{filteredProfiles.length}</strong> hồ sơ
             </span>
             <span>{hasFilters ? "Đã áp dụng bộ lọc" : "Tất cả hồ sơ đã lập bản đồ"}</span>
+            <button
+              className={`buyer-saved-filter${savedOnly ? " is-active" : ""}`}
+              type="button"
+              aria-pressed={savedOnly}
+              onClick={() => {
+                setSavedOnly((value) => !value);
+                setCurrentPage(1);
+              }}
+            >
+              <Bookmark size={13} strokeWidth={1.8} fill={savedOnly ? "currentColor" : "none"} aria-hidden="true" />
+              {savedOnly ? showAllLabel : savedBuyersLabel} ({savedBuyerIds.length})
+            </button>
           </div>
         </section>
 
         <main className="buyer-profiles-grid" aria-live="polite">
-          {paginatedProfiles.map((buyer) => <BuyerCard buyer={buyer} key={buyer.id} />)}
+          {paginatedProfiles.map((buyer) => (
+            <BuyerCard
+              buyer={buyer}
+              isSaved={savedBuyerIds.includes(buyer.id)}
+              onToggleSaved={toggleSavedBuyer}
+              saveLabel={saveLabel}
+              savedLabel={savedLabel}
+              key={buyer.id}
+            />
+          ))}
           {paginatedProfiles.length === 0 && (
             <div className="buyer-empty-results">
               <strong>Không tìm thấy hồ sơ phù hợp</strong>
