@@ -2,6 +2,7 @@ import { type Locale } from "@/data/landing-page";
 
 export function ProductKnowledge({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
+  const ar = locale === "ar";
   const applications = vi
     ? [
         "Commercial Plywood — Plywood thương mại",
@@ -11,7 +12,16 @@ export function ProductKnowledge({ locale }: { locale: Locale }) {
         "Film-Faced Plywood — Plywood phủ phim",
         "Plywood theo dự án hoặc ứng dụng đặc thù",
       ]
-    : [
+    : ar
+      ? [
+          "الخشب الرقائقي التجاري",
+          "الخشب الرقائقي للأثاث",
+          "الخشب الرقائقي للتغليف",
+          "الخشب الرقائقي للبناء",
+          "الخشب الرقائقي مكسو بالفيلم",
+          "خشب رقائقي لتطبيقات خاصة أو حسب المشروع",
+        ]
+      : [
         "Commercial Plywood",
         "Furniture Plywood",
         "Packing Plywood",
@@ -32,7 +42,20 @@ export function ProductKnowledge({ locale }: { locale: Locale }) {
         "Yêu cầu phát thải / thử nghiệm",
         "Đóng gói, marking và yêu cầu thị trường nhập khẩu",
       ]
-    : [
+    : ar
+      ? [
+          "المقاس والسماكة",
+          "تحمل السماكة",
+          "أنواع خشب القلب وتركيبته",
+          "تصنيف الوجه والظهر",
+          "جودة القشرة",
+          "متطلبات المادة اللاصقة / الربط",
+          "محتوى الرطوبة والكثافة",
+          "متطلبات السطح",
+          "متطلبات الانبعاثات / الاختبارات",
+          "متطلبات التغليف ووضع العلامات وسوق الوجهة",
+        ]
+      : [
         "Size and thickness",
         "Thickness tolerance",
         "Core species and core construction",
@@ -49,29 +72,29 @@ export function ProductKnowledge({ locale }: { locale: Locale }) {
     <section className="product-knowledge">
       <div className="product-knowledge-copy">
         <p className="eyebrow">
-          {vi ? "Hiểu biết sản phẩm và kỹ thuật plywood" : "Plywood product & technical understanding"}
+          {vi ? "Hiểu biết sản phẩm và kỹ thuật plywood" : ar ? "فهم منتجات الخشب الرقائقي والمتطلبات الفنية" : "Plywood product & technical understanding"}
         </p>
-        <h2>{vi ? "Sourcing plywood không chỉ là biết tên sản phẩm." : "Plywood sourcing requires more than product names."}</h2>
+        <h2>{vi ? "Sourcing plywood không chỉ là biết tên sản phẩm." : ar ? "لا يقتصر توريد الخشب الرقائقي على معرفة أسماء المنتجات." : "Plywood sourcing requires more than product names."}</h2>
         <p>
           {vi
             ? "Mỗi buyer, mỗi ứng dụng và mỗi thị trường đều có thể yêu cầu thông số khác nhau. MISO JAPAN hỗ trợ làm rõ yêu cầu kỹ thuật trước khi lựa chọn nhà cung cấp và so sánh báo giá."
-            : "Different buyers, applications and markets require different specifications. MISO JAPAN helps clarify technical requirements before supplier matching and quotation comparison."}
+            : ar ? "تتطلب احتياجات المشترين والتطبيقات والأسواق المختلفة مواصفات مختلفة. تساعد MISO JAPAN على توضيح المتطلبات الفنية قبل مطابقة الموردين ومقارنة عروض الأسعار." : "Different buyers, applications and markets require different specifications. MISO JAPAN helps clarify technical requirements before supplier matching and quotation comparison."}
         </p>
         <blockquote>
           {vi
             ? "Sản phẩm phải được định nghĩa bằng thông số kỹ thuật, mục đích sử dụng và tiêu chí chấp nhận — không chỉ bằng tên gọi."
-            : "The product is defined by specification, application and acceptance criteria — not by name alone."}
+            : ar ? "يُعرَّف المنتج بالمواصفات والتطبيق ومعايير القبول، وليس بالاسم وحده." : "The product is defined by specification, application and acceptance criteria — not by name alone."}
         </blockquote>
       </div>
       <div className="product-knowledge-lists">
         <div>
-          <h3>{vi ? "Các nhóm ứng dụng điển hình" : "Typical product applications"}</h3>
+          <h3>{vi ? "Các nhóm ứng dụng điển hình" : ar ? "تطبيقات المنتجات الشائعة" : "Typical product applications"}</h3>
           <ul>
             {applications.map((application) => <li key={application}>{application}</li>)}
           </ul>
         </div>
         <div>
-          <h3>{vi ? "Các thông số cần làm rõ" : "Key parameters we clarify"}</h3>
+          <h3>{vi ? "Các thông số cần làm rõ" : ar ? "المعايير الرئيسية التي نوضحها" : "Key parameters we clarify"}</h3>
           <ul>
             {parameters.map((parameter) => <li key={parameter}>{parameter}</li>)}
           </ul>

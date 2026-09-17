@@ -4,6 +4,7 @@ import Image from "next/image";
 
 export function BuyerProtection({ locale }: { locale: Locale }) {
   const { protectionLayers } = getLandingContent(locale);
+  const ar = locale === "ar";
   const images: Record<string, string> = {
     "01": "/images/protection/factory-verification.jpg",
     "02": "/images/protection/supplier-selection.jpg",
@@ -20,7 +21,7 @@ export function BuyerProtection({ locale }: { locale: Locale }) {
         <p className="eyebrow eyebrow-light">
           {locale === "vi"
             ? "Hệ thống quản trị rủi ro Buyer"
-            : "Buyer risk elimination system"}
+            : ar ? "نظام التخلص من مخاطر المشتري" : "Buyer risk elimination system"}
         </p>
         <h2>
           {locale === "vi" ? (
@@ -28,6 +29,14 @@ export function BuyerProtection({ locale }: { locale: Locale }) {
               Một phương pháp
               <br />
               <em>có cấu trúc.</em>
+            </>
+          ) : ar ? (
+            <>
+              نهج منظم
+              <br />
+              لإدارة مخاطر
+              <br />
+              <em>المشتري.</em>
             </>
           ) : (
             <>
@@ -42,21 +51,21 @@ export function BuyerProtection({ locale }: { locale: Locale }) {
         <p>
           {locale === "vi"
             ? "100 nhóm rủi ro, 30 SOP tổng thể, biểu mẫu có kiểm soát, bộ bằng chứng và 12 control gate giúp giảm sự phụ thuộc vào lời hứa bằng miệng."
-            : "100 buyer risks, 30 master SOPs, controlled forms, evidence packs and 12 control gates reduce dependence on verbal promises and make critical sourcing stages traceable."}
+            : ar ? "100 من مخاطر المشتري و30 إجراء تشغيل قياسي ونماذج خاضعة للرقابة وحزم أدلة و12 نقطة تحكم تقلل الاعتماد على الوعود الشفهية وتجعل مراحل التوريد الحرجة قابلة للتتبع." : "100 buyer risks, 30 master SOPs, controlled forms, evidence packs and 12 control gates reduce dependence on verbal promises and make critical sourcing stages traceable."}
           </p>
         <div className="protection-system">
-          <p className="eyebrow eyebrow-light">MISO JAPAN BUYER RISK ELIMINATION SYSTEM™</p>
+          <p className="eyebrow eyebrow-light">{ar ? "نظام MISO JAPAN للتخلص من مخاطر المشتري™" : "MISO JAPAN BUYER RISK ELIMINATION SYSTEM™"}</p>
           <div className="protection-system-flow">
-            <span><strong>100</strong>{locale === "vi" ? "nhóm rủi ro Buyer" : "buyer risks"}</span>
-            <span><strong>30</strong>{locale === "vi" ? "SOP tổng thể" : "master SOPs"}</span>
-            <span>{locale === "vi" ? "Biểu mẫu và checklist có kiểm soát" : "Controlled forms & checklists"}</span>
-            <span>{locale === "vi" ? "Bộ hồ sơ bằng chứng" : "Evidence packs"}</span>
-            <span><strong>12</strong>{locale === "vi" ? "control gates" : "control gates"}</span>
+            <span><strong>100</strong>{locale === "vi" ? "nhóm rủi ro Buyer" : ar ? "مخاطر المشتري" : "buyer risks"}</span>
+            <span><strong>30</strong>{locale === "vi" ? "SOP tổng thể" : ar ? "إجراءات التشغيل القياسية الرئيسية" : "master SOPs"}</span>
+            <span>{locale === "vi" ? "Biểu mẫu và checklist có kiểm soát" : ar ? "نماذج وقوائم تحقق خاضعة للرقابة" : "Controlled forms & checklists"}</span>
+            <span>{locale === "vi" ? "Bộ hồ sơ bằng chứng" : ar ? "حزم الأدلة" : "Evidence packs"}</span>
+            <span><strong>12</strong>{locale === "vi" ? "control gates" : ar ? "نقاط تحكم" : "control gates"}</span>
           </div>
           <p className="protection-system-logic">
             {locale === "vi"
               ? "Nỗi lo Buyer → Rủi ro → Kiểm soát → Bằng chứng → Phê duyệt → Giám sát"
-              : "Buyer fear → Risk → Control → Evidence → Approval → Monitoring"}
+              : ar ? "مخاوف المشتري ← المخاطر ← التحكم ← الأدلة ← الاعتماد ← المتابعة" : "Buyer fear → Risk → Control → Evidence → Approval → Monitoring"}
           </p>
         </div>
       </div>
@@ -80,25 +89,25 @@ export function BuyerProtection({ locale }: { locale: Locale }) {
           ))}
       </div>
       <div className="protection-evidence">
-        <p className="eyebrow eyebrow-light">{locale === "vi" ? "Sourcing dựa trên bằng chứng" : "Evidence-based sourcing"}</p>
-        <h3>{locale === "vi" ? "Không chỉ nói cho Buyer biết. Hãy cho Buyer nhìn thấy." : "Do not just tell the buyer. Show the buyer."}</h3>
+        <p className="eyebrow eyebrow-light">{locale === "vi" ? "Sourcing dựa trên bằng chứng" : ar ? "التوريد القائم على الأدلة" : "Evidence-based sourcing"}</p>
+        <h3>{locale === "vi" ? "Không chỉ nói cho Buyer biết. Hãy cho Buyer nhìn thấy." : ar ? "لا تكتفِ بإخبار المشتري. أره الدليل." : "Do not just tell the buyer. Show the buyer."}</h3>
         <p>
           {locale === "vi"
             ? "Tùy theo phạm vi đã thống nhất, bộ bằng chứng có thể bao gồm hồ sơ xác minh nhà máy, xác nhận yêu cầu, hồ sơ duyệt mẫu, ảnh sản xuất, hồ sơ QC, bằng chứng đóng gói, loading và đối chiếu chứng từ shipment."
-            : "Depending on the agreed scope, a buyer evidence package may include factory verification, requirement confirmation, sample approval, production photos, QC records, packing and loading evidence, and shipment document reconciliation."}
+            : ar ? "بحسب النطاق المتفق عليه، قد تتضمن حزمة أدلة المشتري التحقق من المصنع وتأكيد المتطلبات واعتماد العينات وصور الإنتاج وسجلات مراقبة الجودة وأدلة التغليف والتحميل ومطابقة مستندات الشحن." : "Depending on the agreed scope, a buyer evidence package may include factory verification, requirement confirmation, sample approval, production photos, QC records, packing and loading evidence, and shipment document reconciliation."}
         </p>
         <div className="protection-evidence-list">
           {(locale === "vi"
             ? ["Hồ sơ xác minh nhà máy", "Xác nhận yêu cầu Buyer", "Hồ sơ phê duyệt mẫu", "Hồ sơ QC / Inspection", "Bằng chứng đóng gói và loading", "Đối chiếu chứng từ shipment"]
-            : ["Factory verification record", "Buyer requirement confirmation", "Sample approval record", "QC / inspection records", "Packing and loading evidence", "Shipment document reconciliation"]
+            : ar ? ["سجل التحقق من المصنع", "تأكيد متطلبات المشتري", "سجل اعتماد العينات", "سجلات مراقبة الجودة / الفحص", "أدلة التغليف والتحميل", "مطابقة مستندات الشحن"] : ["Factory verification record", "Buyer requirement confirmation", "Sample approval record", "QC / inspection records", "Packing and loading evidence", "Shipment document reconciliation"]
           ).map((item) => <span key={item}>{item}</span>)}
         </div>
-        <strong className="protection-evidence-principle">{locale === "vi" ? "CAM KẾT → KIỂM SOÁT → BẰNG CHỨNG" : "CLAIM → CONTROL → EVIDENCE"}</strong>
+        <strong className="protection-evidence-principle">{locale === "vi" ? "CAM KẾT → KIỂM SOÁT → BẰNG CHỨNG" : ar ? "الادعاء ← التحكم ← الدليل" : "CLAIM → CONTROL → EVIDENCE"}</strong>
       </div>
       <div className="protection-badge">
         <span aria-hidden="true"><ShieldCheck size={27} strokeWidth={1.8} /></span>
         <strong>
-          {locale === "vi" ? "12 control gates" : "12 control gates"}
+          {locale === "vi" ? "12 control gates" : ar ? "12 نقطة تحكم" : "12 control gates"}
         </strong>
         <small>
           {locale === "vi" ? (
@@ -106,6 +115,12 @@ export function BuyerProtection({ locale }: { locale: Locale }) {
               Kiểm soát có cấu trúc.
               <br />
               Bằng chứng tại các bước quan trọng.
+            </>
+          ) : ar ? (
+            <>
+              تحكم منظم.
+              <br />
+              أدلة في المراحل الحرجة.
             </>
           ) : (
             <>

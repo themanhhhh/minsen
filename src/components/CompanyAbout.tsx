@@ -1,4 +1,4 @@
-import { aboutPageContent, type Locale } from "@/data/landing-page";
+import { aboutPageContent, getLocalizedPath, type Locale } from "@/data/landing-page";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import Link from "next/link";
@@ -7,6 +7,7 @@ import { ScrollCue } from "@/components/ScrollCue";
 
 export function CompanyAbout({ locale }: { locale: Locale }) {
   const content = aboutPageContent[locale];
+  const ar = locale === "ar";
   return (
     <>
       <Header locale={locale} />
@@ -17,7 +18,7 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
             <h1>{content.title}</h1>
             <p>{content.intro}</p>
             <a className="button button-light" href="#mission">
-              {locale === "vi" ? "Tìm hiểu thêm" : "Learn more"}
+              {locale === "vi" ? "Tìm hiểu thêm" : ar ? "معرفة المزيد" : "Learn more"}
               <span aria-hidden="true">↓</span>
             </a>
           </div>
@@ -31,30 +32,30 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
             <span>MISO JAPAN</span>
             <strong>01</strong>
             <small>
-              ACCOUNTABLE
+              {ar ? "شريك" : "ACCOUNTABLE"}
               <br />
-              PARTNER
+              {ar ? "مسؤول" : "PARTNER"}
             </small>
           </div>
-          <ScrollCue targetId="mission" label={locale === "vi" ? "Cuộn để tìm hiểu thêm" : "Scroll to learn more"} />
+          <ScrollCue targetId="mission" label={locale === "vi" ? "Cuộn để tìm hiểu thêm" : ar ? "مرر لمعرفة المزيد" : "Scroll to learn more"} />
         </section>
         <section className="about-story" id="mission">
           <div className="about-story-label">
             <span>01</span>
-            <p>{locale === "vi" ? "Sứ mệnh của chúng tôi" : "Our mission"}</p>
+            <p>{locale === "vi" ? "Sứ mệnh của chúng tôi" : ar ? "مهمتنا" : "Our mission"}</p>
           </div>
           <div>
             <h2>{content.missionTitle}</h2>
             <p>{content.missionText}</p>
-            <Link className="text-link" href="/#contact">
-              {locale === "vi" ? "Trao đổi với đội ngũ" : "Talk to our team"}{" "}
+            <Link className="text-link" href={`${getLocalizedPath(locale, "/")}#contact`}>
+              {locale === "vi" ? "Trao đổi với đội ngũ" : ar ? "تحدث مع فريقنا" : "Talk to our team"}{" "}
               <span aria-hidden="true">↗</span>
             </Link>
           </div>
         </section>
         <section className="about-positioning">
           <p className="eyebrow">
-            {locale === "vi" ? "Định vị của MISO JAPAN" : "Our positioning"}
+            {locale === "vi" ? "Định vị của MISO JAPAN" : ar ? "مكانة MISO JAPAN" : "Our positioning"}
           </p>
           <blockquote>{content.positioningTitle}</blockquote>
           <p>{content.positioningText}</p>
@@ -62,7 +63,7 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
         <section className="about-network">
           <div className="network-copy">
             <p className="eyebrow">
-              {locale === "vi" ? "Năng lực kết nối" : "The network behind us"}
+              {locale === "vi" ? "Năng lực kết nối" : ar ? "الشبكة التي تقف خلفنا" : "The network behind us"}
             </p>
             <h2>{content.networkTitle}</h2>
             <p>{content.networkText}</p>
@@ -73,7 +74,7 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
               <span>
                 {locale === "vi"
                   ? "đầu mối chịu trách nhiệm"
-                  : "accountable partner"}
+                  : ar ? "شريك مسؤول" : "accountable partner"}
               </span>
             </div>
             <div>
@@ -81,7 +82,7 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
               <span>
                 {locale === "vi"
                   ? "giai đoạn dành cho buyer"
-                  : "buyer-facing phases"}
+                  : ar ? "مراحل مخصصة للمشتري" : "buyer-facing phases"}
               </span>
             </div>
             <div>
@@ -89,20 +90,20 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
               <span>
                 {locale === "vi"
                   ? "control gate dự kiến"
-                  : "control gates planned"}
+                  : ar ? "نقاط تحكم مخططة" : "control gates planned"}
               </span>
             </div>
           </div>
         </section>
         <section className="about-local">
           <div>
-            <p className="eyebrow">{locale === "vi" ? "Đối tác thực thi tại Việt Nam" : "Your local execution partner in Vietnam"}</p>
+            <p className="eyebrow">{locale === "vi" ? "Đối tác thực thi tại Việt Nam" : ar ? "شريكك المحلي للتنفيذ في فيتنام" : "Your local execution partner in Vietnam"}</p>
             <h2>{content.localTitle}</h2>
             <p>{content.localText}</p>
-            <blockquote>{locale === "vi" ? "Một đội ngũ địa phương ở gần nhà máy hơn, trong khi buyer vẫn giữ quyền kiểm soát các quyết định thương mại." : "A local team closer to the factory, while the buyer remains in control of commercial decisions."}</blockquote>
+            <blockquote>{locale === "vi" ? "Một đội ngũ địa phương ở gần nhà máy hơn, trong khi buyer vẫn giữ quyền kiểm soát các quyết định thương mại." : ar ? "فريق محلي أقرب إلى المصنع، مع بقاء القرارات التجارية تحت سيطرة المشتري." : "A local team closer to the factory, while the buyer remains in control of commercial decisions."}</blockquote>
           </div>
           <div className="about-local-support">
-            <h3>{locale === "vi" ? "Các hỗ trợ có thể bao gồm" : "Local support may include"}</h3>
+            <h3>{locale === "vi" ? "Các hỗ trợ có thể bao gồm" : ar ? "قد يشمل الدعم المحلي" : "Local support may include"}</h3>
             <ul>
               {content.localSupport.map((item) => <li key={item}>{item}</li>)}
             </ul>
@@ -110,9 +111,9 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
         </section>
         <section className="factory-intelligence">
           <div>
-            <p className="eyebrow">{locale === "vi" ? "Dữ liệu nhà máy plywood Việt Nam" : "Vietnam factory intelligence"}</p>
+            <p className="eyebrow">{locale === "vi" ? "Dữ liệu nhà máy plywood Việt Nam" : ar ? "بيانات مصانع الخشب الرقائقي في فيتنام" : "Vietnam factory intelligence"}</p>
             <strong>230</strong>
-            <span>{locale === "vi" ? "hồ sơ nhà máy đã được lập bản đồ dữ liệu" : "mapped factory records"}</span>
+            <span>{locale === "vi" ? "hồ sơ nhà máy đã được lập bản đồ dữ liệu" : ar ? "سجلات مصانع موثقة" : "mapped factory records"}</span>
           </div>
           <p>{content.factoryIntelligence}</p>
         </section>
@@ -124,6 +125,8 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
                 <>
                   Làm việc với <em>chủ đích.</em>
                 </>
+              ) : ar ? (
+                <>مبني على <em>عمل جيد.</em></>
               ) : (
                 <>
                   Built on <em>good work.</em>
@@ -143,7 +146,7 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
         </section>
         <section className="about-why">
           <div>
-            <p className="eyebrow">{locale === "vi" ? "Tại sao chọn MISO JAPAN" : "Why MISO JAPAN"}</p>
+            <p className="eyebrow">{locale === "vi" ? "Tại sao chọn MISO JAPAN" : ar ? "لماذا MISO JAPAN" : "Why MISO JAPAN"}</p>
             <h2>{content.whyTitle}</h2>
           </div>
           <div className="about-why-grid">
@@ -157,18 +160,18 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
           </div>
         </section>
         <section className="founder-message">
-          <p className="eyebrow">{locale === "vi" ? "Thông điệp từ nhà sáng lập" : "Founder message"}</p>
+          <p className="eyebrow">{locale === "vi" ? "Thông điệp từ nhà sáng lập" : ar ? "رسالة المؤسس" : "Founder message"}</p>
           <blockquote>“{content.founderMessage}”</blockquote>
-          <p>Founder &amp; Managing Director<br />MISO JAPAN</p>
+          <p>{locale === "vi" ? "Nhà sáng lập & Giám đốc điều hành" : ar ? "المؤسس والمدير الإداري" : "Founder & Managing Director"}<br />MISO JAPAN</p>
         </section>
         <section className="core-message">
           <div>
-            <p className="eyebrow">{locale === "vi" ? "Thông điệp cốt lõi" : "Core message"}</p>
+            <p className="eyebrow">{locale === "vi" ? "Thông điệp cốt lõi" : ar ? "الرسالة الأساسية" : "Core message"}</p>
             <h2>{content.coreTitle}</h2>
             <p>{content.coreText}</p>
           </div>
           <div className="commercial-logic">
-            <p className="eyebrow">{locale === "vi" ? "Logic thương mại của MISO JAPAN" : "Our commercial logic"}</p>
+            <p className="eyebrow">{locale === "vi" ? "Logic thương mại của MISO JAPAN" : ar ? "منطقنا التجاري" : "Our commercial logic"}</p>
             {content.commercialLogic.map((item, index) => (
               <span key={item}><strong>0{index + 1}</strong>{item}</span>
             ))}
@@ -176,11 +179,11 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
         </section>
         <section className="about-page-cta">
           <p className="eyebrow eyebrow-light">
-            {locale === "vi" ? "Cùng bắt đầu" : "Let's work together"}
+            {locale === "vi" ? "Cùng bắt đầu" : ar ? "لنعمل معًا" : "Let's work together"}
           </p>
           <h2>{content.ctaTitle}</h2>
           <p>{content.ctaText}</p>
-          <Link className="button button-light" href="/#contact">
+          <Link className="button button-light" href={`${getLocalizedPath(locale, "/")}#contact`}>
             {content.cta}
             <span aria-hidden="true">↗</span>
           </Link>
