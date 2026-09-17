@@ -22,7 +22,6 @@ function readIds(key: string) {
 export function ShortlistPage({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
   const ar = locale === "ar";
-  const factoryPublicLabel = getFactoryPublicLabel(locale);
   const missing = vi ? "Chưa cung cấp" : ar ? "غير متوفر" : "Not provided";
   const [shortlistIds, setShortlistIds] = useState<string[]>([]);
   const [compareIds, setCompareIds] = useState<string[]>([]);
@@ -192,12 +191,12 @@ export function ShortlistPage({ locale }: { locale: Locale }) {
                  <strong>{vi ? "Tiêu chí" : ar ? "المعايير" : "Criteria"}</strong>
                 {selected.map((factory) => (
                   <div className="compare-factory-heading" key={factory.id}>
-                     <strong>{factoryPublicLabel}</strong>
+                     <strong>{getFactoryPublicLabel(locale, factory.id)}</strong>
                     {compareMode && (
                       <button
                         type="button"
                         onClick={() => removeFromCompare(factory.id)}
-                          aria-label={`${vi ? "Xóa" : ar ? "إزالة" : "Remove"} ${factoryPublicLabel}`}
+                          aria-label={`${vi ? "Xóa" : ar ? "إزالة" : "Remove"} ${getFactoryPublicLabel(locale, factory.id)}`}
                       >
                         ×
                       </button>

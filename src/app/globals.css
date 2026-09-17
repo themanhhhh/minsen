@@ -8229,24 +8229,15 @@ html[dir="rtl"] .registration-form input[type="file"] {
   white-space: nowrap;
 }
 
-.buyer-flag {
-  background: linear-gradient(to bottom, #f18c35 0 33%, #fff 33% 66%, #25864a 66% 100%);
-  border: 1px solid #d5d8d9;
-  display: inline-block;
-  height: 13px;
-  position: relative;
-  width: 21px;
+.buyer-country-mark {
+  align-items: center;
+  color: #aa7b4a;
+  display: inline-flex;
 }
 
-.buyer-flag::after {
-  border: 1px solid #244a88;
-  border-radius: 50%;
-  content: "";
-  height: 4px;
-  left: 8px;
-  position: absolute;
-  top: 4px;
-  width: 4px;
+.buyer-country-mark svg {
+  height: 14px;
+  width: 14px;
 }
 
 .buyer-layer {
@@ -8436,6 +8427,11 @@ html[dir="rtl"] .registration-form input[type="file"] {
   margin: 0;
 }
 
+.buyer-fit-value {
+  font-weight: 800;
+  margin-top: 7px !important;
+}
+
 .buyer-fit-column .buyer-bullet-list {
   margin-top: 2px;
 }
@@ -8444,6 +8440,7 @@ html[dir="rtl"] .registration-form input[type="file"] {
   color: #172846;
   display: block;
   font-size: clamp(6px, .64vw, 9px);
+  font-weight: 700;
   line-height: 1.35;
   margin-top: 6px;
 }
@@ -8958,7 +8955,15 @@ html[dir="rtl"] .registration-form input[type="file"] {
   opacity: .72;
 }
 
-.buyer-pagination > span {
+.buyer-pagination-ellipsis {
+  color: #768494;
+  font-size: 9px;
+  font-weight: 900;
+  min-width: 14px;
+  text-align: center;
+}
+
+.buyer-pagination > span:not(.buyer-pagination-ellipsis) {
   color: #768494;
   font-size: 7px;
   font-weight: 900;
@@ -9007,7 +9012,7 @@ html[dir="rtl"] .registration-form input[type="file"] {
     flex-wrap: wrap;
   }
 
-  .buyer-pagination > span {
+  .buyer-pagination > span:not(.buyer-pagination-ellipsis) {
     flex-basis: 100%;
     margin: 3px 0 0;
     text-align: center;

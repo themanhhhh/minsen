@@ -5,7 +5,6 @@ import { factories, getFactoryPublicLabel, getLocalizedPath, type Locale } from 
 export function FactoryPreview({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
   const ar = locale === "ar";
-  const factoryPublicLabel = getFactoryPublicLabel(locale);
   const regionNames = { North: "Miền Bắc", Central: "Miền Trung", South: "Miền Nam" };
   const regionNamesAr = { North: "الشمال", Central: "الوسط", South: "الجنوب" };
   const productNames: Record<string, string> = {
@@ -46,7 +45,7 @@ export function FactoryPreview({ locale }: { locale: Locale }) {
               {factory.imagePath && (
                 <Image
                   src={factory.imagePath}
-                   alt={factoryPublicLabel}
+                   alt={getFactoryPublicLabel(locale, factory.id)}
                    fill
                    sizes="(max-width: 820px) 100vw, 33vw"
                    unoptimized={/\.(avif|jfif)$/i.test(factory.imagePath)}
@@ -56,9 +55,9 @@ export function FactoryPreview({ locale }: { locale: Locale }) {
                <strong>{vi ? regionNames[factory.region] : ar ? regionNamesAr[factory.region] : factory.region}</strong>
             </div>
             <span className="factory-id">
-                {factoryPublicLabel} · {factory.location}
+                {getFactoryPublicLabel(locale, factory.id)} · {factory.location}
              </span>
-             <h3>{factoryPublicLabel}</h3>
+             <h3>{getFactoryPublicLabel(locale, factory.id)}</h3>
             <p>
               {factory.products.slice(0, 2).map((product) => vi ? productNames[product] ?? product : product).join(" · ")} ·{" "}
               {factory.capacity || missing}

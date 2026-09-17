@@ -16,7 +16,6 @@ export function ProductProfile({
   const product = productCatalog.find((item) => item.slug === slug);
   const vi = locale === "vi";
   const ar = locale === "ar";
-  const factoryPublicLabel = getFactoryPublicLabel(locale);
   if (!product)
     return (
       <main className="not-found-panel">
@@ -157,7 +156,7 @@ export function ProductProfile({
                   {factory.imagePath && (
                     <Image
                       src={factory.imagePath}
-                       alt={factoryPublicLabel}
+                       alt={getFactoryPublicLabel(locale, factory.id)}
                        fill
                        sizes="(max-width: 820px) 100vw, 33vw"
                        unoptimized={/\.(avif|jfif)$/i.test(factory.imagePath)}
@@ -166,7 +165,7 @@ export function ProductProfile({
                    <span>{factory.imagePath ? factory.region : vi ? "CHƯA CÓ ẢNH" : ar ? "الصورة قيد التجهيز" : "IMAGE PENDING"}</span>
                 </div>
                 <p className="product-factory-location">{factory.location}</p>
-                 <h3>{factoryPublicLabel}</h3>
+                  <h3>{getFactoryPublicLabel(locale, factory.id)}</h3>
                 <div className="product-factory-tags">
                   {factory.products.map((item) => (
                     <span key={item}>{item}</span>

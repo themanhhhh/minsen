@@ -27,7 +27,7 @@ export function FactoryProfile({
     );
   const vi = locale === "vi";
   const ar = locale === "ar";
-  const factoryPublicLabel = getFactoryPublicLabel(locale);
+  const factoryPublicLabel = getFactoryPublicLabel(locale, factory.id);
   const missing = vi ? "Chưa cung cấp trong tài liệu" : ar ? "غير مذكور في الملف المقدم" : "Not provided in submitted file";
   const galleryImages = factory.galleryPaths.map((src) => ({
     src,

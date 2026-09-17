@@ -142,10 +142,6 @@ export const contactContent = {
 
 export type Locale = "en" | "vi" | "ar";
 
-export function getFactoryPublicLabel(locale: Locale) {
-  return locale === "vi" ? "Nhà máy ******" : locale === "ar" ? "مصنع ******" : "Factory ******";
-}
-
 export function getLocalePrefix(locale: Locale) {
   return locale === "vi" ? "/vi" : locale === "ar" ? "/ar" : "";
 }
@@ -683,6 +679,25 @@ export const factories: Factory[] = [
     devNote: "Confirm whether Okal should be published as particleboard and whether it is produced or traded.",
   },
 ];
+
+function getFactoryPublicCode(name: string) {
+  return (
+    name
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/Đ/g, "D")
+      .replace(/đ/g, "d")
+      .replace(/[^A-Za-z]/g, "")
+      .slice(-3)
+      .toUpperCase() || "XXX"
+  );
+}
+
+export function getFactoryPublicLabel(locale: Locale, factoryId: string) {
+  const factory = factories.find((item) => item.id.toUpperCase() === factoryId.toUpperCase());
+  const code = getFactoryPublicCode(factory?.companyNameVi ?? "");
+  return locale === "vi" ? `Nhà máy **** ${code}` : locale === "ar" ? `مصنع **** ${code}` : `Factory **** ${code}`;
+}
 
 export const factoryFilterOptions = {
   products: ["Hardwood Plywood", "Birch-Faced Plywood", "Film-Faced Plywood", "Veneer-Faced / UV-Coated Plywood", "Moisture-Resistant Plywood", "Acacia Wood Pallets", "Plywood Pallets", "Plywood Crates", "Acacia Wood Crates", "Wood Packaging", "Carton Packaging", "Plywood", "Veneer", "Furniture Plywood", "Commercial Plywood", "Packaging Plywood", "Industrial Plywood", "LVL", "Particleboard / Okal", "Other Wood Products"],

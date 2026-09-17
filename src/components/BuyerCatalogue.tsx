@@ -3,169 +3,21 @@
 import Link from "next/link";
 import { useDeferredValue, useState } from "react";
 import { getLocalizedPath, type Locale } from "@/data/landing-page";
+import type { BuyerProfile } from "@/data/buyers";
 import {
   BadgeCheck,
   Building2,
   ClipboardList,
   Factory,
+  Globe2,
   ShieldCheck,
   ShoppingCart,
   UsersRound,
 } from "lucide-react";
 
-type BuyerIconName = "factory" | "cart" | "clipboard" | "shield" | "users" | "building" | "badge";
+type BuyerIconName = "factory" | "cart" | "clipboard" | "shield" | "users" | "building" | "badge" | "globe";
 
-type BuyerProfile = {
-  number: string;
-  id: string;
-  country: string;
-  mainProduct: string[];
-  core: string[];
-  glue: string[];
-  needs: string[];
-  buying: string[];
-  application: string[];
-  fit: string;
-  fitDescription: string;
-  qualifications: string[];
-  model: string;
-  market: string;
-  ports: string;
-};
-
-const buyerProfiles: BuyerProfile[] = [
-  {
-    number: "01",
-    id: "MJB-IN-0001",
-    country: "India",
-    mainProduct: ["Commercial Plywood,", "Film Faced Plywood"],
-    core: ["Eucalyptus Core,", "Combi Core"],
-    glue: ["MR, E2", "Melamine"],
-    needs: [
-      "Nhu cầu đều đặn theo tháng (theo container)",
-      "Ưu tiên ổn định chất lượng & kiểm soát độ ẩm",
-      "Đa dạng cấp phẩm & chủng loại",
-    ],
-    buying: ["Mua theo số lượng", "Ưu tiên hợp tác dài hạn", "Giá cạnh tranh nhưng đảm bảo chất lượng"],
-    application: ["Nội thất, Nội thất văn phòng,", "Xây dựng"],
-    fit: "Cao",
-    fitDescription: "Phù hợp với nhà máy có chất lượng ổn định và năng lực cung ứng tốt",
-    qualifications: ["Chứng chỉ chất lượng (ISO)", "Năng lực sản xuất ổn định", "Lịch sử giao hàng"],
-    model: "Nhập khẩu trực tiếp",
-    market: "Miền Tây & Miền Bắc Ấn Độ",
-    ports: "Nhava Sheva, Mundra",
-  },
-  {
-    number: "02",
-    id: "MJB-IN-0002",
-    country: "India",
-    mainProduct: ["Film Faced Plywood,", "Marine Plywood"],
-    core: ["Hardwood Core,", "Combi Core"],
-    glue: ["Phenolic,", "WBP"],
-    needs: [
-      "Phục vụ dự án xây dựng & hạ tầng",
-      "Yêu cầu cao về chất lượng film và độ bền",
-      "Đơn hàng lớn và nhu cầu ổn định",
-    ],
-    buying: ["Mua theo chất lượng & tiêu chuẩn", "Hợp tác dài hạn", "Dịch vụ sau bán hàng quan trọng"],
-    application: ["Xây dựng, Ván khuôn", "bê tông"],
-    fit: "Rất cao",
-    fitDescription: "Chuyên về Film Faced & Marine plywood",
-    qualifications: ["Chứng chỉ WBP/Phenolic", "Kiểm tra film & độ bền", "Năng lực cung ứng lớn", "Hồ sơ dự án tương tự"],
-    model: "Nhập khẩu trực tiếp",
-    market: "Nam Ấn Độ",
-    ports: "Chennai, Tuticorin",
-  },
-  {
-    number: "03",
-    id: "MJB-IN-0003",
-    country: "India",
-    mainProduct: ["Furniture Plywood", "BWP Plywood"],
-    core: ["Poplar Core", "Combi Core"],
-    glue: ["E1, Formaldehyde", "Melamine"],
-    needs: [
-      "Nhu cầu liên tục cho sản xuất nội thất",
-      "Có yêu cầu chất lượng bề mặt & sự đồng đều",
-      "Chấp nhận nhiều container mix",
-    ],
-    buying: ["Ưu tiên chất lượng", "Giá ổn định & nguồn cung ổn định", "Cần hỗ trợ kỹ thuật"],
-    application: ["Nội thất, Nội thất cao cấp,", "Nội thất retail"],
-    fit: "Trung bình",
-    fitDescription: "Phù hợp với nhà máy chuyên plywood nội thất",
-    qualifications: ["Chất lượng bề mặt", "Độ ẩm ổn định", "Mẫu test đạt yêu cầu"],
-    model: "Nhập khẩu trực tiếp",
-    market: "Miền Tây Ấn Độ",
-    ports: "Nhava Sheva, Mundra",
-  },
-  {
-    number: "04",
-    id: "MJB-IN-0004",
-    country: "India",
-    mainProduct: ["Commercial Plywood,", "Blockboard"],
-    core: ["Eucalyptus Core", "Combi Core"],
-    glue: ["MR, E2,", "Melamine"],
-    needs: ["Phân phối cho nhiều khu vực", "Kết hợp bán lẻ & dự án", "Mua theo nhiều quy cách"],
-    buying: ["Nhạy cảm về giá", "Vòng quay nhanh", "Điều khoản thanh toán linh hoạt"],
-    application: ["Nội thất, Nội thất văn phòng,", "Đóng gói"],
-    fit: "Trung bình",
-    fitDescription: "Phù hợp với nhà máy giá cạnh tranh & giao hàng nhanh",
-    qualifications: ["Khả năng bề mặt", "Độ đa dạng quy cách", "Giá cạnh tranh"],
-    model: "Nhập khẩu trực tiếp",
-    market: "Miền Bắc Ấn Độ",
-    ports: "Nhava Sheva, Mundra",
-  },
-  {
-    number: "05",
-    id: "MJB-IN-0005",
-    country: "India",
-    mainProduct: ["Industrial Plywood,", "Packing Plywood"],
-    core: ["Hardwood Core,", "Eucalyptus Core"],
-    glue: ["MR, E1", "Melamine"],
-    needs: ["Phục vụ cho công nghiệp & đóng gói", "Độ bền & strength quan trọng", "Mua lặp lại thường xuyên"],
-    buying: ["Quan tâm công năng", "Chất lượng phù hợp giá", "Giao hàng đúng tiến độ là yếu tố then chốt"],
-    application: ["Đóng gói công nghiệp,", "Packaging"],
-    fit: "Trung bình",
-    fitDescription: "Phù hợp với nhà máy chuyên plywood công nghiệp, đóng gói",
-    qualifications: ["Chứng chỉ chất lượng", "Độ bền & MOE/Strength", "Năng lực sản xuất ổn định"],
-    model: "Nhập khẩu trực tiếp",
-    market: "Miền Trung Ấn Độ",
-    ports: "Nhava Sheva, Mundra",
-  },
-  {
-    number: "06",
-    id: "MJB-IN-0006",
-    country: "India",
-    mainProduct: ["Film Faced Plywood,", "Construction Plywood"],
-    core: ["Eucalyptus Core,", "Combi Core"],
-    glue: ["Phenolic,", "WBP"],
-    needs: [
-      "Phục vụ dự án bất động sản & hạ tầng",
-      "Đơn hàng lớn & ổn định",
-      "Yêu cầu chất lượng & chu kỳ cung ứng dài",
-    ],
-    buying: ["Đặc biệt chú ý độ tin cậy & lịch sử giao hàng", "Ưu tiên hợp đồng dài hạn", "Yêu cầu chứng từ đầy đủ"],
-    application: ["Xây dựng, Ván khuôn", "bê tông"],
-    fit: "Cao",
-    fitDescription: "Phù hợp với nhà máy có nguồn cung ổn định, kiểm soát chất lượng tốt",
-    qualifications: ["WBP/Phenolic", "Kiểm tra chất lượng nghiêm ngặt", "Hồ sơ dự án & tài chính"],
-    model: "Nhập khẩu trực tiếp",
-    market: "Miền Bắc & Đông Ấn Độ",
-    ports: "Kolkata, Vishakhapatnam",
-  },
-];
-
-const productOptions = Array.from(
-  new Set(
-    buyerProfiles.flatMap((buyer) =>
-      buyer.mainProduct.map((product) => product.replace(/,$/, "")),
-    ),
-  ),
-);
-const marketOptions = Array.from(
-  new Set(buyerProfiles.map((buyer) => buyer.market)),
-);
-const fitOptions = ["Rất cao", "Cao", "Trung bình"];
-const buyerPageSize = 4;
+const buyerPageSize = 6;
 
 const marketRail = [
   { country: "India", label: "ẤN ĐỘ", labelEn: "INDIA", className: "buyer-rail-india" },
@@ -179,6 +31,51 @@ const marketRail = [
   { country: "Americas", label: "KHÁC / MỸ", labelEn: "AMERICAS", className: "buyer-rail-america" },
   { country: "Other", label: "KHÁC / KHÁC", labelEn: "OTHER", className: "buyer-rail-other" },
 ];
+
+const countryRailGroups: Record<string, string[]> = {
+  India: ["Ấn Độ"],
+  China: ["Trung Quốc"],
+  Vietnam: ["Việt Nam"],
+  Bangladesh: ["Bangladesh"],
+  Indonesia: ["Indonesia"],
+  "Middle East": ["UAE", "Thổ Nhĩ Kỳ", "Ả Rập Xê Út", "Oman", "Oman và Ả Rập Xê Út", "Israel", "Jordan", "Yemen", "Qatar", "Bahrain", "Lebanon"],
+  Africa: ["Ai Cập", "Nam Phi", "Mayotte", "Uganda", "Maroc", "Reunion"],
+  Americas: ["Mỹ", "Canada", "Guatemala", "Panama", "Peru", "Colombia", "Costa Rica", "Brazil", "Uruguay", "Mexico", "Chile", "Guyana"],
+};
+
+function matchesCountryRail(country: string, filter: string) {
+  if (!filter || filter === "Global") {
+    return true;
+  }
+
+  if (filter === "Other") {
+    const groupedCountries = Object.values(countryRailGroups).flat();
+    return !groupedCountries.includes(country);
+  }
+
+  return countryRailGroups[filter]?.includes(country) ?? false;
+}
+
+function getPaginationItems(totalPages: number, currentPage: number): Array<number | "ellipsis"> {
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
+
+  const visiblePages = new Set([1, totalPages, currentPage - 1, currentPage, currentPage + 1]);
+  const pages = Array.from(visiblePages)
+    .filter((page) => page > 0 && page <= totalPages)
+    .sort((left, right) => left - right);
+  const items: Array<number | "ellipsis"> = [];
+
+  pages.forEach((page, index) => {
+    if (index > 0 && page - pages[index - 1] > 1) {
+      items.push("ellipsis");
+    }
+    items.push(page);
+  });
+
+  return items;
+}
 
 const buyerPageCopy = {
   en: {
@@ -232,13 +129,15 @@ function BuyerIcon({ name }: { name: BuyerIconName }) {
       return <Building2 {...props} />;
     case "badge":
       return <BadgeCheck {...props} />;
+    case "globe":
+      return <Globe2 {...props} />;
     default:
       return <Factory {...props} />;
   }
 }
 
-function IndiaFlag() {
-  return <span className="buyer-flag" aria-label="Ấn Độ" role="img" />;
+function CountryMark() {
+  return <span className="buyer-country-mark" aria-hidden="true"><BuyerIcon name="globe" /></span>;
 }
 
 function IndiaLandmark() {
@@ -298,7 +197,7 @@ function BuyerCard({ buyer }: { buyer: BuyerProfile }) {
       <header className="buyer-profile-header">
         <span className="buyer-profile-number">{buyer.number}</span>
         <strong>MÃ BUYER: {buyer.id}</strong>
-        <span className="buyer-profile-country"><IndiaFlag /> ẤN ĐỘ</span>
+        <span className="buyer-profile-country"><CountryMark /> {buyer.country}</span>
       </header>
 
       <section className="buyer-layer buyer-signal-layer">
@@ -341,23 +240,22 @@ function BuyerCard({ buyer }: { buyer: BuyerProfile }) {
         <LayerHeading tone="gold" label="TẦNG 3 – FACTORY FIT" question="NHÀ MÁY CỦA BẠN CÓ PHÙ HỢP?" />
         <div className="buyer-fit-grid">
           <div className="buyer-fit-column">
-            <div className="buyer-context-label"><BuyerIcon name="factory" /><strong>MỨC ĐỘ PHÙ HỢP<br />VỚI NHÀ MÁY</strong></div>
-            <b className="buyer-fit-level">{buyer.fit}</b>
-            <p>{buyer.fitDescription}</p>
+            <div className="buyer-context-label"><BuyerIcon name="factory" /><strong>CÔNG SUẤT SẢN XUẤT</strong></div>
+            <p className="buyer-fit-value">{buyer.capacity}</p>
           </div>
           <div className="buyer-fit-column">
-            <div className="buyer-context-label"><BuyerIcon name="clipboard" /><strong>YÊU CẦU QUALIFICATION</strong></div>
-            <BuyerList items={buyer.qualifications} />
+            <div className="buyer-context-label"><BuyerIcon name="clipboard" /><strong>YÊU CẦU CHẤT LƯỢNG</strong></div>
+            <BuyerList items={buyer.quality} />
           </div>
           <div className="buyer-fit-column buyer-access-column">
             <div className="buyer-context-label"><BuyerIcon name="shield" /><strong>TRẠNG THÁI TRUY CẬP</strong></div>
-            <strong className="buyer-access-status">THÔNG TIN BUYER<br />ĐƯỢC KIỂM SOÁT<br />THÔNG QUA<br />MISO JAPAN</strong>
+            <p className="buyer-access-status">{buyer.access}</p>
           </div>
         </div>
       </section>
 
       <footer className="buyer-profile-meta">
-        <span><b>MÔ HÌNH HỢP TÁC:</b> {buyer.model}</span>
+        <span><b>THANH TOÁN:</b> {buyer.payment}</span>
         <span><b>THỊ TRƯỜNG:</b> {buyer.market}</span>
         <span><b>CẢNG ƯU TIÊN:</b> {buyer.ports}</span>
       </footer>
@@ -387,44 +285,48 @@ function CatalogueCategories() {
   );
 }
 
-export function BuyerCatalogue({ locale }: { locale: Locale }) {
+export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles: BuyerProfile[] }) {
   const vi = locale === "vi";
   const ar = locale === "ar";
   const copy = buyerPageCopy[locale];
+  const productOptions = Array.from(new Set(profiles.flatMap((buyer) => buyer.mainProduct))).sort();
+  const marketOptions = Array.from(new Set(profiles.map((buyer) => buyer.market))).sort();
+  const paymentOptions = Array.from(new Set(profiles.map((buyer) => buyer.payment))).sort();
   const [query, setQuery] = useState("");
   const [productFilter, setProductFilter] = useState("");
-  const [fitFilter, setFitFilter] = useState("");
+  const [paymentFilter, setPaymentFilter] = useState("");
   const [marketFilter, setMarketFilter] = useState("");
   const [countryFilter, setCountryFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const deferredQuery = useDeferredValue(query);
 
   const normalizedQuery = deferredQuery.trim().toLowerCase();
-  const filteredProfiles = buyerProfiles.filter((buyer) => {
+  const filteredProfiles = profiles.filter((buyer) => {
     const searchableText = [
       buyer.id,
+      buyer.country,
       ...buyer.mainProduct,
       ...buyer.core,
       ...buyer.glue,
       ...buyer.needs,
       ...buyer.buying,
       ...buyer.application,
-      buyer.fit,
-      buyer.fitDescription,
-      ...buyer.qualifications,
+      buyer.capacity,
+      ...buyer.quality,
+      buyer.access,
+      buyer.payment,
       buyer.market,
       buyer.ports,
-      buyer.model,
     ]
       .join(" ")
       .toLowerCase();
 
     return (
       (!normalizedQuery || searchableText.includes(normalizedQuery)) &&
-      (!productFilter || buyer.mainProduct.some((product) => product.replace(/,$/, "") === productFilter)) &&
-      (!fitFilter || buyer.fit === fitFilter) &&
+      (!productFilter || buyer.mainProduct.includes(productFilter)) &&
+      (!paymentFilter || buyer.payment === paymentFilter) &&
       (!marketFilter || buyer.market === marketFilter) &&
-      (!countryFilter || buyer.country === countryFilter)
+      matchesCountryRail(buyer.country, countryFilter)
     );
   });
 
@@ -437,13 +339,14 @@ export function BuyerCatalogue({ locale }: { locale: Locale }) {
     (safePage - 1) * buyerPageSize,
     safePage * buyerPageSize,
   );
+  const paginationItems = getPaginationItems(totalPages, safePage);
   const hasFilters = Boolean(
-    query.trim() || productFilter || fitFilter || marketFilter || countryFilter,
+    query.trim() || productFilter || paymentFilter || marketFilter || countryFilter,
   );
   const clearFilters = () => {
     setQuery("");
     setProductFilter("");
-    setFitFilter("");
+    setPaymentFilter("");
     setMarketFilter("");
     setCountryFilter("");
     setCurrentPage(1);
@@ -471,7 +374,7 @@ export function BuyerCatalogue({ locale }: { locale: Locale }) {
           <div className="buyer-cover-copy">
             <h2>{copy.catalogueTitle}</h2>
             <p>{copy.catalogueDescription}</p>
-            <div className="buyer-cover-meta"><span>TRANG DANH MỤC 018 / 100</span><i /> <span>TRANG CATALOGUE 046 / 146</span></div>
+            <div className="buyer-cover-meta"><span>TRANG DANH MỤC {String(safePage).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}</span><i /> <span>6 BUYER / TRANG</span></div>
           </div>
           <IndiaLandmark />
           <div className="buyer-cover-stamp"><strong>{copy.featuredCountry}</strong><span>{copy.featuredCountryType}</span></div>
@@ -522,16 +425,16 @@ export function BuyerCatalogue({ locale }: { locale: Locale }) {
               </select>
             </label>
             <label>
-              <span>Mức độ phù hợp</span>
+              <span>Phương thức thanh toán</span>
               <select
-                value={fitFilter}
+                value={paymentFilter}
                 onChange={(event) => {
-                  setFitFilter(event.target.value);
+                  setPaymentFilter(event.target.value);
                   setCurrentPage(1);
                 }}
               >
-                <option value="">Tất cả mức độ</option>
-                {fitOptions.map((fit) => <option key={fit}>{fit}</option>)}
+                <option value="">Tất cả thanh toán</option>
+                {paymentOptions.map((payment) => <option key={payment}>{payment}</option>)}
               </select>
             </label>
             <label>
@@ -577,7 +480,9 @@ export function BuyerCatalogue({ locale }: { locale: Locale }) {
             >
               ←
             </button>
-            {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+            {paginationItems.map((page, index) => page === "ellipsis" ? (
+              <span className="buyer-pagination-ellipsis" aria-hidden="true" key={`ellipsis-${index}`}>...</span>
+            ) : (
               <button
                 className={page === safePage ? "is-active" : ""}
                 type="button"
