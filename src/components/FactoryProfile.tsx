@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { factories, getLocalizedPath, type Locale } from "@/data/landing-page";
+import Image from "next/image";
+import { factories, getFactoryPublicLabel, getLocalizedPath, type Locale } from "@/data/landing-page";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { ProductGallery } from "@/components/ProductGallery";
 import { ScrollCue } from "@/components/ScrollCue";
 
 export function FactoryProfile({
@@ -25,7 +27,13 @@ export function FactoryProfile({
     );
   const vi = locale === "vi";
   const ar = locale === "ar";
+  const factoryPublicLabel = getFactoryPublicLabel(locale);
   const missing = vi ? "Chưa cung cấp trong tài liệu" : ar ? "غير مذكور في الملف المقدم" : "Not provided in submitted file";
+  const galleryImages = factory.galleryPaths.map((src) => ({
+    src,
+    alt: factoryPublicLabel,
+    unoptimized: /\.(avif|jfif)$/i.test(src),
+  }));
   return (
     <>
       <Header locale={locale} />
@@ -35,11 +43,11 @@ export function FactoryProfile({
             <p className="eyebrow eyebrow-light">
                 {vi ? "Hồ sơ năng lực do doanh nghiệp cung cấp" : ar ? "ملف القدرات المقدم من الشركة" : "Company-submitted capability profile"}
             </p>
-            <div className="profile-id">{factory.id}</div>
-            <h1>
-              {vi ? factory.companyNameVi : factory.displayName}
-            </h1>
-            <p className="profile-company-name">{vi ? factory.companyNameEn : factory.companyNameVi}</p>
+             <div className="profile-id">{factoryPublicLabel}</div>
+             <h1>
+               {factoryPublicLabel}
+             </h1>
+             <p className="profile-company-name">{factoryPublicLabel}</p>
             <p>{factory.location} · {factory.region} Vietnam</p>
             <Link
               className="button button-light"
@@ -52,6 +60,15 @@ export function FactoryProfile({
             </Link>
           </div>
           <div className="profile-mark" aria-hidden="true">
+            {factory.imagePath && (
+              <Image
+                src={factory.imagePath}
+                alt=""
+                fill
+                sizes="220px"
+                unoptimized={/\.(avif|jfif)$/i.test(factory.imagePath)}
+              />
+            )}
             <span className="factory-image-status">{factory.imagePath ? "FACTORY IMAGE" : "IMAGE PENDING"}</span>
             <strong>Q</strong>
             <small>
@@ -62,17 +79,23 @@ export function FactoryProfile({
         </section>
         <section className="profile-body" id="profile-body">
           <div className="profile-main">
-            <div className="profile-heading">
-              <p className="eyebrow">
+             <div className="profile-heading">
+               <p className="eyebrow">
                  {vi ? "Tổng quan hồ sơ" : ar ? "نظرة عامة على الملف" : "Profile overview"}
               </p>
               <h2>
                 {vi
                    ? "Năng lực được cung cấp, đang chờ qualification."
                    : ar ? "القدرات المقدمة بانتظار التأهيل." : "Submitted capability, pending qualification."}
-              </h2>
-            </div>
-            <div className="profile-spec-grid">
+               </h2>
+             </div>
+             {galleryImages.length > 0 && (
+               <div className="profile-block factory-profile-gallery">
+                 <h3>{vi ? "Hình ảnh nhà máy" : ar ? "صور المصنع" : "Factory images"}</h3>
+                 <ProductGallery images={galleryImages} productName={factoryPublicLabel} />
+               </div>
+             )}
+             <div className="profile-spec-grid">
               <div>
                  <span>{vi ? "Năm thành lập" : ar ? "سنة التأسيس" : "Established"}</span>
                 <strong>{factory.establishedYear}</strong>
@@ -135,9 +158,13 @@ export function FactoryProfile({
               <span className="is-pending">!</span>
                <strong>{vi ? "TRẠNG THÁI MISO JAPAN" : ar ? "حالة MISO JAPAN" : "MISO JAPAN STATUS"}</strong>
               <p>
-                {vi
-                  ? "Đây là thông tin do doanh nghiệp cung cấp và đang chờ qualification. Chưa có ảnh nhà máy hoặc bản scan chứng nhận trong tài liệu."
-                   : ar ? "قدمت الشركة هذه المعلومات ولا تزال بانتظار التأهيل. لم تُرفق صور للمصنع أو نسخ ممسوحة من الشهادات في المصدر." : "This information was submitted by the company and remains pending qualification. No factory images or certification scans were included in the source material."}
+                 {factory.galleryPaths.length > 0
+                   ? vi
+                     ? "Đây là thông tin do doanh nghiệp cung cấp và đang chờ qualification. Hình ảnh được cung cấp để tham khảo và chưa thay thế quy trình xác minh."
+                     : ar ? "قدمت الشركة هذه المعلومات ولا تزال بانتظار التأهيل. الصور المعروضة مرجعية ولا تحل محل عملية التحقق." : "This information was submitted by the company and remains pending qualification. The images are provided for reference and do not replace verification."
+                   : vi
+                     ? "Đây là thông tin do doanh nghiệp cung cấp và đang chờ qualification. Chưa có ảnh nhà máy hoặc bản scan chứng nhận trong tài liệu."
+                     : ar ? "قدمت الشركة هذه المعلومات ولا تزال بانتظار التأهيل. لم تُرفق صور للمصنع أو نسخ ممسوحة من الشهادات في المصدر." : "This information was submitted by the company and remains pending qualification. No factory images or certification scans were included in the source material."}
               </p>
             </div>
             <div className="profile-source">

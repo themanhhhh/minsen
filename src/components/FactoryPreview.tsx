@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { factories, getLocalizedPath, type Locale } from "@/data/landing-page";
+import { factories, getFactoryPublicLabel, getLocalizedPath, type Locale } from "@/data/landing-page";
 
 export function FactoryPreview({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
   const ar = locale === "ar";
+  const factoryPublicLabel = getFactoryPublicLabel(locale);
   const regionNames = { North: "Miền Bắc", Central: "Miền Trung", South: "Miền Nam" };
   const regionNamesAr = { North: "الشمال", Central: "الوسط", South: "الجنوب" };
   const productNames: Record<string, string> = {
@@ -45,18 +46,19 @@ export function FactoryPreview({ locale }: { locale: Locale }) {
               {factory.imagePath && (
                 <Image
                   src={factory.imagePath}
-                  alt={`${factory.id} factory`}
-                  fill
-                  sizes="(max-width: 820px) 100vw, 33vw"
-                />
+                   alt={factoryPublicLabel}
+                   fill
+                   sizes="(max-width: 820px) 100vw, 33vw"
+                   unoptimized={/\.(avif|jfif)$/i.test(factory.imagePath)}
+                 />
               )}
               <span className="factory-image-status">{factory.imagePath ? "VN" : vi ? "CHƯA CÓ ẢNH" : ar ? "الصورة قيد التجهيز" : "IMAGE PENDING"}</span>
                <strong>{vi ? regionNames[factory.region] : ar ? regionNamesAr[factory.region] : factory.region}</strong>
             </div>
             <span className="factory-id">
-               {factory.id} · {factory.location}
-            </span>
-            <h3>{vi ? factory.companyNameVi : factory.displayName}</h3>
+                {factoryPublicLabel} · {factory.location}
+             </span>
+             <h3>{factoryPublicLabel}</h3>
             <p>
               {factory.products.slice(0, 2).map((product) => vi ? productNames[product] ?? product : product).join(" · ")} ·{" "}
               {factory.capacity || missing}

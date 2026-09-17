@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { factories, getLocalizedPath, productCatalog, type Locale } from "@/data/landing-page";
+import { factories, getFactoryPublicLabel, getLocalizedPath, productCatalog, type Locale } from "@/data/landing-page";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ProductGallery } from "@/components/ProductGallery";
@@ -16,6 +16,7 @@ export function ProductProfile({
   const product = productCatalog.find((item) => item.slug === slug);
   const vi = locale === "vi";
   const ar = locale === "ar";
+  const factoryPublicLabel = getFactoryPublicLabel(locale);
   if (!product)
     return (
       <main className="not-found-panel">
@@ -156,15 +157,16 @@ export function ProductProfile({
                   {factory.imagePath && (
                     <Image
                       src={factory.imagePath}
-                      alt={`${factory.id} factory`}
-                      fill
-                      sizes="(max-width: 820px) 100vw, 33vw"
-                    />
+                       alt={factoryPublicLabel}
+                       fill
+                       sizes="(max-width: 820px) 100vw, 33vw"
+                       unoptimized={/\.(avif|jfif)$/i.test(factory.imagePath)}
+                     />
                   )}
                    <span>{factory.imagePath ? factory.region : vi ? "CHƯA CÓ ẢNH" : ar ? "الصورة قيد التجهيز" : "IMAGE PENDING"}</span>
                 </div>
                 <p className="product-factory-location">{factory.location}</p>
-                <h3>{vi ? factory.companyNameVi : factory.displayName}</h3>
+                 <h3>{factoryPublicLabel}</h3>
                 <div className="product-factory-tags">
                   {factory.products.map((item) => (
                     <span key={item}>{item}</span>

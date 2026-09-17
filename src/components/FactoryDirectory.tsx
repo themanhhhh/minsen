@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import {
   factories,
   factoryFilterOptions,
+  getFactoryPublicLabel,
   getLocalizedPath,
   type Factory,
   type Locale,
@@ -69,6 +70,7 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
   }, []);
   const vi = locale === "vi";
   const ar = locale === "ar";
+  const factoryPublicLabel = getFactoryPublicLabel(locale);
   const labels = vi
     ? {
         eyebrow: "Mạng lưới sản xuất",
@@ -412,34 +414,35 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
               {filtered.map((factory) => (
                 <article className="factory-card" key={factory.id}>
                   <div className="factory-card-top">
-                    <span className="factory-id">{factory.id}</span>
+                    <span className="factory-id">{factoryPublicLabel}</span>
                      <span className="qualification-badge">{factory.misoStatus}</span>
                   </div>
                   <Link
                     className="factory-placeholder"
                      href={getLocalizedPath(locale, `/manufacturers/${factory.slug}`)}
-                     aria-label={`${vi ? "Xem hồ sơ" : ar ? "عرض الملف" : "View profile"}: ${factory.id}`}
+                      aria-label={`${vi ? "Xem hồ sơ" : ar ? "عرض الملف" : "View profile"}: ${factoryPublicLabel}`}
                   >
                      {factory.imagePath && (
                        <Image
                          src={factory.imagePath}
-                        alt={`${factory.id} factory`}
-                        fill
-                        sizes="(max-width: 820px) 100vw, 50vw"
-                      />
+                         alt={factoryPublicLabel}
+                          fill
+                          sizes="(max-width: 820px) 100vw, 50vw"
+                          unoptimized={/\.(avif|jfif)$/i.test(factory.imagePath)}
+                        />
                     )}
                       <span className="factory-image-status">{factory.imagePath ? "VN" : vi ? "CHƯA CÓ ẢNH" : ar ? "الصورة قيد التجهيز" : "IMAGE PENDING"}</span>
                      <strong>{factory.location.split(",")[0]}</strong>
                   </Link>
                   <p className="factory-location"><MapPin size={13} strokeWidth={2} aria-hidden="true" />{factory.location}</p>
-                   <h2>{vi ? factory.companyNameVi : factory.displayName}</h2>
+                    <h2>{factoryPublicLabel}</h2>
                   <div className="factory-tags">
                     {factory.products.slice(0, 3).map((product) => (
                       <span key={product}>{product}</span>
                     ))}
                   </div>
                   <div className="factory-details">
-                     <div><FactoryIcon size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.factoryType}</small><strong>{vi ? factory.companyNameVi : factory.companyNameEn}</strong></span></div>
+                      <div><FactoryIcon size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.factoryType}</small><strong>{factoryPublicLabel}</strong></span></div>
                      <div><ClipboardList size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.capacity}</small><strong>{factory.capacity || missing}</strong></span></div>
                      <div><CalendarDays size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.established}</small><strong>{factory.establishedYear}</strong></span></div>
                      <div><Globe2 size={14} strokeWidth={1.7} aria-hidden="true" /><span><small>{labels.markets}</small><strong>{factory.exportMarkets.slice(0, 3).join(", ") || missing}</strong></span></div>
@@ -506,7 +509,7 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
                <Link className="button button-primary" href={`${getLocalizedPath(locale, "/shortlist")}?compare=${encodeURIComponent(compare.join(","))}`}>{vi ? "Mở bảng đầy đủ" : ar ? "فتح المقارنة الكاملة" : "Open full comparison"} <span aria-hidden="true">↗</span></Link>
             </div>
              <div className="compare-table" role="table" aria-label={vi ? "So sánh nhanh nhà máy" : ar ? "مقارنة سريعة للمصانع" : "Quick factory comparison"}>
-               <div className="compare-row compare-heading" role="row"><strong>{vi ? "Tiêu chí" : ar ? "المعايير" : "Criteria"}</strong>{comparedFactories.map((factory) => <div className="compare-factory-heading" key={factory.id}><strong>{factory.id}</strong><small>{factory.location}</small></div>)}</div>
+               <div className="compare-row compare-heading" role="row"><strong>{vi ? "Tiêu chí" : ar ? "المعايير" : "Criteria"}</strong>{comparedFactories.map((factory) => <div className="compare-factory-heading" key={factory.id}><strong>{factoryPublicLabel}</strong><small>{factory.location}</small></div>)}</div>
               {comparisonRows.map((row) => <div className="compare-row" role="row" key={row.label}><span>{row.label}</span>{comparedFactories.map((factory) => <span key={factory.id}>{row.value(factory)}</span>)}</div>)}
             </div>
           </section>

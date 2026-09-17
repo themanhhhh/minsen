@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { factories, getLocalizedPath, type Factory, type Locale } from "@/data/landing-page";
+import { factories, getFactoryPublicLabel, getLocalizedPath, type Factory, type Locale } from "@/data/landing-page";
 import { ScrollCue } from "@/components/ScrollCue";
 
 const shortlistStorageKey = "minsen-shortlist";
@@ -22,6 +22,7 @@ function readIds(key: string) {
 export function ShortlistPage({ locale }: { locale: Locale }) {
   const vi = locale === "vi";
   const ar = locale === "ar";
+  const factoryPublicLabel = getFactoryPublicLabel(locale);
   const missing = vi ? "Chưa cung cấp" : ar ? "غير متوفر" : "Not provided";
   const [shortlistIds, setShortlistIds] = useState<string[]>([]);
   const [compareIds, setCompareIds] = useState<string[]>([]);
@@ -191,12 +192,12 @@ export function ShortlistPage({ locale }: { locale: Locale }) {
                  <strong>{vi ? "Tiêu chí" : ar ? "المعايير" : "Criteria"}</strong>
                 {selected.map((factory) => (
                   <div className="compare-factory-heading" key={factory.id}>
-                    <strong>{factory.id}</strong>
+                     <strong>{factoryPublicLabel}</strong>
                     {compareMode && (
                       <button
                         type="button"
                         onClick={() => removeFromCompare(factory.id)}
-                         aria-label={`${vi ? "Xóa" : ar ? "إزالة" : "Remove"} ${factory.id}`}
+                          aria-label={`${vi ? "Xóa" : ar ? "إزالة" : "Remove"} ${factoryPublicLabel}`}
                       >
                         ×
                       </button>

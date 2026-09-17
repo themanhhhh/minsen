@@ -142,6 +142,10 @@ export const contactContent = {
 
 export type Locale = "en" | "vi" | "ar";
 
+export function getFactoryPublicLabel(locale: Locale) {
+  return locale === "vi" ? "Nhà máy ******" : locale === "ar" ? "مصنع ******" : "Factory ******";
+}
+
 export function getLocalePrefix(locale: Locale) {
   return locale === "vi" ? "/vi" : locale === "ar" ? "/ar" : "";
 }
@@ -479,6 +483,7 @@ export type Factory = {
   misoStatus: string;
   shortDescription: string;
   imagePath: string;
+  galleryPaths: string[];
   sourceFile: string;
   devNote: string;
 };
@@ -502,7 +507,13 @@ export const factories: Factory[] = [
     certifications: ["CARB Phase 2", "HWPW-VC", "HWPW-CC", "TPC-44"],
     misoStatus: "Qualification pending",
     shortDescription: "Plywood manufacturer with two reported production sites in Lam Dong. Submitted information states equipment capacity of 120,000 m³/year and recorded shipments to the United States and South Korea. Claims require qualification before publication.",
-    imagePath: "",
+     imagePath: "/images/factories/vn-pw-001/exterior.webp",
+     galleryPaths: [
+       "/images/factories/vn-pw-001/exterior.webp",
+       "/images/factories/vn-pw-001/production-line.webp",
+       "/images/factories/vn-pw-001/product-stack.webp",
+       "/images/factories/vn-pw-001/quality-control.jpg",
+     ],
     sourceFile: "Info(1).txt",
     devNote: "Missing establishment year, workforce and images; confirm primary factory address and certification evidence.",
   },
@@ -524,7 +535,13 @@ export const factories: Factory[] = [
     certifications: [],
     misoStatus: "Qualification pending",
     shortDescription: "Manufacturer of wood pallets, plywood pallets, wooden crates and packaging products, with reported branches in Bac Ninh and Thai Nguyen. Submitted information lists domestic, Japanese and South Korean markets.",
-    imagePath: "",
+     imagePath: "/images/factories/vn-pw-002/exterior.jpg",
+     galleryPaths: [
+       "/images/factories/vn-pw-002/exterior.jpg",
+       "/images/factories/vn-pw-002/production-line.jpg",
+       "/images/factories/vn-pw-002/product-stack.jpg",
+       "/images/factories/vn-pw-002/quality-control.jpg",
+     ],
     sourceFile: "Thông Tin DN (3)(2).txt",
     devNote: "Main products are pallets/crates/packaging; confirm inclusion in plywood directory and profile branch.",
   },
@@ -546,7 +563,12 @@ export const factories: Factory[] = [
     certifications: [],
     misoStatus: "Qualification pending",
     shortDescription: "Registered wood-processing manufacturer with plywood and veneer as its principal business line. Capacity, detailed product specifications, export markets and certifications were not included in the submitted file.",
-    imagePath: "",
+     imagePath: "/images/factories/vn-pw-003/exterior.jpg",
+     galleryPaths: [
+       "/images/factories/vn-pw-003/exterior.jpg",
+       "/images/factories/vn-pw-003/production-line.avif",
+       "/images/factories/vn-pw-003/product-stack.png",
+     ],
     sourceFile: "Thông tin DN (1)(2).txt",
     devNote: "Missing capacity, workforce, detailed products, markets, certifications and images.",
   },
@@ -568,7 +590,12 @@ export const factories: Factory[] = [
     certifications: [],
     misoStatus: "Qualification pending",
     shortDescription: "Plywood manufacturer in Lang Son with two reported production facilities, focused on furniture, commercial, packaging and industrial plywood. The submitted profile references product positioning for European and North American requirements, not confirmed export markets.",
-    imagePath: "",
+     imagePath: "/images/factories/vn-pw-004/2024_04_26_09_36_184.jpg",
+     galleryPaths: [
+       "/images/factories/vn-pw-004/2024_04_26_09_36_184.jpg",
+       "/images/factories/vn-pw-004/production-line.jpg",
+       "/images/factories/vn-pw-004/quality-control.jpg",
+     ],
     sourceFile: "Thông tin DN (2)(2).txt",
     devNote: "Two facilities reported; confirm canonical address. Europe/North America are standards, not confirmed export markets.",
   },
@@ -590,7 +617,12 @@ export const factories: Factory[] = [
     certifications: [],
     misoStatus: "Qualification pending",
     shortDescription: "Plywood, LVL and veneer manufacturer. Company-provided figures indicate a 20,000 m² factory and approximately 3,000 m³/month production capacity, equivalent to about 40 containers/month.",
-    imagePath: "",
+     imagePath: "/images/factories/vn-pw-005/exterior.jpg",
+     galleryPaths: [
+       "/images/factories/vn-pw-005/exterior.jpg",
+       "/images/factories/vn-pw-005/production-line.jpg",
+       "/images/factories/vn-pw-005/product-stack.jpg",
+     ],
     sourceFile: "Thông tin DN(2).txt",
     devNote: "Capacity/workforce are company-reported; verify before publication. Images and certifications missing.",
   },
@@ -612,7 +644,14 @@ export const factories: Factory[] = [
     certifications: [],
     misoStatus: "Qualification pending",
     shortDescription: "Registered wood-processing manufacturer focused on plywood, veneer and related wood products. Capacity, workforce, specifications and export markets were not included in the submitted file.",
-    imagePath: "",
+     imagePath: "/images/factories/vn-pw-006/exterior.jfif",
+     galleryPaths: [
+       "/images/factories/vn-pw-006/exterior.jfif",
+       "/images/factories/vn-pw-006/production-line.jpg",
+       "/images/factories/vn-pw-006/production-line.jfif",
+       "/images/factories/vn-pw-006/product-stack.jfif",
+       "/images/factories/vn-pw-006/quality-control.jfif",
+     ],
     sourceFile: "Thông tin doanh nghiệp(2).txt",
     devNote: "Missing capacity, workforce, product specifications, markets, certifications and images.",
   },
@@ -634,7 +673,12 @@ export const factories: Factory[] = [
     certifications: [],
     misoStatus: "Qualification pending",
     shortDescription: "Plywood manufacturer established in 2005. Submitted company information indicates plywood and particleboard/Okal-related manufacturing; operational metrics and export markets were not included.",
-    imagePath: "",
+     imagePath: "/images/factories/vn-pw-007/production-line.jpg",
+     galleryPaths: [
+       "/images/factories/vn-pw-007/production-line.jpg",
+       "/images/factories/vn-pw-007/product-stack.jpg",
+       "/images/factories/vn-pw-007/quality-control.jpg",
+     ],
     sourceFile: "Thông tin(2).txt",
     devNote: "Confirm whether Okal should be published as particleboard and whether it is produced or traded.",
   },

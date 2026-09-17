@@ -6,6 +6,7 @@ import { useState } from "react";
 type GalleryImage = {
   src: string;
   alt: string;
+  unoptimized?: boolean;
 };
 
 export function ProductGallery({
@@ -23,12 +24,13 @@ export function ProductGallery({
   return (
     <div className="product-gallery">
       <div className="product-gallery-main">
-        <Image
-          src={activeImage.src}
-          alt={activeImage.alt}
-          fill
-          priority
-          sizes="(max-width: 820px) 100vw, 500px"
+          <Image
+            src={activeImage.src}
+            alt={activeImage.alt}
+            fill
+            priority
+            sizes="(max-width: 820px) 100vw, 500px"
+            unoptimized={activeImage.unoptimized}
         />
       </div>
       <div className="product-gallery-thumbnails" aria-label={`${productName} images`}>
@@ -41,7 +43,7 @@ export function ProductGallery({
             aria-label={`Show image ${index + 1} of ${images.length}`}
             aria-pressed={index === activeIndex}
           >
-            <Image src={image.src} alt="" fill sizes="90px" />
+             <Image src={image.src} alt="" fill sizes="90px" unoptimized={image.unoptimized} />
           </button>
         ))}
       </div>
