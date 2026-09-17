@@ -1,13 +1,27 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { company, getLandingContent, type Locale } from "@/data/landing-page";
+import { useEffect } from "react";
+import { company, factories, getLandingContent, type Locale } from "@/data/landing-page";
+import { readSavedBuyerIds, readSavedFactoryIds } from "@/data/saved-profiles";
 
 export function Contact({ locale }: { locale: Locale }) {
   const { contactContent } = getLandingContent(locale);
   const vi = locale === "vi";
   const ar = locale === "ar";
   const [submitted, setSubmitted] = useState(false);
+  const [savedFactoryIds, setSavedFactoryIds] = useState<string[]>([]);
+  const [savedBuyerIds, setSavedBuyerIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      const validFactoryIds = new Set(factories.map((factory) => factory.id));
+      setSavedFactoryIds(readSavedFactoryIds().filter((id) => validFactoryIds.has(id)));
+      setSavedBuyerIds(readSavedBuyerIds());
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitted(true);
@@ -86,6 +100,35 @@ export function Contact({ locale }: { locale: Locale }) {
               />
             </label>
           </div>
+          {(savedFactoryIds.length > 0 || savedBuyerIds.length > 0) && (
+            <div className="contact-saved-profiles" aria-live="polite">
+              <p>
+                {vi
+                  ? "Hồ sơ đã lưu sẽ được gửi kèm yêu cầu này."
+                  : ar
+                    ? "سيتم إرفاق الملفات المحفوظة بهذا الاستفسار."
+                    : "Your saved profiles will be included with this inquiry."}
+              </p>
+              {savedFactoryIds.length > 0 && (
+                <div className="contact-saved-group">
+                  <span>{vi ? "Mã nhà máy đã lưu" : ar ? "رموز المصانع المحفوظة" : "Saved factory IDs"}</span>
+                  <div className="contact-saved-tags">
+                    {savedFactoryIds.map((id) => <code key={id}>{id}</code>)}
+                  </div>
+                  <input type="hidden" name="saved_factory_ids" value={savedFactoryIds.join(", ")} readOnly />
+                </div>
+              )}
+              {savedBuyerIds.length > 0 && (
+                <div className="contact-saved-group">
+                  <span>{vi ? "Mã buyer đã lưu" : ar ? "رموز المشترين المحفوظة" : "Saved buyer IDs"}</span>
+                  <div className="contact-saved-tags">
+                    {savedBuyerIds.map((id) => <code key={id}>{id}</code>)}
+                  </div>
+                  <input type="hidden" name="saved_buyer_ids" value={savedBuyerIds.join(", ")} readOnly />
+                </div>
+              )}
+            </div>
+          )}
           <label>
             {vi ? "Sản phẩm cần tìm" : ar ? "المنتج الذي تبحث عنه" : "Product you are sourcing"}
             <input
