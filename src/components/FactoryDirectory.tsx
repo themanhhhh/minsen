@@ -211,8 +211,60 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
       "United States": "Hoa Kỳ",
     },
   };
+  const filterOptionLabelsAr: Partial<Record<keyof Filters, Record<string, string>>> = {
+    products: {
+      "Hardwood Plywood": "خشب رقائقي من الخشب الصلب",
+      "Birch-Faced Plywood": "خشب رقائقي بواجهة من البتولا",
+      "Film-Faced Plywood": "خشب رقائقي مكسو بالفيلم",
+      "Veneer-Faced / UV-Coated Plywood": "خشب رقائقي مكسو بالقشرة / مطلي بالأشعة فوق البنفسجية",
+      "Moisture-Resistant Plywood": "خشب رقائقي مقاوم للرطوبة",
+      "Acacia Wood Pallets": "منصات خشبية من الأكاسيا",
+      "Plywood Pallets": "منصات من الخشب الرقائقي",
+      "Plywood Crates": "صناديق من الخشب الرقائقي",
+      "Acacia Wood Crates": "صناديق خشبية من الأكاسيا",
+      "Wood Packaging": "تغليف خشبي",
+      "Carton Packaging": "تغليف كرتوني",
+      Plywood: "خشب رقائقي",
+      Veneer: "قشرة خشبية",
+      "Furniture Plywood": "خشب رقائقي للأثاث",
+      "Commercial Plywood": "خشب رقائقي تجاري",
+      "Packaging Plywood": "خشب رقائقي للتغليف",
+      "Industrial Plywood": "خشب رقائقي صناعي",
+      LVL: "خشب القشرة الرقائقي LVL",
+      "Particleboard / Okal": "ألواح حبيبية / أوكال",
+      "Other Wood Products": "منتجات خشبية أخرى",
+    },
+    materials: {
+      "Rubberwood plantation core": "قلب من خشب المطاط المزروع",
+      "Birch veneer": "قشرة بتولا",
+      Acacia: "أكاسيا",
+      Pine: "صنوبر",
+      Melaleuca: "ميلاليوكا",
+      Plywood: "خشب رقائقي",
+      Eucalyptus: "أوكالبتوس",
+      Styrax: "ستيراكس",
+      Rubberwood: "خشب المطاط",
+      "Mixed Light Hardwood (MLH)": "خشب صلب خفيف مختلط (MLH)",
+      Other: "أخرى",
+    },
+    regions: {
+      North: "الشمال",
+      Central: "الوسط",
+      South: "الجنوب",
+    },
+    markets: {
+      Vietnam: "فيتنام",
+      Japan: "اليابان",
+      "South Korea": "كوريا الجنوبية",
+      "United States": "الولايات المتحدة",
+    },
+  };
   const filterOptionLabel = (group: keyof Filters, option: string) =>
-    vi ? filterOptionLabels[group]?.[option] ?? option : option;
+    vi
+      ? filterOptionLabels[group]?.[option] ?? option
+      : ar
+        ? filterOptionLabelsAr[group]?.[option] ?? option
+        : option;
   const toggleFilter = (group: keyof Filters, value: string) =>
     setFilters((current) => ({
       ...current,
