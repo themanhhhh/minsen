@@ -931,7 +931,7 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
   };
 
   return (
-    <div className="buyer-catalogue-page">
+    <div className={`buyer-catalogue-page buyer-catalogue-page-${locale}`}>
       <div className="buyer-catalogue-sheet">
         <section className="buyer-page-intro">
           <div className="buyer-page-intro-copy">

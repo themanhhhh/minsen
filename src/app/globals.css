@@ -7981,12 +7981,56 @@ html[dir="rtl"] .registration-form input[type="file"] {
 .buyer-catalogue-page {
   background: #e9edf2;
   color: #17243b;
+  direction: ltr;
   display: grid;
   font-family: var(--font-body), sans-serif;
   grid-template-columns: minmax(0, 1fr) 39px;
   margin: 0 auto;
   max-width: 1580px;
   min-height: 100vh;
+}
+
+/* Keep the catalogue's designed shell order while Arabic copy remains RTL. */
+.buyer-catalogue-page-ar .buyer-page-intro h1,
+.buyer-catalogue-page-ar .buyer-page-intro-copy > p:not(.eyebrow),
+.buyer-catalogue-page-ar .buyer-page-intro-stats span,
+.buyer-catalogue-page-ar .buyer-page-intro-stats small,
+.buyer-catalogue-page-ar .buyer-cover-copy h2,
+.buyer-catalogue-page-ar .buyer-cover-copy > p,
+.buyer-catalogue-page-ar .buyer-cover-meta span,
+.buyer-catalogue-page-ar .buyer-cover-stamp strong,
+.buyer-catalogue-page-ar .buyer-cover-stamp span,
+.buyer-catalogue-page-ar .buyer-category strong,
+.buyer-catalogue-page-ar .buyer-directory-tools-heading > div > span,
+.buyer-catalogue-page-ar .buyer-directory-tools-heading > div > strong,
+.buyer-catalogue-page-ar .buyer-filter-clear,
+.buyer-catalogue-page-ar .buyer-filter-controls label > span,
+.buyer-catalogue-page-ar .buyer-filter-controls input,
+.buyer-catalogue-page-ar .buyer-filter-controls select,
+.buyer-catalogue-page-ar .buyer-directory-results-bar > span,
+.buyer-catalogue-page-ar .buyer-profile-header > strong,
+.buyer-catalogue-page-ar .buyer-layer-heading span,
+.buyer-catalogue-page-ar .buyer-signal-item > div,
+.buyer-catalogue-page-ar .buyer-context-label strong,
+.buyer-catalogue-page-ar .buyer-bullet-list,
+.buyer-catalogue-page-ar .buyer-bullet-list li,
+.buyer-catalogue-page-ar .buyer-application-column p,
+.buyer-catalogue-page-ar .buyer-fit-column > p,
+.buyer-catalogue-page-ar .buyer-access-status,
+.buyer-catalogue-page-ar .buyer-profile-meta span,
+.buyer-catalogue-page-ar .buyer-pagination > span:not(.buyer-pagination-ellipsis) {
+  direction: rtl;
+  text-align: right;
+}
+
+.buyer-catalogue-page-ar .buyer-search-field input {
+  padding-left: 28px;
+  padding-right: 8px;
+}
+
+.buyer-catalogue-page-ar .buyer-search-field b {
+  left: 9px;
+  right: auto;
 }
 
 .buyer-catalogue-sheet {
