@@ -8,8 +8,10 @@ export function LocaleDirection() {
 
   useEffect(() => {
     const isArabic = pathname === "/ar" || pathname.startsWith("/ar/");
-    document.documentElement.lang = isArabic ? "ar" : pathname.startsWith("/vi") ? "vi" : "en";
-    document.documentElement.dir = isArabic ? "rtl" : "ltr";
+    const locale = isArabic ? "ar" : pathname.startsWith("/vi") ? "vi" : "en";
+    document.documentElement.lang = locale;
+    document.documentElement.dir = "ltr";
+    document.documentElement.dataset.locale = locale;
   }, [pathname]);
 
   return null;

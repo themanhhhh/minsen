@@ -4352,37 +4352,32 @@ p {
   }
 }
 
-html[dir="rtl"] body {
+html[data-locale="ar"] body {
   font-family: Tahoma, Arial, sans-serif;
   text-align: right;
 }
 
-html[dir="rtl"] .eyebrow {
+html[data-locale="ar"] .eyebrow {
   letter-spacing: 0;
   text-transform: none;
 }
 
-html[dir="rtl"] .desktop-nav {
-  margin-left: 0;
-  margin-right: 100px;
+html[data-locale="ar"] .button span,
+html[data-locale="ar"] .text-link span,
+html[data-locale="ar"] .header-cta span,
+html[data-locale="ar"] .layer-arrow,
+html[data-locale="ar"] .footer-contact span {
+  margin-left: 5px;
+  margin-right: 0;
 }
 
-html[dir="rtl"] .button span,
-html[dir="rtl"] .text-link span,
-html[dir="rtl"] .header-cta span,
-html[dir="rtl"] .layer-arrow,
-html[dir="rtl"] .footer-contact span {
-  margin-left: 0;
-  margin-right: 5px;
-}
-
-html[dir="rtl"] input,
-html[dir="rtl"] textarea,
-html[dir="rtl"] select {
+html[data-locale="ar"] input,
+html[data-locale="ar"] textarea,
+html[data-locale="ar"] select {
   text-align: right;
 }
 
-html[dir="rtl"] .registration-form input[type="file"] {
+html[data-locale="ar"] .registration-form input[type="file"] {
   text-align: left;
 }
 
