@@ -680,23 +680,10 @@ export const factories: Factory[] = [
   },
 ];
 
-function getFactoryPublicCode(name: string) {
-  return (
-    name
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/Đ/g, "D")
-      .replace(/đ/g, "d")
-      .replace(/[^A-Za-z]/g, "")
-      .slice(-3)
-      .toUpperCase() || "XXX"
-  );
-}
-
 export function getFactoryPublicLabel(locale: Locale, factoryId: string) {
   const factory = factories.find((item) => item.id.toUpperCase() === factoryId.toUpperCase());
-  const code = getFactoryPublicCode(factory?.companyNameVi ?? "");
-  return locale === "vi" ? `Nhà máy **** ${code}` : locale === "ar" ? `مصنع **** ${code}` : `Factory **** ${code}`;
+  const code = factory?.id ?? factoryId.toUpperCase();
+  return locale === "vi" ? `Nhà máy ${code}` : locale === "ar" ? `مصنع ${code}` : `Factory ${code}`;
 }
 
 export const factoryFilterOptions = {
