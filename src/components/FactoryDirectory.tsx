@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import {
   factories,
   factoryFilterOptions,
+  getFactoryCodeLabel,
   getFactoryPublicLabel,
   getLocalizedPath,
   type Factory,
@@ -465,7 +466,7 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
               {filtered.map((factory) => (
                 <article className="factory-card" key={factory.id}>
                   <div className="factory-card-top">
-                    <span className="factory-id">{getFactoryPublicLabel(locale, factory.id)}</span>
+                    <span className="factory-id">{getFactoryCodeLabel(locale, factory.id)}</span>
                      <span className="qualification-badge">{factory.misoStatus}</span>
                   </div>
                   <Link
