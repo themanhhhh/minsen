@@ -5165,8 +5165,16 @@ html[data-locale="ar"] .registration-form input[type="file"] {
 .header-cta {
   border-radius: 4px;
   font-size: 11px;
+  letter-spacing: 0;
+  line-height: 1.35;
   padding: 11px 14px;
   white-space: nowrap;
+}
+
+.site-header .header-home,
+.site-header .desktop-nav a {
+  letter-spacing: 0;
+  line-height: 1.35;
 }
 
 .hero {
@@ -5541,6 +5549,8 @@ html[data-locale="ar"] .registration-form input[type="file"] {
 
 .directory-hero h1 {
   font-size: clamp(48px, 5vw, 69px);
+  letter-spacing: -.02em;
+  line-height: 1.04;
   max-width: 680px;
 }
 
@@ -5573,6 +5583,7 @@ html[data-locale="ar"] .registration-form input[type="file"] {
 .directory-features strong {
   color: #fff;
   font-size: 11px;
+  letter-spacing: 0;
   line-height: 1.35;
 }
 
@@ -5950,6 +5961,11 @@ html[data-locale="ar"] .registration-form input[type="file"] {
   .directory-disclaimer {
     padding: 15px 20px;
   }
+}
+
+html[data-locale="ar"] .directory-hero h1 {
+  letter-spacing: 0;
+  line-height: 1.25;
 }
 
 /* Product category hero and RFQ content matching the reference layout. */
