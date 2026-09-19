@@ -2079,8 +2079,8 @@ p {
 .profile-heading h2 {
   color: var(--primary-dark);
   font-size: clamp(38px, 4vw, 58px);
-  letter-spacing: -.08em;
-  line-height: 1;
+  letter-spacing: -.02em;
+  line-height: 1.08;
   margin: 0 0 50px;
 }
 
