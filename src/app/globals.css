@@ -779,6 +779,8 @@ p {
 
 .contact-copy h2 {
   color: #fff;
+  letter-spacing: -.02em;
+  line-height: 1.08;
   max-width: 570px;
 }
 
@@ -2941,8 +2943,8 @@ p {
 
 .product-profile-hero h1 {
   font-size: clamp(49px, 5.6vw, 80px);
-  letter-spacing: -.09em;
-  line-height: .96;
+  letter-spacing: -.02em;
+  line-height: 1.04;
   margin-bottom: 25px;
 }
 
@@ -3045,8 +3047,8 @@ p {
   color: var(--primary-dark);
   font-family: var(--font-heading), sans-serif;
   font-size: 55px;
-  letter-spacing: -.08em;
-  line-height: 1;
+  letter-spacing: -.02em;
+  line-height: 1.08;
 }
 
 .product-profile-body>div:first-child>p:last-child,
@@ -3087,8 +3089,8 @@ p {
   color: var(--primary-dark);
   font-family: var(--font-heading), sans-serif;
   font-size: clamp(38px, 4.5vw, 62px);
-  letter-spacing: -.08em;
-  line-height: 1;
+  letter-spacing: -.02em;
+  line-height: 1.08;
   max-width: 620px;
 }
 
@@ -3501,8 +3503,8 @@ p {
 
 .detail-hero h1 {
   font-size: clamp(50px, 6vw, 86px);
-  letter-spacing: -.09em;
-  line-height: .96;
+  letter-spacing: -.02em;
+  line-height: 1.04;
   margin: 0 0 25px;
 }
 
@@ -6118,6 +6120,8 @@ html[data-locale="ar"] .registration-form input[type="file"] {
 
 .products-section .section-heading h2 {
   font-size: clamp(38px, 4.2vw, 56px);
+  letter-spacing: -.02em;
+  line-height: 1.08;
   max-width: 580px;
 }
 
@@ -6189,8 +6193,8 @@ html[data-locale="ar"] .registration-form input[type="file"] {
 .product-knowledge-copy h2 {
   color: var(--primary-dark);
   font-size: clamp(38px, 4.3vw, 60px);
-  letter-spacing: -.08em;
-  line-height: 1;
+  letter-spacing: -.02em;
+  line-height: 1.08;
   margin-bottom: 22px;
   max-width: 520px;
 }
@@ -6207,7 +6211,7 @@ html[data-locale="ar"] .registration-form input[type="file"] {
   color: var(--primary-dark);
   font-family: var(--font-heading), sans-serif;
   font-size: 20px;
-  letter-spacing: -.04em;
+  letter-spacing: -.01em;
   line-height: 1.2;
   margin: 28px 0 0;
   padding-left: 17px;
