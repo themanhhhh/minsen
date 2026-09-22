@@ -159,10 +159,25 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
             ))}
           </div>
         </section>
-        <section className="founder-message">
-          <p className="eyebrow">{locale === "vi" ? "Thông điệp từ nhà sáng lập" : ar ? "رسالة المؤسس" : "Founder message"}</p>
-          <blockquote>“{content.founderMessage}”</blockquote>
-          <p>{locale === "vi" ? "Nhà sáng lập & Giám đốc điều hành" : ar ? "المؤسس والمدير الإداري" : "Founder & Managing Director"}<br />MISO JAPAN</p>
+        <section className="founder-profile">
+          <div className="founder-profile-heading">
+            <p className="eyebrow">{locale === "vi" ? "Thông tin CEO" : ar ? "معلومات المدير التنفيذي" : "CEO profile"}</p>
+            <span aria-hidden="true">02</span>
+          </div>
+          <div className="founder-profile-layout">
+            <div className="founder-profile-identity">
+              <h2>
+                {content.ceoProfile.name}
+                <span className="founder-profile-name-divider" aria-hidden="true"> - </span>
+                <em>{content.ceoProfile.vietnameseName}</em>
+              </h2>
+              <p className="founder-profile-role">{content.ceoProfile.role}</p>
+              <p className="founder-profile-tagline">{content.ceoProfile.tagline}</p>
+            </div>
+            <div className="founder-profile-copy">
+              {content.ceoProfile.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            </div>
+          </div>
         </section>
         <section className="core-message">
           <div>
