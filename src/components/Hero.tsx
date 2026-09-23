@@ -1,4 +1,4 @@
-import { getLandingContent, heroStats, heroStatsAr, heroStatsVi, type Locale } from "@/data/landing-page";
+import { getLandingContent, getLocalizedPath, heroStats, heroStatsAr, heroStatsVi, type Locale } from "@/data/landing-page";
 import { Factory, Globe2, Handshake, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 
@@ -9,6 +9,8 @@ export function Hero({ locale }: { locale: Locale }) {
   const stats = locale === "vi" ? heroStatsVi : locale === "ar" ? heroStatsAr : heroStats;
   const vi = locale === "vi";
   const ar = locale === "ar";
+  const manufacturersPath = getLocalizedPath(locale, "/manufacturers");
+  const popularSearchTerms = ["Commercial Plywood", "Film-Faced Plywood", "Packaging Plywood", "Furniture Plywood", "Veneer"];
   return (
     <section className="hero" id="top">
       <div className="hero-content">
@@ -22,13 +24,13 @@ export function Hero({ locale }: { locale: Locale }) {
           ))}
         </h1>
         <p className="hero-description">{heroContent.description}</p>
-        <form className="hero-search" action="#contact">
+        <form className="hero-search" action={manufacturersPath} method="get">
           <label className="sr-only" htmlFor="product-search">
             {vi ? "Sản phẩm bạn đang tìm kiếm" : ar ? "المنتج الذي تبحث عنه" : "Product you are looking for"}
           </label>
           <input
             id="product-search"
-            name="product"
+            name="q"
             placeholder={heroContent.searchPlaceholder}
           />
           <button className="button button-search" type="submit">
@@ -37,8 +39,8 @@ export function Hero({ locale }: { locale: Locale }) {
         </form>
         <div className="hero-popular">
           <strong>{vi ? "Tìm kiếm phổ biến:" : ar ? "عمليات البحث الشائعة:" : "Popular searches:"}</strong>
-          {heroContent.popularSearches.map((search) => (
-            <a href="#products" key={search}>
+          {heroContent.popularSearches.map((search, index) => (
+            <a href={`${manufacturersPath}?q=${encodeURIComponent(popularSearchTerms[index] ?? search)}`} key={search}>
               {search}
             </a>
           ))}

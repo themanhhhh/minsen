@@ -41,6 +41,11 @@ const emptyFilters: Filters = {
   regions: [],
   markets: [],
 };
+
+function normalizeSearch(value: string) {
+  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
+
 const shortlistStorageKey = "minsen-shortlist";
 const compareStorageKey = "minsen-compare";
 
@@ -53,10 +58,11 @@ function readIds(key: string) {
   }
 }
 
-export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; initialProduct?: string }) {
+export function FactoryDirectory({ locale, initialProduct, initialSearch }: { locale: Locale; initialProduct?: string; initialSearch?: string }) {
   const initialFilters = initialProduct && factoryFilterOptions.products.includes(initialProduct)
     ? { ...emptyFilters, products: [initialProduct] }
     : emptyFilters;
+  const searchQuery = normalizeSearch(initialSearch ?? "");
   const [filters, setFilters] = useState<Filters>(initialFilters);
   const [appliedFilters, setAppliedFilters] = useState<Filters>(initialFilters);
   const [shortlist, setShortlist] = useState<string[]>([]);
@@ -300,8 +306,24 @@ export function FactoryDirectory({ locale, initialProduct }: { locale: Locale; i
       appliedFilters.regions.includes(factory.region)) &&
     (appliedFilters.markets.length === 0 ||
       appliedFilters.markets.some((item) => factory.exportMarkets.includes(item)));
+  const matchesSearch = (factory: Factory) => {
+    if (!searchQuery) return true;
+    const searchableText = normalizeSearch([
+      factory.id,
+      factory.slug,
+      factory.displayName,
+      factory.companyNameVi,
+      factory.companyNameEn,
+      factory.location,
+      factory.products.join(" "),
+      factory.materials.join(" "),
+      factory.exportMarkets.join(" "),
+      factory.shortDescription,
+    ].join(" "));
+    return searchableText.includes(searchQuery);
+  };
   const filtered = factories.filter(
-    (factory) => (!savedOnly || shortlist.includes(factory.id)) && matches(factory),
+    (factory) => (!savedOnly || shortlist.includes(factory.id)) && matchesSearch(factory) && matches(factory),
   );
   const comparedFactories = factories.filter((factory) => compare.includes(factory.id));
   const comparisonRows: { label: string; value: (factory: Factory) => string }[] = [

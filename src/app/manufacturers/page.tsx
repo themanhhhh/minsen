@@ -5,6 +5,12 @@ export const metadata = {
     "Explore sample capability profiles in the MISO JAPAN manufacturing network.",
 };
 export default async function ManufacturersPage({ searchParams }: PageProps<"/manufacturers">) {
-  const { product } = await searchParams;
-  return <FactoryDirectory locale="en" initialProduct={typeof product === "string" ? product : undefined} />;
+  const { product, q } = await searchParams;
+  return (
+    <FactoryDirectory
+      locale="en"
+      initialProduct={typeof product === "string" ? product : undefined}
+      initialSearch={typeof q === "string" ? q : undefined}
+    />
+  );
 }
