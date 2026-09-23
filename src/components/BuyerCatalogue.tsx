@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useDeferredValue, useEffect, useState } from "react";
-import { getLocalizedPath, type Locale } from "@/data/landing-page";
+import type { Locale } from "@/data/landing-page";
 import type { BuyerProfile } from "@/data/buyers";
 import { readSavedBuyerIds, writeSavedBuyerIds } from "@/data/saved-profiles";
 import {
@@ -948,9 +947,9 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
             <p className="eyebrow">{copy.eyebrow}</p>
             <h1>{copy.title}</h1>
             <p>{copy.description}</p>
-            <Link className="button button-primary" href={getLocalizedPath(locale, "/rfq")}>
+            <a className="button button-primary" href="https://plywood.misojapan.com/factory-registration">
               {copy.action} <span aria-hidden="true">↗</span>
-            </Link>
+            </a>
           </div>
           <div className="buyer-page-intro-stats" aria-label={copy.overviewAria}>
             <strong>600+</strong>
