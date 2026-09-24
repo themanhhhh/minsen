@@ -166,6 +166,15 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
           </div>
           <div className="founder-profile-layout">
             <div className="founder-profile-identity">
+              <div className="founder-profile-portrait">
+                <Image
+                  src="/images/ceo.jfif"
+                  alt={`${content.ceoProfile.name}, ${content.ceoProfile.role}`}
+                  fill
+                  sizes="(max-width: 820px) 100vw, 390px"
+                  unoptimized
+                />
+              </div>
               <h2>
                 {content.ceoProfile.name}
                 <span className="founder-profile-name-divider" aria-hidden="true"> - </span>

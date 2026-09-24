@@ -6621,6 +6621,19 @@ html[data-locale="ar"] .directory-hero h1 {
   max-width: 1304px;
 }
 
+.founder-profile-portrait {
+  aspect-ratio: 1 / 1;
+  background: var(--primary-dark);
+  margin-bottom: 28px;
+  max-width: 390px;
+  overflow: hidden;
+  position: relative;
+}
+
+.founder-profile-portrait img {
+  object-fit: cover;
+}
+
 .founder-profile-identity h2 {
   color: var(--primary-dark);
   font-size: clamp(34px, 4vw, 58px);
