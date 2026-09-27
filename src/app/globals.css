@@ -8733,6 +8733,19 @@ html[data-locale="ar"] .founder-profile-tagline {
   font-weight: 800;
 }
 
+.buyer-profile-action {
+  align-self: stretch;
+  font-size: clamp(8px, .72vw, 10px);
+  gap: 8px;
+  margin: 8px;
+  padding: 10px 12px;
+}
+
+.buyer-profile-action:focus-visible {
+  outline: 2px solid #18519a;
+  outline-offset: 2px;
+}
+
 .buyer-market-rail {
   display: flex;
   flex-direction: column;

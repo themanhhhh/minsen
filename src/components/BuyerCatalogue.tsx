@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useDeferredValue, useEffect, useState } from "react";
-import type { Locale } from "@/data/landing-page";
+import { getLocalizedPath, type Locale } from "@/data/landing-page";
 import type { BuyerProfile } from "@/data/buyers";
 import { readSavedBuyerIds, writeSavedBuyerIds } from "@/data/saved-profiles";
 import {
@@ -735,6 +736,8 @@ function BuyerCard({
   savedLabel: string;
   copy: BuyerCardCopy;
 }) {
+  const vi = locale === "vi";
+  const ar = locale === "ar";
   const localizedMainProducts = localizeBuyerItems(buyer.mainProduct, locale);
   const localizedCore = localizeBuyerItems(buyer.core, locale);
   const localizedGlue = localizeBuyerItems(buyer.glue, locale);
@@ -820,6 +823,15 @@ function BuyerCard({
         <span><b>{copy.market}:</b> {localizeBuyerValue(buyer.market, locale)}</span>
         <span><b>{copy.ports}:</b> {localizeBuyerValue(buyer.ports, locale)}</span>
       </footer>
+      <Link
+        className="button button-primary buyer-profile-action"
+        href={getLocalizedPath(locale, "/rfq")}
+      >
+        {vi
+          ? "Yêu cầu MISO JAPAN kết nối"
+          : ar ? "اطلب من MISO JAPAN التواصل" : "Ask MISO JAPAN to connect"}{" "}
+        <span aria-hidden="true">↗</span>
+      </Link>
     </article>
   );
 }
