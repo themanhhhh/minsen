@@ -115,12 +115,19 @@ export function Footer({ locale }: { locale: Locale }) {
         <p>
           © 2026 {company.name}.{" "}
            {locale === "vi" ? "Bảo lưu mọi quyền." : ar ? "جميع الحقوق محفوظة." : "All rights reserved."}
-        </p>
-        <div className="footer-legal">
-           <a href="#top">{locale === "vi" ? "Về đầu trang" : ar ? "العودة إلى الأعلى" : "Back to top"}</a>
-          <span aria-hidden="true">·</span>
-          <LanguageSwitcher locale={locale} />
-        </div>
+         </p>
+         <div className="footer-legal">
+            <a
+              className="footer-back-to-top"
+              href="#top"
+              aria-label={locale === "vi" ? "Về đầu trang" : ar ? "العودة إلى الأعلى" : "Back to top"}
+              title={locale === "vi" ? "Về đầu trang" : ar ? "العودة إلى الأعلى" : "Back to top"}
+            >
+              <span aria-hidden="true">↑</span>
+            </a>
+           <span aria-hidden="true">·</span>
+           <LanguageSwitcher locale={locale} />
+         </div>
       </div>
     </footer>
   );

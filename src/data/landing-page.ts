@@ -1657,6 +1657,7 @@ export const factories: Factory[] = [
     sourceFile: "Thông tin(2).txt",
     devNote: "Confirm whether Okal should be published as particleboard and whether it is produced or traded.",
   },
+  ...additionalFactories,
 ];
 
 function getFactoryPublicCode(name: string) {
