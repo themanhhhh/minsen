@@ -1867,8 +1867,40 @@ p {
   gap: 9px;
 }
 
+.footer-legal span {
+  
+  font-size: 20px;
+}
+
 .footer-legal a {
+  font-size: 30px;
   color: #8296bf;
+}
+
+.footer-legal .footer-back-to-top {
+  align-items: center;
+  border: 1px solid rgba(130, 150, 191, .65);
+  border-radius: 50%;
+  display: inline-flex;
+  font-size: 16px;
+  height: 30px;
+  justify-content: center;
+  line-height: 1;
+  transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease, color .2s ease, transform .2s ease;
+  width: 30px;
+}
+
+.footer-legal .footer-back-to-top:hover {
+  background: #61c9f6;
+  border-color: #61c9f6;
+  box-shadow: 0 0 0 4px rgba(97, 201, 246, .14);
+  color: #081426;
+  transform: translateY(-2px);
+}
+
+.footer-legal .footer-back-to-top:focus-visible {
+  outline: 2px solid #61c9f6;
+  outline-offset: 3px;
 }
 
 .footer-legal a:hover,
