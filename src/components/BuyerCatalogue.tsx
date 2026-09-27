@@ -23,15 +23,15 @@ const buyerPageSize = 6;
 
 const marketRail = [
   { country: "India", label: "ẤN ĐỘ", labelEn: "INDIA", labelAr: "الهند", className: "buyer-rail-india" },
+  { country: "United States", label: "MỸ", labelEn: "UNITED STATES", labelAr: "الولايات المتحدة", className: "buyer-rail-america" },
+  { country: "Malaysia", label: "MALAYSIA", labelEn: "MALAYSIA", labelAr: "ماليزيا", className: "buyer-rail-malaysia" },
   { country: "China", label: "TRUNG QUỐC", labelEn: "CHINA", labelAr: "الصين", className: "buyer-rail-china" },
-  { country: "Vietnam", label: "VIỆT NAM", labelEn: "VIETNAM", labelAr: "فيتنام", className: "buyer-rail-vietnam" },
-  { country: "Bangladesh", label: "BANGLADESH", labelEn: "BANGLADESH", labelAr: "بنغلاديش", className: "buyer-rail-bangladesh" },
-  { country: "Indonesia", label: "INDONESIA", labelEn: "INDONESIA", labelAr: "إندونيسيا", className: "buyer-rail-indonesia" },
-  { country: "Middle East", label: "TRUNG ĐÔNG", labelEn: "MIDDLE EAST", labelAr: "الشرق الأوسط", className: "buyer-rail-middle-east" },
-  { country: "Africa", label: "CHÂU PHI", labelEn: "AFRICA", labelAr: "أفريقيا", className: "buyer-rail-africa" },
-  { country: "Global", label: "KHÁC / GLOBAL", labelEn: "GLOBAL", labelAr: "عالمي", className: "buyer-rail-global" },
-  { country: "Americas", label: "KHÁC / MỸ", labelEn: "AMERICAS", labelAr: "الأمريكتان", className: "buyer-rail-america" },
-  { country: "Other", label: "KHÁC / KHÁC", labelEn: "OTHER", labelAr: "أخرى", className: "buyer-rail-other" },
+  { country: "Turkey", label: "THỔ NHĨ KỲ", labelEn: "TURKEY", labelAr: "تركيا", className: "buyer-rail-turkey" },
+  { country: "United Arab Emirates", label: "UAE", labelEn: "UAE", labelAr: "الإمارات العربية المتحدة", className: "buyer-rail-uae" },
+  { country: "South Korea", label: "HÀN QUỐC", labelEn: "SOUTH KOREA", labelAr: "كوريا الجنوبية", className: "buyer-rail-korea" },
+  { country: "United Kingdom", label: "ANH", labelEn: "UNITED KINGDOM", labelAr: "المملكة المتحدة", className: "buyer-rail-uk" },
+  { country: "Poland", label: "BA LAN", labelEn: "POLAND", labelAr: "بولندا", className: "buyer-rail-poland" },
+  { country: "Australia", label: "ÚC", labelEn: "AUSTRALIA", labelAr: "أستراليا", className: "buyer-rail-australia" },
 ];
 
 const buyerCountryCodes: Record<string, string> = {
@@ -336,23 +336,20 @@ function localizeBuyerItems(items: string[], locale: Locale) {
 
 const countryRailGroups: Record<string, string[]> = {
   India: ["Ấn Độ"],
+  "United States": ["Mỹ"],
+  Malaysia: ["Malaysia"],
   China: ["Trung Quốc"],
-  Vietnam: ["Việt Nam"],
-  Bangladesh: ["Bangladesh"],
-  Indonesia: ["Indonesia"],
-  "Middle East": ["UAE", "Thổ Nhĩ Kỳ", "Ả Rập Xê Út", "Oman", "Oman và Ả Rập Xê Út", "Israel", "Jordan", "Yemen", "Qatar", "Bahrain", "Lebanon"],
-  Africa: ["Ai Cập", "Nam Phi", "Mayotte", "Uganda", "Maroc", "Reunion"],
-  Americas: ["Mỹ", "Canada", "Guatemala", "Panama", "Peru", "Colombia", "Costa Rica", "Brazil", "Uruguay", "Mexico", "Chile", "Guyana"],
+  Turkey: ["Thổ Nhĩ Kỳ"],
+  "United Arab Emirates": ["UAE"],
+  "South Korea": ["Hàn Quốc"],
+  "United Kingdom": ["Anh"],
+  Poland: ["Ba Lan"],
+  Australia: ["Úc"],
 };
 
 function matchesCountryRail(country: string, filter: string) {
-  if (!filter || filter === "Global") {
+  if (!filter) {
     return true;
-  }
-
-  if (filter === "Other") {
-    const groupedCountries = Object.values(countryRailGroups).flat();
-    return !groupedCountries.includes(country);
   }
 
   return countryRailGroups[filter]?.includes(country) ?? false;
