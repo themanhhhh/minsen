@@ -9315,11 +9315,14 @@ html[data-locale="ar"] .founder-profile-tagline {
 }
 
 .buyer-search-field {
+  justify-self: center;
   position: relative;
+  width: min(100%, 560px);
 }
 
 .buyer-search-field input {
   padding-right: 28px;
+  text-align: center;
 }
 
 .buyer-search-field b {
