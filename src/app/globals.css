@@ -9346,7 +9346,7 @@ html[data-locale="ar"] .founder-profile-tagline {
   padding: 0;
   position: absolute;
   right: 28px;
-  top: 26px;
+  bottom: 7px;
   width: 18px;
   z-index: 1;
 }

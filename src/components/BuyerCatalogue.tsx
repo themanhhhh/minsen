@@ -852,14 +852,13 @@ function BuyerCard({
           </div>
            <div className="buyer-fit-column buyer-access-column">
              <div className="buyer-context-label"><BuyerIcon name="shield" /><strong>{copy.access}</strong></div>
-             <p className="buyer-access-status">{localizeBuyerValue(buyer.access, locale)}</p>
              <Link
                className="button button-primary buyer-profile-action"
                href={getLocalizedPath(locale, "/rfq")}
              >
                {vi
-                 ? "Yêu cầu MISO JAPAN kết nối"
-                 : ar ? "اطلب من MISO JAPAN التواصل" : "Ask MISO JAPAN to connect"}{" "}
+                 ? "Kết nối"
+                 : ar ? "تواصل" : "Connect"}{" "}
                <span aria-hidden="true">↗</span>
              </Link>
            </div>
