@@ -24,11 +24,10 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
           </div>
           <div className="about-hero-mark" aria-hidden="true">
             <Image
-              src="/images/ceo.jfif"
-              alt={`${content.ceoProfile.name}, ${content.ceoProfile.role}`}
+              src="/images/team/minsen-sourcing-team.jpg"
+              alt=""
               fill
               sizes="300px"
-              unoptimized
             />
             <span>MISO JAPAN</span>
             <strong>01</strong>
@@ -39,6 +38,35 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
             </small>
           </div>
           <ScrollCue targetId="mission" label={locale === "vi" ? "Cuộn để tìm hiểu thêm" : ar ? "مرر لمعرفة المزيد" : "Scroll to learn more"} />
+        </section>
+        <section className="founder-profile">
+          <div className="founder-profile-heading">
+            <p className="eyebrow">{locale === "vi" ? "Thông tin CEO" : ar ? "معلومات المدير التنفيذي" : "CEO profile"}</p>
+            <span aria-hidden="true">02</span>
+          </div>
+          <div className="founder-profile-layout">
+            <div className="founder-profile-identity">
+              <div className="founder-profile-portrait">
+                <Image
+                  src="/images/ceo.jfif"
+                  alt={`${content.ceoProfile.name}, ${content.ceoProfile.role}`}
+                  fill
+                  sizes="(max-width: 820px) 100vw, 390px"
+                  unoptimized
+                />
+              </div>
+              <h2>
+                {content.ceoProfile.name}
+                <span className="founder-profile-name-divider" aria-hidden="true"> - </span>
+                <em>{content.ceoProfile.vietnameseName}</em>
+              </h2>
+              <p className="founder-profile-role">{content.ceoProfile.role}</p>
+              <p className="founder-profile-tagline">{content.ceoProfile.tagline}</p>
+            </div>
+            <div className="founder-profile-copy">
+              {content.ceoProfile.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            </div>
+          </div>
         </section>
         <section className="about-story" id="mission">
           <div className="about-story-label">
@@ -158,35 +186,6 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
                 <p>{item.text}</p>
               </article>
             ))}
-          </div>
-        </section>
-        <section className="founder-profile">
-          <div className="founder-profile-heading">
-            <p className="eyebrow">{locale === "vi" ? "Thông tin CEO" : ar ? "معلومات المدير التنفيذي" : "CEO profile"}</p>
-            <span aria-hidden="true">02</span>
-          </div>
-          <div className="founder-profile-layout">
-            <div className="founder-profile-identity">
-              <div className="founder-profile-portrait">
-                <Image
-                  src="/images/ceo.jfif"
-                  alt={`${content.ceoProfile.name}, ${content.ceoProfile.role}`}
-                  fill
-                  sizes="(max-width: 820px) 100vw, 390px"
-                  unoptimized
-                />
-              </div>
-              <h2>
-                {content.ceoProfile.name}
-                <span className="founder-profile-name-divider" aria-hidden="true"> - </span>
-                <em>{content.ceoProfile.vietnameseName}</em>
-              </h2>
-              <p className="founder-profile-role">{content.ceoProfile.role}</p>
-              <p className="founder-profile-tagline">{content.ceoProfile.tagline}</p>
-            </div>
-            <div className="founder-profile-copy">
-              {content.ceoProfile.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-            </div>
           </div>
         </section>
         <section className="core-message">
