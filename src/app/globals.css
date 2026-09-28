@@ -8393,6 +8393,14 @@ html[data-locale="ar"] .founder-profile-tagline {
   line-height: .95;
 }
 
+.buyer-cover-stamp.is-filtered strong {
+  font-size: clamp(18px, 2.65vw, 40px);
+  letter-spacing: -.04em;
+  line-height: 1;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
 .buyer-cover-stamp span {
   color: #9e7136;
   font-size: clamp(7px, .85vw, 12px);

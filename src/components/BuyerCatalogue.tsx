@@ -1024,6 +1024,22 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
     });
   }
   if (savedOnly) activeFilters.push({ key: "saved", label: savedBuyersLabel });
+  const selectedMarket = marketRail.find((market) => market.country === countryFilter);
+  const featuredCountry = selectedMarket ? getMarketRailLabel(selectedMarket) : copy.featuredCountry;
+  const coverDescription = selectedMarket
+    ? vi
+      ? `${filteredProfiles.length} HỒ SƠ BUYER ĐANG HIỂN THỊ TẠI ${featuredCountry}`
+      : ar
+        ? `${filteredProfiles.length} ملف مشتري معروض في ${featuredCountry}`
+        : `${filteredProfiles.length} BUYER PROFILES FILTERED FOR ${featuredCountry}`
+    : copy.catalogueDescription;
+  const coverStampLabel = selectedMarket
+    ? vi
+      ? `${filteredProfiles.length} BUYER`
+      : ar
+        ? `${filteredProfiles.length} مشترٍ`
+        : `${filteredProfiles.length} BUYERS`
+    : copy.featuredCountryType;
 
   return (
     <div className={`buyer-catalogue-page buyer-catalogue-page-${locale}`}>
@@ -1044,13 +1060,16 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
           </div>
         </section>
         <header className="buyer-catalogue-cover">
-          <div className="buyer-cover-copy">
-            <h2>{copy.catalogueTitle}</h2>
-            <p>{copy.catalogueDescription}</p>
-            <div className="buyer-cover-meta"><span>{copy.coverPageLabel} {String(safePage).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}</span><i /> <span>6 {copy.perPageLabel}</span></div>
-          </div>
-          <IndiaLandmark ariaLabel={copy.landmarkAria} />
-          <div className="buyer-cover-stamp"><strong>{copy.featuredCountry}</strong><span>{copy.featuredCountryType}</span></div>
+           <div className="buyer-cover-copy">
+             <h2>{copy.catalogueTitle}</h2>
+             <p>{coverDescription}</p>
+             <div className="buyer-cover-meta"><span>{copy.coverPageLabel} {String(safePage).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}</span><i /> <span>6 {copy.perPageLabel}</span></div>
+           </div>
+           <IndiaLandmark ariaLabel={copy.landmarkAria} />
+           <div className={`buyer-cover-stamp${selectedMarket ? " is-filtered" : ""}`}>
+             <strong>{featuredCountry}</strong>
+             <span>{coverStampLabel}</span>
+           </div>
         </header>
 
         <CatalogueCategories copy={copy} />
