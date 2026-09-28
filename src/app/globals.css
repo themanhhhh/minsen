@@ -10103,7 +10103,7 @@ html[data-locale="ar"] .founder-profile-tagline {
 /* Homepage supply paths inspired by the supplied three-way sourcing graphic. */
 .supply-paths {
   background: #f4f6f9;
-  padding: 173px max(24px, calc((100vw - 1304px) / 2)) 72px;
+  padding: 173px max(24px, calc((100vw - 1304px) / 2)) 22px;
 }
 
 .supply-path-grid {

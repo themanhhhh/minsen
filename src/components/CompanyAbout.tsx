@@ -24,10 +24,11 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
           </div>
           <div className="about-hero-mark" aria-hidden="true">
             <Image
-              src="/images/team/minsen-sourcing-team.jpg"
-              alt=""
+              src="/images/ceo.jfif"
+              alt={`${content.ceoProfile.name}, ${content.ceoProfile.role}`}
               fill
               sizes="300px"
+              unoptimized
             />
             <span>MISO JAPAN</span>
             <strong>01</strong>
