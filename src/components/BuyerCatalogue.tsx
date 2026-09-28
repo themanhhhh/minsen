@@ -10,14 +10,18 @@ import {
   Bookmark,
   Building2,
   ClipboardList,
+  Filter,
   Factory,
   Globe2,
   ShieldCheck,
   ShoppingCart,
   UsersRound,
+  X,
 } from "lucide-react";
 
 type BuyerIconName = "factory" | "cart" | "clipboard" | "shield" | "users" | "building" | "badge" | "globe";
+type BuyerFilterGroup = "product" | "payment" | "market" | "country";
+type BuyerFilterChipKey = BuyerFilterGroup | "query" | "saved";
 
 const buyerPageSize = 6;
 
@@ -334,6 +338,32 @@ function localizeBuyerItems(items: string[], locale: Locale) {
   return items.map((item) => localizeBuyerValue(item, locale));
 }
 
+function getBuyerSearchableText(buyer: BuyerProfile, locale: Locale) {
+  const values = [
+    buyer.id,
+    buyer.country,
+    ...buyer.mainProduct,
+    ...buyer.core,
+    ...buyer.glue,
+    ...buyer.needs,
+    ...buyer.buying,
+    ...buyer.application,
+    buyer.capacity,
+    ...buyer.quality,
+    buyer.access,
+    buyer.payment,
+    buyer.market,
+    buyer.ports,
+  ];
+
+  return [
+    ...values,
+    ...values.map((value) => localizeBuyerValue(value, locale)),
+  ]
+    .join(" ")
+    .toLowerCase();
+}
+
 const countryRailGroups: Record<string, string[]> = {
   India: ["Ấn Độ"],
   "United States": ["Mỹ"],
@@ -417,6 +447,9 @@ type BuyerPageCopy = {
   lookupLabel: string;
   lookupTitle: string;
   clearFilters: string;
+  activeFilters: string;
+  noActiveFilters: string;
+  clearSearch: string;
   searchLabel: string;
   searchPlaceholder: string;
   productLabel: string;
@@ -463,6 +496,9 @@ const buyerPageCopy: Record<Locale, BuyerPageCopy> = {
     lookupLabel: "BUYER PROFILE SEARCH",
     lookupTitle: "Find the right requirement before matching a factory",
     clearFilters: "Clear filters",
+    activeFilters: "ACTIVE FILTERS",
+    noActiveFilters: "No filters applied",
+    clearSearch: "Clear search",
     searchLabel: "Search",
     searchPlaceholder: "Buyer ID, product, application, market...",
     productLabel: "Main product",
@@ -527,6 +563,9 @@ const buyerPageCopy: Record<Locale, BuyerPageCopy> = {
     lookupLabel: "TRA CỨU HỒ SƠ BUYER",
     lookupTitle: "Tìm đúng nhu cầu trước khi matching nhà máy",
     clearFilters: "Xóa bộ lọc",
+    activeFilters: "BỘ LỌC ĐANG ÁP DỤNG",
+    noActiveFilters: "Chưa áp dụng bộ lọc",
+    clearSearch: "Xóa nội dung tìm kiếm",
     searchLabel: "Tìm kiếm",
     searchPlaceholder: "Mã buyer, sản phẩm, ứng dụng, thị trường...",
     productLabel: "Sản phẩm chính",
@@ -591,6 +630,9 @@ const buyerPageCopy: Record<Locale, BuyerPageCopy> = {
     lookupLabel: "البحث في ملفات المشترين",
     lookupTitle: "اعثر على المتطلبات المناسبة قبل مطابقة المصنع",
     clearFilters: "مسح الفلاتر",
+    activeFilters: "الفلاتر المطبقة",
+    noActiveFilters: "لم يتم تطبيق أي فلاتر",
+    clearSearch: "مسح البحث",
     searchLabel: "بحث",
     searchPlaceholder: "رمز المشتري، المنتج، الاستخدام، السوق...",
     productLabel: "المنتج الرئيسي",
@@ -852,15 +894,9 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
   const vi = locale === "vi";
   const ar = locale === "ar";
   const copy = buyerPageCopy[locale];
-  const productOptions = Array.from(new Set(profiles.flatMap((buyer) => buyer.mainProduct)))
-    .sort()
-    .map((value) => ({ value, label: localizeBuyerValue(value, locale) }));
-  const marketOptions = Array.from(new Set(profiles.map((buyer) => buyer.market)))
-    .sort()
-    .map((value) => ({ value, label: localizeBuyerValue(value, locale) }));
-  const paymentOptions = Array.from(new Set(profiles.map((buyer) => buyer.payment)))
-    .sort()
-    .map((value) => ({ value, label: localizeBuyerValue(value, locale) }));
+  const productValues = Array.from(new Set(profiles.flatMap((buyer) => buyer.mainProduct))).sort();
+  const marketValues = Array.from(new Set(profiles.map((buyer) => buyer.market))).sort();
+  const paymentValues = Array.from(new Set(profiles.map((buyer) => buyer.payment))).sort();
   const saveLabel = vi ? "Lưu buyer" : ar ? "حفظ المشتري" : "Save buyer";
   const savedLabel = vi ? "Đã lưu" : ar ? "محفوظ" : "Saved";
   const savedBuyersLabel = vi ? "Buyer đã lưu" : ar ? "المشترون المحفوظون" : "Saved buyers";
@@ -884,39 +920,41 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
   }, [profiles]);
 
   const normalizedQuery = deferredQuery.trim().toLowerCase();
-  const filteredProfiles = profiles.filter((buyer) => {
-    const searchableValues = [
-      buyer.id,
-      buyer.country,
-      ...buyer.mainProduct,
-      ...buyer.core,
-      ...buyer.glue,
-      ...buyer.needs,
-      ...buyer.buying,
-      ...buyer.application,
-      buyer.capacity,
-      ...buyer.quality,
-      buyer.access,
-      buyer.payment,
-      buyer.market,
-      buyer.ports,
-    ];
-    const searchableText = [
-      ...searchableValues,
-      ...searchableValues.map((value) => localizeBuyerValue(value, locale)),
-    ]
-      .join(" ")
-      .toLowerCase();
-
-    return (
-      (!normalizedQuery || searchableText.includes(normalizedQuery)) &&
-      (!productFilter || buyer.mainProduct.includes(productFilter)) &&
-      (!paymentFilter || buyer.payment === paymentFilter) &&
-      (!marketFilter || buyer.market === marketFilter) &&
-      (!savedOnly || savedBuyerIds.includes(buyer.id)) &&
-      matchesCountryRail(buyer.country, countryFilter)
-    );
-  });
+  const matchesBuyerFilters = (buyer: BuyerProfile, ignoredGroup?: BuyerFilterGroup) =>
+    (!normalizedQuery || getBuyerSearchableText(buyer, locale).includes(normalizedQuery)) &&
+    (ignoredGroup === "product" || !productFilter || buyer.mainProduct.includes(productFilter)) &&
+    (ignoredGroup === "payment" || !paymentFilter || buyer.payment === paymentFilter) &&
+    (ignoredGroup === "market" || !marketFilter || buyer.market === marketFilter) &&
+    (!savedOnly || savedBuyerIds.includes(buyer.id)) &&
+    (ignoredGroup === "country" || matchesCountryRail(buyer.country, countryFilter));
+  const filteredProfiles = profiles.filter((buyer) => matchesBuyerFilters(buyer));
+  const countFilterOption = (group: BuyerFilterGroup, value: string) =>
+    profiles.filter((buyer) => {
+      if (!matchesBuyerFilters(buyer, group)) return false;
+      if (group === "product") return buyer.mainProduct.includes(value);
+      if (group === "payment") return buyer.payment === value;
+      if (group === "market") return buyer.market === value;
+      return matchesCountryRail(buyer.country, value);
+    }).length;
+  const productOptions = productValues.map((value) => ({
+    value,
+    label: localizeBuyerValue(value, locale),
+    count: countFilterOption("product", value),
+  }));
+  const marketOptions = marketValues.map((value) => ({
+    value,
+    label: localizeBuyerValue(value, locale),
+    count: countFilterOption("market", value),
+  }));
+  const paymentOptions = paymentValues.map((value) => ({
+    value,
+    label: localizeBuyerValue(value, locale),
+    count: countFilterOption("payment", value),
+  }));
+  const countryCounts = marketRail.reduce<Record<string, number>>((counts, market) => {
+    counts[market.country] = countFilterOption("country", market.country);
+    return counts;
+  }, {});
 
   const totalPages = Math.max(
     1,
@@ -947,6 +985,45 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
     setSavedOnly(false);
     setCurrentPage(1);
   };
+  const removeFilter = (group: BuyerFilterChipKey) => {
+    if (group === "query") setQuery("");
+    if (group === "product") setProductFilter("");
+    if (group === "payment") setPaymentFilter("");
+    if (group === "market") setMarketFilter("");
+    if (group === "country") setCountryFilter("");
+    if (group === "saved") setSavedOnly(false);
+    setCurrentPage(1);
+  };
+  const getMarketRailLabel = (market: (typeof marketRail)[number]) =>
+    vi ? market.label : ar ? market.labelAr : market.labelEn;
+  const activeFilters: Array<{ key: BuyerFilterChipKey; label: string }> = [];
+  if (query.trim()) activeFilters.push({ key: "query", label: `${copy.searchLabel}: ${query.trim()}` });
+  if (productFilter) {
+    activeFilters.push({
+      key: "product",
+      label: `${copy.productLabel}: ${productOptions.find((option) => option.value === productFilter)?.label ?? productFilter}`,
+    });
+  }
+  if (paymentFilter) {
+    activeFilters.push({
+      key: "payment",
+      label: `${copy.paymentLabel}: ${paymentOptions.find((option) => option.value === paymentFilter)?.label ?? paymentFilter}`,
+    });
+  }
+  if (marketFilter) {
+    activeFilters.push({
+      key: "market",
+      label: `${copy.marketLabel}: ${marketOptions.find((option) => option.value === marketFilter)?.label ?? marketFilter}`,
+    });
+  }
+  if (countryFilter) {
+    const selectedCountry = marketRail.find((market) => market.country === countryFilter);
+    activeFilters.push({
+      key: "country",
+      label: `${copy.countryLabel}: ${selectedCountry ? getMarketRailLabel(selectedCountry) : countryFilter}`,
+    });
+  }
+  if (savedOnly) activeFilters.push({ key: "saved", label: savedBuyersLabel });
 
   return (
     <div className={`buyer-catalogue-page buyer-catalogue-page-${locale}`}>
@@ -991,22 +1068,58 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
               disabled={!hasFilters}
             >
               {copy.clearFilters}
-            </button>
-          </div>
-          <div className="buyer-filter-controls">
-            <label className="buyer-search-field">
-              <span>{copy.searchLabel}</span>
+             </button>
+           </div>
+           <div className="buyer-filter-summary" aria-live="polite">
+             <div className="buyer-filter-summary-heading">
+               <Filter size={14} strokeWidth={1.8} aria-hidden="true" />
+               <strong>{copy.activeFilters}</strong>
+               <span>{activeFilters.length}</span>
+             </div>
+             <div className="buyer-filter-chips">
+               {activeFilters.length > 0 ? activeFilters.map((filter) => (
+                 <span className="buyer-filter-chip" key={filter.key}>
+                   {filter.label}
+                   <button
+                     type="button"
+                     aria-label={`${copy.clearFilters}: ${filter.label}`}
+                     onClick={() => removeFilter(filter.key)}
+                   >
+                     <X size={11} strokeWidth={2} aria-hidden="true" />
+                   </button>
+                 </span>
+               )) : (
+                 <span className="buyer-filter-empty">{copy.noActiveFilters}</span>
+               )}
+             </div>
+           </div>
+           <div className="buyer-filter-controls">
+             <label className="buyer-search-field">
+               <span>{copy.searchLabel}</span>
               <input
                 type="search"
                 value={query}
                 onChange={(event) => {
                   setQuery(event.target.value);
                   setCurrentPage(1);
-                }}
-                placeholder={copy.searchPlaceholder}
-              />
-              <b aria-hidden="true">⌕</b>
-            </label>
+                 }}
+                 placeholder={copy.searchPlaceholder}
+               />
+               {query && (
+                 <button
+                   className="buyer-search-clear"
+                   type="button"
+                   aria-label={copy.clearSearch}
+                   onClick={() => {
+                     setQuery("");
+                     setCurrentPage(1);
+                   }}
+                 >
+                   <X size={13} strokeWidth={2} aria-hidden="true" />
+                 </button>
+               )}
+               <b aria-hidden="true">⌕</b>
+             </label>
             <label>
               <span>{copy.productLabel}</span>
               <select
@@ -1014,12 +1127,20 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
                 onChange={(event) => {
                   setProductFilter(event.target.value);
                   setCurrentPage(1);
-                }}
-              >
+               }}
+             >
                 <option value="">{copy.allProducts}</option>
-                {productOptions.map((product) => <option key={product.value} value={product.value}>{product.label}</option>)}
-              </select>
-            </label>
+                {productOptions.map((product) => (
+                  <option
+                    key={product.value}
+                    value={product.value}
+                    disabled={product.count === 0 && product.value !== productFilter}
+                  >
+                    {product.label} ({product.count})
+                  </option>
+                ))}
+               </select>
+             </label>
             <label>
               <span>{copy.paymentLabel}</span>
               <select
@@ -1027,12 +1148,20 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
                 onChange={(event) => {
                   setPaymentFilter(event.target.value);
                   setCurrentPage(1);
-                }}
-              >
+               }}
+             >
                 <option value="">{copy.allPayments}</option>
-                {paymentOptions.map((payment) => <option key={payment.value} value={payment.value}>{payment.label}</option>)}
-              </select>
-            </label>
+                {paymentOptions.map((payment) => (
+                  <option
+                    key={payment.value}
+                    value={payment.value}
+                    disabled={payment.count === 0 && payment.value !== paymentFilter}
+                  >
+                    {payment.label} ({payment.count})
+                  </option>
+                ))}
+               </select>
+             </label>
             <label>
               <span>{copy.marketLabel}</span>
               <select
@@ -1040,12 +1169,20 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
                 onChange={(event) => {
                   setMarketFilter(event.target.value);
                   setCurrentPage(1);
-                }}
-              >
+               }}
+             >
                 <option value="">{copy.allMarkets}</option>
-                {marketOptions.map((market) => <option key={market.value} value={market.value}>{market.label}</option>)}
-              </select>
-            </label>
+                {marketOptions.map((market) => (
+                  <option
+                    key={market.value}
+                    value={market.value}
+                    disabled={market.count === 0 && market.value !== marketFilter}
+                  >
+                    {market.label} ({market.count})
+                  </option>
+                ))}
+               </select>
+             </label>
           </div>
           <div className="buyer-directory-results-bar" aria-live="polite">
             <span>
@@ -1126,22 +1263,26 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
 
       </div>
       <aside className="buyer-market-rail" aria-label={copy.countryLabel}>
-        {marketRail.map((market) => {
-          const isActive = countryFilter === market.country;
-          return (
-            <button
-              className={`${market.className}${isActive ? " is-active" : ""}`}
-              type="button"
-              aria-pressed={isActive}
-               aria-label={`${copy.countryLabel}: ${vi ? market.label : ar ? market.labelAr : market.labelEn}`}
-              onClick={() => {
-                setCountryFilter(isActive ? "" : market.country);
-                setCurrentPage(1);
+         {marketRail.map((market) => {
+           const isActive = countryFilter === market.country;
+           const marketLabel = getMarketRailLabel(market);
+           const marketCount = countryCounts[market.country] ?? 0;
+           return (
+             <button
+               className={`${market.className}${isActive ? " is-active" : ""}`}
+               type="button"
+               aria-pressed={isActive}
+               aria-label={`${copy.countryLabel}: ${marketLabel} (${marketCount})`}
+               title={`${marketLabel}: ${marketCount}`}
+               onClick={() => {
+                 setCountryFilter(isActive ? "" : market.country);
+                 setCurrentPage(1);
               }}
-              key={market.country}
-            >
-              {vi ? market.label : ar ? market.labelAr : market.labelEn}
-            </button>
+               key={market.country}
+             >
+               <span>{marketLabel}</span>
+               <small>{marketCount}</small>
+             </button>
           );
         })}
       </aside>
