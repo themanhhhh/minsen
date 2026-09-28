@@ -850,27 +850,27 @@ function BuyerCard({
             <div className="buyer-context-label"><BuyerIcon name="clipboard" /><strong>{copy.quality}</strong></div>
             <BuyerList items={localizedQuality} />
           </div>
-          <div className="buyer-fit-column buyer-access-column">
-            <div className="buyer-context-label"><BuyerIcon name="shield" /><strong>{copy.access}</strong></div>
-            <p className="buyer-access-status">{localizeBuyerValue(buyer.access, locale)}</p>
-          </div>
+           <div className="buyer-fit-column buyer-access-column">
+             <div className="buyer-context-label"><BuyerIcon name="shield" /><strong>{copy.access}</strong></div>
+             <p className="buyer-access-status">{localizeBuyerValue(buyer.access, locale)}</p>
+             <Link
+               className="button button-primary buyer-profile-action"
+               href={getLocalizedPath(locale, "/rfq")}
+             >
+               {vi
+                 ? "Yêu cầu MISO JAPAN kết nối"
+                 : ar ? "اطلب من MISO JAPAN التواصل" : "Ask MISO JAPAN to connect"}{" "}
+               <span aria-hidden="true">↗</span>
+             </Link>
+           </div>
         </div>
       </section>
 
       <footer className="buyer-profile-meta">
         <span><b>{copy.payment}:</b> {localizeBuyerValue(buyer.payment, locale)}</span>
-        <span><b>{copy.market}:</b> {localizeBuyerValue(buyer.market, locale)}</span>
-        <span><b>{copy.ports}:</b> {localizeBuyerValue(buyer.ports, locale)}</span>
+       <span><b>{copy.market}:</b> {localizeBuyerValue(buyer.market, locale)}</span>
+       <span><b>{copy.ports}:</b> {localizeBuyerValue(buyer.ports, locale)}</span>
       </footer>
-      <Link
-        className="button button-primary buyer-profile-action"
-        href={getLocalizedPath(locale, "/rfq")}
-      >
-        {vi
-          ? "Yêu cầu MISO JAPAN kết nối"
-          : ar ? "اطلب من MISO JAPAN التواصل" : "Ask MISO JAPAN to connect"}{" "}
-        <span aria-hidden="true">↗</span>
-      </Link>
     </article>
   );
 }

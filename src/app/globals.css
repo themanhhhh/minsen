@@ -8742,6 +8742,11 @@ html[data-locale="ar"] .founder-profile-tagline {
   padding-top: 8px;
 }
 
+.buyer-access-column {
+  display: flex;
+  flex-direction: column;
+}
+
 .buyer-fit-level {
   color: #8e6b25;
   display: block;
@@ -8809,6 +8814,18 @@ html[data-locale="ar"] .founder-profile-tagline {
 .buyer-profile-action:focus-visible {
   outline: 2px solid #18519a;
   outline-offset: 2px;
+}
+
+.buyer-access-column .buyer-profile-action {
+  align-self: stretch;
+  font-size: clamp(7px, .68vw, 9px);
+  gap: 4px;
+  line-height: 1.2;
+  margin: auto 0 0;
+  min-height: 29px;
+  padding: 7px 5px;
+  text-align: center;
+  width: 100%;
 }
 
 .buyer-market-rail {
