@@ -41,6 +41,7 @@ const emptyFilters: Filters = {
   regions: [],
   markets: [],
 };
+const factoryPageSize = 10;
 
 function normalizeSearch(value: string) {
   return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
@@ -68,6 +69,7 @@ export function FactoryDirectory({ locale, initialProduct, initialSearch }: { lo
   const [shortlist, setShortlist] = useState<string[]>([]);
   const [savedOnly, setSavedOnly] = useState(false);
   const [compare, setCompare] = useState<string[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     const timer = window.setTimeout(() => {
       setShortlist(readIds(shortlistStorageKey));
@@ -325,6 +327,12 @@ export function FactoryDirectory({ locale, initialProduct, initialSearch }: { lo
   const filtered = factories.filter(
     (factory) => (!savedOnly || shortlist.includes(factory.id)) && matchesSearch(factory) && matches(factory),
   );
+  const totalPages = Math.max(1, Math.ceil(filtered.length / factoryPageSize));
+  const safePage = Math.min(currentPage, totalPages);
+  const paginatedFactories = filtered.slice(
+    (safePage - 1) * factoryPageSize,
+    safePage * factoryPageSize,
+  );
   const comparedFactories = factories.filter((factory) => compare.includes(factory.id));
   const comparisonRows: { label: string; value: (factory: Factory) => string }[] = [
     { label: vi ? "Địa điểm" : ar ? "الموقع" : "Location", value: (factory) => factory.location },
@@ -338,6 +346,7 @@ export function FactoryDirectory({ locale, initialProduct, initialSearch }: { lo
       ? shortlist.filter((item) => item !== id)
       : [...shortlist, id];
     setShortlist(next);
+    setCurrentPage(1);
     window.localStorage.setItem(shortlistStorageKey, JSON.stringify(next));
   };
   const toggleCompare = (id: string) => {
@@ -358,6 +367,7 @@ export function FactoryDirectory({ locale, initialProduct, initialSearch }: { lo
     setFilters(emptyFilters);
     setAppliedFilters(emptyFilters);
     setSavedOnly(false);
+    setCurrentPage(1);
   };
   const filterGroup = (
     title: string,
@@ -455,8 +465,11 @@ export function FactoryDirectory({ locale, initialProduct, initialSearch }: { lo
             <label className="factory-saved-filter">
               <input
                 type="checkbox"
-                checked={savedOnly}
-                onChange={(event) => setSavedOnly(event.target.checked)}
+               checked={savedOnly}
+               onChange={(event) => {
+                 setSavedOnly(event.target.checked);
+                 setCurrentPage(1);
+               }}
               />
               <Bookmark size={14} strokeWidth={1.7} aria-hidden="true" />
                {vi ? "Chỉ nhà máy đã lưu" : ar ? "المصانع المحفوظة فقط" : "Saved factories only"}
@@ -473,9 +486,16 @@ export function FactoryDirectory({ locale, initialProduct, initialSearch }: { lo
             )}
             {filterSelect(labels.location, "regions", factoryFilterOptions.regions, labels.allRegions)}
             {filterSelect(labels.exportMarket, "markets", factoryFilterOptions.markets, labels.allMarkets)}
-            <button className="apply-filters-button" type="button" onClick={() => setAppliedFilters(filters)}>
-              {labels.applyFilters}
-            </button>
+             <button
+               className="apply-filters-button"
+               type="button"
+               onClick={() => {
+                 setAppliedFilters(filters);
+                 setCurrentPage(1);
+               }}
+             >
+               {labels.applyFilters}
+             </button>
           </aside>
           <div className="directory-results">
             <div className="directory-toolbar">
@@ -485,7 +505,7 @@ export function FactoryDirectory({ locale, initialProduct, initialSearch }: { lo
               <span className="saved-count"><Bookmark size={16} strokeWidth={1.7} aria-hidden="true" /> {shortlist.length} {labels.shortlist}</span>
             </div>
             <div className="factory-grid">
-              {filtered.map((factory) => (
+               {paginatedFactories.map((factory) => (
                 <article className="factory-card" key={factory.id}>
                   <div className="factory-card-top">
                     <span className="factory-id">{getFactoryCodeLabel(locale, factory.id)}</span>
@@ -502,7 +522,7 @@ export function FactoryDirectory({ locale, initialProduct, initialSearch }: { lo
                          alt={getFactoryPublicLabel(locale, factory.id)}
                           fill
                           sizes="(max-width: 820px) 100vw, 50vw"
-                          unoptimized={/\.(avif|jfif)$/i.test(factory.imagePath)}
+                           unoptimized={/\.(avif|jfif|svg)$/i.test(factory.imagePath)}
                         />
                     )}
                       <span className="factory-image-status">{factory.imagePath ? "VN" : vi ? "CHƯA CÓ ẢNH" : ar ? "الصورة قيد التجهيز" : "IMAGE PENDING"}</span>
@@ -560,9 +580,48 @@ export function FactoryDirectory({ locale, initialProduct, initialSearch }: { lo
                     </button>
                     </div>
                   </div>
-                </article>
-              ))}
+               </article>
+               ))}
             </div>
+            {filtered.length > 0 && totalPages > 1 && (
+              <nav
+                className="factory-pagination"
+                aria-label={vi ? "Phân trang nhà máy" : ar ? "ترقيم صفحات المصانع" : "Factory pagination"}
+              >
+                <button
+                  type="button"
+                  aria-label={vi ? "Trang trước" : ar ? "الصفحة السابقة" : "Previous page"}
+                  disabled={safePage === 1}
+                  onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
+                >
+                  ←
+                </button>
+                <div className="factory-pagination-pages">
+                  {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+                    <button
+                      className={page === safePage ? "is-active" : ""}
+                      type="button"
+                      aria-current={page === safePage ? "page" : undefined}
+                      onClick={() => setCurrentPage(page)}
+                      key={page}
+                    >
+                      {String(page).padStart(2, "0")}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  aria-label={vi ? "Trang tiếp theo" : ar ? "الصفحة التالية" : "Next page"}
+                  disabled={safePage === totalPages}
+                  onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
+                >
+                  →
+                </button>
+                <span>
+                  {safePage} / {totalPages}
+                </span>
+              </nav>
+            )}
             {filtered.length === 0 && (
               <div className="empty-results">
                  {vi

@@ -32,7 +32,7 @@ export function FactoryProfile({
   const galleryImages = factory.galleryPaths.map((src) => ({
     src,
     alt: factoryPublicLabel,
-    unoptimized: /\.(avif|jfif)$/i.test(src),
+     unoptimized: /\.(avif|jfif|svg)$/i.test(src),
   }));
   return (
     <>
@@ -66,7 +66,7 @@ export function FactoryProfile({
                 alt=""
                 fill
                 sizes="220px"
-                unoptimized={/\.(avif|jfif)$/i.test(factory.imagePath)}
+                 unoptimized={/\.(avif|jfif|svg)$/i.test(factory.imagePath)}
               />
             )}
             <span className="factory-image-status">{factory.imagePath ? "FACTORY IMAGE" : "IMAGE PENDING"}</span>

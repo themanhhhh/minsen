@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">MISO JAPAN factory network illustration</title>
+  <desc id="desc">Illustrative plywood factory with warehouse, timber stacks and a loading area.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#dcecff"/>
+      <stop offset="1" stop-color="#f7fbff"/>
+    </linearGradient>
+    <linearGradient id="wall" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#e9eef2"/>
+      <stop offset="1" stop-color="#b8c5d1"/>
+    </linearGradient>
+    <linearGradient id="roof" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#173d72"/>
+      <stop offset="1" stop-color="#0a2247"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#8ed9f1"/>
+      <stop offset="1" stop-color="#2f77aa"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#d49a5c"/>
+      <stop offset="1" stop-color="#93603a"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#12335b" flood-opacity=".18"/>
+    </filter>
+    <pattern id="panel" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M0 31.5H32M31.5 0V32" stroke="#6c7d90" stroke-opacity=".22"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <circle cx="1360" cy="150" r="74" fill="#fff4c6" opacity=".72"/>
+  <path d="M0 500C210 415 365 455 550 505S920 565 1110 490s330-68 490-12v190H0Z" fill="#d3e3e7"/>
+  <path d="M0 570c210-66 380-32 560 18s352 56 548-19 333-76 492-19v130H0Z" fill="#a9c1b4"/>
+  <path d="M0 650h1600v250H0z" fill="#263b4f"/>
+  <path d="M0 720h1600v180H0z" fill="#314c62"/>
+  <path d="M0 790h1600" stroke="#607c8e" stroke-width="4" stroke-dasharray="42 28" opacity=".65"/>
+
+  <g filter="url(#shadow)">
+    <path d="M265 345 520 205h770l198 140Z" fill="url(#roof)"/>
+    <path d="m520 205 770 0 198 140H265Z" fill="#27588b" opacity=".42"/>
+    <path d="M310 345h1134v330H310z" fill="url(#wall)"/>
+    <path d="M310 345h1134v330H310z" fill="url(#panel)" opacity=".6"/>
+    <path d="M310 345h1134" stroke="#09264e" stroke-width="10"/>
+    <path d="M362 394h228v280H362z" fill="#8f9eab"/>
+    <path d="M382 415h188v156H382z" fill="url(#glass)"/>
+    <path d="M382 493h188M476 415v156" stroke="#d2f3ff" stroke-width="8" opacity=".75"/>
+    <path d="M640 395h650v280H640z" fill="#c2ced7"/>
+    <path d="M681 430h570v245H681z" fill="#dce5e9"/>
+    <path d="M720 468h160v207H720z" fill="#29455f"/>
+    <path d="M916 468h160v207H916z" fill="#29455f"/>
+    <path d="M1112 468h100v207h-100z" fill="#29455f"/>
+    <path d="M720 468h160l-36 30H756ZM916 468h160l-36 30H952ZM1112 468h100l-28 30h-72Z" fill="#6ea3bb"/>
+    <path d="M650 395h640" stroke="#fff" stroke-opacity=".7" stroke-width="8"/>
+    <path d="M1298 375v300h72V375Z" fill="#8295a2"/>
+    <path d="M1305 390h58v40h-58zM1305 452h58v40h-58zM1305 514h58v40h-58zM1305 576h58v40h-58z" fill="#cce1e8"/>
+    <path d="M1380 338h36v337h-36z" fill="#657888"/>
+    <path d="M1373 338h50l-25-47z" fill="#314a61"/>
+    <path d="M1360 290c35-26 74-25 108 0" fill="none" stroke="#91a8b7" stroke-width="8" opacity=".7"/>
+    <path d="M476 585h108v90H476z" fill="#193653"/>
+    <path d="M443 675h174" stroke="#152b43" stroke-width="10"/>
+  </g>
+
+  <g>
+    <path d="M185 671h207v82H185z" fill="#61432f"/>
+    <path d="M185 671h207v82H185z" fill="url(#wood)" opacity=".7"/>
+    <path d="M185 671h207M185 712h207M236 671v82M290 671v82M344 671v82" stroke="#f0c281" stroke-width="4" opacity=".55"/>
+    <path d="M135 753h305v22H135z" fill="#172c3d"/>
+    <path d="M220 635h207v82H220z" fill="#775036"/>
+    <path d="M220 635h207v82H220z" fill="url(#wood)" opacity=".7"/>
+    <path d="M220 635h207M220 676h207M271 635v82M325 635v82M379 635v82" stroke="#f0c281" stroke-width="4" opacity=".55"/>
+  </g>
+
+  <g transform="translate(1180 702)">
+    <path d="M0 0h126v62H0z" fill="#e19a3e"/>
+    <path d="M126 18h42v44h-42z" fill="#f0ae50"/>
+    <path d="M19 20h43v24H19zM78 20h28v24H78z" fill="#234d6a"/>
+    <circle cx="30" cy="70" r="15" fill="#132a3e"/><circle cx="142" cy="70" r="15" fill="#132a3e"/>
+    <path d="M168 18h62v9h-62zM222 18v84" fill="none" stroke="#e19a3e" stroke-width="9"/>
+  </g>
+
+  <g fill="#214f43">
+    <path d="M74 694c0-80 38-140 83-140s83 60 83 140Z"/>
+    <path d="M1420 680c0-94 44-160 95-160s95 66 95 160Z"/>
+    <path d="M25 720c0-55 28-98 62-98s62 43 62 98Z"/>
+  </g>
+  <g fill="#a6c9a0" opacity=".8">
+    <circle cx="138" cy="590" r="20"/><circle cx="180" cy="565" r="25"/><circle cx="1455" cy="540" r="22"/><circle cx="1510" cy="565" r="27"/>
+  </g>
+
+  <g transform="translate(82 88)">
+    <rect width="385" height="88" rx="12" fill="#0d2c55" opacity=".94"/>
+    <text x="28" y="38" fill="#7ed9f4" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="4">MISO JAPAN</text>
+    <text x="28" y="67" fill="#fff" font-family="Arial, sans-serif" font-size="25" font-weight="800" letter-spacing="2">PLYWOOD NETWORK</text>
+  </g>
+  <g transform="translate(1170 820)">
+    <text fill="#d8e6ed" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="3">ILLUSTRATIVE FACTORY VISUAL</text>
+  </g>
+</svg>

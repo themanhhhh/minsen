@@ -5759,6 +5759,63 @@ html[data-locale="ar"] .registration-form input[type="file"] {
   gap: 16px;
 }
 
+.factory-pagination {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.factory-pagination-pages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+}
+
+.factory-pagination button {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #cfd5df;
+  color: var(--blue);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  height: 32px;
+  justify-content: center;
+  min-width: 32px;
+  padding: 0 8px;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.factory-pagination button:hover:not(:disabled),
+.factory-pagination button.is-active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+.factory-pagination button:disabled {
+  color: #aeb7c2;
+  cursor: default;
+  opacity: .7;
+}
+
+.factory-pagination button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.factory-pagination > span {
+  color: var(--muted);
+  font-size: 10px;
+  margin-left: 4px;
+  white-space: nowrap;
+}
+
 .factory-card {
   border: 1px solid #e7e9ee;
   border-radius: 5px;

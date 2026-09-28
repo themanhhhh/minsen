@@ -48,7 +48,7 @@ export function FactoryPreview({ locale }: { locale: Locale }) {
                    alt={getFactoryPublicLabel(locale, factory.id)}
                    fill
                    sizes="(max-width: 820px) 100vw, 33vw"
-                   unoptimized={/\.(avif|jfif)$/i.test(factory.imagePath)}
+                    unoptimized={/\.(avif|jfif|svg)$/i.test(factory.imagePath)}
                  />
               )}
               <span className="factory-image-status">{factory.imagePath ? "VN" : vi ? "CHƯA CÓ ẢNH" : ar ? "الصورة قيد التجهيز" : "IMAGE PENDING"}</span>
