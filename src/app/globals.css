@@ -3646,16 +3646,12 @@ p {
 .about-hero-mark {
   align-items: center;
   background: var(--cyan);
-  border-radius: 50%;
   color: var(--primary-dark);
   display: flex;
   flex-direction: column;
   flex: 0 0 300px;
   height: 300px;
   justify-content: center;
-  outline: 1px solid rgba(255, 255, 255, .35);
-  outline-offset: 14px;
-  transform: rotate(7deg);
   width: 300px;
 }
 
