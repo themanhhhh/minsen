@@ -43,6 +43,27 @@ const emptyFilters: Filters = {
 };
 const factoryPageSize = 10;
 
+function getPaginationItems(totalPages: number, currentPage: number): Array<number | "ellipsis"> {
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
+
+  const visiblePages = new Set([1, 2, 3, totalPages, currentPage - 1, currentPage, currentPage + 1]);
+  const pages = Array.from(visiblePages)
+    .filter((page) => page > 0 && page <= totalPages)
+    .sort((left, right) => left - right);
+  const items: Array<number | "ellipsis"> = [];
+
+  pages.forEach((page, index) => {
+    if (index > 0 && page - pages[index - 1] > 1) {
+      items.push("ellipsis");
+    }
+    items.push(page);
+  });
+
+  return items;
+}
+
 function normalizeSearch(value: string) {
   return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 }
@@ -70,6 +91,7 @@ export function FactoryDirectory({ locale, initialProduct, initialSearch }: { lo
   const [savedOnly, setSavedOnly] = useState(false);
   const [compare, setCompare] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [pagePickerOpenAt, setPagePickerOpenAt] = useState<number | null>(null);
   useEffect(() => {
     const timer = window.setTimeout(() => {
       setShortlist(readIds(shortlistStorageKey));
@@ -333,6 +355,7 @@ export function FactoryDirectory({ locale, initialProduct, initialSearch }: { lo
     (safePage - 1) * factoryPageSize,
     safePage * factoryPageSize,
   );
+  const paginationItems = getPaginationItems(totalPages, safePage);
   const comparedFactories = factories.filter((factory) => compare.includes(factory.id));
   const comparisonRows: { label: string; value: (factory: Factory) => string }[] = [
     { label: vi ? "Địa điểm" : ar ? "الموقع" : "Location", value: (factory) => factory.location },
@@ -583,40 +606,86 @@ export function FactoryDirectory({ locale, initialProduct, initialSearch }: { lo
                </article>
                ))}
             </div>
-            {filtered.length > 0 && totalPages > 1 && (
-              <nav
-                className="factory-pagination"
-                aria-label={vi ? "Phân trang nhà máy" : ar ? "ترقيم صفحات المصانع" : "Factory pagination"}
-              >
-                <button
-                  type="button"
-                  aria-label={vi ? "Trang trước" : ar ? "الصفحة السابقة" : "Previous page"}
-                  disabled={safePage === 1}
-                  onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
-                >
-                  ←
-                </button>
-                <div className="factory-pagination-pages">
-                  {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
-                    <button
-                      className={page === safePage ? "is-active" : ""}
-                      type="button"
-                      aria-current={page === safePage ? "page" : undefined}
-                      onClick={() => setCurrentPage(page)}
-                      key={page}
-                    >
-                      {String(page).padStart(2, "0")}
-                    </button>
-                  ))}
-                </div>
-                <button
-                  type="button"
-                  aria-label={vi ? "Trang tiếp theo" : ar ? "الصفحة التالية" : "Next page"}
-                  disabled={safePage === totalPages}
-                  onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
-                >
-                  →
-                </button>
+             {filtered.length > 0 && totalPages > 1 && (
+               <nav
+                 className="factory-pagination"
+                 aria-label={vi ? "Phân trang nhà máy" : ar ? "ترقيم صفحات المصانع" : "Factory pagination"}
+               >
+                 <button
+                   type="button"
+                   aria-label={vi ? "Trang trước" : ar ? "الصفحة السابقة" : "Previous page"}
+                   disabled={safePage === 1}
+                   onClick={() => {
+                     setPagePickerOpenAt(null);
+                     setCurrentPage((page) => Math.max(1, page - 1));
+                   }}
+                 >
+                   ←
+                 </button>
+                 <div className="factory-pagination-pages">
+                   {paginationItems.map((page, index) => page === "ellipsis" ? (
+                     pagePickerOpenAt === index ? (
+                       <select
+                         autoFocus
+                         className="factory-pagination-page-picker"
+                         aria-label={vi ? "Chọn trang" : ar ? "اختر صفحة" : "Choose page"}
+                         defaultValue=""
+                         onChange={(event) => {
+                           setCurrentPage(Number(event.target.value));
+                           setPagePickerOpenAt(null);
+                         }}
+                         onKeyDown={(event) => {
+                           if (event.key === "Escape") setPagePickerOpenAt(null);
+                         }}
+                         key={`page-picker-${index}`}
+                       >
+                         <option value="" disabled>
+                           {vi ? "Chọn trang" : ar ? "اختر صفحة" : "Choose page"}
+                         </option>
+                         {Array.from({ length: totalPages }, (_, pageIndex) => pageIndex + 1).map((optionPage) => (
+                           <option value={optionPage} key={optionPage}>
+                             {vi ? `Trang ${optionPage}` : ar ? `صفحة ${optionPage}` : `Page ${optionPage}`}
+                           </option>
+                         ))}
+                       </select>
+                     ) : (
+                       <button
+                         className="factory-pagination-ellipsis"
+                         type="button"
+                         aria-label={vi ? "Chọn trang chính xác" : ar ? "اختر رقم الصفحة" : "Choose an exact page"}
+                         aria-expanded={false}
+                         onClick={() => setPagePickerOpenAt(index)}
+                         key={`page-ellipsis-${index}`}
+                       >
+                         ...
+                       </button>
+                     )
+                   ) : (
+                     <button
+                       className={page === safePage ? "is-active" : ""}
+                       type="button"
+                       aria-current={page === safePage ? "page" : undefined}
+                       onClick={() => {
+                         setPagePickerOpenAt(null);
+                         setCurrentPage(page);
+                       }}
+                       key={page}
+                     >
+                       {page}
+                     </button>
+                   ))}
+                 </div>
+                 <button
+                   type="button"
+                   aria-label={vi ? "Trang tiếp theo" : ar ? "الصفحة التالية" : "Next page"}
+                   disabled={safePage === totalPages}
+                   onClick={() => {
+                     setPagePickerOpenAt(null);
+                     setCurrentPage((page) => Math.min(totalPages, page + 1));
+                   }}
+                 >
+                   →
+                 </button>
                 <span>
                   {safePage} / {totalPages}
                 </span>

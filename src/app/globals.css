@@ -5805,6 +5805,28 @@ html[data-locale="ar"] .registration-form input[type="file"] {
   outline-offset: 2px;
 }
 
+.factory-pagination-ellipsis {
+  letter-spacing: .08em;
+}
+
+.factory-pagination-page-picker {
+  background: #fff;
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  height: 32px;
+  max-width: 128px;
+  padding: 0 6px;
+}
+
+.factory-pagination-page-picker:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
 .factory-pagination > span {
   color: var(--muted);
   font-size: 10px;
