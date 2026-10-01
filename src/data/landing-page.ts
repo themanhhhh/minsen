@@ -1,3 +1,5 @@
+import supplementalFactoryData from "./supplemental-factories.json";
+
 export const company = {
   name: "MISO JAPAN",
   legalName: "CÔNG TY TNHH LIÊN DOANH MISO JAPAN",
@@ -41,21 +43,21 @@ export const heroContent = {
 };
 
 export const heroStats = [
-  { value: "230", label: "Mapped factory records", detail: "Vietnam plywood intelligence" },
+  { value: "383", label: "Mapped factory records", detail: "Vietnam plywood intelligence" },
   { value: "12", label: "Control gates planned", detail: "Structured buyer risk management" },
   { value: "01", label: "Accountable partner", detail: "One team between buyer and factory" },
   { value: "02", label: "Primary markets", detail: "India · Middle East" },
 ];
 
 export const heroStatsVi = [
-  { value: "230", label: "Hồ sơ nhà máy đã lập bản đồ", detail: "Dữ liệu plywood tại Việt Nam" },
+  { value: "383", label: "Hồ sơ nhà máy đã lập bản đồ", detail: "Dữ liệu plywood tại Việt Nam" },
   { value: "12", label: "Control gate dự kiến", detail: "Quản trị rủi ro Buyer có cấu trúc" },
   { value: "01", label: "Đầu mối chịu trách nhiệm", detail: "Một đội ngũ giữa Buyer và nhà máy" },
   { value: "02", label: "Thị trường chính", detail: "Ấn Độ · Trung Đông" },
 ];
 
 export const heroStatsAr = [
-  { value: "230", label: "ملفات مصانع موثقة", detail: "بيانات صناعة الخشب في فيتنام" },
+  { value: "383", label: "ملفات مصانع موثقة", detail: "بيانات صناعة الخشب في فيتنام" },
   { value: "12", label: "نقاط تحكم مخططة", detail: "إدارة منظمة لمخاطر المشتري" },
   { value: "01", label: "شريك مسؤول", detail: "فريق واحد بين المشتري والمصنع" },
   { value: "02", label: "أسواق رئيسية", detail: "الهند والشرق الأوسط" },
@@ -544,6 +546,10 @@ function createFactory(input: FactoryInput): Factory {
     ...input,
   };
 }
+
+const supplementalFactories: Factory[] = supplementalFactoryData.map((factory) =>
+  createFactory(factory as FactoryInput),
+);
 
 const additionalFactories: Factory[] = [
   createFactory({
@@ -1477,6 +1483,7 @@ const additionalFactories: Factory[] = [
     misoStatus: "Qualification pending / certificate renewal / U.S. trade review",
     devNote: "HOLD until renewed FloorScore/FSC evidence and current U.S. trade review are complete.",
   }),
+  ...supplementalFactories,
 ];
 
 export const factories: Factory[] = [
