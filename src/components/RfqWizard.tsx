@@ -2,6 +2,7 @@
 
 import { type FormEvent, type MouseEvent, useState } from "react";
 import type { Locale } from "@/data/landing-page";
+import { submitFormToGoogleSheets } from "@/lib/form-submission";
 
 type Step = 1 | 2 | 3;
 
@@ -10,6 +11,7 @@ export function RfqWizard({ locale }: { locale: Locale }) {
   const ar = locale === "ar";
   const [step, setStep] = useState<Step>(1);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const [form, setForm] = useState({
     product: "Plywood",
     specification: "",
@@ -132,6 +134,12 @@ export function RfqWizard({ locale }: { locale: Locale }) {
         home: "Back to home",
       };
 
+  const submitErrorMessage = vi
+    ? "Không thể gửi yêu cầu lúc này. Vui lòng thử lại."
+    : ar
+      ? "تعذر إرسال الطلب الآن. يرجى المحاولة مرة أخرى."
+      : "The request could not be sent. Please try again.";
+
   const update = (key: keyof typeof form, value: string) =>
     setForm((current) => ({ ...current, [key]: value }));
 
@@ -140,8 +148,14 @@ export function RfqWizard({ locale }: { locale: Locale }) {
     setStep(step === 1 ? 2 : 3);
   };
 
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setSubmitError(false);
+    const sent = await submitFormToGoogleSheets("rfq", form);
+    if (!sent) {
+      setSubmitError(true);
+      return;
+    }
     setSubmitted(true);
   };
 
@@ -265,6 +279,7 @@ export function RfqWizard({ locale }: { locale: Locale }) {
             </div>
           )}
 
+          {submitError && <p className="form-submit-error" role="alert">{submitErrorMessage}</p>}
           <div className="rfq-wizard-actions">
             {step > 1 ? (
               <button className="rfq-wizard-back" type="button" onClick={() => setStep(step === 2 ? 1 : 2)}>

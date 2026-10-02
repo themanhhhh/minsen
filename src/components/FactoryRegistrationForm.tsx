@@ -3,13 +3,15 @@
 import Link from "next/link";
 import { type FormEvent, useState } from "react";
 import { getLocalizedPath, type Locale } from "@/data/landing-page";
+import { submitFormToGoogleSheets } from "@/lib/form-submission";
 
 export function FactoryRegistrationForm({ locale = "en" }: { locale?: Locale }) {
   const [submitted, setSubmitted] = useState(false);
   const [fileError, setFileError] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const isArabic = locale === "ar";
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const fileInput = event.currentTarget.elements.namedItem("companyProfile");
     const file = fileInput instanceof HTMLInputElement ? fileInput.files?.[0] : undefined;
@@ -18,6 +20,23 @@ export function FactoryRegistrationForm({ locale = "en" }: { locale?: Locale }) 
       return;
     }
     setFileError(false);
+    setSubmitError(false);
+    const formData = new FormData(event.currentTarget);
+    const data: Record<string, string> = {};
+    formData.forEach((value, key) => {
+      if (key === "companyProfile") {
+        data.companyProfileName = value instanceof File ? value.name : "";
+      } else if (key === "consent") {
+        data.consent = "true";
+      } else if (typeof value === "string") {
+        data[key] = value;
+      }
+    });
+    const sent = await submitFormToGoogleSheets("registration", data);
+    if (!sent) {
+      setSubmitError(true);
+      return;
+    }
     setSubmitted(true);
   };
 
@@ -123,6 +142,7 @@ export function FactoryRegistrationForm({ locale = "en" }: { locale?: Locale }) 
           </label>
 
           <div className="registration-actions">
+            {submitError && <small className="form-submit-error" role="alert">{isArabic ? "تعذر إرسال التسجيل الآن. يرجى المحاولة مرة أخرى." : "Không thể gửi đăng ký lúc này. Vui lòng thử lại / The registration could not be sent. Please try again."}</small>}
             <button className="button button-primary" type="submit">
                {isArabic ? "تسجيل المصنع" : "ĐĂNG KÝ NHÀ MÁY / REGISTER FACTORY"} <span aria-hidden="true">↗</span>
             </button>
