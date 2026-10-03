@@ -35,9 +35,19 @@ export async function POST(request: Request) {
       body: JSON.stringify(payload),
       cache: "no-store",
     });
+    const responseBody = await response.text();
 
     if (!response.ok) {
       return Response.json({ ok: false, message: "Google Sheets rejected the submission." }, { status: 502 });
+    }
+
+    try {
+      const result = JSON.parse(responseBody) as { ok?: boolean };
+      if (result.ok === false) {
+        return Response.json({ ok: false, message: "Google Sheets could not save the submission." }, { status: 502 });
+      }
+    } catch {
+      // Apps Script responses are expected to be JSON, but a successful response is still usable.
     }
 
     return Response.json({ ok: true });
