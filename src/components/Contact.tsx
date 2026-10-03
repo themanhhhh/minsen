@@ -4,12 +4,14 @@ import { FormEvent, useState } from "react";
 import { useEffect } from "react";
 import { company, factories, getLandingContent, type Locale } from "@/data/landing-page";
 import { readSavedBuyerIds, readSavedFactoryIds } from "@/data/saved-profiles";
+import { submitFormToGoogleSheets } from "@/lib/form-submission";
 
 export function Contact({ locale }: { locale: Locale }) {
   const { contactContent } = getLandingContent(locale);
   const vi = locale === "vi";
   const ar = locale === "ar";
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const [savedFactoryIds, setSavedFactoryIds] = useState<string[]>([]);
   const [savedBuyerIds, setSavedBuyerIds] = useState<string[]>([]);
 
@@ -22,10 +24,36 @@ export function Contact({ locale }: { locale: Locale }) {
     return () => window.clearTimeout(timer);
   }, []);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setSubmitError(false);
+    const formData = new FormData(event.currentTarget);
+    const value = (name: string) => String(formData.get(name) ?? "");
+    const sent = await submitFormToGoogleSheets("rfq", {
+      product: value("product"),
+      specification: "",
+      core: "",
+      bond: "",
+      application: value("message"),
+      quantity: "",
+      destination: "",
+      delivery: "",
+      name: value("name"),
+      company: value("company"),
+      email: value("email"),
+      whatsapp: value("whatsapp"),
+    });
+    if (!sent) {
+      setSubmitError(true);
+      return;
+    }
     setSubmitted(true);
   };
+  const submitErrorMessage = vi
+    ? "Không thể gửi yêu cầu lúc này. Vui lòng thử lại."
+    : ar
+      ? "تعذر إرسال الاستفسار الآن. يرجى المحاولة مرة أخرى."
+      : "The inquiry could not be sent. Please try again.";
   return (
     <section className="contact-section" id="contact">
       <div className="contact-copy">
@@ -154,6 +182,7 @@ export function Contact({ locale }: { locale: Locale }) {
               rows={3}
             />
           </label>
+          {submitError && <p className="form-submit-error" role="alert">{submitErrorMessage}</p>}
           <button className="button button-light" type="submit">
             {vi ? "Gửi yêu cầu" : ar ? "إرسال الاستفسار" : "Send inquiry"}{" "}
             <span aria-hidden="true">↗</span>
