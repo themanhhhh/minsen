@@ -124,9 +124,6 @@ export function Footer({ locale }: { locale: Locale }) {
              title={locale === "vi" ? "Về đầu trang" : ar ? "العودة إلى الأعلى" : "Back to top"}
             >
               <span className="footer-back-to-top-icon" aria-hidden="true">↑</span>
-              <span className="footer-back-to-top-label">
-                {locale === "vi" ? "Lên đầu trang" : ar ? "العودة إلى الأعلى" : "Back to top"}
-              </span>
             </a>
            <span aria-hidden="true">·</span>
            <LanguageSwitcher locale={locale} />

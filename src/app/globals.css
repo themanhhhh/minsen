@@ -1893,7 +1893,7 @@ p {
   justify-content: center;
   line-height: 1;
   min-width: 50px;
-  padding: 0 17px;
+  padding: 0;
   position: fixed;
   right: 24px;
   bottom: 24px;
@@ -1901,7 +1901,7 @@ p {
   color: #fff;
   box-shadow: 0 8px 22px rgba(4, 35, 112, .28);
   transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease, color .2s ease, transform .2s ease;
-  width: auto;
+  width: 50px;
 }
 
 .footer-legal .footer-back-to-top:hover {
@@ -1915,12 +1915,6 @@ p {
 .footer-back-to-top-icon {
   font-size: 24px !important;
   font-weight: 800;
-}
-
-.footer-back-to-top-label {
-  font-size: 14px !important;
-  font-weight: 800;
-  white-space: nowrap;
 }
 
 .footer-legal .footer-back-to-top:focus-visible {
@@ -3671,6 +3665,7 @@ p {
 .about-hero-mark {
   align-items: center;
   background: var(--primary-dark);
+  border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, .2);
   display: flex;
   flex-direction: column;
@@ -6656,6 +6651,12 @@ html[data-locale="ar"] .directory-hero h1 {
   font-size: 10px;
   line-height: 1.45;
   max-width: 130px;
+}
+
+.home-network-section h2,
+.home-values-section h2,
+.home-trust-cta h2 {
+  letter-spacing: -.04em;
 }
 
 .home-trust-cta {
