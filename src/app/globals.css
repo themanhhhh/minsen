@@ -9780,34 +9780,6 @@ html[data-locale="ar"] .founder-profile-tagline {
   background: #b58a24;
 }
 
-.profile-source {
-  border-top: 1px solid var(--border);
-  margin-top: 28px;
-  padding-top: 20px;
-}
-
-.profile-source h3 {
-  color: var(--primary-dark);
-  font-size: 14px;
-  margin-bottom: 14px;
-  text-transform: uppercase;
-}
-
-.profile-source p {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 13px;
-}
-
-.profile-source p strong {
-  color: var(--primary-dark);
-  display: block;
-  font-size: 9px;
-  margin-bottom: 3px;
-  text-transform: uppercase;
-}
-
 /* Factory registration form. */
 .registration-page {
   background: var(--soft);

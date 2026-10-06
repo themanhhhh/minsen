@@ -167,12 +167,7 @@ export function FactoryProfile({
                      : ar ? "قدمت الشركة هذه المعلومات ولا تزال بانتظار التأهيل. لم تُرفق صور للمصنع أو نسخ ممسوحة من الشهادات في المصدر." : "This information was submitted by the company and remains pending qualification. No factory images or certification scans were included in the source material."}
               </p>
             </div>
-            <div className="profile-source">
-               <h3>{vi ? "Nguồn dữ liệu công khai" : ar ? "مصدر البيانات العامة" : "Public data source"}</h3>
-               <p><strong>{vi ? "File nguồn" : ar ? "الملف المصدر" : "Source file"}</strong>{factory.sourceFile}</p>
-               <p><strong>{vi ? "Ghi chú phát triển" : ar ? "ملاحظة التطوير" : "Development note"}</strong>{factory.devNote}</p>
-            </div>
-            <Link
+             <Link
               className="button button-primary profile-cta"
                href={`${getLocalizedPath(locale, "/rfq")}?factory=${factory.id}`}
             >
