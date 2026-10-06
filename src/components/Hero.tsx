@@ -12,7 +12,7 @@ export function Hero({ locale }: { locale: Locale }) {
   const manufacturersPath = getLocalizedPath(locale, "/manufacturers");
   const popularSearchTerms = ["Commercial Plywood", "Film-Faced Plywood", "Packaging Plywood", "Furniture Plywood", "Veneer"];
   return (
-    <section className="hero" id="top">
+    <section className="hero">
       <div className="hero-content">
         <p className="eyebrow">
           <span className="eyebrow-dot" />

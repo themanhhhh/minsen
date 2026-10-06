@@ -315,7 +315,7 @@ const buyerValuePhraseTranslations: Record<"en" | "ar", Array<[string, string]>>
 
 function localizeBuyerValue(value: string, locale: Locale) {
   if (locale === "vi") {
-    return value;
+    return value.replace(/\bbuyer\b/gi, "Khách hàng");
   }
 
   const countryCode = buyerCountryCodes[value];
@@ -545,29 +545,29 @@ const buyerPageCopy: Record<Locale, BuyerPageCopy> = {
     },
   },
   vi: {
-    eyebrow: "DANH MỤC BUYER QUỐC TẾ",
-    title: "Tìm đúng buyer phù hợp với năng lực nhà máy của bạn.",
-    description: "Khám phá hồ sơ buyer có cấu trúc theo quốc gia, yêu cầu sản phẩm và bối cảnh mua hàng. MISO JAPAN giúp nhà máy phù hợp xác định cơ hội liên quan và điều phối kết nối tại địa phương.",
+    eyebrow: "DANH MỤC KHÁCH HÀNG QUỐC TẾ",
+    title: "Tìm đúng khách hàng phù hợp với năng lực nhà máy của bạn.",
+    description: "Khám phá hồ sơ khách hàng có cấu trúc theo quốc gia, yêu cầu sản phẩm và bối cảnh mua hàng. MISO JAPAN giúp nhà máy phù hợp xác định cơ hội liên quan và điều phối kết nối tại địa phương.",
     action: "Yêu cầu MISO JAPAN kết nối",
-    catalogueTitle: "DANH MỤC BUYER QUỐC TẾ",
-    catalogueDescription: "600 HỒ SƠ BUYER UY TÍN TRONG NGÀNH PLYWOOD & VÁN GỖ ĐƯỢC LẬP BẢN ĐỒ DỮ LIỆU",
+    catalogueTitle: "DANH MỤC KHÁCH HÀNG QUỐC TẾ",
+    catalogueDescription: "600 HỒ SƠ KHÁCH HÀNG UY TÍN TRONG NGÀNH PLYWOOD & VÁN GỖ ĐƯỢC LẬP BẢN ĐỒ DỮ LIỆU",
     countryLabel: "Lọc theo quốc gia",
     featuredCountry: "ẤN ĐỘ",
-    featuredCountryType: "DANH MỤC BUYER",
-    statsLabel: "HỒ SƠ BUYER",
+    featuredCountryType: "DANH MỤC KHÁCH HÀNG",
+    statsLabel: "HỒ SƠ KHÁCH HÀNG",
     statsDetail: "Được lập bản đồ theo nhu cầu",
-    overviewAria: "Tổng quan danh mục buyer",
+    overviewAria: "Tổng quan danh mục khách hàng",
     coverPageLabel: "TRANG DANH MỤC",
-    perPageLabel: "BUYER / TRANG",
-    directoryAria: "Tìm kiếm và lọc buyer",
-    lookupLabel: "TRA CỨU HỒ SƠ BUYER",
+    perPageLabel: "KHÁCH HÀNG / TRANG",
+    directoryAria: "Tìm kiếm và lọc khách hàng",
+    lookupLabel: "TRA CỨU HỒ SƠ KHÁCH HÀNG",
     lookupTitle: "Tìm đúng nhu cầu trước khi matching nhà máy",
     clearFilters: "Xóa bộ lọc",
     activeFilters: "BỘ LỌC ĐANG ÁP DỤNG",
     noActiveFilters: "Chưa áp dụng bộ lọc",
     clearSearch: "Xóa nội dung tìm kiếm",
     searchLabel: "Tìm kiếm",
-    searchPlaceholder: "Mã buyer, sản phẩm, ứng dụng, thị trường...",
+    searchPlaceholder: "Mã khách hàng, sản phẩm, ứng dụng, thị trường...",
     productLabel: "Sản phẩm chính",
     allProducts: "Tất cả sản phẩm",
     paymentLabel: "Phương thức thanh toán",
@@ -582,22 +582,22 @@ const buyerPageCopy: Record<Locale, BuyerPageCopy> = {
     emptyTitle: "Không tìm thấy hồ sơ phù hợp",
     emptyDescription: "Hãy thử từ khóa khác hoặc xóa bớt điều kiện lọc.",
     emptyAction: "Xem tất cả hồ sơ",
-    paginationAria: "Phân trang danh sách buyer",
+    paginationAria: "Phân trang danh sách khách hàng",
     previousPage: "Trang trước",
     nextPage: "Trang sau",
     pageLabel: "TRANG",
-    categoryAria: "Phân loại buyer",
+    categoryAria: "Phân loại khách hàng",
     categories: ["NHÀ NHẬP KHẨU", "NHÀ PHÂN PHỐI", "NHÀ PHÂN PHỐI PLYWOOD / PANEL", "NHÀ SẢN XUẤT NỘI THẤT", "NGƯỜI DÙNG CÔNG NGHIỆP", "THƯƠNG MẠI / TRADER"],
     landmarkAria: "Minh họa Taj Mahal tại Ấn Độ",
     card: {
-      buyerId: "MÃ BUYER",
+      buyerId: "MÃ KHÁCH HÀNG",
       layerOne: "TẦNG 1 - PRODUCT SIGNAL",
-      layerOneQuestion: "BUYER ĐANG CẦN GÌ?",
+      layerOneQuestion: "KHÁCH HÀNG ĐANG CẦN GÌ?",
       mainProduct: "SẢN PHẨM CHÍNH",
       core: "LÕI (CORE)",
       glue: "KEO (GLUE)",
       layerTwo: "TẦNG 2 - BUYING CONTEXT",
-      layerTwoQuestion: "BUYER MUA NHƯ THẾ NÀO?",
+      layerTwoQuestion: "KHÁCH HÀNG MUA NHƯ THẾ NÀO?",
       needs: "HỒ SƠ NHU CẦU",
       buying: "ĐẶC ĐIỂM MUA HÀNG",
       application: "ỨNG DỤNG CUỐI",
@@ -896,9 +896,9 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
   const productValues = Array.from(new Set(profiles.flatMap((buyer) => buyer.mainProduct))).sort();
   const marketValues = Array.from(new Set(profiles.map((buyer) => buyer.market))).sort();
   const paymentValues = Array.from(new Set(profiles.map((buyer) => buyer.payment))).sort();
-  const saveLabel = vi ? "Lưu buyer" : ar ? "حفظ المشتري" : "Save buyer";
+  const saveLabel = vi ? "Lưu khách hàng" : ar ? "حفظ المشتري" : "Save buyer";
   const savedLabel = vi ? "Đã lưu" : ar ? "محفوظ" : "Saved";
-  const savedBuyersLabel = vi ? "Buyer đã lưu" : ar ? "المشترون المحفوظون" : "Saved buyers";
+  const savedBuyersLabel = vi ? "Khách hàng đã lưu" : ar ? "المشترون المحفوظون" : "Saved buyers";
   const showAllLabel = vi ? "Xem tất cả" : ar ? "عرض الكل" : "Show all";
   const [query, setQuery] = useState("");
   const [productFilter, setProductFilter] = useState("");
@@ -1027,14 +1027,14 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
   const featuredCountry = selectedMarket ? getMarketRailLabel(selectedMarket) : copy.featuredCountry;
   const coverDescription = selectedMarket
     ? vi
-      ? `${filteredProfiles.length} HỒ SƠ BUYER ĐANG HIỂN THỊ TẠI ${featuredCountry}`
+      ? `${filteredProfiles.length} HỒ SƠ KHÁCH HÀNG ĐANG HIỂN THỊ TẠI ${featuredCountry}`
       : ar
         ? `${filteredProfiles.length} ملف مشتري معروض في ${featuredCountry}`
         : `${filteredProfiles.length} BUYER PROFILES FILTERED FOR ${featuredCountry}`
     : copy.catalogueDescription;
   const coverStampLabel = selectedMarket
     ? vi
-      ? `${filteredProfiles.length} BUYER`
+      ? `${filteredProfiles.length} KHÁCH HÀNG`
       : ar
         ? `${filteredProfiles.length} مشترٍ`
         : `${filteredProfiles.length} BUYERS`

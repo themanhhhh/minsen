@@ -1,4 +1,4 @@
-import { aboutPageContent, getLocalizedPath, type Locale } from "@/data/landing-page";
+import { aboutPageContent, company, getLocalizedPath, type Locale } from "@/data/landing-page";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import Link from "next/link";
@@ -22,20 +22,13 @@ export function CompanyAbout({ locale }: { locale: Locale }) {
               <span aria-hidden="true">↓</span>
             </a>
           </div>
-          <div className="about-hero-mark" aria-hidden="true">
+          <div className="about-hero-mark">
             <Image
-              src="/images/team/minsen-sourcing-team.jpg"
-              alt=""
+              src="/images/logo/577e0a8a-c480-40d7-b31b-28c602ad95e1.png"
+              alt={company.legalName}
               fill
               sizes="300px"
             />
-            <span>MISO JAPAN</span>
-            <strong>01</strong>
-            <small>
-              {ar ? "شريك" : "ACCOUNTABLE"}
-              <br />
-              {ar ? "مسؤول" : "PARTNER"}
-            </small>
           </div>
           <ScrollCue targetId="mission" label={locale === "vi" ? "Cuộn để tìm hiểu thêm" : ar ? "مرر لمعرفة المزيد" : "Scroll to learn more"} />
         </section>

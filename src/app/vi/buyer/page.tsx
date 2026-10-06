@@ -4,8 +4,8 @@ import { Header } from "@/components/Header";
 import { getBuyerProfiles } from "@/data/buyers";
 
 export const metadata = {
-  title: "Danh mục Buyer quốc tế | MISO JAPAN",
-  description: "Danh mục hồ sơ buyer quốc tế trong ngành plywood và ván gỗ.",
+  title: "Danh mục khách hàng quốc tế | MISO JAPAN",
+  description: "Danh mục hồ sơ khách hàng quốc tế trong ngành plywood và ván gỗ.",
 };
 
 export default function VietnameseBuyerPage() {

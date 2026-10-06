@@ -62,7 +62,7 @@ export function Footer({ locale }: { locale: Locale }) {
             </span>
           </a>
           <p>
-            {locale === "vi" ? "Đối tác sourcing plywood Việt Nam, phát triển nhà cung cấp và quản trị rủi ro cho Buyer." : ar ? "شريك توريد الخشب الرقائقي من فيتنام وتطوير الموردين وإدارة مخاطر المشتري." : "Vietnam plywood sourcing, supplier development and buyer risk management partner."}
+            {locale === "vi" ? "Đối tác sourcing plywood Việt Nam, phát triển nhà cung cấp và quản trị rủi ro cho khách hàng." : ar ? "شريك توريد الخشب الرقائقي من فيتنام وتطوير الموردين وإدارة مخاطر المشتري." : "Vietnam plywood sourcing, supplier development and buyer risk management partner."}
           </p>
             <small>{locale === "vi" ? "Tên công ty" : ar ? "اسم الشركة" : "Company name"}: {company.legalName}</small>
             <small>{locale === "vi" ? "Địa chỉ" : ar ? "العنوان" : "Address"}: {company.location}</small>
@@ -121,9 +121,12 @@ export function Footer({ locale }: { locale: Locale }) {
               className="footer-back-to-top"
               href="#top"
               aria-label={locale === "vi" ? "Về đầu trang" : ar ? "العودة إلى الأعلى" : "Back to top"}
-              title={locale === "vi" ? "Về đầu trang" : ar ? "العودة إلى الأعلى" : "Back to top"}
+             title={locale === "vi" ? "Về đầu trang" : ar ? "العودة إلى الأعلى" : "Back to top"}
             >
-              <span aria-hidden="true">↑</span>
+              <span className="footer-back-to-top-icon" aria-hidden="true">↑</span>
+              <span className="footer-back-to-top-label">
+                {locale === "vi" ? "Lên đầu trang" : ar ? "العودة إلى الأعلى" : "Back to top"}
+              </span>
             </a>
            <span aria-hidden="true">·</span>
            <LanguageSwitcher locale={locale} />

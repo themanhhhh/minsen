@@ -1879,15 +1879,25 @@ p {
 
 .footer-legal .footer-back-to-top {
   align-items: center;
-  border: 1px solid rgba(130, 150, 191, .65);
+  background: var(--blue);
+  border: 2px solid #fff;
   border-radius: 50%;
   display: inline-flex;
-  font-size: 16px;
-  height: 30px;
+  font-size: 11px;
+  gap: 8px;
+  height: 50px;
   justify-content: center;
   line-height: 1;
+  min-width: 50px;
+  padding: 0 17px;
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 20;
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(4, 35, 112, .28);
   transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease, color .2s ease, transform .2s ease;
-  width: 30px;
+  width: auto;
 }
 
 .footer-legal .footer-back-to-top:hover {
@@ -1896,6 +1906,17 @@ p {
   box-shadow: 0 0 0 4px rgba(97, 201, 246, .14);
   color: #081426;
   transform: translateY(-2px);
+}
+
+.footer-back-to-top-icon {
+  font-size: 24px !important;
+  font-weight: 800;
+}
+
+.footer-back-to-top-label {
+  font-size: 11px !important;
+  font-weight: 800;
+  white-space: nowrap;
 }
 
 .footer-legal .footer-back-to-top:focus-visible {
@@ -3645,36 +3666,14 @@ p {
 
 .about-hero-mark {
   align-items: center;
-  background: var(--cyan);
-  color: var(--primary-dark);
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, .2);
   display: flex;
   flex-direction: column;
   flex: 0 0 300px;
   height: 300px;
   justify-content: center;
   width: 300px;
-}
-
-.about-hero-mark span {
-  font-family: var(--font-heading), sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: .2em;
-}
-
-.about-hero-mark strong {
-  font-family: var(--font-heading), sans-serif;
-  font-size: 72px;
-  letter-spacing: -.1em;
-  line-height: 1;
-}
-
-.about-hero-mark small {
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: .15em;
-  line-height: 1.35;
-  text-align: center;
 }
 
 .about-story {
@@ -3887,10 +3886,6 @@ p {
     width: 210px;
   }
 
-  .about-hero-mark strong {
-    font-size: 55px;
-  }
-
   .about-story,
   .about-network {
     display: block;
@@ -3972,21 +3967,8 @@ p {
 }
 
 .about-hero-mark img {
-  object-fit: cover;
-}
-
-.about-hero-mark::after {
-  background: rgba(9, 153, 232, .62);
-  content: "";
-  inset: 0;
-  position: absolute;
-}
-
-.about-hero-mark span,
-.about-hero-mark strong,
-.about-hero-mark small {
-  position: relative;
-  z-index: 1;
+  object-fit: contain;
+  padding: 24px;
 }
 
 .about-copy h2 {
@@ -10012,6 +9994,7 @@ html[data-locale="ar"] .founder-profile-tagline {
   cursor: pointer;
   display: flex;
   font-size: 11px;
+  font-weight: 700;
   gap: 10px;
   line-height: 1.55;
   margin-top: 34px;

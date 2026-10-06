@@ -2,14 +2,14 @@ import supplementalFactoryData from "./supplemental-factories.json";
 
 export const company = {
   name: "MISO JAPAN",
-  legalName: "CÔNG TY TNHH LIÊN DOANH MISO JAPAN",
+  legalName: "CÔNG TY CỔ PHẦN XÚC TIẾN THƯƠNG MẠI MISO JAPAN",
   descriptor: "Vietnam Plywood Sourcing, Supplier Development & Buyer Risk Management Partner",
   descriptorVi: "Đối tác sourcing Plywood Việt Nam, phát triển nhà cung cấp và quản trị rủi ro cho Buyer",
   email: "misojapan.global@gmail.com",
   emailVi: "misojapan.global@gmail.com",
   whatsapp: "+84 833 158 866",
   whatsappVi: "+84 833 158 866",
-  location: "Đội 3, Thôn Cấn Hạ, Xã Kiều Phú, Thành phố Hà Nội, Việt Nam",
+  location: "Số 71, Tập thể K159 Học Viện Hậu Cần, Tổ 29, Ngách 606/187 Đường Ngọc Thuỵ, Phường Bồ Đề, Thành phố Hà Nội, Việt Nam",
 };
 
 export const socialLinks = [
@@ -157,7 +157,7 @@ export function getLocalizedPath(locale: Locale, path: string) {
 const vietnameseContent = {
   navigation: [
     { label: "Sản phẩm", href: "/vi/products" },
-    { label: "Buyer quốc tế", href: "/vi/buyer" },
+    { label: "Khách hàng quốc tế", href: "/vi/buyer" },
     { label: "Nhà máy", href: "/vi/manufacturers" },
     { label: "Dịch vụ sourcing", href: "/vi/sourcing" },
     { label: "Quy trình", href: "/vi/process" },
@@ -320,7 +320,7 @@ export const aboutPageContent = {
   en: {
     eyebrow: "About MISO JAPAN",
     title: "Your sourcing partner on the ground in Vietnam.",
-    intro: "MISO JAPAN JOINT VENTURE COMPANY LIMITED is a Vietnam-based sourcing, supplier development and export coordination company specializing in the plywood industry. We support international buyers in identifying, evaluating and working with suitable Vietnam plywood manufacturers.",
+    intro: "CÔNG TY CỔ PHẦN XÚC TIẾN THƯƠNG MẠI MISO JAPAN is a Vietnam-based sourcing, supplier development and export coordination company specializing in the plywood industry. We support international buyers in identifying, evaluating and working with suitable Vietnam plywood manufacturers.",
     missionTitle: "From buyer requirement to a controlled supply relationship.",
     missionText: "Our role goes beyond introducing a buyer to a factory. We translate buyer requirements into clear technical and commercial criteria, verify supplier capability, coordinate quotations and sample development, support order execution and provide documented evidence throughout critical sourcing stages.",
     positioningTitle: "We act as a professional bridge between international buyer requirements and Vietnam manufacturing capability.",
@@ -369,7 +369,7 @@ export const aboutPageContent = {
   vi: {
     eyebrow: "Về MISO JAPAN",
     title: "Đối tác sourcing và thực thi của bạn tại Việt Nam.",
-    intro: "CÔNG TY TNHH LIÊN DOANH MISO JAPAN là doanh nghiệp hoạt động tại Việt Nam trong lĩnh vực sourcing, phát triển nhà cung cấp và điều phối xuất khẩu, tập trung chuyên sâu vào ngành plywood. Chúng tôi hỗ trợ buyer quốc tế tìm kiếm, đánh giá và làm việc với các nhà sản xuất plywood phù hợp tại Việt Nam.",
+    intro: "CÔNG TY CỔ PHẦN XÚC TIẾN THƯƠNG MẠI MISO JAPAN là doanh nghiệp hoạt động tại Việt Nam trong lĩnh vực sourcing, phát triển nhà cung cấp và điều phối xuất khẩu, tập trung chuyên sâu vào ngành plywood. Chúng tôi hỗ trợ buyer quốc tế tìm kiếm, đánh giá và làm việc với các nhà sản xuất plywood phù hợp tại Việt Nam.",
     missionTitle: "Từ yêu cầu của buyer đến mối quan hệ cung ứng có kiểm soát.",
     missionText: "Vai trò của chúng tôi không dừng lại ở việc giới thiệu buyer với nhà máy. MISO JAPAN chuyển yêu cầu thành tiêu chí kỹ thuật và thương mại rõ ràng, xác minh năng lực nhà cung cấp, điều phối báo giá và phát triển mẫu, hỗ trợ thực hiện đơn hàng và cung cấp bằng chứng tại các giai đoạn sourcing quan trọng.",
     positioningTitle: "Cầu nối chuyên nghiệp giữa yêu cầu của buyer quốc tế và năng lực sản xuất tại Việt Nam.",
@@ -403,11 +403,10 @@ export const aboutPageContent = {
       vietnameseName: "Nguyễn Minh Sơn",
       role: "Nhà sáng lập & Tổng Giám đốc MISO JAPAN",
       paragraphs: [
-        "Nguyễn Minh Sơn là Nhà sáng lập và Tổng Giám đốc MISO JAPAN, tập trung vào thương mại xuyên biên giới, sourcing và điều phối chuỗi cung ứng từ Việt Nam cho buyer quốc tế.",
-        "Một trong những định hướng kinh doanh trọng tâm của MISO JAPAN là MISO PLYWOOD, nền tảng sourcing plywood tại Việt Nam được xây dựng để hỗ trợ buyer quốc tế trong toàn bộ quá trình tìm nguồn cung, từ làm rõ yêu cầu của buyer và xác định nhà cung cấp phù hợp đến xác minh nhà máy, điều phối quy cách, kiểm soát chất lượng và điều phối xuất khẩu.",
-        "Trọng tâm của ông là xây dựng một mô hình sourcing minh bạch, có kiểm soát và đáng tin cậy, giúp buyer quốc tế giảm rủi ro khi tìm nguồn cung từ Việt Nam.",
-        "Thị trường ưu tiên hiện nay của MISO JAPAN gồm Ấn Độ, Trung Đông và các thị trường nhập khẩu quốc tế khác.",
-        "Mục tiêu của ông là phát triển MISO JAPAN trở thành đối tác thương mại xuyên biên giới và sourcing đáng tin cậy, kết nối đúng nhu cầu của buyer với năng lực cung ứng đáng tin cậy từ Việt Nam.",
+        "Nguyễn Minh Sơn là Nhà sáng lập và Tổng Giám đốc CÔNG TY CỔ PHẦN XÚC TIẾN THƯƠNG MẠI MISO JAPAN từ năm 2017. Với 10 năm kinh nghiệm trong lĩnh vực xúc tiến đầu tư quốc tế tại Việt Nam, ông tập trung phát triển các hoạt động thương mại xuyên biên giới, sourcing và điều phối chuỗi cung ứng từ Việt Nam cho buyer quốc tế.",
+        "Một trong những định hướng kinh doanh trọng tâm của MISO JAPAN là MISO PLYWOOD — nền tảng sourcing plywood tại Việt Nam, hỗ trợ buyer quốc tế từ khâu làm rõ yêu cầu, xác định nhà cung cấp phù hợp, xác minh năng lực nhà máy, điều phối quy cách, kiểm soát chất lượng đến xuất khẩu.",
+        "Ông hướng đến xây dựng mô hình sourcing minh bạch, có kiểm soát và đáng tin cậy, giúp buyer quốc tế giảm rủi ro khi tìm nguồn cung từ Việt Nam. Các thị trường trọng điểm của MISO JAPAN gồm châu Âu, Hoa Kỳ, Ấn Độ, Trung Đông và các thị trường nhập khẩu quốc tế khác.",
+        "Mục tiêu của ông là phát triển MISO JAPAN trở thành đối tác thương mại xuyên biên giới và sourcing đáng tin cậy, kết nối đúng nhu cầu của buyer với năng lực cung ứng phù hợp từ Việt Nam.",
       ],
       tagline: "Từ yêu cầu Buyer đến nguồn cung Việt Nam đáng tin cậy.",
     },
@@ -418,7 +417,7 @@ export const aboutPageContent = {
   ar: {
     eyebrow: "عن MISO JAPAN",
     title: "شريك التوريد والتنفيذ الخاص بك في فيتنام.",
-    intro: "شركة MISO JAPAN JOINT VENTURE COMPANY LIMITED هي شركة مقرها فيتنام متخصصة في التوريد وتطوير المورّدين وتنسيق التصدير في قطاع الخشب الرقائقي. نساعد المشترين الدوليين على تحديد وتقييم والتعامل مع مصنّعي الخشب الرقائقي المناسبين في فيتنام.",
+    intro: "CÔNG TY CỔ PHẦN XÚC TIẾN THƯƠNG MẠI MISO JAPAN هي شركة مقرها فيتنام متخصصة في التوريد وتطوير المورّدين وتنسيق التصدير في قطاع الخشب الرقائقي. نساعد المشترين الدوليين على تحديد وتقييم والتعامل مع مصنّعي الخشب الرقائقي المناسبين في فيتنام.",
     missionTitle: "من متطلبات المشتري إلى علاقة توريد منظمة.",
     missionText: "يتجاوز دورنا مجرد تعريف المشتري بالمصنع. نحوّل المتطلبات إلى معايير فنية وتجارية واضحة، ونتحقق من قدرة المورّد، وننسق الأسعار وتطوير العينات، وندعم تنفيذ الطلب مع أدلة موثقة في مراحل التوريد المهمة.",
     positioningTitle: "نحن جسر مهني بين متطلبات المشترين الدوليين وقدرات التصنيع في فيتنام.",
