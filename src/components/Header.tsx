@@ -57,7 +57,7 @@ export function Header({ locale }: { locale: Locale }) {
         >
           <span className="brand-logo">
             <Image
-              src="/images/logo/577e0a8a-c480-40d7-b31b-28c602ad95e1.png"
+              src="/images/logo/7f3e1587-4c3c-4f96-aeba-7a2f5478a1d7.png"
               alt=""
               fill
               preload
