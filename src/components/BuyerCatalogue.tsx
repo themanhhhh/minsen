@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useDeferredValue, useEffect, useState } from "react";
-import { getLocalizedPath, type Locale } from "@/data/landing-page";
+import type { Locale } from "@/data/landing-page";
 import type { BuyerProfile } from "@/data/buyers";
 import { readSavedBuyerIds, writeSavedBuyerIds } from "@/data/saved-profiles";
 import {
@@ -854,7 +854,7 @@ function BuyerCard({
              <div className="buyer-context-label"><BuyerIcon name="shield" /><strong>{copy.access}</strong></div>
              <Link
                className="button button-primary buyer-profile-action"
-               href={getLocalizedPath(locale, "/rfq")}
+                href="https://plywood.misojapan.com/factory-registration"
              >
                {vi
                  ? "Kết nối"
