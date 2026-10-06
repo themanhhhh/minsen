@@ -113,12 +113,8 @@ export function FactoryProfile({
                  <strong>{vi ? "Đang chờ qualification" : ar ? "بانتظار التأهيل" : factory.misoStatus}</strong>
               </div>
             </div>
-            <div className="profile-block">
-               <h3>{vi ? "Mô tả hồ sơ" : ar ? "وصف الملف" : "Profile description"}</h3>
-              <p>{factory.shortDescription}</p>
-            </div>
-            <div className="profile-block">
-               <h3>{vi ? "Sản phẩm chính" : ar ? "المنتجات الرئيسية" : "Main products"}</h3>
+             <div className="profile-block">
+                <h3>{vi ? "Sản phẩm chính" : ar ? "المنتجات الرئيسية" : "Main products"}</h3>
               <div className="profile-tags">
                 {factory.products.map((item) => (
                   <span key={item}>{item}</span>
@@ -136,23 +132,7 @@ export function FactoryProfile({
               </p>
               {factory.materialsAndSpecs && <p>{factory.materialsAndSpecs}</p>}
             </div>
-            <div className="profile-block">
-               <h3>{vi ? "Thị trường tham khảo" : ar ? "الأسواق المرجعية" : "Reference markets"}</h3>
-              <div className="profile-tags">
-                {factory.exportMarkets.length > 0 ? factory.exportMarkets.map((item) => (
-                  <span key={item}>{item}</span>
-                )) : <p>{missing}</p>}
-              </div>
-            </div>
-            <div className="profile-block">
-               <h3>{vi ? "Chứng nhận" : ar ? "الشهادات" : "Certifications"}</h3>
-              <div className="profile-tags">
-                {factory.certifications.length > 0 ? factory.certifications.map((item) => (
-                  <span key={item}>{item}</span>
-                )) : <p>{missing}</p>}
-              </div>
-            </div>
-          </div>
+           </div>
           <aside className="profile-sidebar">
             <div className="verification-card">
               <span className="is-pending">!</span>
