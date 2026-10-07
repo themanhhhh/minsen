@@ -8522,7 +8522,7 @@ html[data-locale="ar"] .founder-profile-tagline {
 
 .buyer-profile-header > strong {
   color: #10264b;
-  font-size: clamp(9px, .92vw, 13px);
+  font-size: clamp(11px, .98vw, 14px);
   letter-spacing: .015em;
   line-height: 1.1;
 }
@@ -8531,7 +8531,7 @@ html[data-locale="ar"] .founder-profile-tagline {
   align-items: center;
   color: #142749;
   display: inline-flex;
-  font-size: clamp(8px, .8vw, 11px);
+  font-size: clamp(10px, .86vw, 12px);
   font-weight: 800;
   gap: 6px;
   margin-left: auto;
@@ -8563,7 +8563,7 @@ html[data-locale="ar"] .founder-profile-tagline {
   display: inline-flex;
   flex: 0 0 auto;
   font: inherit;
-  font-size: clamp(6px, .62vw, 9px);
+  font-size: clamp(9px, .72vw, 11px);
   font-weight: 800;
   gap: 4px;
   padding: 4px 6px;
@@ -8601,7 +8601,7 @@ html[data-locale="ar"] .founder-profile-tagline {
   color: #fff;
   display: flex;
   flex: 0 0 auto;
-  font-size: clamp(7px, .72vw, 10px);
+  font-size: clamp(9px, .78vw, 11px);
   font-weight: 800;
   height: 22px;
   letter-spacing: .02em;
@@ -8611,7 +8611,7 @@ html[data-locale="ar"] .founder-profile-tagline {
 
 .buyer-layer-heading span {
   color: #5c625d;
-  font-size: clamp(6px, .64vw, 9px);
+  font-size: clamp(8px, .7vw, 10px);
   font-weight: 800;
   margin-left: 5px;
   overflow: hidden;
@@ -8659,7 +8659,7 @@ html[data-locale="ar"] .founder-profile-tagline {
 .buyer-field-label {
   color: #52605a;
   display: block;
-  font-size: clamp(5px, .58vw, 8px);
+  font-size: clamp(8px, .66vw, 10px);
   font-weight: 800;
   line-height: 1.15;
   margin-bottom: 3px;
@@ -8669,7 +8669,7 @@ html[data-locale="ar"] .founder-profile-tagline {
 .buyer-signal-item strong {
   color: #13223c;
   display: block;
-  font-size: clamp(7px, .76vw, 10px);
+  font-size: clamp(10px, .86vw, 13px);
   line-height: 1.25;
   overflow-wrap: anywhere;
 }
@@ -8708,7 +8708,7 @@ html[data-locale="ar"] .founder-profile-tagline {
 }
 
 .buyer-context-label strong {
-  font-size: clamp(6px, .63vw, 9px);
+  font-size: clamp(9px, .72vw, 11px);
   font-weight: 800;
   line-height: 1.2;
 }
@@ -8722,7 +8722,7 @@ html[data-locale="ar"] .founder-profile-tagline {
 .buyer-bullet-list li {
   color: #28354a;
   display: flex;
-  font-size: clamp(6.5px, .68vw, 9px);
+  font-size: clamp(9px, .76vw, 11px);
   line-height: 1.32;
   margin: 2px 0;
 }
@@ -8736,7 +8736,7 @@ html[data-locale="ar"] .founder-profile-tagline {
 
 .buyer-application-column p {
   color: #26354d;
-  font-size: clamp(7px, .7vw, 10px);
+  font-size: clamp(9px, .78vw, 12px);
   font-weight: 700;
   line-height: 1.45;
   margin: 9px 0 0;
@@ -8770,7 +8770,7 @@ html[data-locale="ar"] .founder-profile-tagline {
 
 .buyer-fit-column > p {
   color: #26354d;
-  font-size: clamp(6.5px, .69vw, 9px);
+  font-size: clamp(9px, .76vw, 11px);
   line-height: 1.32;
   margin: 0;
 }
@@ -8787,7 +8787,7 @@ html[data-locale="ar"] .founder-profile-tagline {
 .buyer-access-status {
   color: #172846;
   display: block;
-  font-size: clamp(6px, .64vw, 9px);
+  font-size: clamp(9px, .72vw, 11px);
   font-weight: 700;
   line-height: 1.35;
   margin-top: 6px;
@@ -8807,7 +8807,7 @@ html[data-locale="ar"] .founder-profile-tagline {
 
 .buyer-profile-meta span {
   color: #24364e;
-  font-size: clamp(5.5px, .6vw, 8px);
+  font-size: clamp(8px, .68vw, 10px);
   line-height: 1.25;
 }
 
@@ -8818,7 +8818,7 @@ html[data-locale="ar"] .founder-profile-tagline {
 
 .buyer-profile-action {
   align-self: stretch;
-  font-size: clamp(8px, .72vw, 10px);
+  font-size: clamp(10px, .8vw, 12px);
   gap: 8px;
   margin: 8px;
   padding: 10px 12px;
@@ -8831,7 +8831,7 @@ html[data-locale="ar"] .founder-profile-tagline {
 
 .buyer-access-column .buyer-profile-action {
   align-self: stretch;
-  font-size: clamp(7px, .68vw, 9px);
+  font-size: clamp(10px, .78vw, 12px);
   gap: 4px;
   line-height: 1.2;
   margin: auto 0 0;
@@ -9045,7 +9045,7 @@ html[data-locale="ar"] .founder-profile-tagline {
   }
 
   .buyer-profile-country {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .buyer-save-button {
@@ -9057,16 +9057,16 @@ html[data-locale="ar"] .founder-profile-tagline {
   }
 
   .buyer-layer-heading strong {
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .buyer-layer-heading span {
-    font-size: 7px;
+    font-size: 9px;
   }
 
   .buyer-field-label,
   .buyer-context-label strong {
-    font-size: 7px;
+    font-size: 9px;
   }
 
   .buyer-signal-item strong,
@@ -9075,7 +9075,7 @@ html[data-locale="ar"] .founder-profile-tagline {
   .buyer-fit-column > p,
   .buyer-fit-level,
   .buyer-access-status {
-    font-size: 9px;
+    font-size: 11px;
   }
 
   .buyer-context-label svg {
@@ -9085,7 +9085,7 @@ html[data-locale="ar"] .founder-profile-tagline {
   }
 
   .buyer-profile-meta span {
-    font-size: 7px;
+    font-size: 9px;
   }
 
 }
