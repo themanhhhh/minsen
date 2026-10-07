@@ -10529,6 +10529,26 @@ html[data-locale="ar"] .supply-path-stat strong {
   font-size: 12px;
 }
 
+.protection-evidence .eyebrow {
+  font-size: 12px;
+}
+
+.protection-evidence h3 {
+  font-size: 32px;
+}
+
+.protection-evidence > p:not(.eyebrow) {
+  font-size: 17px;
+}
+
+.protection-evidence-list span {
+  font-size: 13px;
+}
+
+.protection-evidence-principle {
+  font-size: 16px;
+}
+
 /* Slightly reduce header typography without changing its spacing or controls. */
 .site-header .header-home,
 .site-header .desktop-nav a,
