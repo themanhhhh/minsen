@@ -1735,15 +1735,13 @@ p {
 
 .footer-cta-description {
   color: #b8c7e7;
-  font-size: 19px;
+  font-size: 14px;
   line-height: 1.7;
   margin: 25px 0 0;
   max-width: 520px;
 }
 
-.footer-cta-description p {
-  font-size: 14px;
-}
+
 
 .footer-cta-button {
   margin-bottom: 7px;
@@ -1785,7 +1783,7 @@ p {
 .footer-brand-block small {
   color: #8296bf;
   display: block;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
