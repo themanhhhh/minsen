@@ -4,8 +4,15 @@ import Link from "next/link";
 import { type FormEvent, useState } from "react";
 import { getLocalizedPath, type Locale } from "@/data/landing-page";
 import { submitFormToGoogleSheets } from "@/lib/form-submission";
+import type { FactoryRegistrationPrefill } from "@/lib/form-prefill";
 
-export function FactoryRegistrationForm({ locale = "en" }: { locale?: Locale }) {
+export function FactoryRegistrationForm({
+  locale = "en",
+  prefill,
+}: {
+  locale?: Locale;
+  prefill?: FactoryRegistrationPrefill;
+}) {
   const [submitted, setSubmitted] = useState(false);
   const [fileError, setFileError] = useState(false);
   const [submitError, setSubmitError] = useState(false);
@@ -79,12 +86,24 @@ export function FactoryRegistrationForm({ locale = "en" }: { locale?: Locale }) 
            <div className="registration-form-heading">
              <p className="eyebrow">{isArabic ? "معلومات المصنع" : "THÔNG TIN NHÀ MÁY / FACTORY INFORMATION"}</p>
              <p>{isArabic ? "يرجى تقديم معلومات دقيقة. الحقول المميزة بعلامة * إلزامية." : "Vui lòng cung cấp thông tin chính xác. Các trường có dấu ** hoặc * là bắt buộc."}</p>
-          </div>
+           </div>
 
-          <div className="registration-fields">
-            <label>
-               <span>{isArabic ? "اسم الشركة" : "Tên công ty / Company Name"} <sup>**</sup></span>
-              <input name="companyName" type="text" autoComplete="organization" required />
+           <div className="registration-fields">
+             {prefill?.buyerReference && (
+               <label className="registration-field-full">
+                 <span>
+                   {isArabic
+                     ? "ملف المشتري المطلوب"
+                     : locale === "vi"
+                       ? "Hồ sơ khách hàng đang kết nối / Buyer Profile"
+                       : "BUYER PROFILE OF INTEREST"}
+                 </span>
+                 <textarea name="buyerReference" defaultValue={prefill.buyerReference} rows={6} readOnly />
+               </label>
+             )}
+             <label>
+                <span>{isArabic ? "اسم الشركة" : "Tên công ty / Company Name"} <sup>**</sup></span>
+               <input name="companyName" type="text" autoComplete="organization" required />
             </label>
             <label>
                <span>{isArabic ? "عنوان المصنع" : "Địa chỉ nhà máy / Factory Address"} <sup>**</sup></span>
@@ -110,14 +129,14 @@ export function FactoryRegistrationForm({ locale = "en" }: { locale?: Locale }) 
                <span>{isArabic ? "واتساب / الهاتف" : "WhatsApp / Điện thoại / WhatsApp / Phone"} <sup>**</sup></span>
               <input name="phone" type="tel" autoComplete="tel" required />
             </label>
-            <label className="registration-field-full">
-               <span>{isArabic ? "منتجات الخشب الرقائقي الرئيسية" : "Sản phẩm Plywood chính / Main Plywood Products"} <sup>**</sup></span>
-              <textarea name="mainProducts" rows={3} required placeholder="Ví dụ / Example: Commercial plywood, film-faced plywood, LVL..." />
-            </label>
-            <label className="registration-field-full">
-               <span>{isArabic ? "مواصفات المنتجات الرئيسية" : "Quy cách sản phẩm chính / Main Product Specifications"} <sup>**</sup></span>
-              <textarea name="specifications" rows={4} required placeholder="Độ dày / Thickness · Kích thước / Size · Lõi / Core · Keo / Glue" />
-            </label>
+             <label className="registration-field-full">
+                <span>{isArabic ? "منتجات الخشب الرقائقي الرئيسية" : "Sản phẩm Plywood chính / Main Plywood Products"} <sup>**</sup></span>
+               <textarea name="mainProducts" defaultValue={prefill?.mainProducts} rows={3} required placeholder="Ví dụ / Example: Commercial plywood, film-faced plywood, LVL..." />
+             </label>
+             <label className="registration-field-full">
+                <span>{isArabic ? "مواصفات المنتجات الرئيسية" : "Quy cách sản phẩm chính / Main Product Specifications"} <sup>**</sup></span>
+               <textarea name="specifications" defaultValue={prefill?.specifications} rows={4} required placeholder="Độ dày / Thickness · Kích thước / Size · Lõi / Core · Keo / Glue" />
+             </label>
             <label>
                <span>{isArabic ? "الطاقة الإنتاجية" : "Công suất sản xuất / Production Capacity"} <sup>**</sup></span>
               <input name="capacity" type="text" required placeholder="Ví dụ / Example: 3,000 CBM/month" />

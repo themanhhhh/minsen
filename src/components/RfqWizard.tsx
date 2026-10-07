@@ -3,21 +3,23 @@
 import { type FormEvent, type MouseEvent, useState } from "react";
 import type { Locale } from "@/data/landing-page";
 import { submitFormToGoogleSheets } from "@/lib/form-submission";
+import type { RfqPrefill } from "@/lib/form-prefill";
 
 type Step = 1 | 2 | 3;
 
-export function RfqWizard({ locale }: { locale: Locale }) {
+export function RfqWizard({ locale, prefill }: { locale: Locale; prefill?: RfqPrefill }) {
   const vi = locale === "vi";
   const ar = locale === "ar";
   const [step, setStep] = useState<Step>(1);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState(false);
   const [form, setForm] = useState({
-    product: "Plywood",
-    specification: "",
+    factoryReference: prefill?.factoryReference ?? "",
+    product: prefill?.product ?? "Plywood",
+    specification: prefill?.specification ?? "",
     core: "",
     bond: "",
-    application: "",
+    application: prefill?.application ?? "",
     quantity: "",
     destination: "",
     delivery: "",
@@ -35,6 +37,7 @@ export function RfqWizard({ locale }: { locale: Locale }) {
           "Chúng tôi xem xét yêu cầu và shortlist các nhà sản xuất Việt Nam phù hợp thông qua quy trình sourcing và kiểm soát rủi ro cho buyer.",
         steps: ["Sản phẩm", "Yêu cầu kỹ thuật", "Liên hệ"],
         product: "DANH MỤC SẢN PHẨM",
+        factoryReference: "NHÀ MÁY ĐANG QUAN TÂM",
         specification: "QUY CÁCH SẢN PHẨM",
         core: "LÕI / VẬT LIỆU",
         bond: "YÊU CẦU KEO",
@@ -70,6 +73,7 @@ export function RfqWizard({ locale }: { locale: Locale }) {
         description: "نراجع متطلباتك ونختار المصنعين الفيتناميين المناسبين من خلال عملية التوريد ومراقبة مخاطر المشتري.",
         steps: ["المنتج", "المتطلبات التقنية", "جهة الاتصال"],
         product: "فئة المنتج",
+        factoryReference: "المصنع المطلوب",
         specification: "مواصفات المنتج",
         core: "القلب / المادة",
         bond: "متطلبات اللصق",
@@ -104,6 +108,7 @@ export function RfqWizard({ locale }: { locale: Locale }) {
           "We review your requirements and shortlist suitable Vietnamese manufacturers through our sourcing and buyer risk-control process.",
         steps: ["Product", "Technical Requirements", "Contact"],
         product: "PRODUCT CATEGORY",
+        factoryReference: "FACTORY OF INTEREST",
         specification: "PRODUCT SPECIFICATION",
         core: "CORE / MATERIAL",
         bond: "BONDING REQUIREMENT",
@@ -200,6 +205,17 @@ export function RfqWizard({ locale }: { locale: Locale }) {
 
           {step === 1 && (
             <div className="rfq-wizard-fields">
+              {prefill?.factoryReference && (
+                <label className="rfq-wizard-field-full">
+                  {copy.factoryReference}
+                  <textarea
+                    name="factoryReference"
+                    value={form.factoryReference}
+                    onChange={(event) => update("factoryReference", event.target.value)}
+                    rows={6}
+                  />
+                </label>
+              )}
               <label>
                 {copy.product}
                 <select name="product" value={form.product} onChange={(event) => update("product", event.target.value)} required>

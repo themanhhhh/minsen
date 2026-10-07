@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useDeferredValue, useEffect, useState } from "react";
-import type { Locale } from "@/data/landing-page";
+import { getLocalizedPath, type Locale } from "@/data/landing-page";
 import type { BuyerProfile } from "@/data/buyers";
 import { readSavedBuyerIds, writeSavedBuyerIds } from "@/data/saved-profiles";
 import {
@@ -852,10 +852,10 @@ function BuyerCard({
           </div>
            <div className="buyer-fit-column buyer-access-column">
              <div className="buyer-context-label"><BuyerIcon name="shield" /><strong>{copy.access}</strong></div>
-             <Link
-               className="button button-primary buyer-profile-action"
-                href="https://plywood.misojapan.com/factory-registration"
-             >
+              <Link
+                className="button button-primary buyer-profile-action"
+                href={`${getLocalizedPath(locale, "/factory-registration")}?buyer=${encodeURIComponent(buyer.id)}`}
+              >
                {vi
                  ? "Kết nối"
                  : ar ? "تواصل" : "Connect"}{" "}
@@ -1048,9 +1048,9 @@ export function BuyerCatalogue({ locale, profiles }: { locale: Locale; profiles:
             <p className="eyebrow">{copy.eyebrow}</p>
             <h1>{copy.title}</h1>
             <p>{copy.description}</p>
-            <a className="button button-primary" href="https://plywood.misojapan.com/factory-registration">
+            <Link className="button button-primary" href={getLocalizedPath(locale, "/factory-registration")}>
               {copy.action} <span aria-hidden="true">↗</span>
-            </a>
+            </Link>
           </div>
           <div className="buyer-page-intro-stats" aria-label={copy.overviewAria}>
             <strong>600+</strong>
