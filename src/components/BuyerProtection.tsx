@@ -6,18 +6,18 @@ export function BuyerProtection({ locale }: { locale: Locale }) {
   const { protectionLayers } = getLandingContent(locale);
   const ar = locale === "ar";
   const images: Record<string, string> = {
-    "01": "/images/protection/factory-verification.jpg",
-    "02": "/images/protection/supplier-selection.jpg",
-    "03": "/images/protection/quality-inspection.jpg",
-    "04": "/images/protection/production-supervision.jpg",
-     "05": "/images/protection/quality-control.jpg",
-     "06": "/images/protection/export-support.jpg",
-     "07": "/images/team/minsen-buyer-factory-meeting.jpg",
-     "08": "/images/protection/golden-sample.svg",
-     "09": "/images/protection/order-production.svg",
-     "10": "/images/protection/qc-inspection.svg",
-     "11": "/images/protection/packing-loading.svg",
-     "12": "/images/protection/shipment-documents.svg",
+    "01": "/images/img1.png",
+    "02": "/images/img2.png",
+    "03": "/images/img3.png",
+    "04": "/images/img4.jfif",
+    "05": "/images/img5.jfif",
+    "06": "/images/img6.jfif",
+    "07": "/images/img7.jfif",
+    "08": "/images/img8.jfif",
+    "09": "/images/img9.jfif",
+    "10": "/images/img10.jfif",
+    "11": "/images/img11.png",
+    "12": "/images/img12.jfif",
   };
 
   return (
@@ -82,11 +82,10 @@ export function BuyerProtection({ locale }: { locale: Locale }) {
               <div className="protection-thumb">
                 <Image
                   src={images[layer.number] ?? images["05"]}
-                   alt={layer.title}
-                   fill
-                   sizes="(max-width: 820px) 35vw, 140px"
-                   unoptimized={images[layer.number]?.endsWith(".svg")}
-                 />
+                  alt={layer.title}
+                  fill
+                  sizes="(max-width: 820px) 35vw, 140px"
+                />
               </div>
               <h3>{layer.title}</h3>
             </div>
