@@ -37,7 +37,6 @@ function getProductOption(values: string[], locale: Locale) {
 function getSourceLabels(locale: Locale) {
   if (locale === "vi") {
     return {
-      buyer: "Khách hàng",
       country: "Quốc gia",
       products: "Sản phẩm",
       core: "Lõi / vật liệu",
@@ -53,7 +52,6 @@ function getSourceLabels(locale: Locale) {
   }
   if (locale === "ar") {
     return {
-      buyer: "المشتري",
       country: "الدولة",
       products: "المنتجات",
       core: "القلب / المادة",
@@ -68,7 +66,6 @@ function getSourceLabels(locale: Locale) {
     };
   }
   return {
-    buyer: "Buyer",
     country: "Country",
     products: "Products",
     core: "Core / material",
@@ -95,15 +92,7 @@ export function getFactoryRegistrationPrefill(
 
   const labels = getSourceLabels(locale);
   return {
-    buyerReference: [
-      `${labels.buyer}: ${buyer.id}`,
-      `${labels.country}: ${buyer.country}`,
-      `${labels.products}: ${joinValues(buyer.mainProduct)}`,
-      `${labels.core}: ${joinValues(buyer.core)}`,
-      `${labels.glue}: ${joinValues(buyer.glue)}`,
-      `${labels.needs}: ${joinValues(buyer.needs)}`,
-      `${labels.market}: ${buyer.market} · ${buyer.ports}`,
-    ].join("\n"),
+    buyerReference: buyer.id,
     mainProducts: joinValues(buyer.mainProduct),
     specifications: [
       `${labels.core}: ${joinValues(buyer.core)}`,

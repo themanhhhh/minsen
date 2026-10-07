@@ -187,14 +187,6 @@ export function FactoryRegistrationForm({
            </div>
 
            <div className="registration-fields">
-             {prefill?.buyerReference && (
-               <label className="registration-field-full">
-                 <span>
-                   {copy.buyerReference}
-                 </span>
-                 <textarea name="buyerReference" defaultValue={prefill.buyerReference} rows={6} readOnly />
-               </label>
-             )}
              <label>
                 <span>{copy.companyName} <sup>**</sup></span>
                <input name="companyName" type="text" autoComplete="organization" required />
@@ -244,8 +236,14 @@ export function FactoryRegistrationForm({
                <input name="companyProfile" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx" />
                 <small>{copy.fileHelp}</small>
                 {fileError && <small className="registration-file-error" role="alert">{copy.fileError}</small>}
-            </label>
-          </div>
+             </label>
+             {prefill?.buyerReference && (
+               <label className="registration-field-full">
+                 <span>{copy.buyerReference}</span>
+                 <input name="buyerReference" defaultValue={prefill.buyerReference} readOnly />
+               </label>
+             )}
+           </div>
 
           <label className="registration-consent">
             <input name="consent" type="checkbox" required />
