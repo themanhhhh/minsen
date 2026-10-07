@@ -10512,6 +10512,23 @@ html[data-locale="ar"] .supply-path-stat strong {
   font-size: 12px;
 }
 
+/* Improve readability of the buyer risk-control summary. */
+.protection-system .eyebrow {
+  font-size: 12px;
+}
+
+.protection-system-flow span {
+  font-size: 12px;
+}
+
+.protection-system-flow strong {
+  font-size: 32px;
+}
+
+.protection-system-logic {
+  font-size: 12px;
+}
+
 /* Slightly reduce header typography without changing its spacing or controls. */
 .site-header .header-home,
 .site-header .desktop-nav a,

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Packing and loading illustration</title>
+  <desc id="desc">A plywood shipment is secured on pallets before being loaded into a shipping container.</desc>
+  <defs>
+    <linearGradient id="pack-bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#dceef4"/>
+      <stop offset="1" stop-color="#8cb5c1"/>
+    </linearGradient>
+    <linearGradient id="pack-container" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#d87743"/>
+      <stop offset="1" stop-color="#93462f"/>
+    </linearGradient>
+    <linearGradient id="pack-wood" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ecc37a"/>
+      <stop offset="1" stop-color="#a96a3d"/>
+    </linearGradient>
+    <filter id="pack-shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#14354b" flood-opacity=".25"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="760" fill="url(#pack-bg)"/>
+  <path d="M0 585h1200v175H0z" fill="#183d55"/>
+  <path d="M0 649h1200" stroke="#6c99a4" stroke-dasharray="42 28" stroke-width="5" opacity=".6"/>
+  <path d="M82 202h1036v18H82zM82 298h1036v18H82z" fill="#85adb9" opacity=".55"/>
+
+  <g filter="url(#pack-shadow)">
+    <path d="M166 255h642l200 122v248H166z" fill="url(#pack-container)"/>
+    <path d="M166 255h642l200 122H366Z" fill="#f08d4c"/>
+    <path d="M190 285h592l172 104H364Z" fill="#713e31"/>
+    <path d="M364 389h590v209H364z" fill="#6a3a2e"/>
+    <path d="M399 420h500v170H399z" fill="#132d4b"/>
+    <path d="M425 446h448v118H425z" fill="#e5bb72"/>
+    <path d="M447 467h404v20H447zM447 509h404v20H447z" fill="#b57842" opacity=".65"/>
+    <path d="M226 294v304M294 307v291M362 319v279M810 359v239M878 400v198M946 441v157" stroke="#e9a05a" stroke-width="12" opacity=".72"/>
+    <path d="M166 598h808" stroke="#f4bb6c" stroke-width="12"/>
+  </g>
+
+  <g transform="translate(845 111)" filter="url(#pack-shadow)">
+    <rect width="205" height="250" rx="16" fill="#f7fbfa"/>
+    <rect width="205" height="36" rx="16" fill="#0b3767"/>
+    <rect y="22" width="205" height="14" fill="#0b3767"/>
+    <path d="M34 82h136M34 119h136M34 156h92" stroke="#9aadb8" stroke-linecap="round" stroke-width="10"/>
+    <path d="M31 199h143" stroke="#e2b454" stroke-width="12"/>
+    <path d="m44 199 21 22 45-55" fill="none" stroke="#3aa47c" stroke-linecap="round" stroke-linejoin="round" stroke-width="11"/>
+  </g>
+
+  <g transform="translate(75 550)">
+    <path d="M0 48h252v28H0z" fill="#c58b48"/>
+    <path d="M21 0h210v54H21z" fill="url(#pack-wood)"/>
+    <path d="M21 18h210M21 36h210" stroke="#f4d394" stroke-width="6" opacity=".55"/>
+    <path d="M28 78v35M108 78v35M188 78v35" stroke="#c58b48" stroke-width="10"/>
+  </g>
+</svg>
