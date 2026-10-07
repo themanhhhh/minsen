@@ -860,7 +860,7 @@ p {
   color: #fff;
 }
 
-.site-footer>div:first-child p {
+.site-footer>div:first-child p:not(.footer-cta-description) {
   font-size: 10px;
   margin: 10px 0 0 38px;
 }
@@ -4441,8 +4441,8 @@ html[data-locale="ar"] .registration-form input[type="file"] {
 }
 
 .protection-item:last-child {
-  grid-column: 1 / -1;
-  min-height: 105px;
+  grid-column: auto;
+  min-height: 192px;
 }
 
 .protection-item-head {
