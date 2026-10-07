@@ -10440,3 +10440,74 @@ html[data-locale="ar"] .supply-path-stat strong {
     transform: rotate(90deg);
   }
 }
+
+/* Improve readability across the factory directory cards and filters. */
+.factory-filters .filter-heading strong {
+  font-size: 19px;
+}
+
+.factory-filters .filter-heading button {
+  font-size: 12px;
+}
+
+.factory-filters .factory-filter-group legend,
+.factory-filters .factory-filter-select-group legend {
+  font-size: 12px;
+}
+
+.factory-filters .factory-filter-group label,
+.factory-filters .factory-saved-filter {
+  font-size: 12px;
+}
+
+.factory-filters .factory-filter-select-group select,
+.factory-filters .apply-filters-button {
+  font-size: 12px;
+}
+
+.directory-toolbar p,
+.directory-toolbar span {
+  font-size: 17px;
+}
+
+.factory-pagination > span {
+  font-size: 12px;
+}
+
+.factory-card .factory-id {
+  font-size: 19px;
+}
+
+.factory-card .qualification-badge,
+.factory-card .factory-placeholder strong {
+  font-size: 11px;
+}
+
+.factory-card .factory-image-status {
+  font-size: 12px !important;
+}
+
+.factory-card .factory-location {
+  font-size: 12px;
+}
+
+.factory-card h2 {
+  font-size: 24px;
+}
+
+.factory-card .factory-tags span {
+  font-size: 11px;
+}
+
+.factory-card .factory-details small {
+  font-size: 10px;
+}
+
+.factory-card .factory-details strong {
+  font-size: 12px;
+}
+
+.factory-card .factory-profile-link,
+.factory-card .factory-action-button {
+  font-size: 12px;
+}
