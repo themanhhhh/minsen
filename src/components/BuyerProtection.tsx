@@ -9,15 +9,15 @@ export function BuyerProtection({ locale }: { locale: Locale }) {
     "01": "/images/img1.png",
     "02": "/images/img2.png",
     "03": "/images/img3.png",
-    "04": "/images/img4.jfif",
-    "05": "/images/img5.jfif",
-    "06": "/images/img6.jfif",
-    "07": "/images/img7.jfif",
-    "08": "/images/img8.jfif",
-    "09": "/images/img9.jfif",
-    "10": "/images/img10.jfif",
+    "04": "/images/img4.jpg",
+    "05": "/images/img5.jpg",
+    "06": "/images/img6.jpg",
+    "07": "/images/img7.jpg",
+    "08": "/images/img8.jpg",
+    "09": "/images/img9.jpg",
+    "10": "/images/img10.jpg",
     "11": "/images/img11.png",
-    "12": "/images/img12.jfif",
+    "12": "/images/img12.jpg",
   };
 
   return (
