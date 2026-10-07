@@ -17,7 +17,7 @@ function getSupplyPaths(locale: Locale): SupplyPath[] {
   if (locale === "vi") {
     return [
       {
-        stat: "500",
+        stat: "3000 +",
         statLabel: "XƯỞNG & NHÀ MÁY VÁN BÓC",
         title: "THÊM ĐẦU RA — TĂNG QUYỀN CHỦ ĐỘNG",
         points: [
@@ -32,7 +32,7 @@ function getSupplyPaths(locale: Locale): SupplyPath[] {
         alt: "Veneer tự nhiên được kiểm tra tại khu vực sản xuất",
       },
       {
-        stat: "300",
+        stat: "300 +",
         statLabel: "NHÀ MÁY PLYWOOD",
         title: "CHỦ ĐỘNG ĐẦU VÀO — MỞ RỘNG ĐẦU RA",
         points: [
@@ -47,7 +47,7 @@ function getSupplyPaths(locale: Locale): SupplyPath[] {
         alt: "Các tấm plywood thương mại trong khu vực sản xuất",
       },
       {
-        stat: "1.000",
+        stat: "1000 +",
         statLabel: "BUYER QUỐC TẾ",
         title: "THÊM NGUỒN CUNG — CHỌN ĐÚNG NHÀ MÁY",
         points: [
@@ -67,7 +67,7 @@ function getSupplyPaths(locale: Locale): SupplyPath[] {
   if (locale === "ar") {
     return [
       {
-        stat: "500",
+        stat: "3000 +",
         statLabel: "ورشة ومصنع قشرة خشبية",
         title: "مزيد من الطلبات — تحكم أكبر",
         points: [
@@ -82,7 +82,7 @@ function getSupplyPaths(locale: Locale): SupplyPath[] {
         alt: "قشرة خشبية طبيعية قيد الفحص في منطقة الإنتاج",
       },
       {
-        stat: "300",
+        stat: "300 +",
         statLabel: "مصنع خشب رقائقي",
         title: "مدخلات أكثر مرونة — أسواق أوسع",
         points: [
@@ -97,7 +97,7 @@ function getSupplyPaths(locale: Locale): SupplyPath[] {
         alt: "ألواح خشب رقائقي تجاري في منطقة الإنتاج",
       },
       {
-        stat: "1,000",
+        stat: "1000 +",
         statLabel: "مشترٍ دولي",
         title: "مصادر أكثر — المصنع المناسب",
         points: [
@@ -116,7 +116,7 @@ function getSupplyPaths(locale: Locale): SupplyPath[] {
 
   return [
     {
-      stat: "500",
+      stat: "3000 +",
       statLabel: "VENEER MILLS & WORKSHOPS",
       title: "MORE OUTPUT — MORE CONTROL",
       points: [
@@ -131,7 +131,7 @@ function getSupplyPaths(locale: Locale): SupplyPath[] {
       alt: "Natural veneer inspected in a production area",
     },
     {
-      stat: "300",
+      stat: "300 +",
       statLabel: "PLYWOOD FACTORIES",
       title: "MORE INPUT OPTIONS — MORE OUTPUT",
       points: [
@@ -146,7 +146,7 @@ function getSupplyPaths(locale: Locale): SupplyPath[] {
       alt: "Commercial plywood panels in a production area",
     },
     {
-      stat: "1,000",
+      stat: "1000 +",
       statLabel: "INTERNATIONAL BUYERS",
       title: "MORE SOURCES — THE RIGHT FACTORY",
       points: [
