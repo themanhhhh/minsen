@@ -10549,6 +10549,14 @@ html[data-locale="ar"] .supply-path-stat strong {
   font-size: 16px;
 }
 
+.protection-badge strong {
+  font-size: 19px;
+}
+
+.protection-badge small {
+  font-size: 11px;
+}
+
 /* Slightly reduce header typography without changing its spacing or controls. */
 .site-header .header-home,
 .site-header .desktop-nav a,
