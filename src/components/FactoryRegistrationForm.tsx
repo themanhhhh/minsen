@@ -21,7 +21,7 @@ export function FactoryRegistrationForm({
   const copy = isVietnamese
     ? {
         heroTitle: "ĐĂNG KÝ NHÀ MÁY",
-        heroDescription: "Chia sẻ thông tin nhà máy để MISO JAPAN xem xét cơ hội qualification và hợp tác.",
+        heroDescription: "Chia sẻ thông tin nhà máy đến MISO JAPAN nhằm phục vụ quá trình đánh giá năng lực (qualification), làm cơ sở mở rộng hợp tác kinh doanh quốc tế và cập nhật các thông tin chuyên ngành hữu ích.",
         heroMark: ["ĐĂNG KÝ", "NHÀ MÁY"],
         successEyebrow: "ĐÃ NHẬN ĐĂNG KÝ",
         successTitle: "Cảm ơn bạn đã đăng ký.",
