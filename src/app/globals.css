@@ -9805,8 +9805,9 @@ html[data-locale="ar"] .founder-profile-tagline {
 .registration-hero h1 {
   color: #fff;
   font-size: clamp(42px, 5.5vw, 76px);
-  letter-spacing: -.08em;
-  line-height: .98;
+  letter-spacing: 0;
+  word-spacing: .08em;
+  line-height: 1.2;
   margin-bottom: 24px;
   max-width: 780px;
 }
