@@ -9797,7 +9797,7 @@ html[data-locale="ar"] .founder-profile-tagline {
   color: #fff;
   display: grid;
   gap: 60px;
-  grid-template-columns: minmax(0, 1fr) 220px;
+  grid-template-columns: minmax(0, 1fr);
   min-height: 390px;
   padding: 78px max(24px, calc((100vw - 1304px) / 2));
 }
@@ -9805,8 +9805,9 @@ html[data-locale="ar"] .founder-profile-tagline {
 .registration-hero h1 {
   color: #fff;
   font-size: clamp(42px, 5.5vw, 76px);
-  letter-spacing: -.08em;
-  line-height: .98;
+  letter-spacing: 0;
+  word-spacing: .08em;
+  line-height: 1.2;
   margin-bottom: 24px;
   max-width: 780px;
 }
@@ -9816,35 +9817,6 @@ html[data-locale="ar"] .founder-profile-tagline {
   font-size: 17px;
   line-height: 1.65;
   max-width: 650px;
-}
-
-.registration-hero-mark {
-  align-items: center;
-  background: var(--cyan);
-  border-radius: 50%;
-  color: var(--primary-dark);
-  display: flex;
-  flex-direction: column;
-  height: 210px;
-  justify-content: center;
-  outline: 1px solid rgba(255, 255, 255, .42);
-  outline-offset: 12px;
-  transform: rotate(7deg);
-  width: 210px;
-}
-
-.registration-hero-mark strong {
-  font-family: var(--font-heading), sans-serif;
-  font-size: 62px;
-  line-height: 1;
-}
-
-.registration-hero-mark span {
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .15em;
-  line-height: 1.4;
-  text-align: center;
 }
 
 .registration-content {
@@ -10047,16 +10019,6 @@ html[data-locale="ar"] .founder-profile-tagline {
 
   .registration-hero h1 {
     font-size: clamp(42px, 11vw, 68px);
-  }
-
-  .registration-hero-mark {
-    height: 170px;
-    margin: 70px auto 0;
-    width: 170px;
-  }
-
-  .registration-hero-mark strong {
-    font-size: 52px;
   }
 
   .registration-content {

@@ -4,8 +4,8 @@ import { Header } from "@/components/Header";
 import { getFactoryRegistrationPrefill, type FormSearchParams } from "@/lib/form-prefill";
 
 export const metadata = {
-  title: "Register Factory | MISO JAPAN",
-  description: "Register your Vietnam plywood factory with the MISO JAPAN manufacturing network.",
+  title: "Đăng ký nhà máy | MISO JAPAN",
+  description: "Gửi thông tin nhà máy plywood và veneer của bạn cho mạng lưới MISO JAPAN.",
 };
 
 export default async function FactoryRegistrationPage({
@@ -13,12 +13,12 @@ export default async function FactoryRegistrationPage({
 }: {
   searchParams: Promise<FormSearchParams>;
 }) {
-  const prefill = getFactoryRegistrationPrefill("en", await searchParams);
+  const prefill = getFactoryRegistrationPrefill("vi", await searchParams);
   return (
     <>
-      <Header locale="en" />
-      <FactoryRegistrationForm prefill={prefill} />
-      <Footer locale="en" />
+      <Header locale="vi" />
+      <FactoryRegistrationForm locale="vi" prefill={prefill} />
+      <Footer locale="vi" />
     </>
   );
 }

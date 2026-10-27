@@ -56,7 +56,6 @@ export function FactoryRegistrationForm({
       ? {
           heroTitle: "تسجيل المصنع",
           heroDescription: "شاركوا معلومات مصنعكم لتراجع MISO JAPAN فرص التأهيل والشراكة.",
-          heroMark: ["تسجيل", "المصنع"],
           successEyebrow: "تم استلام التسجيل",
           successTitle: "شكرًا لتسجيلكم.",
           successDescription: "ستراجع MISO JAPAN معلومات المصنع وتتواصل معكم إذا لزم تقديم مستندات إضافية للتأهيل.",
@@ -89,7 +88,6 @@ export function FactoryRegistrationForm({
       : {
           heroTitle: "REGISTER FACTORY",
           heroDescription: "Share your factory information for MISO JAPAN to review qualification and partnership opportunities.",
-          heroMark: ["FACTORY", "REGISTRATION"],
           successEyebrow: "REGISTRATION RECEIVED",
           successTitle: "Thank you for registering.",
           successDescription: "MISO JAPAN will review the factory information and contact you if additional qualification documents are needed.",
@@ -172,10 +170,6 @@ export function FactoryRegistrationForm({
           <p className="eyebrow eyebrow-light">MISO JAPAN FACTORY NETWORK</p>
           <h1>{copy.heroTitle}</h1>
           <p>{copy.heroDescription}</p>
-        </div>
-        <div className="registration-hero-mark" aria-hidden="true">
-          <strong>01</strong>
-          <span>{copy.heroMark[0]}<br />{copy.heroMark[1]}</span>
         </div>
       </section>
 
